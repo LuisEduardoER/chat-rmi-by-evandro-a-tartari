@@ -2,6 +2,7 @@ package forms;
 
 import java.awt.Container;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,11 +15,17 @@ public class FormConnect extends JFrame {
      * 
      */
     private static final long serialVersionUID = 7662142711284402861L;
+    @SuppressWarnings("unused")
     private JLabel lblIpServidor;
+    @SuppressWarnings("unused")
     private JLabel lblPortaServico;
+    @SuppressWarnings("unused")
     private JLabel lblPortaCliente;
+    @SuppressWarnings("unused")
     private JLabel lblLogin;
+    @SuppressWarnings("unused")
     private JLabel lblSenha;
+    @SuppressWarnings("unused")
     private JLabel lblSkin;
     
     private JTextField txtIpServidor;
@@ -28,6 +35,10 @@ public class FormConnect extends JFrame {
     private JPasswordField txtSenha;
     private JComboBox comboSkin;
     
+    @SuppressWarnings("unused")
+    private JButton btnConnectar;
+    @SuppressWarnings("unused")
+    private JButton btnCancelar;
     
     public FormConnect() {
         configJFrame();
@@ -50,15 +61,24 @@ public class FormConnect extends JFrame {
         txtLogin = newJTextField(100,95);
         txtSenha = newJPasswordField(100, 125);
         comboSkin = newJCombobox(100, 157);
+        btnCancelar = newJButton("fechar", 15, 195);
+        btnConnectar = newJButton("connect", 130, 195);
     }
     
     private void configJFrame(){
         setTitle("MsRamister");
         setResizable(false);
-        setSize(250, 300);
+        setSize(250, 260);
         setLocationRelativeTo(null);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    private JButton newJButton(String textButton, Integer x, Integer y){
+        JButton button = new JButton(textButton);
+        button.setBounds(x, y, 100, 20);
+        add(button);
+        return button;
     }
     
     private JPasswordField newJPasswordField(Integer x, Integer y){
@@ -120,6 +140,7 @@ public class FormConnect extends JFrame {
     
     
     public static void main(String[] args) {
+        @SuppressWarnings("unused")
         FormConnect connect = new FormConnect();
     }
 }
