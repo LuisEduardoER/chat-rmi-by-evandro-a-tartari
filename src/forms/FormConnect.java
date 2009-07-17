@@ -15,29 +15,22 @@ public class FormConnect extends JFrame {
      * 
      */
     private static final long serialVersionUID = 7662142711284402861L;
-    @SuppressWarnings("unused")
     private JLabel lblIpServidor;
-    @SuppressWarnings("unused")
     private JLabel lblPortaServico;
-    @SuppressWarnings("unused")
     private JLabel lblPortaCliente;
-    @SuppressWarnings("unused")
     private JLabel lblLogin;
-    @SuppressWarnings("unused")
     private JLabel lblSenha;
-    @SuppressWarnings("unused")
     private JLabel lblSkin;
     
+    //TextFields e combobox
     private JTextField txtIpServidor;
     private JTextField txtPortaServico;
     private JTextField txtPortaCliente;
     private JTextField txtLogin;
     private JPasswordField txtSenha;
     private JComboBox comboSkin;
-    
-    @SuppressWarnings("unused")
+    //Botoes    
     private JButton btnConnectar;
-    @SuppressWarnings("unused")
     private JButton btnCancelar;
     
     public FormConnect() {
@@ -48,21 +41,21 @@ public class FormConnect extends JFrame {
     
     private void inicializar(){
         //Labels
-        lblIpServidor = newJLabel("Ip servidor:", 5);
-        lblPortaServico = newJLabel("Porta servico:", 35);
-        lblPortaCliente = newJLabel("Porta resposta:", 65);
-        lblLogin = newJLabel("Login:", 95);
-        lblSenha = newJLabel("Senha:", 125);
-        lblSkin = newJLabel("Skin:", 155);
+        newJLabel(lblIpServidor,"Ip servidor:", 5);
+        newJLabel(lblPortaServico,"Porta servico:", 35);
+        newJLabel(lblPortaCliente, "Porta resposta:", 65);
+        newJLabel(lblLogin,"Login:", 95);
+        newJLabel(lblSenha,"Senha:", 125);
+        newJLabel(lblSkin,"Skin:", 155);
         //Fields
-        txtIpServidor = newJTextField(100,5);
-        txtPortaServico = newJTextField(100,35);
-        txtPortaCliente = newJTextField(100,65);
-        txtLogin = newJTextField(100,95);
-        txtSenha = newJPasswordField(100, 125);
-        comboSkin = newJCombobox(100, 157);
-        btnCancelar = newJButton("fechar", 15, 195);
-        btnConnectar = newJButton("connect", 130, 195);
+        newJTextField(txtIpServidor,100,5);
+        newJTextField(txtPortaServico,100,35);
+        newJTextField(txtPortaCliente,100,65);
+        newJTextField(txtLogin,100,95);
+        newJPasswordField(txtSenha,100, 125);
+        newJCombobox(comboSkin, 100, 157);
+        newJButton(btnCancelar, "Fechar", 15, 195);
+        newJButton(btnConnectar, "Connectar", 130, 195);
     }
     
     private void configJFrame(){
@@ -74,28 +67,28 @@ public class FormConnect extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    private JButton newJButton(String textButton, Integer x, Integer y){
-        JButton button = new JButton(textButton);
+    private JButton newJButton(JButton button, String textButton, Integer x, Integer y){
+        button = new JButton(textButton);
         button.setBounds(x, y, 100, 20);
         add(button);
         return button;
     }
     
-    private JPasswordField newJPasswordField(Integer x, Integer y){
-        JPasswordField txtPass = new JPasswordField();
+    private JPasswordField newJPasswordField(JPasswordField txtPass, Integer x, Integer y){
+        txtPass = new JPasswordField();
         txtPass.setBounds(x, y, 130, 25);
         add(txtPass);
         return txtPass;
     }
     
-    private JTextField newJTextField(Integer x, Integer y){
-        JTextField txt = new JTextField();
+    private JTextField newJTextField(JTextField txt, Integer x, Integer y){
+        txt = new JTextField();
         txt.setBounds(x, y, 130, 25);
         add(txt);
         return txt;
     }
-    private JLabel newJLabel(String textLabel, Integer y){
-        JLabel lbl = new JLabel(textLabel);
+    private JLabel newJLabel(JLabel lbl, String textLabel, Integer y){
+        lbl = new JLabel(textLabel);
         lbl.setBounds(5, y, 90, 25);
         add(lbl);
         return lbl;
@@ -105,8 +98,8 @@ public class FormConnect extends JFrame {
         setVisible(true);
     }
     
-    private JComboBox newJCombobox(Integer x, Integer y){
-        JComboBox combo = new JComboBox();
+    private JComboBox newJCombobox(JComboBox combo, Integer x, Integer y){
+        combo = new JComboBox();
         combo.setBounds(x, y, 130, 20);
         add(combo);
         return combo;
@@ -137,7 +130,12 @@ public class FormConnect extends JFrame {
     }
     
     
-    
+    /**
+     *
+     * Sessão Excluir
+     *
+     * 
+     */
     
     public static void main(String[] args) {
         @SuppressWarnings("unused")
