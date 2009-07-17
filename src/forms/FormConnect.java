@@ -1,5 +1,7 @@
 package forms;
 
+import java.awt.Container;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,10 +30,12 @@ public class FormConnect extends JFrame {
     
     
     public FormConnect() {
-
+        configJFrame();
+        inicializar();
+        criaTela();
     }
     
-    public void inicializar(){
+    private void inicializar(){
         //Labels
         lblIpServidor = new JLabel("Ip servidor:");
         lblPortaServico = new JLabel("Porta servico:");
@@ -48,11 +52,40 @@ public class FormConnect extends JFrame {
         comboSkin = getComboboxSkin();
     }
     
+    private void configJFrame(){
+        setTitle("MsRamister");
+        setResizable(false);
+        setContentPane(new Container());
+        setSize(200, 200);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
+    private void criaTela(){
+        adicionaLabels(lblIpServidor, 5);
+        adicionaLabels(lblPortaServico, 35);
+        adicionaLabels(lblPortaCliente, 55);
+        adicionaLabels(lblLogin, 85);
+        adicionaLabels(lblSenha, 115);
+        adicionaLabels(lblSkin, 145);
+    }
+    
+    private void adicionaLabels(JLabel t, Integer y){
+        t.setBounds(5, y, 90, 25);
+        add(t);
+    }
+    
+    
+    
     private JComboBox getComboboxSkin(){
         if (comboSkin == null) {
             comboSkin = new JComboBox();
             comboSkin.addItem("");
         }
         return comboSkin;
+    }
+    public static void main(String[] args) {
+        FormConnect connect = new FormConnect();
     }
 }
