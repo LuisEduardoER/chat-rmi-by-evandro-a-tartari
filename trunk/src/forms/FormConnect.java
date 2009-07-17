@@ -1,11 +1,14 @@
 package forms;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.GridLayout;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class FormConnect extends JFrame {
@@ -32,59 +35,66 @@ public class FormConnect extends JFrame {
     public FormConnect() {
         configJFrame();
         inicializar();
-        criaTela();
+        renderizaTela();
     }
     
     private void inicializar(){
         //Labels
-        lblIpServidor = new JLabel("Ip servidor:");
-        lblPortaServico = new JLabel("Porta servico:");
-        lblPortaCliente = new JLabel("Porta resposta:");
-        lblLogin = new JLabel("Login:");
-        lblSenha = new JLabel("Senha:");
-        lblSkin = new JLabel("Skin:");
+        lblIpServidor = newJLabel("Ip servidor:", 5);
+        lblPortaServico = newJLabel("Porta servico:", 35);
+        lblPortaCliente = newJLabel("Porta resposta:", 65);
+        lblLogin = newJLabel("Login:", 95);
+        lblSenha = newJLabel("Senha:", 125);
+        lblSkin = newJLabel("Skin:", 155);
         //Fields
-        txtIpServidor = new JTextField();
-        txtPortaServico = new JTextField();
-        txtPortaCliente = new JTextField();
-        txtLogin = new JTextField();
-        txtSenha = new JPasswordField();
-        comboSkin = getComboboxSkin();
+        txtIpServidor = newJTextField(100,5);
+        txtPortaServico = newJTextField(100,35);
+        txtPortaCliente = newJTextField(100,65);
+        txtLogin = newJTextField(100,95);
+        txtSenha = newJPasswordField(100, 125);
+        comboSkin = newJCombobox(100, 157);
     }
     
     private void configJFrame(){
         setTitle("MsRamister");
         setResizable(false);
-        setContentPane(new Container());
-        setSize(200, 200);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(250, 300);
         setLocationRelativeTo(null);
+        setContentPane(new Container());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    private JPasswordField newJPasswordField(Integer x, Integer y){
+        JPasswordField txtPass = new JPasswordField();
+        txtPass.setBounds(x, y, 130, 25);
+        add(txtPass);
+        return txtPass;
+    }
+    
+    private JTextField newJTextField(Integer x, Integer y){
+        JTextField txt = new JTextField();
+        txt.setBounds(x, y, 130, 25);
+        add(txt);
+        return txt;
+    }
+    private JLabel newJLabel(String textLabel, Integer y){
+        JLabel lbl = new JLabel(textLabel);
+        lbl.setBounds(5, y, 90, 25);
+        add(lbl);
+        return lbl;
+    }
+    
+    private void renderizaTela(){
         setVisible(true);
     }
     
-    private void criaTela(){
-        adicionaLabels(lblIpServidor, 5);
-        adicionaLabels(lblPortaServico, 35);
-        adicionaLabels(lblPortaCliente, 55);
-        adicionaLabels(lblLogin, 85);
-        adicionaLabels(lblSenha, 115);
-        adicionaLabels(lblSkin, 145);
+    private JComboBox newJCombobox(Integer x, Integer y){
+        JComboBox combo = new JComboBox();
+        combo.setBounds(x, y, 130, 20);
+        add(combo);
+        return combo;
     }
     
-    private void adicionaLabels(JLabel t, Integer y){
-        t.setBounds(5, y, 90, 25);
-        add(t);
-    }
-    
-    
-    
-    private JComboBox getComboboxSkin(){
-        if (comboSkin == null) {
-            comboSkin = new JComboBox();
-            comboSkin.addItem("");
-        }
-        return comboSkin;
-    }
     public static void main(String[] args) {
         FormConnect connect = new FormConnect();
     }
