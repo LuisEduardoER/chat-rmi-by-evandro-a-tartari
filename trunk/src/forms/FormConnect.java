@@ -1,14 +1,11 @@
 package forms;
 
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.GridLayout;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class FormConnect extends JFrame {
@@ -94,6 +91,33 @@ public class FormConnect extends JFrame {
         add(combo);
         return combo;
     }
+    
+    public String getIpServidor(){
+        return txtIpServidor.getText();
+    }
+    
+    public String getPortaServico(){
+        return txtPortaServico.getText();
+    }
+    
+    public String getPortaCliente(){
+        return txtPortaCliente.getText();
+    }
+    
+    public String getLogin(){
+        return txtLogin.getText();
+    }
+    
+    public String getPassWord(){
+        return txtSenha.getPassword().toString();
+    }
+    
+    public String getItemSelectedCombo(){
+        return (String) comboSkin.getSelectedItem();
+    }
+    
+    
+    
     
     public static void main(String[] args) {
         FormConnect connect = new FormConnect();
