@@ -27,9 +27,15 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
         connect = (FormConnect) frame;
     }
 
+    /**
+     * Metodos para o Onclick nos botoes tela
+     */
     public void actionPerformed(ActionEvent e) {
         if (verificarAcaoBotao(e.getActionCommand(), "Connectar")) {
-            System.out.println("Action Connectar a implementar");
+            if (isValid())
+                System.out.println("Action Connectar a implementar");
+            else
+                LancaExcessao();
         } else if (verificarAcaoBotao(e.getActionCommand(), "Fechar")) {
             connect.dispose();
         } else if (verificarAcaoBotao(e.getActionCommand(), "comboBoxChanged")) {
@@ -60,7 +66,10 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
                 else if (verificador(getLogin()))
                     getPassWord().requestFocus();
                 else if (verificador(getPassWord())) {
-                    System.out.println("KeyEvent Connectar a implementar");
+                    if (isValid())
+                        System.out.println("KeyEvent Connectar a implementar");
+                    else
+                        LancaExcessao();
                 }
 
             }
@@ -194,5 +203,36 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     public Boolean verificarAcaoBotao(String actionComand, String esperado) {
         return actionComand.equals(esperado);
+    }
+
+    /**
+     * Metodo para lancar excessao na tela
+     */
+    private void LancaExcessao() {
+        System.out.println("Excessao Tela a implementar");
+    }
+
+    /**
+     * Metodo para verificar validacao dos dados do form
+     * 
+     * @return Boolean
+     */
+    private Boolean isValid() {
+        if (ver(getIpServidor()) && ver(getPortaServico())
+                && ver(getPortaCliente()) && ver(getLogin())
+                && ver(getPassWord()))
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Metodo auxiliar na validacao dos dados
+     * 
+     * @param t
+     * @return Boolean
+     */
+    private Boolean ver(JTextField t) {
+        return !t.getText().equals("");
     }
 }
