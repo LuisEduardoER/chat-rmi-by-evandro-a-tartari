@@ -45,7 +45,6 @@ public class FormConnect extends JFrame {
         configJFrame();
         inicializar();
         renderizaTela();
-        adicionaListenerAcao();
     }
 
     /**
@@ -60,14 +59,15 @@ public class FormConnect extends JFrame {
         newJLabel(lblSenha, "Senha:", 125);
         newJLabel(lblSkin, "Skin:", 155);
         // Fields
-        newJTextField(txtIpServidor, 100, 5);
-        newJTextField(txtPortaServico, 100, 35);
-        newJTextField(txtPortaCliente, 100, 65);
-        newJTextField(txtLogin, 100, 95);
-        newJPasswordField(txtSenha, 100, 125);
-        newJCombobox(comboSkin, 100, 157);
-        newJButton(btnCancelar, "Fechar", 15, 195);
-        newJButton(btnConnectar, "Connectar", 130, 195);
+        txtIpServidor = newJTextField(100, 5);
+        txtPortaServico = newJTextField(100, 35);
+        txtPortaCliente = newJTextField(100, 65);
+        txtLogin = newJTextField(100, 95);
+        txtSenha = newJPasswordField(100, 125);
+        comboSkin = newJCombobox(100, 157);
+        btnCancelar = newJButton("Fechar", 15, 195);
+        btnConnectar = newJButton("Connectar", 130, 195);
+        adicionaListenerAcao();
     }
 
     /**
@@ -90,13 +90,15 @@ public class FormConnect extends JFrame {
      * @param textButton
      * @param x
      * @param y
+     * @return 
      * 
      */
-    private void newJButton(JButton button, String textButton, Integer x,
+    private JButton newJButton(String textButton, Integer x,
             Integer y) {
-        button = new JButton(textButton);
+        JButton button = new JButton(textButton);
         button.setBounds(x, y, 100, 20);
         add(button);
+        return button;
     }
 
     /**
@@ -105,11 +107,13 @@ public class FormConnect extends JFrame {
      * @param txtPass
      * @param x
      * @param y
+     * @return 
      */
-    private void newJPasswordField(JPasswordField txtPass, Integer x, Integer y) {
-        txtPass = new JPasswordField();
+    private JPasswordField newJPasswordField(Integer x, Integer y) {
+        JPasswordField txtPass = new JPasswordField();
         txtPass.setBounds(x, y, 130, 25);
         add(txtPass);
+        return txtPass;
     }
 
     /**
@@ -118,11 +122,13 @@ public class FormConnect extends JFrame {
      * @param txt
      * @param x
      * @param y
+     * @return 
      */
-    private void newJTextField(JTextField txt, Integer x, Integer y) {
-        txt = new JTextField();
+    private JTextField newJTextField(Integer x, Integer y) {
+        JTextField txt = new JTextField();
         txt.setBounds(x, y, 130, 25);
         add(txt);
+        return txt;
     }
 
     /**
@@ -153,46 +159,47 @@ public class FormConnect extends JFrame {
      * @param x
      * @param y
      */
-    private void newJCombobox(JComboBox combo, Integer x, Integer y) {
-        combo = new JComboBox();
+    private JComboBox newJCombobox(Integer x, Integer y) {
+        JComboBox combo = new JComboBox();
         combo.setBounds(x, y, 130, 20);
         add(combo);
+        return combo;
     }
 
     /**
      * Retorna uma String do campo txtIpServidor
      * 
-     * @return String
+     * @return JTextField
      */
-    public String getIpServidor() {
-        return txtIpServidor.getText();
+    public JTextField getIpServidor() {
+        return txtIpServidor;
     }
 
     /**
      * Retorna uma String do campo txtPortaServico
      * 
-     * @return String
+     * @return JTextField
      */
-    public String getPortaServico() {
-        return txtPortaServico.getText();
+    public JTextField getPortaServico() {
+        return txtPortaServico;
     }
 
     /**
      * Retorna uma String do campo txtPortaCliente
      * 
-     * @return String
+     * @return JTextField
      */
-    public String getPortaCliente() {
-        return txtPortaCliente.getText();
+    public JTextField getPortaCliente() {
+        return txtPortaCliente;
     }
 
     /**
      * Retorna uma String do campo txtLogin
      * 
-     * @return String
+     * @return JTextField
      */
-    public String getLogin() {
-        return txtLogin.getText();
+    public JTextField getLogin() {
+        return txtLogin;
     }
 
     /**
@@ -200,8 +207,8 @@ public class FormConnect extends JFrame {
      * 
      * @return String
      */
-    public String getPassWord() {
-        return txtSenha.getPassword().toString();
+    public JPasswordField getPassWord() {
+        return txtSenha;
     }
 
     /**
@@ -212,16 +219,36 @@ public class FormConnect extends JFrame {
     public String getItemSelectedCombo() {
         return (String) comboSkin.getSelectedItem();
     }
+    /**
+     * Metodo para retornar a comboBox
+     * @return JComboBox
+     */
+    public JComboBox getComboBox(){
+        return comboSkin;
+    }
+    
+    /**
+     * Metodo para retornar o btnConnectar 
+     * @return JButton
+     */
+    public JButton getConnectar() {
+        return btnConnectar;
+    }
 
+    
+    /**
+     * Metodo para adicão de KeyListener e ActionListener do FormConnect 
+     */
     private void adicionaListenerAcao() {
-        btnCancelar.addActionListener(new AcaoFormConnect());
-        btnConnectar.addActionListener(new AcaoFormConnect());
-        txtIpServidor.addKeyListener(new AcaoFormConnect());
-        txtPortaServico.addKeyListener(new AcaoFormConnect());
-        txtPortaCliente.addKeyListener(new AcaoFormConnect());
-        txtLogin.addKeyListener(new AcaoFormConnect());
-        txtSenha.addKeyListener(new AcaoFormConnect());
-        comboSkin.addActionListener(new AcaoFormConnect());
+        AcaoFormConnect acao = new AcaoFormConnect(this);
+        btnCancelar.addActionListener(acao);
+        btnConnectar.addActionListener(acao);
+        txtIpServidor.addKeyListener(acao);
+        txtPortaServico.addKeyListener(acao);
+        txtPortaCliente.addKeyListener(acao);
+        txtLogin.addKeyListener(acao);
+        txtSenha.addKeyListener(acao);
+        comboSkin.addActionListener(acao);
     }
 
     /**
@@ -235,4 +262,7 @@ public class FormConnect extends JFrame {
         @SuppressWarnings("unused")
         FormConnect connect = new FormConnect();
     }
+
+
+    
 }
