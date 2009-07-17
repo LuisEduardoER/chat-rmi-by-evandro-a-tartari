@@ -1,6 +1,9 @@
 package forms;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -8,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import excessao.FormConnectException;
 
 import acao.AcaoFormConnect;
 
@@ -26,8 +31,7 @@ public class FormConnect extends JFrame {
     private JLabel lblLogin;
     private JLabel lblSenha;
     private JLabel lblSkin;
-    private JLabel lblResposta;
-    
+
     // TextFields e combobox
     private JTextField txtIpServidor;
     private JTextField txtPortaServico;
@@ -39,6 +43,18 @@ public class FormConnect extends JFrame {
     private JButton btnConnectar;
     private JButton btnCancelar;
 
+    // Excessao
+    private FormConnectException excessao;
+    private JLabel lblResposta;
+    private JLabel lblVIpServ;
+    private JLabel lblVPortServ;
+    private JLabel lblVPortaClie;
+    private JLabel lblVLog;
+    private JLabel lblVSenha;
+
+    // Lista dos validadores
+    private List<JLabel> lblLista;
+
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
      * server em rmi
@@ -46,6 +62,7 @@ public class FormConnect extends JFrame {
     public FormConnect() {
         configJFrame();
         inicializar();
+        grupoValidador();
         renderizaTela();
     }
 
@@ -60,7 +77,7 @@ public class FormConnect extends JFrame {
         newJLabel(lblLogin, "Login:", 95);
         newJLabel(lblSenha, "Senha:", 125);
         newJLabel(lblSkin, "Skin:", 155);
-        newJLabel(lblResposta, "", 225);
+        lblResposta = newJLabel(25, 215, 150, Color.RED);
         // Fields
         txtIpServidor = newJTextField(100, 5);
         txtPortaServico = newJTextField(100, 35);
@@ -79,7 +96,7 @@ public class FormConnect extends JFrame {
     private void configJFrame() {
         setTitle("MsRamister");
         setResizable(false);
-        setSize(250, 260);
+        setSize(250, 270);
         setLocationRelativeTo(null);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,11 +110,10 @@ public class FormConnect extends JFrame {
      * @param textButton
      * @param x
      * @param y
-     * @return 
+     * @return
      * 
      */
-    private JButton newJButton(String textButton, Integer x,
-            Integer y) {
+    private JButton newJButton(String textButton, Integer x, Integer y) {
         JButton button = new JButton(textButton);
         button.setBounds(x, y, 100, 20);
         add(button);
@@ -110,7 +126,7 @@ public class FormConnect extends JFrame {
      * @param txtPass
      * @param x
      * @param y
-     * @return 
+     * @return
      */
     private JPasswordField newJPasswordField(Integer x, Integer y) {
         JPasswordField txtPass = new JPasswordField();
@@ -125,7 +141,7 @@ public class FormConnect extends JFrame {
      * @param txt
      * @param x
      * @param y
-     * @return 
+     * @return
      */
     private JTextField newJTextField(Integer x, Integer y) {
         JTextField txt = new JTextField();
@@ -145,6 +161,48 @@ public class FormConnect extends JFrame {
         lbl = new JLabel(textLabel);
         lbl.setBounds(5, y, 90, 25);
         add(lbl);
+    }
+
+    /**
+     * Cria uma JLabel para validacao
+     * 
+     * @param x
+     * @param y
+     * @param size
+     * @param cor
+     * @return JLabel
+     */
+    private JLabel newJLabel(Integer x, Integer y, Integer size, Color cor) {
+        JLabel lbl = new JLabel("");
+        lbl.setBounds(x, y, size, 25);
+        lbl.setForeground(cor);
+        add(lbl);
+        return lbl;
+    }
+
+    /**
+     * Cria a adiciona na tela o grupo de validadores
+     */
+    private void grupoValidador() {
+        lblVIpServ = newJLabel(232, 5, 5, Color.RED);
+        lblVPortServ = newJLabel(232, 35, 5, Color.RED);
+        lblVPortaClie = newJLabel(232, 65, 5, Color.RED);
+        lblVLog = newJLabel(232, 95, 5, Color.RED);
+        lblVSenha = newJLabel(232, 125, 5, Color.RED);
+    }
+
+    /**
+     * Retorna o grupo de validadores
+     */
+    public List<JLabel> getValidadores() {
+        if (getLblLista().size() == 0) {
+            getLblLista().add(lblVIpServ);
+            getLblLista().add(lblVPortServ);
+            getLblLista().add(lblVPortaClie);
+            getLblLista().add(lblVLog);
+            getLblLista().add(lblVSenha);
+        }
+        return getLblLista();
     }
 
     /**
@@ -222,25 +280,27 @@ public class FormConnect extends JFrame {
     public String getItemSelectedCombo() {
         return (String) comboSkin.getSelectedItem();
     }
+
     /**
      * Metodo para retornar a comboBox
+     * 
      * @return JComboBox
      */
-    public JComboBox getComboBox(){
+    public JComboBox getComboBox() {
         return comboSkin;
     }
-    
+
     /**
-     * Metodo para retornar o btnConnectar 
+     * Metodo para retornar o btnConnectar
+     * 
      * @return JButton
      */
     public JButton getConnectar() {
         return btnConnectar;
     }
 
-    
     /**
-     * Metodo para adicão de KeyListener e ActionListener do FormConnect 
+     * Metodo para adicão de KeyListener e ActionListener do FormConnect
      */
     private void adicionaListenerAcao() {
         AcaoFormConnect acao = new AcaoFormConnect(this);
@@ -266,6 +326,38 @@ public class FormConnect extends JFrame {
         FormConnect connect = new FormConnect();
     }
 
+    /**
+     * Retorn a instancia do FormConnectException
+     * 
+     * @return FormConnectException
+     */
+    public FormConnectException getExcessao() {
+        if (excessao == null) {
+            excessao = new FormConnectException(this);
 
-    
+        }
+        return excessao;
+    }
+
+    /**
+     * Retorna a lista
+     * 
+     * @return List<JLabel>
+     */
+    private List<JLabel> getLblLista() {
+        if (lblLista == null) {
+            lblLista = new ArrayList<JLabel>();
+
+        }
+        return lblLista;
+    }
+
+    /**
+     * Retorna o label para resposta na tela
+     * @return JLabel
+     */
+    public JLabel getLblResposta() {
+        return lblResposta;
+    }
+
 }
