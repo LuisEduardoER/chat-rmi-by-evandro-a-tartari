@@ -26,6 +26,8 @@ public class FormConnect extends JFrame {
     private JLabel lblLogin;
     private JLabel lblSenha;
     private JLabel lblSkin;
+    private JLabel lblResposta;
+    
     // TextFields e combobox
     private JTextField txtIpServidor;
     private JTextField txtPortaServico;
@@ -58,6 +60,7 @@ public class FormConnect extends JFrame {
         newJLabel(lblLogin, "Login:", 95);
         newJLabel(lblSenha, "Senha:", 125);
         newJLabel(lblSkin, "Skin:", 155);
+        newJLabel(lblResposta, "", 225);
         // Fields
         txtIpServidor = newJTextField(100, 5);
         txtPortaServico = newJTextField(100, 35);
