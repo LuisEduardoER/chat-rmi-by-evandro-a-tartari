@@ -8,7 +8,6 @@ import conexao.Conexao;
 public interface IMensageiroCliente extends Remote {
 
     public Boolean findServidor() throws RemoteException;
-
     public Conexao getConexao() throws RemoteException;
 
 }

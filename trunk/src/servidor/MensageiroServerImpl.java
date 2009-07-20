@@ -4,6 +4,8 @@ import interfaces.IMensageiroCliente;
 import interfaces.IMensageiroServer;
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,17 +21,18 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
      * 
      */
     private static final long serialVersionUID = -5493710291205128452L;
+    private Registry registro;
     private Map<String, IMensageiroCliente> clientes;
     private List<Conexao> listaConexao;
     private List<String> permissoes;
 
-    protected MensageiroServerImpl() throws RemoteException {
-        super(/* pode passar a porta */);
+    public MensageiroServerImpl(Integer porta) throws RemoteException {
+        super(porta);
     }
 
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
-        if (permissoes.contains(mensageiro.getConexao().getLogin())) {
+        if (getPermissoes().contains(mensageiro.getConexao().getLogin())) {
             if (!getClientes().containsValue(mensageiro)) {
                 getClientes().put(mensageiro.getConexao().getLogin(),
                         mensageiro);
@@ -43,6 +46,17 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         }
 
     }
+
+    public void inicializar(Integer porta) throws RemoteException{
+        try {
+            registro = LocateRegistry.createRegistry(porta);
+            registro.bind("MensageiroServer", this);
+        } catch (Exception e) {
+           e.printStackTrace(); 
+        }
+        
+    }
+
 
     /**
      * Getters and Setters
@@ -66,6 +80,9 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public List<Conexao> getListaConexao() {
+        if (listaConexao == null) {
+            listaConexao = new ArrayList<Conexao>();
+        }
         return listaConexao;
     }
 
@@ -86,5 +103,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         return permissoes;
 
     }
+
+
 
 }
