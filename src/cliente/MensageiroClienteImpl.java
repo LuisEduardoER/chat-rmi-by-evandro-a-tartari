@@ -57,11 +57,9 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         }
     }
 
-    /**
-     * Pega os dados da conexao
-     */
     public Conexao getConexao() throws RemoteException {
         return con;
     }
+    
 
 }
