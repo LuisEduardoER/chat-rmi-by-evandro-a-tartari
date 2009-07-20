@@ -79,11 +79,11 @@ public class FormConnect extends JFrame {
         newJLabel(lblSkin, "Skin:", 155);
         lblResposta = newJLabel(25, 215, 150, Color.RED);
         // Fields
-        txtIpServidor = newJTextField(100, 5);
-        txtPortaServico = newJTextField(100, 35);
-        txtPortaCliente = newJTextField(100, 65);
-        txtLogin = newJTextField(100, 95);
-        txtSenha = newJPasswordField(100, 125);
+        txtIpServidor = newJTextField(100, 5, 0);
+        txtPortaServico = newJTextField(100, 35, 1);
+        txtPortaCliente = newJTextField(100, 65, 2);
+        txtLogin = newJTextField(100, 95, 3);
+        txtSenha = newJPasswordField(100, 125, 4);
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
         btnConnectar = newJButton("Connectar", 130, 195);
@@ -128,9 +128,10 @@ public class FormConnect extends JFrame {
      * @param y
      * @return
      */
-    private JPasswordField newJPasswordField(Integer x, Integer y) {
+    private JPasswordField newJPasswordField(Integer x, Integer y, Integer id) {
         JPasswordField txtPass = new JPasswordField();
         txtPass.setBounds(x, y, 130, 25);
+        txtPass.setName(id.toString());
         add(txtPass);
         return txtPass;
     }
@@ -143,9 +144,10 @@ public class FormConnect extends JFrame {
      * @param y
      * @return
      */
-    private JTextField newJTextField(Integer x, Integer y) {
+    private JTextField newJTextField(Integer x, Integer y, Integer id) {
         JTextField txt = new JTextField();
         txt.setBounds(x, y, 130, 25);
+        txt.setName(id.toString());
         add(txt);
         return txt;
     }
@@ -354,6 +356,7 @@ public class FormConnect extends JFrame {
 
     /**
      * Retorna o label para resposta na tela
+     * 
      * @return JLabel
      */
     public JLabel getLblResposta() {
