@@ -12,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import excessao.FormConnectException;
-
 import acao.AcaoFormConnect;
+import excessao.FormConnectException;
+import gerenteDeTelas.Gerente;
 
 /**
  * 
@@ -52,24 +52,25 @@ public class FormConnect extends JFrame {
     private JLabel lblVLog;
     private JLabel lblVSenha;
 
+    // Gerente de Telas
+    private Gerente gerente;
+    
     // Lista dos validadores
     private List<JLabel> lblLista;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
      * server em rmi
+     * @param gerente 
      */
-    public FormConnect() {
-        configJFrame();
-        inicializar();
-        grupoValidador();
-        renderizaTela();
+    public FormConnect(Gerente gerente) {
+        this.gerente = gerente;
     }
 
     /**
      * inicialização dos componentes
      */
-    private void inicializar() {
+    public void inicializar() {
         // Labels
         newJLabel(lblIpServidor, "Ip servidor:", 5);
         newJLabel(lblPortaServico, "Porta servico:", 35);
@@ -93,7 +94,7 @@ public class FormConnect extends JFrame {
     /**
      * configuração do JFrame
      */
-    private void configJFrame() {
+    public void configJFrame() {
         setTitle("MsRamister");
         setResizable(false);
         setSize(250, 270);
@@ -185,7 +186,7 @@ public class FormConnect extends JFrame {
     /**
      * Cria a adiciona na tela o grupo de validadores
      */
-    private void grupoValidador() {
+    public void grupoValidador() {
         lblVIpServ = newJLabel(232, 5, 5, Color.RED);
         lblVPortServ = newJLabel(232, 35, 5, Color.RED);
         lblVPortaClie = newJLabel(232, 65, 5, Color.RED);
@@ -211,7 +212,7 @@ public class FormConnect extends JFrame {
      * Metodo para renderizar a tela depois de todos componentes inclusos na
      * JFrame.
      */
-    private void renderizaTela() {
+    public void renderizaTela() {
         setVisible(true);
     }
 
@@ -305,7 +306,7 @@ public class FormConnect extends JFrame {
      * Metodo para adicão de KeyListener e ActionListener do FormConnect
      */
     private void adicionaListenerAcao() {
-        AcaoFormConnect acao = new AcaoFormConnect(this);
+        AcaoFormConnect acao = new AcaoFormConnect(this, gerente);
         btnCancelar.addActionListener(acao);
         btnConnectar.addActionListener(acao);
         txtIpServidor.addKeyListener(acao);
@@ -314,18 +315,6 @@ public class FormConnect extends JFrame {
         txtLogin.addKeyListener(acao);
         txtSenha.addKeyListener(acao);
         comboSkin.addActionListener(acao);
-    }
-
-    /**
-     * 
-     * Sessão Excluir
-     * 
-     * 
-     */
-    @Deprecated
-    public static void main(String[] args) {
-        @SuppressWarnings("unused")
-        FormConnect connect = new FormConnect();
     }
 
     /**
