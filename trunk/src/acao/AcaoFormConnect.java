@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
@@ -49,19 +47,19 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     public void keyPressed(KeyEvent e) {
         if (verificador(getIpServidor())) {
-            if (ver(getIpServidor()))
+            if (isVer(getIpServidor()))
                 connect.getExcessao().limpaExcessao(0);
         } else if (verificador(getPortaServico())) {
-            if (ver(getPortaServico()))
+            if (isVer(getPortaServico()))
                 connect.getExcessao().limpaExcessao(1);
         } else if (verificador(getPortaCliente())) {
-            if (ver(getPortaCliente()))
+            if (isVer(getPortaCliente()))
                 connect.getExcessao().limpaExcessao(2);
         } else if (verificador(getLogin())) {
-            if (ver(getLogin()))
+            if (isVer(getLogin()))
                 connect.getExcessao().limpaExcessao(3);
         } else if (verificador(getPassWord()))
-            if (ver(getPassWord()))
+            if (isVer(getPassWord()))
                 connect.getExcessao().limpaExcessao(4);
     }
 
@@ -189,26 +187,6 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     }
 
     /**
-     * Metodo para facilitar leitura do codigo
-     * 
-     * @return JTextField
-     */
-    @SuppressWarnings("unused")
-    private JComboBox getComboSkin() {
-        return connect.getComboBox();
-    }
-
-    /**
-     * Metodo para facilitar leitura do codigo
-     * 
-     * @return JTextField
-     */
-    @SuppressWarnings("unused")
-    private JButton getConnectar() {
-        return connect.getConnectar();
-    }
-
-    /**
      * @param actionComand
      *            String comandoAcao
      * @param esperado
@@ -232,9 +210,9 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      * @return Boolean
      */
     private Boolean isValid() {
-        if (ver(getIpServidor()) && ver(getPortaServico())
-                && ver(getPortaCliente()) && ver(getLogin())
-                && ver(getPassWord()))
+        if (isVer(getIpServidor()) && isVer(getPortaServico())
+                && isVer(getPortaCliente()) && isVer(getLogin())
+                && isVer(getPassWord()))
             return true;
         else {
             validadorIndividual();
@@ -243,15 +221,15 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     }
 
     private void validadorIndividual() {
-        if (!ver(getIpServidor()))
+        if (!isVer(getIpServidor()))
             connect.getExcessao().adicionaIdExcessaoLancar(0);
-        if (!ver(getPortaServico()))
+        if (!isVer(getPortaServico()))
             connect.getExcessao().adicionaIdExcessaoLancar(1);
-        if (!ver(getPortaCliente()))
+        if (!isVer(getPortaCliente()))
             connect.getExcessao().adicionaIdExcessaoLancar(2);
-        if (!ver(getLogin()))
+        if (!isVer(getLogin()))
             connect.getExcessao().adicionaIdExcessaoLancar(3);
-        if (!ver(getPassWord()))
+        if (!isVer(getPassWord()))
             connect.getExcessao().adicionaIdExcessaoLancar(4);
     }
 
@@ -261,7 +239,23 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      * @param t
      * @return Boolean
      */
-    private Boolean ver(JTextField t) {
+    private Boolean isVer(JTextField t) {
         return !t.getText().trim().equals("");
+    }
+    /**
+     * Validador Campo numerico
+     * @param t
+     * @return Boolean
+     */
+    private Boolean isValidaCampoNumerico(JTextField t, Integer id){
+        String strNumero = t.getText().replaceAll(".", "");
+        try{
+            Integer.parseInt(strNumero);
+            return true;
+        }catch (Exception e) {
+            connect.getExcessao().adicionaIdExcessaoLancar(id);
+            return false;
+        }
+        
     }
 }
