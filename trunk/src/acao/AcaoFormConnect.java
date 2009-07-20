@@ -14,19 +14,24 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import forms.FormConnect;
+import gerenteDeTelas.Gerente;
 
 public class AcaoFormConnect implements ActionListener, KeyListener {
     private List<JComponent> componentes;
     private FormConnect connect;
+    private Gerente gerente;
 
     /**
      * Construtor padrao passando o JFrame ao qual ele responde
      * 
      * @param frame
+     * @param gerente
      */
-    public AcaoFormConnect(JFrame frame) {
+    public AcaoFormConnect(JFrame frame, Gerente gerente) {
         connect = (FormConnect) frame;
+        this.gerente = gerente;
         componentes = new ArrayList<JComponent>();
+
     }
 
     /**
@@ -35,7 +40,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         if (verificarAcaoBotao(e.getActionCommand(), "Connectar")) {
             if (isValid())
-                System.out.println("Action Connectar a implementar");
+                gerente.connectar(connect);
             else
                 LancaExcessao("*Campos Obrigatorios");
         } else if (verificarAcaoBotao(e.getActionCommand(), "Fechar")) {
@@ -83,7 +88,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
                     getPassWord().requestFocus();
                 else if (verificador(getPassWord())) {
                     if (isValid())
-                        System.out.println("KeyEvent Connectar a implementar");
+                        gerente.connectar(connect);
                     else
                         LancaExcessao("*Campos Obrigatorios");
                 }
@@ -248,20 +253,6 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     private Boolean isVer(JTextField t) {
         return !t.getText().trim().equals("");
     }
-    /**
-     * Validador Campo numerico
-     * @param t
-     * @return Boolean
-     */
-    public Boolean isValidaCampoNumerico(JTextField t, Integer id){
-        String strNumero = t.getText().replaceAll(".", "");
-        try{
-            Integer.parseInt(strNumero);
-            return true;
-        }catch (Exception e) {
-//TODO implements methods
-            return false;
-        }
-        
-    }
+
+
 }
