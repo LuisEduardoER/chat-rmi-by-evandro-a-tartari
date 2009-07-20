@@ -1,12 +1,17 @@
 package gerenteDeTelas;
 
+import forms.FormConnect;
+import interfaces.IMensageiroCliente;
+
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
-import forms.FormConnect;
+import cliente.MensageiroClienteImpl;
+import conexao.Conexao;
 
 public class Gerente {
 
@@ -14,6 +19,9 @@ public class Gerente {
      * Contrutor Default do Gerente de Telas
      */
     private List<JComponent> listaExcessaoConnectForm = new ArrayList<JComponent>();
+    private IMensageiroCliente cliente;
+    private Conexao con;
+    private FormConnect connect;
 
     public Gerente() {
     }
@@ -31,12 +39,22 @@ public class Gerente {
 
     /**
      * Metodo connectar para instanciar um cliente e procurar um servico
+     * 
      * @param frame
      */
     public void connectar(FormConnect frame) {
-        if (isValidData(frame))
-            System.out.println("Implementar Metodo no gerente");
-        else {
+        if (isValidData(frame)) {
+            try {
+                connect = frame;
+                setCon(frame);
+                cliente = new MensageiroClienteImpl(getCon());
+                Boolean retorno = cliente.findServidor();
+                if(retorno == true);
+                    //TODO implementsNewMethods
+            } catch (RemoteException e) {
+                frame.getExcessao().lancaExcessao(e.getMessage());
+            }
+        } else {
             frame.getExcessao().setaListaExcessao(listaExcessaoConnectForm);
             frame.getExcessao().lancaExcessao("*Campo numerico");
         }
@@ -44,6 +62,7 @@ public class Gerente {
 
     /**
      * Validador dos componentes numericos
+     * 
      * @param frame
      * @return
      */
@@ -86,6 +105,25 @@ public class Gerente {
     public static void main(String[] args) {
         Gerente gerente = new Gerente();
         gerente.init();
+    }
+
+    public void setCon(FormConnect form) {
+        getCon().setLogin(form.getLogin().getText());
+        getCon().setSenha(form.getPassWord().getPassword().toString());
+        getCon().setIpServidor(form.getIpServidor().getText());
+        getCon().setPortaServico(Integer.parseInt(form.getPortaServico().getText()));
+        getCon().setPortaCliente(Integer.parseInt(form.getPortaCliente().getText()));
+    }
+
+    public Conexao getCon() {
+        if (con == null) {
+            con = new Conexao();
+        }
+        return con;
+    }
+
+    public void lancaExcessao(String texto) {
+        connect.getExcessao().lancaExcessao(texto);
     }
 
 }
