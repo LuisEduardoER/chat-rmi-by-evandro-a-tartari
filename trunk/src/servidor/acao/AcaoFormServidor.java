@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
@@ -15,7 +17,7 @@ import javax.swing.JFrame;
 import servidor.MensageiroServerImpl;
 import servidor.forms.FormServidor;
 
-public class AcaoFormServidor implements ActionListener, KeyListener {
+public class AcaoFormServidor implements ActionListener, KeyListener , WindowListener {
     private FormServidor servidor;
     private IMensageiroServer servico;
 
@@ -23,6 +25,9 @@ public class AcaoFormServidor implements ActionListener, KeyListener {
         this.servidor = (FormServidor) servidor;
     }
 
+    /**
+     * ActionListener
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Inicia")) {
             if (isValid()) {
@@ -48,6 +53,9 @@ public class AcaoFormServidor implements ActionListener, KeyListener {
         }
     }
 
+    /**
+     * KeyListener
+     */
     public void keyPressed(KeyEvent e) {
     }
 
@@ -117,5 +125,38 @@ public class AcaoFormServidor implements ActionListener, KeyListener {
     private boolean isValidEmpyt() {
         return servidor.getTxtPortaServidor().getText().equals("");
     }
+    
+    /**
+     * WindowsListener
+     */
+    public void windowActivated(WindowEvent e) {
+        System.out.println("windowActivated");
+    }
+
+    public void windowClosed(WindowEvent e) {
+        System.out.println("windowClosed");
+    }
+
+    public void windowClosing(WindowEvent e) {
+        System.out.println("windowClosing");
+    }
+
+    public void windowDeactivated(WindowEvent e) {
+        System.out.println("windowDeactivated");
+        
+    }
+
+    public void windowDeiconified(WindowEvent e) {
+        System.out.println("windowDeiconified");
+    }
+
+    public void windowIconified(WindowEvent e) {
+        System.out.println("windowIconified");
+    }
+
+    public void windowOpened(WindowEvent e) {
+        System.out.println("windowOpened");
+    }
+
 
 }

@@ -29,6 +29,8 @@ public class FormServidor extends JFrame {
     private JButton btnFechar = new JButton("Fechar");
     private JLabel lblResposta = new JLabel("");
     private JLabel lblVPortaServidor = new JLabel("");
+    
+
     public void inicializar() {
         setTitle("Servidor");
         setIconImage(getIcon());
@@ -65,6 +67,7 @@ public class FormServidor extends JFrame {
         txtPortaServidor.addKeyListener(acao);
         btnFechar.addActionListener(acao);
         btnInicializar.addActionListener(acao);
+        addWindowListener(acao);
     }
 
     private void renderizaTela() {
@@ -96,10 +99,12 @@ public class FormServidor extends JFrame {
         return btnInicializar;
     }
 
-    public Image getIcon(){
+    public Image getIcon() {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource("imagens/imageIcon.png");
         ImageIcon icon = new ImageIcon(res);
         return icon.getImage();
     }
+
+        
 }
