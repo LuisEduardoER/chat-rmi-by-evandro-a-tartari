@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import forms.FormConnect;
 
 public class AcaoFormConnect implements ActionListener, KeyListener {
+    private List<JComponent> componentes;
     private FormConnect connect;
 
     /**
@@ -23,6 +26,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     public AcaoFormConnect(JFrame frame) {
         connect = (FormConnect) frame;
+        componentes = new ArrayList<JComponent>();
     }
 
     /**
@@ -48,19 +52,19 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         if (verificador(getIpServidor())) {
             if (isVer(getIpServidor()))
-                connect.getExcessao().limpaExcessao(0);
+                connect.getExcessao().limpaExcessao(getIpServidor());
         } else if (verificador(getPortaServico())) {
             if (isVer(getPortaServico()))
-                connect.getExcessao().limpaExcessao(1);
+                connect.getExcessao().limpaExcessao(getPortaServico());
         } else if (verificador(getPortaCliente())) {
             if (isVer(getPortaCliente()))
-                connect.getExcessao().limpaExcessao(2);
+                connect.getExcessao().limpaExcessao(getPortaCliente());
         } else if (verificador(getLogin())) {
             if (isVer(getLogin()))
-                connect.getExcessao().limpaExcessao(3);
+                connect.getExcessao().limpaExcessao(getLogin());
         } else if (verificador(getPassWord()))
             if (isVer(getPassWord()))
-                connect.getExcessao().limpaExcessao(4);
+                connect.getExcessao().limpaExcessao(getPassWord());
     }
 
     /**
@@ -202,6 +206,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     private void LancaExcessao(String excessao) {
         connect.getExcessao().lancaExcessao(excessao);
+        componentes.clear();
     }
 
     /**
@@ -222,15 +227,16 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
 
     private void validadorIndividual() {
         if (!isVer(getIpServidor()))
-            connect.getExcessao().adicionaIdExcessaoLancar(0);
+            componentes.add(getIpServidor());
         if (!isVer(getPortaServico()))
-            connect.getExcessao().adicionaIdExcessaoLancar(1);
+            componentes.add(getPortaServico());
         if (!isVer(getPortaCliente()))
-            connect.getExcessao().adicionaIdExcessaoLancar(2);
+            componentes.add(getPortaCliente());
         if (!isVer(getLogin()))
-            connect.getExcessao().adicionaIdExcessaoLancar(3);
+            componentes.add(getLogin());
         if (!isVer(getPassWord()))
-            connect.getExcessao().adicionaIdExcessaoLancar(4);
+            componentes.add(getPassWord());
+        connect.getExcessao().setaListaExcessao(componentes);
     }
 
     /**
@@ -247,13 +253,13 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      * @param t
      * @return Boolean
      */
-    private Boolean isValidaCampoNumerico(JTextField t, Integer id){
+    public Boolean isValidaCampoNumerico(JTextField t, Integer id){
         String strNumero = t.getText().replaceAll(".", "");
         try{
             Integer.parseInt(strNumero);
             return true;
         }catch (Exception e) {
-            connect.getExcessao().adicionaIdExcessaoLancar(id);
+//TODO implements methods
             return false;
         }
         
