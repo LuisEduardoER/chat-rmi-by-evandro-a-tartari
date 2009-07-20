@@ -5,6 +5,7 @@ import interfaces.IMensageiroServer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     private static final long serialVersionUID = -5493710291205128452L;
     private Map<String, IMensageiroCliente> clientes;
     private List<Conexao> listaConexao;
+    private List<String> permissoes;
 
     protected MensageiroServerImpl() throws RemoteException {
         super(/* pode passar a porta */);
@@ -27,12 +29,17 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
-        if (!getClientes().containsValue(mensageiro)) {
-            getClientes().put(mensageiro.getConexao().getLogin(), mensageiro);
-            getListaConexao().add(mensageiro.getConexao());
-            return "OK";
-        } else {
-            return "Usuario Já conectado";
+        if (permissoes.contains(mensageiro.getConexao().getLogin())) {
+            if (!getClientes().containsValue(mensageiro)) {
+                getClientes().put(mensageiro.getConexao().getLogin(),
+                        mensageiro);
+                getListaConexao().add(mensageiro.getConexao());
+                return "OK";
+            } else {
+                return "Usuario Já conectado";
+            }
+        }else{
+            return "Usuario não Cadastrado";
         }
 
     }
@@ -60,6 +67,24 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public List<Conexao> getListaConexao() {
         return listaConexao;
+    }
+
+    public void setPermissoes(List<String> permissoes) {
+        this.permissoes = permissoes;
+    }
+
+    public List<String> getPermissoes() {
+        if (permissoes == null) {
+            permissoes = new ArrayList<String>();
+            permissoes.add("evandro.tartari");
+            permissoes.add("gustavo.bergamim");
+            permissoes.add("venilton.junior");
+            permissoes.add("andre.freitas");
+            permissoes.add("andre.bacaglini");
+
+        }
+        return permissoes;
+
     }
 
 }
