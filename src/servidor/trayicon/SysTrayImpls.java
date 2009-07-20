@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import servidor.forms.FormServidor;
 
 public class SysTrayImpls implements MouseListener, ActionListener {
+    @SuppressWarnings("unused")
     private TrayIcon trayIcon;
+    @SuppressWarnings("unused")
     private FormServidor servidor;
     
     public SysTrayImpls(TrayIcon trayIcon,JFrame frame) {
