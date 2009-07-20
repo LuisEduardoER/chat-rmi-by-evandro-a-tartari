@@ -23,12 +23,21 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
     private Registry registroRMI;
     private Gerente gerente;
 
+    /**
+     * Construtor padrao do cliente
+     * @param con
+     * @param gerente
+     * @throws RemoteException
+     */
     public MensageiroClienteImpl(Conexao con, Gerente gerente) throws RemoteException {
         super(con.getPortaCliente());
         this.con = con;
         this.gerente = gerente;
     }
 
+    /**
+     * Metodo de busca ao servico
+     */
     public Boolean findServidor() {
         try {
             registroRMI = LocateRegistry.getRegistry(con.getIpServidor(), con
@@ -48,6 +57,9 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         }
     }
 
+    /**
+     * Pega os dados da conexao
+     */
     public Conexao getConexao() throws RemoteException {
         return con;
     }

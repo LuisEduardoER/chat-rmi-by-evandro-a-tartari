@@ -107,6 +107,10 @@ public class Gerente {
         gerente.init();
     }
 
+    /**
+     * Seta dados da conexao
+     * @param form
+     */
     public void setCon(FormConnect form) {
         getCon().setLogin(form.getLogin().getText());
         getCon().setSenha(form.getPassWord().getPassword().toString());
@@ -115,6 +119,10 @@ public class Gerente {
         getCon().setPortaCliente(Integer.parseInt(form.getPortaCliente().getText()));
     }
 
+    /**
+     * Pega dados de uma conexao
+     * @return
+     */
     public Conexao getCon() {
         if (con == null) {
             con = new Conexao();
@@ -122,6 +130,10 @@ public class Gerente {
         return con;
     }
 
+    /**
+     * Lanca uma excessao
+     * @param texto
+     */
     public void lancaExcessao(String texto) {
         connect.getExcessao().lancaExcessaoSimple(texto);
     }

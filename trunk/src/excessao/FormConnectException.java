@@ -15,12 +15,22 @@ public class FormConnectException {
     private FormConnect connect;
     private List<JComponent> componentes;
     private List<JComponent> excessoesLancadas;
+
+    /**
+     * Construtor defaul passando o frame que ele responde
+     * 
+     * @param frame
+     */
     public FormConnectException(JFrame frame) {
         connect = (FormConnect) frame;
         setComponentes(new ArrayList<JComponent>());
         setExcessoesLancadas(new ArrayList<JComponent>());
     }
 
+    /**
+     * Metodo para lancar excessao na Tela do FormConnect
+     * @param excessao
+     */
     public void lancaExcessao(String excessao) {
         if (getComponentes().size() != 0) {
             for (JComponent componente : getComponentes()) {
@@ -35,45 +45,73 @@ public class FormConnectException {
         }
 
     }
-    
-    public void lancaExcessaoSimple(String excessao){
+
+    /**
+     * Metodo que lanca uma excessao simple na tela do form
+     * @param excessao
+     */
+    public void lancaExcessaoSimple(String excessao) {
         getTelaResposta().setText(excessao);
     }
 
+    /**
+     * Metodo que limpa a excessao
+     * @param componente
+     */
     public void limpaExcessao(JComponent componente) {
         connect.getValidadores().get(Integer.parseInt(componente.getName()))
                 .setText("");
         componente.setBackground(Color.WHITE);
         getExcessoesLancadas().remove(componente);
-        if(getExcessoesLancadas().size()==0){
+        if (getExcessoesLancadas().size() == 0) {
             getTelaResposta().setText("");
         }
     }
 
+    /**
+     * Retorna o Label para resposta da tela
+     * @return
+     */
     private JLabel getTelaResposta() {
         return connect.getLblResposta();
     }
 
+    /**
+     * Seta dados da lista de excessao a ser apresentada na tela
+     * @param componentes
+     */
     public void setaListaExcessao(List<JComponent> componentes) {
         this.setComponentes(componentes);
     }
 
-    public JLabel retornaJLabelResponsavel(Integer id) {
-        return connect.getValidadores().get(id);
-    }
-
+    /**
+     * Setada lista de componentes
+     * @param componentes
+     */
     public void setComponentes(List<JComponent> componentes) {
         this.componentes = componentes;
     }
 
+    /**
+     * Pega lista de componentes
+     * @return
+     */
     private List<JComponent> getComponentes() {
         return componentes;
     }
 
+    /**
+     * Seta lista de excessoes lancadas
+     * @param excessoesLancadas
+     */
     public void setExcessoesLancadas(List<JComponent> excessoesLancadas) {
         this.excessoesLancadas = excessoesLancadas;
     }
 
+    /**
+     * Pega lista de excessoes lancadas
+     * @return
+     */
     public List<JComponent> getExcessoesLancadas() {
         return excessoesLancadas;
     }
