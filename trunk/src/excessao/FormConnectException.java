@@ -35,6 +35,10 @@ public class FormConnectException {
         }
 
     }
+    
+    public void lancaExcessaoSimple(String excessao){
+        getTelaResposta().setText(excessao);
+    }
 
     public void limpaExcessao(JComponent componente) {
         connect.getValidadores().get(Integer.parseInt(componente.getName()))
