@@ -2,8 +2,11 @@ package servidor.forms;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Image;
 import java.net.InetAddress;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -28,6 +31,7 @@ public class FormServidor extends JFrame {
     private JLabel lblVPortaServidor = new JLabel("");
     public void inicializar() {
         setTitle("Servidor");
+        setIconImage(getIcon());
         setSize(200, 150);
         setContentPane(new Container());
         setResizable(false);
@@ -92,4 +96,10 @@ public class FormServidor extends JFrame {
         return btnInicializar;
     }
 
+    public Image getIcon(){
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/imageIcon.png");
+        ImageIcon icon = new ImageIcon(res);
+        return icon.getImage();
+    }
 }
