@@ -39,8 +39,9 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     public void actionPerformed(ActionEvent e) {
         if (verificarAcaoBotao(e.getActionCommand(), "Connectar")) {
-            if (isValid())
+            if (isValid()){
                 gerente.connectar(connect);
+            }
             else
                 LancaExcessao("*Campos Obrigatorios");
         } else if (verificarAcaoBotao(e.getActionCommand(), "Fechar")) {

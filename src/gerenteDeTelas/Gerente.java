@@ -47,7 +47,7 @@ public class Gerente {
             try {
                 connect = frame;
                 setCon(frame);
-                cliente = new MensageiroClienteImpl(getCon());
+                cliente = new MensageiroClienteImpl(getCon(), this);
                 Boolean retorno = cliente.findServidor();
                 if(retorno == true);
                     //TODO implementsNewMethods
@@ -123,7 +123,7 @@ public class Gerente {
     }
 
     public void lancaExcessao(String texto) {
-        connect.getExcessao().lancaExcessao(texto);
+        connect.getExcessao().lancaExcessaoSimple(texto);
     }
 
 }
