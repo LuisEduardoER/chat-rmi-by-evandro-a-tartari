@@ -32,19 +32,15 @@ public class SysTrayImpls implements MouseListener, ActionListener {
     }
 
     public void mouseEntered(MouseEvent e) {
-        System.out.println("Tray Icon - Mouse entered!");
     }
 
     public void mouseExited(MouseEvent e) {
-        System.out.println("Tray Icon - Mouse exited!");
     }
 
     public void mousePressed(MouseEvent e) {
-        System.out.println("Tray Icon - Mouse pressed!");
     }
 
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Tray Icon - Mouse released!");
     }
 
     public void actionPerformed(ActionEvent e) {
