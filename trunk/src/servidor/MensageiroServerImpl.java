@@ -41,22 +41,21 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             } else {
                 return "Usuario Já conectado";
             }
-        }else{
+        } else {
             return "Usuario não Cadastrado";
         }
 
     }
 
-    public void inicializar(Integer porta) throws RemoteException{
+    public void inicializar(Integer porta) throws RemoteException {
         try {
             registro = LocateRegistry.createRegistry(porta);
             registro.bind("MensageiroServer", this);
         } catch (Exception e) {
-           e.printStackTrace(); 
+            e.printStackTrace();
         }
-        
-    }
 
+    }
 
     /**
      * Getters and Setters
@@ -104,6 +103,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     }
 
-
+    public void parar() {
+        try {
+            registro.unbind("MensageiroServer");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
