@@ -11,6 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+
+import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 import acao.AcaoFormConnect;
 import excessao.FormConnectException;
@@ -54,14 +58,15 @@ public class FormConnect extends JFrame {
 
     // Gerente de Telas
     private Gerente gerente;
-    
+
     // Lista dos validadores
     private List<JLabel> lblLista;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
      * server em rmi
-     * @param gerente 
+     * 
+     * @param gerente
      */
     public FormConnect(Gerente gerente) {
         this.gerente = gerente;
@@ -101,6 +106,12 @@ public class FormConnect extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+            UIManager
+                    .setLookAndFeel((LookAndFeel) new SubstanceDefaultLookAndFeel());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -224,7 +235,7 @@ public class FormConnect extends JFrame {
      * @param y
      */
     private JComboBox newJCombobox(Integer x, Integer y) {
-        JComboBox combo = new JComboBox();
+        JComboBox combo = new JComboBox(getItensComboBox());
         combo.setBounds(x, y, 130, 20);
         add(combo);
         return combo;
@@ -352,4 +363,13 @@ public class FormConnect extends JFrame {
         return lblResposta;
     }
 
+    /**
+     * Items da Combobox
+     */
+    public String[] getItensComboBox() {
+        return new String[] { "Default Theme", "Creme/Café", "Dark Cyan",
+                "Green Theme", "Ligth Cyan", "Ligth Theme", "Oficce Silver",
+                "Oficce Blue", "Silver Theme", "Silver2 Theme", "Yellow Theme" };
+
+    }
 }
