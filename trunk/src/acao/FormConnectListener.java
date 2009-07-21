@@ -32,7 +32,7 @@ import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
-public class AcaoFormConnect implements ActionListener, KeyListener {
+public class FormConnectListener implements ActionListener, KeyListener {
     private List<JComponent> componentes;
     private FormConnect connect;
     private Gerente gerente;
@@ -44,7 +44,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      * @param frame
      * @param gerente
      */
-    public AcaoFormConnect(JFrame frame, Gerente gerente) {
+    public FormConnectListener(JFrame frame, Gerente gerente) {
         connect = (FormConnect) frame;
         this.gerente = gerente;
         componentes = new ArrayList<JComponent>();

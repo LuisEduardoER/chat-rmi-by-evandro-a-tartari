@@ -16,7 +16,7 @@ import javax.swing.UIManager;
 
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
-import acao.AcaoFormConnect;
+import acao.FormConnectListener;
 import excessao.FormConnectException;
 import gerenteDeTelas.Gerente;
 
@@ -318,7 +318,7 @@ public class FormConnect extends JFrame {
      * Metodo para adicão de KeyListener e ActionListener do FormConnect
      */
     private void adicionaListenerAcao() {
-        AcaoFormConnect acao = new AcaoFormConnect(this, gerente);
+        FormConnectListener acao = new FormConnectListener(this, gerente);
         btnCancelar.addActionListener(acao);
         btnConnectar.addActionListener(acao);
         txtIpServidor.addKeyListener(acao);
