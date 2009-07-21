@@ -11,8 +11,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import acao.FormListFriendsListener;
+
+import contatos.Contatos;
 import contatos.render.ContatosRender;
 
 public class FormListFriends extends JFrame {
@@ -45,11 +51,11 @@ public class FormListFriends extends JFrame {
         cons.gridy = 1;
         cons.weighty = 0.75;
         cons.weightx = 1;
-        c.add(painelUsuario, cons);
+        c.add(painelContatos, cons);
         cons.gridx = 0;
         cons.gridy = 0;
         cons.weighty = 0.25;
-        c.add(painelContatos, cons);
+        c.add(painelUsuario, cons);
     }
 
     private void inicializa() {
@@ -61,7 +67,19 @@ public class FormListFriends extends JFrame {
         addPainel(painelUsuario, listaUsuario);
         setListaContatos(newJList(modelContatos));
         addPainel(painelContatos, listaContatos);
+        teste();
 
+    }
+
+    private void teste() {
+        Contatos contato = new Contatos();
+        contato.setNome("Teste01");
+        contato.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverRunning.png")));
+        adicinalUsuario(contato);
+        Contatos contato2 = new Contatos();
+        contato2.setNome("Teste02");
+        contato2.setIcon(new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverNotRunning.png")));
+        adicionaContato(contato2);
     }
 
     private JPanel newJPanel() {
@@ -95,11 +113,15 @@ public class FormListFriends extends JFrame {
         return icon.getImage();
     }
 
-    public static void main(String[] args) {
-        FormListFriends list = new FormListFriends();
-        list.inicializa();
-        list.config();
-        list.renderiza();
+
+    public void adicionaListener(){
+        FormListFriendsListener listener = new FormListFriendsListener(this);
+        painelContatos.addKeyListener(listener);
+        painelUsuario.addKeyListener(listener);
+        painelContatos.addMouseListener(listener);
+        painelUsuario.addMouseListener(listener);
+        listaContatos.addKeyListener(listener);
+        listaUsuario.addKeyListener(listener);
     }
 
     protected void setListaUsuario(JList listaUsuario) {
@@ -137,6 +159,40 @@ public class FormListFriends extends JFrame {
     public void removeContato(Object obj) {
         modelContatos.removeElement(obj);
         listaContatos.setModel(modelContatos);
+    }
+
+    public void createMenuBar(){
+        JMenuBar menuBar = newJMenuBar();
+        menuBar.add(newJMenuItens("MsMundica", new JMenuItem[]{new JMenuItem("Minimizar"),new JMenuItem("Sair")}));
+    }
+    
+    protected JMenu newJMenu(String nomeMenu){
+        return new JMenu(nomeMenu);
+    }
+    
+    protected JMenu newJMenuItens(String nomeMenu, JMenuItem[] items){
+        JMenu menu = newJMenu(nomeMenu);
+        FormListFriendsListener listener = new FormListFriendsListener(this);
+        for (int i = 0; i < items.length; i++) {
+            items[i].addActionListener(listener);
+            menu.add(items[i]);
+        }
+        return menu;
+    }
+    
+    protected JMenuBar newJMenuBar(){
+        JMenuBar menuBar = new JMenuBar();
+        super.setJMenuBar(menuBar);
+        return menuBar;
+    }
+    
+    public static void main(String[] args) {
+        FormListFriends list = new FormListFriends();
+        list.inicializa();
+        list.config();
+        list.createMenuBar();
+        list.adicionaListener();
+        list.renderiza();
     }
 
 }
