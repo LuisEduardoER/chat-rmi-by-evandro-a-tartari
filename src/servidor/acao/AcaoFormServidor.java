@@ -151,7 +151,8 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     }
 
     public void windowIconified(WindowEvent e) {
-        System.out.println("windowIconified");
+        servidor.createTrayIcon();
+        servidor.setVisible(false);
     }
 
     public void windowOpened(WindowEvent e) {

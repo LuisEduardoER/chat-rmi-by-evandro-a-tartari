@@ -45,7 +45,7 @@ public class TrayManager {
 
     private SysTrayImpls getListener(TrayIcon trayIcon) {
         if (listenerSysTray == null) {
-            listenerSysTray = new SysTrayImpls(trayIcon, servidor);
+            listenerSysTray = new SysTrayImpls(trayIcon, servidor, tray);
         }
         return listenerSysTray;
     }
