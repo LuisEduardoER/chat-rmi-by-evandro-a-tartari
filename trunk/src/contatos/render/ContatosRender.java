@@ -18,7 +18,6 @@ public class ContatosRender extends JLabel implements ListCellRenderer {
     public ContatosRender() {
         setOpaque(true);
         setIconTextGap(12);
-        setHorizontalAlignment(CENTER);
     }
 
     public Component getListCellRendererComponent(JList list, Object value,
