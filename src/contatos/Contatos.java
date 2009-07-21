@@ -1,10 +1,10 @@
-package conexao;
+package contatos;
 
 import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-public class Conexao implements Serializable {
+public class Contatos implements Serializable {
 
     /**
      * 
@@ -72,6 +72,10 @@ public class Conexao implements Serializable {
     }
 
     public ImageIcon getIcon() {
+        return icon;
+    }
+
+    public ImageIcon getImage() {
         return icon;
     }
 

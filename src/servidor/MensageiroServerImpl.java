@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import conexao.Conexao;
+import contatos.Contatos;
 
 public class MensageiroServerImpl extends UnicastRemoteObject implements
         IMensageiroServer {
@@ -23,7 +23,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     private static final long serialVersionUID = -5493710291205128452L;
     private Registry registro;
     private Map<String, IMensageiroCliente> clientes;
-    private List<Conexao> listaConexao;
+    private List<Contatos> listaConexao;
     private List<String> permissoes;
 
     public MensageiroServerImpl(Integer porta) throws RemoteException {
@@ -81,13 +81,13 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         return clientes;
     }
 
-    public void setListaConexao(List<Conexao> con) {
+    public void setListaConexao(List<Contatos> con) {
         this.listaConexao = con;
     }
 
-    public List<Conexao> getListaConexao() {
+    public List<Contatos> getListaConexao() {
         if (listaConexao == null) {
-            listaConexao = new ArrayList<Conexao>();
+            listaConexao = new ArrayList<Contatos>();
         }
         return listaConexao;
     }

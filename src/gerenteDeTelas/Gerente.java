@@ -11,7 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import cliente.MensageiroClienteImpl;
-import conexao.Conexao;
+import contatos.Contatos;
 
 public class Gerente {
 
@@ -20,7 +20,7 @@ public class Gerente {
      */
     private List<JComponent> listaExcessaoConnectForm = new ArrayList<JComponent>();
     private IMensageiroCliente cliente;
-    private Conexao con;
+    private Contatos con;
     private FormConnect connect;
 
     public Gerente() {
@@ -123,9 +123,9 @@ public class Gerente {
      * Pega dados de uma conexao
      * @return
      */
-    public Conexao getCon() {
+    public Contatos getCon() {
         if (con == null) {
-            con = new Conexao();
+            con = new Contatos();
         }
         return con;
     }
