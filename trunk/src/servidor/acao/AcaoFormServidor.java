@@ -10,14 +10,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 
 import servidor.MensageiroServerImpl;
 import servidor.forms.FormServidor;
 
-public class AcaoFormServidor implements ActionListener, KeyListener , WindowListener {
+public class AcaoFormServidor implements ActionListener, KeyListener,
+        WindowListener {
     private FormServidor servidor;
     private IMensageiroServer servico;
 
@@ -28,13 +28,11 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     /**
      * ActionListener
      */
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Inicia")) {
+    public void actionPerformed(ActionEvent evento) {
+        if (evento.getActionCommand().equals("Inicia")) {
             if (isValid()) {
                 try {
-                    servico = (IMensageiroServer) new MensageiroServerImpl(
-                            Integer.parseInt(servidor.getTxtPortaServidor()
-                                    .getText()));
+                    servico = getServico();
                     Integer porta = Integer.parseInt(servidor
                             .getTxtPortaServidor().getText());
                     servico.inicializar(porta);
@@ -43,13 +41,13 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                     servidor.getBtnInicializar().setEnabled(false);
                     servidor.refreshIcon("imagens/serverRunning.png");
                     servidor.setServico(servico);
-                } catch (RemoteException e1) {
+                } catch (Exception e) {
                     servidor.getLblResposta()
                             .setText("Erro Iniciando Servidor");
                     servico = null;
                 }
             }
-        } else if (e.getActionCommand().equals("Fechar")) {
+        } else if (evento.getActionCommand().equals("Fechar")) {
             servidor.dispose();
             System.exit(0);
         }
@@ -58,18 +56,16 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     /**
      * KeyListener
      */
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent evento) {
     }
 
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == Event.ENTER) {
-            if (e.getModifiers() == 0) {
+    public void keyReleased(KeyEvent evento) {
+        if (evento.getKeyCode() == Event.ENTER) {
+            if (evento.getModifiers() == 0) {
                 if (isValid()) {
 
                     try {
-                        servico = (IMensageiroServer) new MensageiroServerImpl(
-                                Integer.parseInt(servidor.getTxtPortaServidor()
-                                        .getText()));
+                        servico = getServico();
                         Integer porta = Integer.parseInt(servidor
                                 .getTxtPortaServidor().getText());
                         servico.inicializar(porta);
@@ -78,15 +74,15 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                         servidor.getBtnInicializar().setEnabled(false);
                         servidor.refreshIcon("imagens/serverRunning.png");
                         servidor.setServico(servico);
-                    } catch (RemoteException e1) {
+                    } catch (Exception e) {
                         servidor.getLblResposta().setText(
                                 "Erro Iniciando Servidor");
-                        servico = null;
+
                     }
                 }
             }
-        } else if (e.getKeyCode() == Event.ESCAPE) {
-            if (e.getModifiers() == 0) {
+        } else if (evento.getKeyCode() == Event.ESCAPE) {
+            if (evento.getModifiers() == 0) {
                 servidor.dispose();
                 System.exit(0);
             }
@@ -128,7 +124,7 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     private boolean isValidEmpyt() {
         return servidor.getTxtPortaServidor().getText().equals("");
     }
-    
+
     /**
      * WindowsListener
      */
@@ -142,7 +138,7 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     }
 
     public void windowDeactivated(WindowEvent e) {
-        
+
     }
 
     public void windowDeiconified(WindowEvent e) {
@@ -156,5 +152,18 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
     public void windowOpened(WindowEvent e) {
     }
 
+    /**
+     * Instancia do Servido
+     * 
+     * @return
+     * @throws Exception
+     */
+    private IMensageiroServer getServico() throws Exception {
+        if (servico == null) {
+            servico = (IMensageiroServer) new MensageiroServerImpl(Integer
+                    .parseInt(servidor.getTxtPortaServidor().getText()));
+        }
+        return servico;
+    }
 
 }
