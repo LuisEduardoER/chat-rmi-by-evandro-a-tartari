@@ -49,6 +49,7 @@ public class FormListFriends extends JFrame {
         setIconImage(getIcon());
         setSize(150, 300);
         setResizable(true);
+        setUndecorated(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         Container c = this.getContentPane();
