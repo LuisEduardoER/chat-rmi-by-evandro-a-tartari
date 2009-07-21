@@ -42,6 +42,9 @@ public class FormListFriends extends JFrame {
     private JList listaContatos;
     private IMensageiroCliente cliente;
 
+    /**
+     * Metodo de Configuracao do frame
+     */
     public void config() {
         try {
             setTitle(cliente.getConexao().getNome());
@@ -72,6 +75,9 @@ public class FormListFriends extends JFrame {
         }
     }
 
+    /**
+     * Metodo de inicializacao dos componentes do frame
+     */
     public void inicializa() {
         painelContatos = newJScrollPane();
         modelUsuario = newDefaultListModel();
@@ -83,12 +89,20 @@ public class FormListFriends extends JFrame {
         adiciona(new JComponent[] { listaUsuario, painelContatos });
     }
 
+    /**
+     * Adiciona um Array de JComponentes no frame
+     * @param components
+     */
     private void adiciona(JComponent[] components) {
         for (int i = 0; i < components.length; i++) {
             add(components[i]);
         }
     }
 
+    /**
+     * Instancia Um JScrollPane
+     * @return
+     */
     private JScrollPane newJScrollPane() {
         JScrollPane painel = new JScrollPane(
                 JScrollPane.VERTICAL_SCROLLBAR_NEVER,
@@ -96,11 +110,19 @@ public class FormListFriends extends JFrame {
         return painel;
     }
 
-    
+    /**
+     * Instancia Uma DefaultaListModel
+     * @return
+     */
     private DefaultListModel newDefaultListModel() {
         return new DefaultListModel();
     }
 
+    /**
+     * Instancia um JList
+     * @param model
+     * @return
+     */
     private JList newJList(DefaultListModel model) {
         JList lista = new JList(model);
         lista.setCellRenderer(new ContatosRender());
@@ -108,10 +130,17 @@ public class FormListFriends extends JFrame {
         return lista;
     }
 
+    /**
+     * Renderiza a tela
+     */
     public void renderiza() {
         setVisible(true);
     }
 
+    /**
+     * Cria Uma imagemIcon
+     * @return
+     */
     private Image getIcon() {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource("imagens/serverRunning.png");
@@ -119,6 +148,9 @@ public class FormListFriends extends JFrame {
         return icon.getImage();
     }
 
+    /**
+     * Adiciona Listeners nos componentes
+     */
     public void adicionaListener() {
         FormListFriendsListener listener = new FormListFriendsListener(this);
         painelContatos.addKeyListener(listener);
@@ -128,6 +160,10 @@ public class FormListFriends extends JFrame {
         listaContatos.addKeyListener(listener);
     }
 
+    /**
+     * set JList Usuario
+     * @param listaUsuario
+     */
     protected void setListaUsuario(JList listaUsuario) {
         this.listaUsuario = listaUsuario;
     }
