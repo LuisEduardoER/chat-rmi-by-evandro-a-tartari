@@ -2,6 +2,8 @@ package conexao;
 
 import java.io.Serializable;
 
+import javax.swing.ImageIcon;
+
 public class Conexao implements Serializable {
 
     /**
@@ -15,6 +17,7 @@ public class Conexao implements Serializable {
     private Integer portaCliente;
     private String login;
     private String senha;
+    private ImageIcon icon;
 
     public String getNome() {
         return nome;
@@ -62,6 +65,14 @@ public class Conexao implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void setIcon(ImageIcon icon) {
+        this.icon = icon;
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 
 }
