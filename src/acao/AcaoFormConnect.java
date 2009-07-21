@@ -6,12 +6,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+
+import org.jvnet.substance.SubstanceDefaultLookAndFeel;
+import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
+import org.jvnet.substance.skin.SubstanceBusinessLookAndFeel;
+import org.jvnet.substance.skin.SubstanceCremeCoffeeLookAndFeel;
+import org.jvnet.substance.skin.SubstanceFieldOfWheatLookAndFeel;
+import org.jvnet.substance.skin.SubstanceGreenMagicLookAndFeel;
+import org.jvnet.substance.skin.SubstanceMistSilverLookAndFeel;
+import org.jvnet.substance.skin.SubstanceModerateLookAndFeel;
+import org.jvnet.substance.skin.SubstanceNebulaBrickWallLookAndFeel;
+import org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel;
+import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
@@ -20,6 +36,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     private List<JComponent> componentes;
     private FormConnect connect;
     private Gerente gerente;
+    private Map<String, LookAndFeel> mapaSubstance;
 
     /**
      * Construtor padrao passando o JFrame ao qual ele responde
@@ -37,17 +54,21 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     /**
      * Metodos para o Onclick nos botoes tela
      */
-    public void actionPerformed(ActionEvent e) {
-        if (verificarAcaoBotao(e.getActionCommand(), "Connectar")) {
+    public void actionPerformed(ActionEvent evento) {
+        if (verificarAcaoBotao(evento.getActionCommand(), "Connectar")) {
             if (isValid()){
                 gerente.connectar(connect);
             }
             else
                 LancaExcessao("*Campos Obrigatorios");
-        } else if (verificarAcaoBotao(e.getActionCommand(), "Fechar")) {
+        } else if (verificarAcaoBotao(evento.getActionCommand(), "Fechar")) {
             connect.dispose();
-        } else if (verificarAcaoBotao(e.getActionCommand(), "comboBoxChanged")) {
-            System.out.println("Action ComboBox a implementar");
+        } else if (verificarAcaoBotao(evento.getActionCommand(), "comboBoxChanged")) {
+            try{
+                UIManager.setLookAndFeel(getMapaSubstance().get(getSelectedItem()));
+            }catch (Exception e) {
+                connect.getExcessao().lancaExcessaoSimple("Erro no substance");
+            }
         }
 
     }
@@ -160,6 +181,10 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
         return connect.getIpServidor();
     }
 
+    public String getSelectedItem(){
+        return (String) connect.getComboBox().getSelectedItem();
+    }
+    
     /**
      * Metodo para facilitar leitura do codigo
      * 
@@ -230,7 +255,9 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
             return false;
         }
     }
-
+    /**
+     *  Validador Individual
+     */
     private void validadorIndividual() {
         if (!isVer(getIpServidor()))
             componentes.add(getIpServidor());
@@ -253,6 +280,28 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      */
     private Boolean isVer(JTextField t) {
         return !t.getText().trim().equals("");
+    }
+    
+    /**
+     * Mapa de Temas
+     * @return LookAndFeel
+     */
+    private Map<String, LookAndFeel> getMapaSubstance(){
+        if(mapaSubstance == null){
+            mapaSubstance = new HashMap<String, LookAndFeel>();
+            mapaSubstance.put("Dark Cyan", new SubstanceBusinessLookAndFeel());
+            mapaSubstance.put("Ligth Cyan", new SubstanceBusinessBlackSteelLookAndFeel());
+            mapaSubstance.put("Creme/Café", new SubstanceCremeCoffeeLookAndFeel());
+            mapaSubstance.put("Default Theme", new SubstanceDefaultLookAndFeel());
+            mapaSubstance.put("Yellow Theme", new SubstanceFieldOfWheatLookAndFeel());
+            mapaSubstance.put("Green Theme", new SubstanceGreenMagicLookAndFeel());
+            mapaSubstance.put("Silver Theme", new SubstanceMistSilverLookAndFeel());
+            mapaSubstance.put("Silver2 Theme", new SubstanceModerateLookAndFeel());
+            mapaSubstance.put("Ligth Theme", new SubstanceNebulaBrickWallLookAndFeel());
+            mapaSubstance.put("Oficce Silver", new SubstanceOfficeSilver2007LookAndFeel());
+            mapaSubstance.put("Oficce Blue", new SubstanceOfficeBlue2007LookAndFeel());
+        }
+        return mapaSubstance;
     }
 
 
