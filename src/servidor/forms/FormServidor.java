@@ -30,6 +30,9 @@ public class FormServidor extends JFrame {
     private JButton btnFechar = new JButton("Fechar");
     private JLabel lblResposta = new JLabel("");
     private JLabel lblVPortaServidor = new JLabel("");
+    private String urlImagem = "imagens/serverNotRunning.png";
+    private ImageIcon icon;
+    private String mensagem = "Server not Running";
     private TrayManager manager;
 
     public void inicializar() {
@@ -102,22 +105,37 @@ public class FormServidor extends JFrame {
 
     public Image getIcon() {
         ClassLoader clazz = this.getClass().getClassLoader();
-        URL res = clazz.getResource("imagens/imageIcon.png");
-        ImageIcon icon = new ImageIcon(res);
+        URL res = clazz.getResource(urlImagem);
+        icon = new ImageIcon(res);
         return icon.getImage();
     }
 
     public void createTrayIcon() {
         if(manager==null){
             manager = new TrayManager(this);
-            manager.createTrayIcon("Mensageiro Server is Running");
+            manager.createTrayIcon("Mensageiro Server is Running", getIcon());
             manager.criaMenu("Exit");
             manager.criaMenu("Abrir");
             manager.adicionaEvento();
             manager.addTrayIcon();
         }else{
-            manager.addTrayIcon();
+            manager.refresh(icon.getImage(), mensagem);
         }
+    }
+    
+    public void refreshIcon(String urlImagem){
+        if(manager!=null)
+            manager=null;
+        this.urlImagem = urlImagem;
+        if(urlImagem.equals("imagens/serverRunning.png")){
+            mensagem = "Server is Running";
+        }else if(urlImagem.equals("imagens/serverNotRunning.png")){
+            mensagem = "Server not is Running";
+        }
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        icon = new ImageIcon(res);
+        setIconImage(icon.getImage());
     }
 
     public void setManager(TrayManager manager) {

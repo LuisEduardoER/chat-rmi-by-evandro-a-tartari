@@ -6,9 +6,7 @@ import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import servidor.forms.FormServidor;
@@ -25,11 +23,10 @@ public class TrayManager {
         this.servidor = (FormServidor) frame;
     }
 
-    public void createTrayIcon(String mensagem) {
+    public void createTrayIcon(String mensagem, Image icon) {
         if (SystemTray.isSupported()) {
             tray = SystemTray.getSystemTray();
-            Image image = getIcon();
-            trayIcon = getTrayCon(image, mensagem);
+            trayIcon = getTrayCon(icon, mensagem);
         } else {
             System.err.println("System tray is currently not supported.");
         }
@@ -76,16 +73,19 @@ public class TrayManager {
             ex.printStackTrace();
         }
     }
-    
-    public void removeTrayIcon(){
+
+    public void removeTrayIcon() {
         tray.remove(trayIcon);
     }
 
-    private Image getIcon() {
-        ClassLoader clazz = this.getClass().getClassLoader();
-        URL res = clazz.getResource("imagens/imageIcon.png");
-        ImageIcon icon = new ImageIcon(res);
-        return icon.getImage();
+    public void refresh(Image imagem, String mensagem) {
+        try {
+            tray.remove(trayIcon);
+            trayIcon = getTrayCon(imagem, mensagem);
+            tray.add(trayIcon);
+        } catch (AWTException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
