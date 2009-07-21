@@ -1,5 +1,7 @@
 package servidor.forms;
 
+import interfaces.IMensageiroServer;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
@@ -30,6 +32,7 @@ public class FormServidor extends JFrame {
     private JButton btnFechar = new JButton("Fechar");
     private JLabel lblResposta = new JLabel("");
     private JLabel lblVPortaServidor = new JLabel("");
+    private IMensageiroServer servico;
     private String urlImagem = "imagens/serverNotRunning.png";
     private ImageIcon icon;
     private String mensagem = "Server not Running";
@@ -144,6 +147,20 @@ public class FormServidor extends JFrame {
 
     public TrayManager getManager() {
         return manager;
+    }
+
+    public void parar() {
+        try {
+            servico.parar();
+            servico = null;
+        } catch (Exception e) {
+            getLblResposta().setText("Erro parando o servico");
+            e.printStackTrace();
+        }
+    }
+
+    public void setServico(IMensageiroServer servico) {
+        this.servico = servico;
     }
 
         

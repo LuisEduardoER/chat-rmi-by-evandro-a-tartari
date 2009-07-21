@@ -42,10 +42,11 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                             "Server is running : " + porta.toString());
                     servidor.getBtnInicializar().setEnabled(false);
                     servidor.refreshIcon("imagens/serverRunning.png");
+                    servidor.setServico(servico);
                 } catch (RemoteException e1) {
                     servidor.getLblResposta()
                             .setText("Erro Iniciando Servidor");
-                    servidor = null;
+                    servico = null;
                 }
             }
         } else if (e.getActionCommand().equals("Fechar")) {
@@ -76,10 +77,11 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                                 "Server is running : " + porta.toString());
                         servidor.getBtnInicializar().setEnabled(false);
                         servidor.refreshIcon("imagens/serverRunning.png");
+                        servidor.setServico(servico);
                     } catch (RemoteException e1) {
                         servidor.getLblResposta().setText(
                                 "Erro Iniciando Servidor");
-                        servidor = null;
+                        servico = null;
                     }
                 }
             }

@@ -15,19 +15,19 @@ public class SysTrayImpls implements MouseListener, ActionListener {
     private TrayIcon trayIcon;
     private FormServidor servidor;
     private SystemTray tray;
-    
-    public SysTrayImpls(TrayIcon trayIcon,JFrame frame, SystemTray tray) {
+
+    public SysTrayImpls(TrayIcon trayIcon, JFrame frame, SystemTray tray) {
         this.trayIcon = trayIcon;
         servidor = (FormServidor) frame;
         this.tray = tray;
     }
-    
+
     public void mouseClicked(MouseEvent e) {
-        if(e.getClickCount()%2==0){
+        if (e.getClickCount() % 2 == 0) {
             servidor.setVisible(true);
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
-            
+
         }
     }
 
@@ -44,17 +44,20 @@ public class SysTrayImpls implements MouseListener, ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand()==null) {
+        if (e.getActionCommand() == null) {
             servidor.setVisible(true);
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
-        }else if(e.getActionCommand().equals("Exit")){
+        } else if (e.getActionCommand().equals("Exit")) {
             System.out.println("Exiting...");
             System.exit(0);
-        }else if(e.getActionCommand().equals("Abrir")){
+        } else if (e.getActionCommand().equals("Abrir")) {
             servidor.setVisible(true);
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
+        } else if (e.getActionCommand().equals("Stop")) {
+            servidor.parar();
+            servidor.refreshIcon("imagens/serverNotRunning.png");
         }
     }
 
