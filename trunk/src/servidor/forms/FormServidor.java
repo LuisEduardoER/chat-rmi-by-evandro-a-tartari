@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import servidor.acao.AcaoFormServidor;
+import servidor.trayicon.TrayManager;
 
 public class FormServidor extends JFrame {
 
@@ -29,7 +30,7 @@ public class FormServidor extends JFrame {
     private JButton btnFechar = new JButton("Fechar");
     private JLabel lblResposta = new JLabel("");
     private JLabel lblVPortaServidor = new JLabel("");
-    
+    private TrayManager manager;
 
     public void inicializar() {
         setTitle("Servidor");
@@ -104,6 +105,27 @@ public class FormServidor extends JFrame {
         URL res = clazz.getResource("imagens/imageIcon.png");
         ImageIcon icon = new ImageIcon(res);
         return icon.getImage();
+    }
+
+    public void createTrayIcon() {
+        if(manager==null){
+            manager = new TrayManager(this);
+            manager.createTrayIcon("Mensageiro Server is Running");
+            manager.criaMenu("Exit");
+            manager.criaMenu("Abrir");
+            manager.adicionaEvento();
+            manager.addTrayIcon();
+        }else{
+            manager.addTrayIcon();
+        }
+    }
+
+    public void setManager(TrayManager manager) {
+        this.manager = manager;
+    }
+
+    public TrayManager getManager() {
+        return manager;
     }
 
         
