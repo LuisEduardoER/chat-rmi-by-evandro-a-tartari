@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import servidor.forms.FormServidor;
@@ -56,8 +57,9 @@ public class SysTrayImpls implements MouseListener, ActionListener {
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
         } else if (e.getActionCommand().equals("Stop")) {
+            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverNotRunning.png"));
+            trayIcon.setImage(icon.getImage());
             servidor.parar();
-            servidor.refreshIcon("imagens/serverNotRunning.png");
         }
     }
 

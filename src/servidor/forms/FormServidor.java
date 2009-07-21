@@ -119,6 +119,7 @@ public class FormServidor extends JFrame {
             manager.createTrayIcon("Mensageiro Server is Running", getIcon());
             manager.criaMenu("Exit");
             manager.criaMenu("Abrir");
+            manager.criaMenu("Stop");
             manager.adicionaEvento();
             manager.addTrayIcon();
         }else{
@@ -152,7 +153,8 @@ public class FormServidor extends JFrame {
     public void parar() {
         try {
             servico.parar();
-            servico = null;
+            getLblResposta().setText("Server stoped");
+            btnInicializar.setEnabled(true);
         } catch (Exception e) {
             getLblResposta().setText("Erro parando o servico");
             e.printStackTrace();

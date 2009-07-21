@@ -49,12 +49,19 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void inicializar(Integer porta) throws RemoteException {
         try {
-            registro = LocateRegistry.createRegistry(porta);
+            registro = getRegistry(porta);
             registro.bind("MensageiroServer", this);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private Registry getRegistry(Integer porta) throws Exception {
+        if(registro==null){
+            registro = LocateRegistry.createRegistry(porta);
+        }
+        return registro;
     }
 
     /**
