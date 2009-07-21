@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import servidor.acao.AcaoFormServidor;
 import servidor.trayicon.TrayManager;
+import util.NumeroMaximoCaracteres;
 
 public class FormServidor extends JFrame {
 
@@ -54,6 +55,7 @@ public class FormServidor extends JFrame {
         txtIpServidor.setText(InetAddress.getLocalHost().getHostAddress());
         adiciona(txtIpServidor, 70, 5, 100, 25);
         adiciona(lblPortaServidor, 25, 35, 40, 25);
+        txtPortaServidor.setDocument(new NumeroMaximoCaracteres(6));
         adiciona(txtPortaServidor, 70, 35, 100, 25);
         adiciona(btnInicializar, 100, 90, 80, 18);
         adiciona(btnFechar, 10, 90, 80, 18);
