@@ -1,11 +1,14 @@
 package forms;
 
+import interfaces.IMensageiroCliente;
+
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -18,14 +21,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.LookAndFeel;
 import javax.swing.ScrollPaneLayout;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
-import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 import acao.FormListFriendsListener;
 import contatos.Contatos;
@@ -42,34 +40,39 @@ public class FormListFriends extends JFrame {
     private DefaultListModel modelContatos;
     private JList listaUsuario;
     private JList listaContatos;
-    private SubstanceDefaultLookAndFeel substance;
+    private IMensageiroCliente cliente;
 
-    private void config() {
-        setTitle("Titulo a colocar");
-        setIconImage(getIcon());
-        setSize(150, 300);
-        setResizable(true);
-        setUndecorated(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        Container c = this.getContentPane();
-        GridBagConstraints cons = new GridBagConstraints();
-        GridBagLayout layout = new GridBagLayout();
-        c.setLayout(layout);
-        cons.anchor = GridBagConstraints.SOUTHEAST;
-        cons.fill = GridBagConstraints.BOTH;
-        cons.gridx = 0;
-        cons.gridy = 1;
-        cons.weighty = 0.75;
-        cons.weightx = 1;
-        c.add(painelContatos, cons);
-        cons.gridx = 0;
-        cons.gridy = 0;
-        cons.weighty = 0.25;
-        c.add(listaUsuario, cons);
+    public void config() {
+        try {
+            setTitle(cliente.getConexao().getNome());
+            setIconImage(getIcon());
+            setSize(150, 300);
+            setResizable(true);
+            setUndecorated(true);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setLocationRelativeTo(null);
+            Container c = this.getContentPane();
+            GridBagConstraints cons = new GridBagConstraints();
+            GridBagLayout layout = new GridBagLayout();
+            c.setLayout(layout);
+            cons.anchor = GridBagConstraints.SOUTHEAST;
+            cons.fill = GridBagConstraints.BOTH;
+            cons.gridx = 0;
+            cons.gridy = 1;
+            cons.weighty = 0.75;
+            cons.weightx = 1;
+            c.add(painelContatos, cons);
+            cons.gridx = 0;
+            cons.gridy = 0;
+            cons.weighty = 0.25;
+            c.add(listaUsuario, cons);
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void inicializa() {
+    public void inicializa() {
         painelContatos = newJScrollPane();
         modelUsuario = newDefaultListModel();
         modelContatos = newDefaultListModel();
@@ -78,7 +81,6 @@ public class FormListFriends extends JFrame {
         listaContatos = newJList(modelContatos);
         painelContatos.setViewportView(listaContatos);
         adiciona(new JComponent[] { listaUsuario, painelContatos });
-        teste();
     }
 
     private void adiciona(JComponent[] components) {
@@ -94,22 +96,7 @@ public class FormListFriends extends JFrame {
         return painel;
     }
 
-    /**
-     * To remove
-     */
-    private void teste() {
-        Contatos contato = new Contatos();
-        contato.setNome("Teste01");
-        contato.setIcon(new ImageIcon(this.getClass().getClassLoader()
-                .getResource("imagens/serverRunning.png")));
-        adicinalUsuario(contato);
-        Contatos contato2 = new Contatos();
-        contato2.setNome("Teste02");
-        contato2.setIcon(new ImageIcon(this.getClass().getClassLoader()
-                .getResource("imagens/serverNotRunning.png")));
-        adicionaContato(contato2);
-    }
-
+    
     private DefaultListModel newDefaultListModel() {
         return new DefaultListModel();
     }
@@ -121,7 +108,7 @@ public class FormListFriends extends JFrame {
         return lista;
     }
 
-    private void renderiza() {
+    public void renderiza() {
         setVisible(true);
     }
 
@@ -220,30 +207,13 @@ public class FormListFriends extends JFrame {
         listaUsuario.setBorder(border);
     }
 
-    public static void main(String[] args) {
-        FormListFriends list = new FormListFriends();
-        list.setLookAndFeelThisForm();
-        list.inicializa();
-        list.config();
-        list.createMenuBar();
-        list.criarBordaPainel("Teste01");
-        list.adicionaListener();
-        list.renderiza();
-    }
-
-    @Deprecated
-    private void setLookAndFeelThisForm() {
-        try {
-            substance = new SubstanceDefaultLookAndFeel();
-            UIManager.setLookAndFeel((LookAndFeel) substance);
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     protected void setPainelContatos(JScrollPane painelContatos) {
         this.painelContatos = painelContatos;
+    }
+
+    public void setCliente(IMensageiroCliente cliente) {
+        this.cliente = cliente;
+
     }
 
 }

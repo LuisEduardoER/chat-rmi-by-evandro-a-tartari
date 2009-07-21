@@ -1,6 +1,7 @@
 package gerenteDeTelas;
 
 import forms.FormConnect;
+import forms.FormListFriends;
 import interfaces.IMensageiroCliente;
 
 import java.rmi.RemoteException;
@@ -22,6 +23,7 @@ public class Gerente {
     private IMensageiroCliente cliente;
     private Contatos con;
     private FormConnect connect;
+    private FormListFriends formListFriends;
 
     public Gerente() {
     }
@@ -49,8 +51,17 @@ public class Gerente {
                 setCon(frame);
                 cliente = new MensageiroClienteImpl(getCon(), this);
                 Boolean retorno = cliente.findServidor();
-                if(retorno == true);
-                    //TODO implementsNewMethods
+                if (retorno == true) {
+                    formListFriends = getFormListFriends();
+                    formListFriends.setCliente(cliente);
+                    formListFriends.inicializa();
+                    formListFriends.config();
+                    formListFriends.createMenuBar();
+                    formListFriends.criarBordaPainel("Teste01");
+                    formListFriends.adicionaListener();
+                    formListFriends.renderiza();
+                }
+
             } catch (RemoteException e) {
                 frame.getExcessao().lancaExcessao(e.getMessage());
             }
@@ -109,18 +120,22 @@ public class Gerente {
 
     /**
      * Seta dados da conexao
+     * 
      * @param form
      */
     public void setCon(FormConnect form) {
         getCon().setLogin(form.getLogin().getText());
         getCon().setSenha(form.getPassWord().getPassword().toString());
         getCon().setIpServidor(form.getIpServidor().getText());
-        getCon().setPortaServico(Integer.parseInt(form.getPortaServico().getText()));
-        getCon().setPortaCliente(Integer.parseInt(form.getPortaCliente().getText()));
+        getCon().setPortaServico(
+                Integer.parseInt(form.getPortaServico().getText()));
+        getCon().setPortaCliente(
+                Integer.parseInt(form.getPortaCliente().getText()));
     }
 
     /**
      * Pega dados de uma conexao
+     * 
      * @return
      */
     public Contatos getCon() {
@@ -132,10 +147,19 @@ public class Gerente {
 
     /**
      * Lanca uma excessao
+     * 
      * @param texto
      */
     public void lancaExcessao(String texto) {
         connect.getExcessao().lancaExcessaoSimple(texto);
+    }
+
+    public FormListFriends getFormListFriends() {
+        if (formListFriends == null) {
+            formListFriends = new FormListFriends();
+        }
+        return formListFriends;
+
     }
 
 }
