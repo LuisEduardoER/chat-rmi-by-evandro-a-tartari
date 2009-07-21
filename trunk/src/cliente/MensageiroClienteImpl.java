@@ -9,7 +9,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import conexao.Conexao;
+import contatos.Contatos;
 
 public class MensageiroClienteImpl extends UnicastRemoteObject implements
         IMensageiroCliente {
@@ -18,7 +18,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
      * 
      */
     private static final long serialVersionUID = -1849358136989976908L;
-    private Conexao con;
+    private Contatos con;
     private IMensageiroServer servidor;
     private Registry registroRMI;
     private Gerente gerente;
@@ -29,7 +29,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
      * @param gerente
      * @throws RemoteException
      */
-    public MensageiroClienteImpl(Conexao con, Gerente gerente) throws RemoteException {
+    public MensageiroClienteImpl(Contatos con, Gerente gerente) throws RemoteException {
         super(con.getPortaCliente());
         this.con = con;
         this.gerente = gerente;
@@ -57,7 +57,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         }
     }
 
-    public Conexao getConexao() throws RemoteException {
+    public Contatos getConexao() throws RemoteException {
         return con;
     }
     
