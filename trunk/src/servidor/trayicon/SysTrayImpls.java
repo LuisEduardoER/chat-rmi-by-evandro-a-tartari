@@ -50,7 +50,6 @@ public class SysTrayImpls implements MouseListener, ActionListener {
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
         } else if (e.getActionCommand().equals("Exit")) {
-            System.out.println("Exiting...");
             System.exit(0);
         } else if (e.getActionCommand().equals("Abrir")) {
             servidor.setVisible(true);
