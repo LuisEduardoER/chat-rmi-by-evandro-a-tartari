@@ -41,6 +41,7 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                     servidor.getLblResposta().setText(
                             "Server is running : " + porta.toString());
                     servidor.getBtnInicializar().setEnabled(false);
+                    servidor.refreshIcon("imagens/serverRunning.png");
                 } catch (RemoteException e1) {
                     servidor.getLblResposta()
                             .setText("Erro Iniciando Servidor");
@@ -74,7 +75,7 @@ public class AcaoFormServidor implements ActionListener, KeyListener , WindowLis
                         servidor.getLblResposta().setText(
                                 "Server is running : " + porta.toString());
                         servidor.getBtnInicializar().setEnabled(false);
-
+                        servidor.refreshIcon("imagens/serverRunning.png");
                     } catch (RemoteException e1) {
                         servidor.getLblResposta().setText(
                                 "Erro Iniciando Servidor");
