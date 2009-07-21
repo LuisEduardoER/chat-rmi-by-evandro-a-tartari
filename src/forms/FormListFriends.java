@@ -8,6 +8,7 @@ import java.net.URL;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -24,7 +25,6 @@ public class FormListFriends extends JFrame {
     private JPanel painelContatos;
     private DefaultListModel modelUsuario;
     private DefaultListModel modelContatos;
-    @SuppressWarnings("unused")
     private JList listaUsuario;
     private JList listaContatos;
 
@@ -58,11 +58,20 @@ public class FormListFriends extends JFrame {
         setModelUsuario(newDefaultListModel());
         setModelContatos(newDefaultListModel());
         setListaUsuario(newJList(modelUsuario));
+        addPainel(painelUsuario, listaUsuario);
         setListaContatos(newJList(modelContatos));
+        addPainel(painelContatos, listaContatos);
+
     }
 
     private JPanel newJPanel() {
-        return new JPanel();
+        JPanel painel = new JPanel();
+        add(painel);
+        return painel;
+    }
+
+    private void addPainel(JPanel painel, JComponent c) {
+        painel.add(c);
     }
 
     private DefaultListModel newDefaultListModel() {
