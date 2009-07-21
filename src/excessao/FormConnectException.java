@@ -15,6 +15,7 @@ public class FormConnectException {
     private FormConnect connect;
     private List<JComponent> componentes;
     private List<JComponent> excessoesLancadas;
+    private Color oldColor;
 
     /**
      * Construtor defaul passando o frame que ele responde
@@ -36,6 +37,7 @@ public class FormConnectException {
             for (JComponent componente : getComponentes()) {
                 connect.getValidadores().get(
                         Integer.parseInt(componente.getName())).setText("*");
+                oldColor = componente.getBackground();
                 componente.setBackground(Color.getHSBColor(80, 50, 25));
                 excessoesLancadas.add(componente);
             }
@@ -61,7 +63,9 @@ public class FormConnectException {
     public void limpaExcessao(JComponent componente) {
         connect.getValidadores().get(Integer.parseInt(componente.getName()))
                 .setText("");
-        componente.setBackground(Color.WHITE);
+        if(oldColor==null)
+            oldColor = componente.getBackground();
+        componente.setBackground(oldColor);
         getExcessoesLancadas().remove(componente);
         if (getExcessoesLancadas().size() == 0) {
             getTelaResposta().setText("");

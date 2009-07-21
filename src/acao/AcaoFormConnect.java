@@ -155,7 +155,6 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
      * Metodos Controlador de Eventos do teclado
      */
     public void keyTyped(KeyEvent e) {
-
     }
 
     /**
@@ -182,6 +181,7 @@ public class AcaoFormConnect implements ActionListener, KeyListener {
     }
 
     public String getSelectedItem(){
+        System.out.println((String) connect.getComboBox().getSelectedItem());
         return (String) connect.getComboBox().getSelectedItem();
     }
     
