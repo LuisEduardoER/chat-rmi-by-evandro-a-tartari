@@ -32,11 +32,11 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
-        if (getPermissoes().contains(mensageiro.getConexao().getLogin())) {
+        if (getPermissoes().contains(mensageiro.getContatos().getLogin())) {
             if (!getClientes().containsValue(mensageiro)) {
-                getClientes().put(mensageiro.getConexao().getLogin(),
+                getClientes().put(mensageiro.getContatos().getLogin(),
                         mensageiro);
-                getListaConexao().add(mensageiro.getConexao());
+                getListaConexao().add(mensageiro.getContatos());
                 return "OK";
             } else {
                 return "Usuario Já conectado";

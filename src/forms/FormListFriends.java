@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
-import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -47,7 +46,7 @@ public class FormListFriends extends JFrame {
      */
     public void config() {
         try {
-            setTitle(cliente.getConexao().getNome());
+//            setTitle(cliente.getConexao().getNome());
             setIconImage(getIcon());
             setSize(150, 300);
             setResizable(true);
@@ -69,8 +68,7 @@ public class FormListFriends extends JFrame {
             cons.gridy = 0;
             cons.weighty = 0.25;
             c.add(listaUsuario, cons);
-
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -168,41 +166,79 @@ public class FormListFriends extends JFrame {
         this.listaUsuario = listaUsuario;
     }
 
+    /**
+     * set JList Contatos
+     * @param listaContatos
+     */
     protected void setListaContatos(JList listaContatos) {
         this.listaContatos = listaContatos;
     }
 
+    /**
+     * set DefaultListModel Usuario
+     * @param modelUsuario
+     */
     protected void setModelUsuario(DefaultListModel modelUsuario) {
         this.modelUsuario = modelUsuario;
     }
 
+    /**
+     * set DefaultListModel Contatos
+     * @param modelContatos
+     */
     protected void setModelContatos(DefaultListModel modelContatos) {
         this.modelContatos = modelContatos;
     }
 
+    /**
+     * adiciona Usuario na listaUsuario
+     * @param contato
+     */
     public void adicinalUsuario(Contatos contato) {
         modelUsuario.addElement(contato);
     }
 
+    /**
+     * adiciona Contato na listaContatos
+     * @param contato
+     */
     public void adicionaContato(Contatos contato) {
         modelContatos.addElement(contato);
     }
 
+    /**
+     * remove Contato da listaContatos
+     * @param obj
+     */
     public void removeContato(Contatos obj) {
         modelContatos.removeElement(obj);
         listaContatos.setModel(modelContatos);
     }
 
+    /**
+     * Cria um JMenuBar
+     */
     public void createMenuBar() {
         JMenuBar menuBar = newJMenuBar();
         menuBar.add(newJMenuItens("MsMundica", new JMenuItem[] {
                 new JMenuItem("Minimizar"), new JMenuItem("Sair") }));
     }
 
+    /**
+     * Instancia um novo JMenu
+     * @param nomeMenu
+     * @return
+     */
     protected JMenu newJMenu(String nomeMenu) {
         return new JMenu(nomeMenu);
     }
 
+    /**
+     * Cria um JMenu com itens
+     * @param nomeMenu
+     * @param items
+     * @return
+     */
     protected JMenu newJMenuItens(String nomeMenu, JMenuItem[] items) {
         JMenu menu = newJMenu(nomeMenu);
         FormListFriendsListener listener = new FormListFriendsListener(this);
@@ -213,12 +249,20 @@ public class FormListFriends extends JFrame {
         return menu;
     }
 
+    /**
+     * Instancia um JMenuBar
+     * @return
+     */
     protected JMenuBar newJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         super.setJMenuBar(menuBar);
         return menuBar;
     }
 
+    /**
+     * Cria as bordas das JList
+     * @param nomeUsuario
+     */
     public void criarBordaPainel(String nomeUsuario) {
         Border loweredbevel = BorderFactory.createLoweredBevelBorder();
         Border raisedbevel = BorderFactory.createRaisedBevelBorder();
@@ -231,25 +275,53 @@ public class FormListFriends extends JFrame {
 
     }
 
+    /**
+     * Adiciona Borda JList Contatos
+     * @param border
+     */
     public void adicionaBordaPainelContatos(Border border) {
         painelContatos.setLayout(new ScrollPaneLayout());
         painelContatos.setDoubleBuffered(false);
         painelContatos.setBorder(border);
     }
 
+    /**
+     * Adiciona Borda JList Usuario
+     * @param border
+     */
     public void adicionaBordaPainelUsuario(TitledBorder border) {
         listaUsuario.setLayout(new GridLayout(1, 1));
         listaUsuario.setDoubleBuffered(false);
         listaUsuario.setBorder(border);
     }
 
+    /**
+     * set JScrollPane painelContatos
+     * @param painelContatos
+     */
     protected void setPainelContatos(JScrollPane painelContatos) {
         this.painelContatos = painelContatos;
     }
 
+    /**
+     * set o Cliente para antes de iniciar o form
+     * @param cliente
+     */
     public void setCliente(IMensageiroCliente cliente) {
         this.cliente = cliente;
 
     }
-
+    
+    /**
+     * TO REMOVE
+     */
+    public static void main(String[] args) {
+        FormListFriends list = new FormListFriends();
+        list.inicializa();
+        list.config();
+        list.createMenuBar();
+        list.criarBordaPainel("Teste01");
+        list.adicionaListener();
+        list.renderiza();
+    }
 }
