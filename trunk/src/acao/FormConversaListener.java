@@ -61,7 +61,9 @@ public class FormConversaListener implements ActionListener, KeyListener {
 
     @Deprecated
     public void enviarMensagem() {
-        sb.append(getDescritor() + "<br>");
+        String mensagem = getDescritor();
+        mensagem = mensagem.replace("\n", "<br/>");
+        sb.append(mensagem + "<br/>");
         conversa.getTxtReceptorMensagens().setText(sb.toString());
         zeraDescritor();
     }
