@@ -57,7 +57,7 @@ public class Gerente {
                     formListFriends.inicializa();
                     formListFriends.config();
                     formListFriends.createMenuBar();
-                    formListFriends.criarBordaPainel("Teste01");
+                    formListFriends.criarBordaPainel(cliente.getContatos().getNome());
                     formListFriends.adicionaListener();
                     formListFriends.renderiza();
                 }
@@ -154,6 +154,10 @@ public class Gerente {
         connect.getExcessao().lancaExcessaoSimple(texto);
     }
 
+    /**
+     * Cria e retorna caso necessario uma instancia do FormListFriends
+     * @return
+     */
     public FormListFriends getFormListFriends() {
         if (formListFriends == null) {
             formListFriends = new FormListFriends();

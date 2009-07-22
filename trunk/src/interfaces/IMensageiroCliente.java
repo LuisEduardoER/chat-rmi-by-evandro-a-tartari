@@ -8,6 +8,6 @@ import contatos.Contatos;
 public interface IMensageiroCliente extends Remote {
 
     public Boolean findServidor() throws RemoteException;
-    public Contatos getConexao() throws RemoteException;
+    public Contatos getContatos() throws RemoteException;
 
 }

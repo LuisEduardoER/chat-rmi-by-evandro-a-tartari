@@ -57,7 +57,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         }
     }
 
-    public Contatos getConexao() throws RemoteException {
+    public Contatos getContatos() throws RemoteException {
         return con;
     }
     
