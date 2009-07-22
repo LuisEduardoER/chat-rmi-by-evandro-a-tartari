@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -23,8 +23,8 @@ public class FormConversa extends JFrame {
      * 
      */
     private static final long serialVersionUID = 6449977848107919009L;
-    private JTextArea txtReceptorMensagem;
-    private JTextArea txtDescritorMensagem;
+    private JTextPane txtReceptorMensagem;
+    private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
@@ -33,9 +33,9 @@ public class FormConversa extends JFrame {
      * Inicializa o componente
      */
     public void inicializar(String urlImagemContato, String urlImagemUsuario) {
-        txtReceptorMensagem = newJTextArea(10, 48);
+        txtReceptorMensagem = newJTextPane();
         txtReceptorMensagem.setEditable(false);
-        txtDescritorMensagem = newJTextArea(5, 48);
+        txtDescritorMensagem = newJTextPane();
         scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
         scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
         btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
@@ -56,6 +56,7 @@ public class FormConversa extends JFrame {
         setTitle("Titulo a colocar");
         setSize(480, 390);
         setLocationRelativeTo(null);
+        setResizable(false);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -88,8 +89,8 @@ public class FormConversa extends JFrame {
      * @param columns
      * @return
      */
-    private JTextArea newJTextArea(int rows, int columns) {
-        return new JTextArea("", rows, columns);
+    private JTextPane newJTextPane() {
+        return new JTextPane();
     }
 
     private JScrollPane newJScrollPane(JComponent c) {
