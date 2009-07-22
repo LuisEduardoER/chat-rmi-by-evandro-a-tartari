@@ -10,60 +10,60 @@ import javax.swing.JFrame;
 
 import forms.FormConversa;
 
-public class FormConversaListener implements ActionListener , KeyListener{
+public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
     private StringBuilder sb;
+
     public FormConversaListener(JFrame frame) {
         this.conversa = (FormConversa) frame;
         sb = new StringBuilder();
     }
-    
+
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().endsWith("enviar")){
-            if(isValid()){
+        if (e.getActionCommand().endsWith("enviar")) {
+            if (isValid()) {
                 enviarMensagem();
             }
+
         }
-        
+
     }
 
     private boolean isValid() {
         return !getDescritor().trim().equals("");
     }
-    
-    private String getDescritor(){
+
+    private String getDescritor() {
         return conversa.getTxtDescritorMensagens().getText();
     }
-    
-    private void zeraDescritor(){
+
+    private void zeraDescritor() {
         conversa.getTxtDescritorMensagens().setText("");
     }
 
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode()==Event.ENTER){
-            e.consume();
-            enviarMensagem();
+        if (e.getKeyCode() == Event.ENTER) {
+            if (e.getModifiers() == 0) {
+                e.consume();
+                enviarMensagem();
+            }
         }
-        
+
     }
 
     public void keyReleased(KeyEvent e) {
-        
-        
+
     }
 
     public void keyTyped(KeyEvent e) {
-        
-        
+
     }
-    
+
     @Deprecated
-    public void enviarMensagem(){
-        sb.append(getDescritor()+"\n");
+    public void enviarMensagem() {
+        sb.append(getDescritor() + "<br>");
         conversa.getTxtReceptorMensagens().setText(sb.toString());
         zeraDescritor();
     }
-    
-    
 
 }
