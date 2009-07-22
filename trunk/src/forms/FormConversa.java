@@ -1,14 +1,21 @@
 package forms;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.net.URL;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+
+import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 public class FormConversa extends JFrame {
 
@@ -18,27 +25,28 @@ public class FormConversa extends JFrame {
     private static final long serialVersionUID = 6449977848107919009L;
     private JTextArea txtReceptorMensagem;
     private JTextArea txtDescritorMensagem;
-    private JPanel painelFotoUsuario;
-    private JPanel painelFotoContato;
+    private JScrollPane scrollPaneDescritor;
+    private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
-    
 
     /**
      * Inicializa o componente
      */
-    public void inicializar() {
+    public void inicializar(String urlImagemContato, String urlImagemUsuario) {
         txtReceptorMensagem = newJTextArea(10, 48);
         txtReceptorMensagem.setEditable(false);
-        txtDescritorMensagem = new JTextArea(10, 48);
-        painelFotoUsuario = newJPanel();
-        painelFotoContato = newJPanel();
+        txtDescritorMensagem = newJTextArea(5, 48);
+        scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
+        scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
         btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                 "imagens/btnEnviarpressionado.png");
-        adicionaTela(txtReceptorMensagem, 5, 5, 340, 220);
-        adicionaTela(txtDescritorMensagem,5, 230, 340, 120);
-        adicionaTela(painelFotoContato, 360, 5, 100, 120);
-        adicionaTela(painelFotoUsuario, 360, 230, 100, 80);
-        adicionaTela(btnEnviarMensagem, 370, 305, 70, 60);
+        adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
+        adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
+        adicionaTela(getImagemIcon(urlImagemContato, 100, 120), 360, 5, 100,
+                120);
+        adicionaTela(getImagemIcon(urlImagemUsuario, 100, 80), 360, 230, 100,
+                80);
+        adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
     }
 
     /**
@@ -84,13 +92,11 @@ public class FormConversa extends JFrame {
         return new JTextArea("", rows, columns);
     }
 
-    /**
-     * Instancia um JPanel
-     * 
-     * @return
-     */
-    private JPanel newJPanel() {
-        return new JPanel();
+    private JScrollPane newJScrollPane(JComponent c) {
+        JScrollPane painel = new JScrollPane(c);
+        painel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        painel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        return painel;
     }
 
     /**
@@ -105,6 +111,7 @@ public class FormConversa extends JFrame {
         ImageIcon icone = new ImageIcon(res);
         JButton button = new JButton();
         button.setBorderPainted(false);
+        button.setSize(new Dimension(100, 50));
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setIcon(icone);
@@ -113,5 +120,46 @@ public class FormConversa extends JFrame {
         return button;
     }
 
-  
+    private JButton getImagemIcon(String urlImagem, int width, int heigth) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        ImageIcon icon = new ImageIcon(res);
+        JButton button = new JButton();
+        Border border = BorderFactory.createCompoundBorder();
+        button.setBorder(border);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setMaximumSize(new Dimension(width, heigth));
+        button.setIcon(icon);
+        return button;
+    }
+
+    /**
+     * Main/ETC TO REMOVE
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        FormConversa conversa = new FormConversa();
+        conversa.setLookAndFeel();
+        conversa.config();
+        conversa.inicializar("imagens/teste.png", "imagens/teste.png");
+        conversa.renderiza();
+    }
+
+    private void setLookAndFeel() {
+        try {
+            UIManager
+                    .setLookAndFeel((LookAndFeel) new SubstanceDefaultLookAndFeel());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * END TO REMOVE
+     */
+
 }
