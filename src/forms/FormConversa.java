@@ -3,7 +3,6 @@ package forms;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.net.URL;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,8 +13,8 @@ import javax.swing.JTextPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
-
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
+import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
 
@@ -28,6 +27,11 @@ public class FormConversa extends JFrame {
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
+    private FormConversaListener listener;
+
+    public FormConversa() {
+        listener = new FormConversaListener(this);
+    }
 
     /**
      * Inicializa o componente
@@ -36,6 +40,7 @@ public class FormConversa extends JFrame {
         txtReceptorMensagem = newJTextPane();
         txtReceptorMensagem.setEditable(false);
         txtDescritorMensagem = newJTextPane();
+        txtDescritorMensagem.addKeyListener(listener);
         scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
         scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
         btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
@@ -95,8 +100,10 @@ public class FormConversa extends JFrame {
 
     private JScrollPane newJScrollPane(JComponent c) {
         JScrollPane painel = new JScrollPane(c);
-        painel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        painel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        painel
+                .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        painel
+                .setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         return painel;
     }
 
@@ -118,6 +125,8 @@ public class FormConversa extends JFrame {
         button.setIcon(icone);
         URL res2 = clazz.getResource(urlImagem2);
         button.setPressedIcon(new ImageIcon(res2));
+        button.setActionCommand("enviar");
+        button.addActionListener(listener);
         return button;
     }
 
@@ -134,6 +143,14 @@ public class FormConversa extends JFrame {
         button.setMaximumSize(new Dimension(width, heigth));
         button.setIcon(icon);
         return button;
+    }
+
+    public JTextPane getTxtDescritorMensagens() {
+        return txtDescritorMensagem;
+    }
+
+    public JTextPane getTxtReceptorMensagens() {
+        return txtReceptorMensagem;
     }
 
     /**
