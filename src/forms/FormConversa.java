@@ -41,6 +41,7 @@ public class FormConversa extends JFrame {
         txtReceptorMensagem.setEditable(false);
         txtDescritorMensagem = newJTextPane();
         txtDescritorMensagem.addKeyListener(listener);
+        txtReceptorMensagem.setContentType("text/html");
         scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
         scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
         btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
@@ -64,6 +65,7 @@ public class FormConversa extends JFrame {
         setResizable(false);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(NORMAL);
     }
 
     /**
