@@ -7,22 +7,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 import forms.FormConversa;
 
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
-    private StringBuilder sb;
 
     public FormConversaListener(JFrame frame) {
         this.conversa = (FormConversa) frame;
-        sb = new StringBuilder();
+
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().endsWith("enviar")) {
             if (isValid()) {
-                enviarMensagem();
+                enviarMensagem(getText());
             }
 
         }
@@ -30,10 +31,18 @@ public class FormConversaListener implements ActionListener, KeyListener {
     }
 
     private boolean isValid() {
-        return !getDescritor().trim().equals("");
+        return !getDescritor().getText().trim().equals("");
     }
 
-    private String getDescritor() {
+    private JTextPane getDescritor() {
+        return conversa.getTxtDescritorMensagens();
+    }
+
+    private JTextArea getReceptor() {
+        return conversa.getTxtReceptorMensagens();
+    }
+
+    private String getText() {
         return conversa.getTxtDescritorMensagens().getText();
     }
 
@@ -45,27 +54,26 @@ public class FormConversaListener implements ActionListener, KeyListener {
         if (e.getKeyCode() == Event.ENTER) {
             if (e.getModifiers() == 0) {
                 e.consume();
-                enviarMensagem();
+                enviarMensagem(getText());
             }
         }
 
     }
 
     public void keyReleased(KeyEvent e) {
-
     }
 
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Deprecated
-    public void enviarMensagem() {
-        String mensagem = getDescritor();
-        mensagem = mensagem.replace("\n", "<br/>");
-        sb.append(mensagem + "<br/>");
-        conversa.getTxtReceptorMensagens().setText(sb.toString());
-        zeraDescritor();
+    public void enviarMensagem(String text) {
+        try {
+            getReceptor().append(text);
+            zeraDescritor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

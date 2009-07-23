@@ -46,7 +46,7 @@ public class FormListFriends extends JFrame {
      */
     public void config() {
         try {
-//            setTitle(cliente.getConexao().getNome());
+            setTitle(cliente.getContatos().getNome());
             setIconImage(getIcon());
             setSize(150, 300);
             setResizable(true);
@@ -310,18 +310,5 @@ public class FormListFriends extends JFrame {
     public void setCliente(IMensageiroCliente cliente) {
         this.cliente = cliente;
 
-    }
-    
-    /**
-     * TO REMOVE
-     */
-    public static void main(String[] args) {
-        FormListFriends list = new FormListFriends();
-        list.inicializa();
-        list.config();
-        list.createMenuBar();
-        list.criarBordaPainel("Teste01");
-        list.adicionaListener();
-        list.renderiza();
     }
 }
