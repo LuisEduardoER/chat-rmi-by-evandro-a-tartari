@@ -3,6 +3,7 @@ package forms;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.net.URL;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,7 +14,9 @@ import javax.swing.JTextPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
+
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
