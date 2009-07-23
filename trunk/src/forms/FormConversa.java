@@ -1,5 +1,7 @@
 package forms;
 
+import interfaces.IMensageiroCliente;
+
 import java.awt.Container;
 import java.awt.Dimension;
 import java.net.URL;
@@ -10,13 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
-
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
-
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
@@ -25,12 +26,13 @@ public class FormConversa extends JFrame {
      * 
      */
     private static final long serialVersionUID = 6449977848107919009L;
-    private JTextPane txtReceptorMensagem;
+    private JTextArea txtReceptorMensagem;
     private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
     private FormConversaListener listener;
+    private IMensageiroCliente cliente;
 
     public FormConversa() {
         listener = new FormConversaListener(this);
@@ -40,11 +42,11 @@ public class FormConversa extends JFrame {
      * Inicializa o componente
      */
     public void inicializar(String urlImagemContato, String urlImagemUsuario) {
-        txtReceptorMensagem = newJTextPane();
+        txtReceptorMensagem = newJTextArea();
+        txtReceptorMensagem.setLineWrap(true);
         txtReceptorMensagem.setEditable(false);
         txtDescritorMensagem = newJTextPane();
         txtDescritorMensagem.addKeyListener(listener);
-        txtReceptorMensagem.setContentType("text/html");
         scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
         scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
         btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
@@ -92,15 +94,12 @@ public class FormConversa extends JFrame {
         getContentPane().add(c);
     }
 
-    /**
-     * Instancia JTextArea
-     * 
-     * @param rows
-     * @param columns
-     * @return
-     */
     private JTextPane newJTextPane() {
         return new JTextPane();
+    }
+
+    private JTextArea newJTextArea() {
+        return new JTextArea();
     }
 
     private JScrollPane newJScrollPane(JComponent c) {
@@ -154,8 +153,16 @@ public class FormConversa extends JFrame {
         return txtDescritorMensagem;
     }
 
-    public JTextPane getTxtReceptorMensagens() {
+    public JTextArea getTxtReceptorMensagens() {
         return txtReceptorMensagem;
+    }
+    
+    public void setCliente(IMensageiroCliente cliente){
+        this.cliente = cliente;
+    }
+    
+    public IMensageiroCliente getCliente(){
+        return this.cliente;
     }
 
     /**
@@ -180,7 +187,6 @@ public class FormConversa extends JFrame {
         }
 
     }
-
     /**
      * END TO REMOVE
      */
