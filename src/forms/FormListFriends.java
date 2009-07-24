@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -171,6 +172,7 @@ public class FormListFriends extends JFrame {
         listaUsuario.addMouseListener(listener);
         listaContatos.addMouseListener(listener);
         listaContatos.addKeyListener(listener);
+        addWindowListener(listener);
     }
 
     /**
@@ -345,5 +347,14 @@ public class FormListFriends extends JFrame {
 
     public JList getListaContatos() {
         return listaContatos;
+    }
+
+    public void removeCliente() {
+        try {
+            cliente.comunicaSaida();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        
     }
 }

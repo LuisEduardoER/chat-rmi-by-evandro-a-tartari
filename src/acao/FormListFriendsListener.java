@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
@@ -15,7 +17,7 @@ import forms.FormListFriends;
 import gerenteDeTelas.Gerente;
 
 public class FormListFriendsListener implements ActionListener, KeyListener,
-        MouseListener {
+        MouseListener, WindowListener {
     private FormListFriends formContatos;
     private Gerente gerente;
 
@@ -28,6 +30,7 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
         if (e.getActionCommand().equals("Minimizar")) {
             formContatos.setExtendedState(JFrame.ICONIFIED);
         } else if (e.getActionCommand().equals("Sair")) {
+            formContatos.removeCliente();
             formContatos.dispose();
             System.exit(0);
         }
@@ -44,6 +47,7 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
             }
         } else if (evento.getKeyCode() == Event.F4) {
             if (evento.getModifiers() == Event.ALT_MASK) {
+                formContatos.removeCliente();
                 formContatos.dispose();
                 System.exit(0);
             }
@@ -77,6 +81,28 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
     }
 
     public void mouseReleased(MouseEvent e) {
+    }
+
+    public void windowActivated(WindowEvent e) {
+    }
+
+    public void windowClosed(WindowEvent e) {
+        formContatos.removeCliente();
+    }
+
+    public void windowClosing(WindowEvent e) {
+    }
+
+    public void windowDeactivated(WindowEvent e) {
+    }
+
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    public void windowIconified(WindowEvent e) {
+    }
+
+    public void windowOpened(WindowEvent e) {
     }
 
 }

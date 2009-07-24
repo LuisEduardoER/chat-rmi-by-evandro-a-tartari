@@ -115,6 +115,14 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     }
 
+    public void removeCliente(IMensageiroCliente mensageiro)
+            throws RemoteException {
+        if(getClientes().get(mensageiro.getContatos().getLogin())!=null){
+            getClientes().remove(mensageiro);
+        }
+        System.out.println("Saida: "+mensageiro.getContatos().getLogin());
+    }
+
     public void parar() {
         try {
             registro.unbind("MensageiroServer");
@@ -122,5 +130,6 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             e.printStackTrace();
         }
     }
+
 
 }
