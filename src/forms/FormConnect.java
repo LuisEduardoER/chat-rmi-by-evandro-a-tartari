@@ -43,9 +43,11 @@ public class FormConnect extends JFrame {
     private JTextField txtLogin;
     private JPasswordField txtSenha;
     private JComboBox comboSkin;
+    private JComboBox imagem;
     // Botoes
     private JButton btnConnectar;
     private JButton btnCancelar;
+    private JButton btnFileChooser;
 
     // Excessao
     private FormConnectException excessao;
@@ -94,6 +96,7 @@ public class FormConnect extends JFrame {
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
         btnConnectar = newJButton("Connectar", 130, 195);
+        btnFileChooser = newJButton("Imagem", 75, 240, 100, 120);
         adicionaListenerAcao();
     }
 
@@ -103,7 +106,7 @@ public class FormConnect extends JFrame {
     public void configJFrame() {
         setTitle("MsRamister");
         setResizable(false);
-        setSize(250, 270);
+        setSize(250, 400);
         setLocationRelativeTo(null);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -129,6 +132,14 @@ public class FormConnect extends JFrame {
     private JButton newJButton(String textButton, Integer x, Integer y) {
         JButton button = new JButton(textButton);
         button.setBounds(x, y, 100, 20);
+        add(button);
+        return button;
+    }
+
+    private JButton newJButton(String textButton, Integer x, Integer y,
+            Integer size, Integer alt) {
+        JButton button = new JButton(textButton);
+        button.setBounds(x, y, size, alt);
         add(button);
         return button;
     }
@@ -327,6 +338,7 @@ public class FormConnect extends JFrame {
         txtLogin.addKeyListener(acao);
         txtSenha.addKeyListener(acao);
         comboSkin.addActionListener(acao);
+        btnFileChooser.addActionListener(acao);
     }
 
     /**
@@ -372,5 +384,17 @@ public class FormConnect extends JFrame {
                 "Green Theme", "Ligth Cyan", "Ligth Theme", "Oficce Silver",
                 "Oficce Blue", "Silver Theme", "Silver2 Theme", "Yellow Theme" };
 
+    }
+
+    public void setImagem(JComboBox imagem) {
+        this.imagem = imagem;
+    }
+
+    public JComboBox getImagem() {
+        return imagem;
+    }
+
+    public JButton getButtonFileChooser() {
+        return btnFileChooser;
     }
 }
