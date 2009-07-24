@@ -1,21 +1,28 @@
 package acao;
 
 import java.awt.Event;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
 
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 import org.jvnet.substance.skin.SubstanceBusinessBlackSteelLookAndFeel;
@@ -29,6 +36,8 @@ import org.jvnet.substance.skin.SubstanceNebulaBrickWallLookAndFeel;
 import org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel;
 import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
+import util.FileFilterImpl;
+import util.ImagePreviewer;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
@@ -37,6 +46,9 @@ public class FormConnectListener implements ActionListener, KeyListener {
     private FormConnect connect;
     private Gerente gerente;
     private Map<String, LookAndFeel> mapaSubstance;
+    private JFileChooser chooser = new JFileChooser();
+    private JFrame frame;
+    private ImagePreviewer view = new ImagePreviewer(chooser);
 
     /**
      * Construtor padrao passando o JFrame ao qual ele responde
@@ -56,21 +68,56 @@ public class FormConnectListener implements ActionListener, KeyListener {
      */
     public void actionPerformed(ActionEvent evento) {
         if (verificarAcaoBotao(evento.getActionCommand(), "Connectar")) {
-            if (isValid()){
+            if (isValid()) {
                 gerente.connectar(connect);
-            }
-            else
+            } else
                 LancaExcessao("*Campos Obrigatorios");
         } else if (verificarAcaoBotao(evento.getActionCommand(), "Fechar")) {
             connect.dispose();
-        } else if (verificarAcaoBotao(evento.getActionCommand(), "comboBoxChanged")) {
-            try{
-                UIManager.setLookAndFeel(getMapaSubstance().get(getSelectedItem()));
-            }catch (Exception e) {
+        } else if (verificarAcaoBotao(evento.getActionCommand(),
+                "comboBoxChanged")) {
+            try {
+                UIManager.setLookAndFeel(getMapaSubstance().get(
+                        getSelectedItem()));
+            } catch (Exception e) {
                 connect.getExcessao().lancaExcessaoSimple("Erro no substance");
             }
-        }else if(verificarAcaoBotao(evento.getActionCommand(), "Imagem")){
-            System.out.println("OK");
+        } else if (verificarAcaoBotao(evento.getActionCommand(), "Imagem")) {
+            configFrame();
+        } else if (verificarAcaoBotao(evento.getActionCommand(),
+                "ApproveSelection")) {
+            String url = chooser.getSelectedFile().getPath();
+            ImageIcon icon = redimencionaImagem(url);
+            connect.getButtonFileChooser().setIcon(icon);
+            connect.getButtonFileChooser().setBorderPainted(false);
+            connect.getButtonFileChooser().setBackground(
+                    connect.getBackground());
+            connect.getButtonFileChooser().setContentAreaFilled(false);
+            connect.getButtonFileChooser().setFocusPainted(false);
+            frame.dispose();
+            frame = null;
+        } else if (verificarAcaoBotao(evento.getActionCommand(),
+                "CancelSelection")) {
+            frame.dispose();
+        }
+
+    }
+
+    private void configFrame() {
+        if (frame == null) {
+            frame = new JFrame();
+            frame.add(chooser);
+            frame.setUndecorated(true);
+            frame.pack();
+            frame.setExtendedState(JFrame.NORMAL);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            chooser.addActionListener(this);
+            chooser.setFileFilter(getFilter());
+            chooser.setAccessory(view);
+        } else {
+            frame.setExtendedState(JFrame.NORMAL);
+            frame.setVisible(true);
         }
 
     }
@@ -182,11 +229,11 @@ public class FormConnectListener implements ActionListener, KeyListener {
         return connect.getIpServidor();
     }
 
-    public String getSelectedItem(){
+    public String getSelectedItem() {
         System.out.println((String) connect.getComboBox().getSelectedItem());
         return (String) connect.getComboBox().getSelectedItem();
     }
-    
+
     /**
      * Metodo para facilitar leitura do codigo
      * 
@@ -257,8 +304,9 @@ public class FormConnectListener implements ActionListener, KeyListener {
             return false;
         }
     }
+
     /**
-     *  Validador Individual
+     * Validador Individual
      */
     private void validadorIndividual() {
         if (!isVer(getIpServidor()))
@@ -283,28 +331,59 @@ public class FormConnectListener implements ActionListener, KeyListener {
     private Boolean isVer(JTextField t) {
         return !t.getText().trim().equals("");
     }
-    
+
     /**
      * Mapa de Temas
+     * 
      * @return LookAndFeel
      */
-    private Map<String, LookAndFeel> getMapaSubstance(){
-        if(mapaSubstance == null){
+    private Map<String, LookAndFeel> getMapaSubstance() {
+        if (mapaSubstance == null) {
             mapaSubstance = new HashMap<String, LookAndFeel>();
             mapaSubstance.put("Dark Cyan", new SubstanceBusinessLookAndFeel());
-            mapaSubstance.put("Ligth Cyan", new SubstanceBusinessBlackSteelLookAndFeel());
-            mapaSubstance.put("Creme/Café", new SubstanceCremeCoffeeLookAndFeel());
-            mapaSubstance.put("Default Theme", new SubstanceDefaultLookAndFeel());
-            mapaSubstance.put("Yellow Theme", new SubstanceFieldOfWheatLookAndFeel());
-            mapaSubstance.put("Green Theme", new SubstanceGreenMagicLookAndFeel());
-            mapaSubstance.put("Silver Theme", new SubstanceMistSilverLookAndFeel());
-            mapaSubstance.put("Silver2 Theme", new SubstanceModerateLookAndFeel());
-            mapaSubstance.put("Ligth Theme", new SubstanceNebulaBrickWallLookAndFeel());
-            mapaSubstance.put("Oficce Silver", new SubstanceOfficeSilver2007LookAndFeel());
-            mapaSubstance.put("Oficce Blue", new SubstanceOfficeBlue2007LookAndFeel());
+            mapaSubstance.put("Ligth Cyan",
+                    new SubstanceBusinessBlackSteelLookAndFeel());
+            mapaSubstance.put("Creme/Café",
+                    new SubstanceCremeCoffeeLookAndFeel());
+            mapaSubstance.put("Default Theme",
+                    new SubstanceDefaultLookAndFeel());
+            mapaSubstance.put("Yellow Theme",
+                    new SubstanceFieldOfWheatLookAndFeel());
+            mapaSubstance.put("Green Theme",
+                    new SubstanceGreenMagicLookAndFeel());
+            mapaSubstance.put("Silver Theme",
+                    new SubstanceMistSilverLookAndFeel());
+            mapaSubstance.put("Silver2 Theme",
+                    new SubstanceModerateLookAndFeel());
+            mapaSubstance.put("Ligth Theme",
+                    new SubstanceNebulaBrickWallLookAndFeel());
+            mapaSubstance.put("Oficce Silver",
+                    new SubstanceOfficeSilver2007LookAndFeel());
+            mapaSubstance.put("Oficce Blue",
+                    new SubstanceOfficeBlue2007LookAndFeel());
         }
         return mapaSubstance;
     }
 
+    private FileFilter getFilter() {
+        FileFilterImpl filter = new FileFilterImpl();
+        filter.addExtension("jpg");
+        filter.addExtension("jpeg");
+        filter.addExtension("gif");
+        filter.addExtension("png");
+        filter.setDescription("Image files");
+        return filter;
+    }
 
+    public ImageIcon redimencionaImagem(String urlImagem) {
+        BufferedImage fundo = null;
+        try {
+            fundo = ImageIO.read(new File(urlImagem));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Image imagem = fundo.getScaledInstance(100, 120, 2000);
+        ImageIcon jpg = new ImageIcon(imagem);
+        return jpg;
+    }
 }
