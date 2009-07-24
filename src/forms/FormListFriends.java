@@ -4,6 +4,7 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -24,8 +25,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
 import acao.FormListFriendsListener;
+import java.awt.Toolkit;
 import contatos.Contatos;
 import contatos.render.ContatosRender;
 
@@ -42,10 +43,11 @@ public class FormListFriends extends JFrame {
     private JList listaContatos;
     private IMensageiroCliente cliente;
     private Gerente gerente;
-    
+
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
     }
+
     /**
      * Metodo de Configuracao do frame
      */
@@ -53,11 +55,13 @@ public class FormListFriends extends JFrame {
         try {
             setTitle(cliente.getContatos().getNome());
             setIconImage(getIcon());
-            setSize(300, 600);
+            Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
+            setSize(250, (int) dimensao.getHeight() - 30);
             setResizable(true);
             setUndecorated(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
+            int x = (int) (dimensao.getWidth() - 250);
+            setLocation(x, 0);
             Container c = this.getContentPane();
             GridBagConstraints cons = new GridBagConstraints();
             GridBagLayout layout = new GridBagLayout();
@@ -94,6 +98,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Adiciona um Array de JComponentes no frame
+     * 
      * @param components
      */
     private void adiciona(JComponent[] components) {
@@ -104,6 +109,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Instancia Um JScrollPane
+     * 
      * @return
      */
     private JScrollPane newJScrollPane() {
@@ -115,6 +121,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Instancia Uma DefaultaListModel
+     * 
      * @return
      */
     private DefaultListModel newDefaultListModel() {
@@ -123,6 +130,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Instancia um JList
+     * 
      * @param model
      * @return
      */
@@ -142,6 +150,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Cria Uma imagemIcon
+     * 
      * @return
      */
     private Image getIcon() {
@@ -155,7 +164,8 @@ public class FormListFriends extends JFrame {
      * Adiciona Listeners nos componentes
      */
     public void adicionaListener() {
-        FormListFriendsListener listener = new FormListFriendsListener(this, gerente);
+        FormListFriendsListener listener = new FormListFriendsListener(this,
+                gerente);
         painelContatos.addKeyListener(listener);
         listaUsuario.addKeyListener(listener);
         listaUsuario.addMouseListener(listener);
@@ -165,6 +175,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set JList Usuario
+     * 
      * @param listaUsuario
      */
     protected void setListaUsuario(JList listaUsuario) {
@@ -173,6 +184,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set JList Contatos
+     * 
      * @param listaContatos
      */
     protected void setListaContatos(JList listaContatos) {
@@ -181,6 +193,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set DefaultListModel Usuario
+     * 
      * @param modelUsuario
      */
     protected void setModelUsuario(DefaultListModel modelUsuario) {
@@ -189,6 +202,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set DefaultListModel Contatos
+     * 
      * @param modelContatos
      */
     protected void setModelContatos(DefaultListModel modelContatos) {
@@ -197,6 +211,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * adiciona Usuario na listaUsuario
+     * 
      * @param contato
      */
     public void adicinalUsuario(Contatos contato) {
@@ -205,6 +220,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * adiciona Contato na listaContatos
+     * 
      * @param contato
      */
     public void adicionaContato(Contatos contato) {
@@ -213,6 +229,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * remove Contato da listaContatos
+     * 
      * @param obj
      */
     public void removeContato(Contatos obj) {
@@ -231,6 +248,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Instancia um novo JMenu
+     * 
      * @param nomeMenu
      * @return
      */
@@ -240,13 +258,15 @@ public class FormListFriends extends JFrame {
 
     /**
      * Cria um JMenu com itens
+     * 
      * @param nomeMenu
      * @param items
      * @return
      */
     protected JMenu newJMenuItens(String nomeMenu, JMenuItem[] items) {
         JMenu menu = newJMenu(nomeMenu);
-        FormListFriendsListener listener = new FormListFriendsListener(this, gerente);
+        FormListFriendsListener listener = new FormListFriendsListener(this,
+                gerente);
         for (int i = 0; i < items.length; i++) {
             items[i].addActionListener(listener);
             menu.add(items[i]);
@@ -256,6 +276,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Instancia um JMenuBar
+     * 
      * @return
      */
     protected JMenuBar newJMenuBar() {
@@ -266,6 +287,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Cria as bordas das JList
+     * 
      * @param nomeUsuario
      */
     public void criarBordaPainel(String nomeUsuario) {
@@ -282,6 +304,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Adiciona Borda JList Contatos
+     * 
      * @param border
      */
     public void adicionaBordaPainelContatos(Border border) {
@@ -292,6 +315,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * Adiciona Borda JList Usuario
+     * 
      * @param border
      */
     public void adicionaBordaPainelUsuario(TitledBorder border) {
@@ -302,6 +326,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set JScrollPane painelContatos
+     * 
      * @param painelContatos
      */
     protected void setPainelContatos(JScrollPane painelContatos) {
@@ -310,6 +335,7 @@ public class FormListFriends extends JFrame {
 
     /**
      * set o Cliente para antes de iniciar o form
+     * 
      * @param cliente
      */
     public void setCliente(IMensageiroCliente cliente) {
