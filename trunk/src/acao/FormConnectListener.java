@@ -1,19 +1,15 @@
 package acao;
 
 import java.awt.Event;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -38,6 +34,7 @@ import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
 import util.FileFilterImpl;
 import util.ImagePreviewer;
+import util.RedimencionaImagemIcon;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
@@ -87,7 +84,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
         } else if (verificarAcaoBotao(evento.getActionCommand(),
                 "ApproveSelection")) {
             String url = chooser.getSelectedFile().getPath();
-            ImageIcon icon = redimencionaImagem(url);
+            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
             connect.setImagemContatos(icon);
             connect.getButtonFileChooser().setBorderPainted(false);
@@ -376,15 +373,4 @@ public class FormConnectListener implements ActionListener, KeyListener {
         return filter;
     }
 
-    public ImageIcon redimencionaImagem(String urlImagem) {
-        BufferedImage fundo = null;
-        try {
-            fundo = ImageIO.read(new File(urlImagem));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Image imagem = fundo.getScaledInstance(100, 120, 2000);
-        ImageIcon jpg = new ImageIcon(imagem);
-        return jpg;
-    }
 }
