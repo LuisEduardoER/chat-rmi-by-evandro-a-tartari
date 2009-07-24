@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -63,6 +64,7 @@ public class FormConnect extends JFrame {
 
     // Lista dos validadores
     private List<JLabel> lblLista;
+    private ImageIcon iconContatos;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
@@ -396,5 +398,17 @@ public class FormConnect extends JFrame {
 
     public JButton getButtonFileChooser() {
         return btnFileChooser;
+    }
+
+    public void setImagemContatos(ImageIcon icon) {
+        this.iconContatos = icon;
+        
+    }
+
+    public ImageIcon getImagemContato() {
+        if(iconContatos==null){
+            iconContatos = new ImageIcon("imagens/teste.png");
+        }
+        return iconContatos;
     }
 }
