@@ -66,6 +66,7 @@ public class Gerente {
                             .getNome());
                     formListFriends.adicionaListener();
                     formListFriends.renderiza();
+                    connect.dispose();
                 }
 
             } catch (RemoteException e) {
