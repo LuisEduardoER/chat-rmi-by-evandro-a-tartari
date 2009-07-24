@@ -2,6 +2,7 @@ package forms;
 
 import interfaces.IMensageiroCliente;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -13,10 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
-import util.DocumentStyle;
-import util.JTextPaneImpl;
+import javax.swing.text.DefaultHighlighter;
+
+import util.Painter;
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
@@ -25,13 +28,15 @@ public class FormConversa extends JFrame {
      * 
      */
     private static final long serialVersionUID = 6449977848107919009L;
-    private JTextPaneImpl txtReceptorMensagem;
+    private JTextArea txtReceptorMensagem;
     private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
     private FormConversaListener listener;
     private IMensageiroCliente cliente;
+    private DefaultHighlighter highlighter;
+    private Painter painter;
 
     public FormConversa() {
         listener = new FormConversaListener(this);
@@ -41,22 +46,37 @@ public class FormConversa extends JFrame {
      * Inicializa o componente
      */
     public void inicializar(String urlImagemContato, String urlImagemUsuario) {
-        txtReceptorMensagem = newJTextPanelImpl();
-        txtReceptorMensagem.setEditable(false);
-        txtReceptorMensagem.setDocument(new DocumentStyle(this));
-        txtDescritorMensagem = newJTextPane();
-        txtDescritorMensagem.addKeyListener(listener);
-        scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
-        scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
-        btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
-                "imagens/btnEnviarpressionado.png");
-        adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
-        adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-        adicionaTela(getImagemIcon(urlImagemContato, 100, 120), 360, 5, 100,
-                120);
-        adicionaTela(getImagemIcon(urlImagemUsuario, 100, 80), 360, 230, 100,
-                80);
-        adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
+        /**
+         * 
+         */
+        urlImagemContato = "imagens/boi.gif";
+        urlImagemUsuario = urlImagemContato;
+        /**
+         * 
+         */
+        try {
+            txtReceptorMensagem = newJTextArea();
+            txtReceptorMensagem.setEditable(false);
+            painter = new Painter(Color.BLUE);
+            highlighter = new DefaultHighlighter();
+            txtReceptorMensagem.setHighlighter(highlighter);
+            highlighter.addHighlight(0, 0, painter);
+            txtDescritorMensagem = newJTextPane();
+            txtDescritorMensagem.addKeyListener(listener);
+            scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
+            scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
+            btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
+                    "imagens/btnEnviarpressionado.png");
+            adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
+            adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
+            adicionaTela(getImagemIcon(urlImagemContato, 100, 120), 360, 5,
+                    100, 120);
+            adicionaTela(getImagemIcon(urlImagemUsuario, 100, 80), 360, 230,
+                    100, 80);
+            adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -98,8 +118,10 @@ public class FormConversa extends JFrame {
         return new JTextPane();
     }
 
-    private JTextPaneImpl newJTextPanelImpl() {
-        return new JTextPaneImpl();
+    private JTextArea newJTextArea() {
+        JTextArea j = new JTextArea();
+        j.setLineWrap(true);
+        return j;
     }
 
     private JScrollPane newJScrollPane(JComponent c) {
@@ -148,9 +170,10 @@ public class FormConversa extends JFrame {
         button.setIcon(icon);
         return button;
     }
-    
+
     /**
      * Cria Uma imagemIcon
+     * 
      * @return
      */
     private Image getIcon() {
@@ -164,17 +187,23 @@ public class FormConversa extends JFrame {
         return txtDescritorMensagem;
     }
 
-    public JTextPaneImpl getTxtReceptorMensagens() {
+    public JTextArea getTxtReceptorMensagens() {
         return txtReceptorMensagem;
     }
-    
-    public void setCliente(IMensageiroCliente cliente){
+
+    public void setCliente(IMensageiroCliente cliente) {
         this.cliente = cliente;
     }
-    
-    public IMensageiroCliente getCliente(){
+
+    public IMensageiroCliente getCliente() {
         return this.cliente;
     }
 
+    public static void main(String[] args) {
+        FormConversa conversa = new FormConversa();
+        conversa.config();
+        conversa.inicializar("", "");
+        conversa.renderiza();
+    }
 
 }
