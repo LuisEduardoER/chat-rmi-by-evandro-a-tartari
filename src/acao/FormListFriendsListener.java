@@ -10,35 +10,40 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import contatos.Contatos;
 import forms.FormListFriends;
+import gerenteDeTelas.Gerente;
 
-public class FormListFriendsListener implements ActionListener, KeyListener, MouseListener{
+public class FormListFriendsListener implements ActionListener, KeyListener,
+        MouseListener {
     private FormListFriends formContatos;
-    
-    public FormListFriendsListener(JFrame formContatos) {
+    private Gerente gerente;
+
+    public FormListFriendsListener(JFrame formContatos, Gerente gerente) {
         this.formContatos = (FormListFriends) formContatos;
+        this.gerente = gerente;
     }
-    
+
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Minimizar")){
+        if (e.getActionCommand().equals("Minimizar")) {
             formContatos.setExtendedState(JFrame.ICONIFIED);
-        }else if(e.getActionCommand().equals("Sair")){
+        } else if (e.getActionCommand().equals("Sair")) {
             formContatos.dispose();
             System.exit(0);
         }
-        
+
     }
 
     public void keyPressed(KeyEvent evento) {
     }
 
     public void keyReleased(KeyEvent evento) {
-        if(evento.getKeyCode()==Event.ESCAPE){
-            if(evento.getModifiers()==0){
+        if (evento.getKeyCode() == Event.ESCAPE) {
+            if (evento.getModifiers() == 0) {
                 formContatos.setExtendedState(JFrame.ICONIFIED);
             }
-        }else if(evento.getKeyCode()==Event.F4){
-            if(evento.getModifiers()==Event.ALT_MASK){
+        } else if (evento.getKeyCode() == Event.F4) {
+            if (evento.getModifiers() == Event.ALT_MASK) {
                 formContatos.dispose();
                 System.exit(0);
             }
@@ -49,29 +54,29 @@ public class FormListFriendsListener implements ActionListener, KeyListener, Mou
     }
 
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+        if (e.getClickCount() % 2 == 0) {
+            if (formContatos.getListaContatos().getSelectedIndex() != -1) {
+                try {
+                    gerente.controladorConversa((Contatos) formContatos
+                            .getListaContatos().getSelectedValue());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+
     }
 
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 
-    
 }

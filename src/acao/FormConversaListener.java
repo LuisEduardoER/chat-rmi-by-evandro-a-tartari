@@ -10,14 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
+import util.JTextPaneImpl;
 import forms.FormConversa;
 
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
 
+
     public FormConversaListener(JFrame frame) {
         this.conversa = (FormConversa) frame;
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -38,7 +39,7 @@ public class FormConversaListener implements ActionListener, KeyListener {
         return conversa.getTxtDescritorMensagens();
     }
 
-    private JTextArea getReceptor() {
+    private JTextPaneImpl getReceptor() {
         return conversa.getTxtReceptorMensagens();
     }
 
@@ -70,6 +71,8 @@ public class FormConversaListener implements ActionListener, KeyListener {
     public void enviarMensagem(String text) {
         try {
             getReceptor().append(text);
+            JTextArea area = new JTextArea();
+            area.append("");
             zeraDescritor();
         } catch (Exception e) {
             e.printStackTrace();

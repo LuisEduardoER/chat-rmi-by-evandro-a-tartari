@@ -1,12 +1,15 @@
 package gerenteDeTelas;
 
 import forms.FormConnect;
+import forms.FormConversa;
 import forms.FormListFriends;
 import interfaces.IMensageiroCliente;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
@@ -24,6 +27,7 @@ public class Gerente {
     private Contatos con;
     private FormConnect connect;
     private FormListFriends formListFriends;
+    private Map<String, FormConversa> listaConversa;
 
     public Gerente() {
     }
@@ -32,6 +36,7 @@ public class Gerente {
      * Metodo de inicialização do Gerente de Telas
      */
     private void init() {
+        listaConversa = new HashMap<String, FormConversa>();
         FormConnect connect = new FormConnect(this);
         connect.configJFrame();
         connect.inicializar();
@@ -57,7 +62,8 @@ public class Gerente {
                     formListFriends.inicializa();
                     formListFriends.config();
                     formListFriends.createMenuBar();
-                    formListFriends.criarBordaPainel(cliente.getContatos().getNome());
+                    formListFriends.criarBordaPainel(cliente.getContatos()
+                            .getNome());
                     formListFriends.adicionaListener();
                     formListFriends.renderiza();
                 }
@@ -156,13 +162,36 @@ public class Gerente {
 
     /**
      * Cria e retorna caso necessario uma instancia do FormListFriends
+     * 
      * @return
      */
     public FormListFriends getFormListFriends() {
         if (formListFriends == null) {
-            formListFriends = new FormListFriends();
+            formListFriends = new FormListFriends(this);
         }
         return formListFriends;
+
+    }
+
+    public void controladorConversa(Contatos contato) throws Exception {
+        String name = cliente.getContatos().getNome() + contato.getNome();
+        String name2 = contato.getNome() + cliente.getContatos().getNome();
+        if (listaConversa.get(name) != null) {
+            FormConversa conversa = listaConversa.get(name);
+            conversa.renderiza();
+        } else if (listaConversa.get(name2) != null) {
+            FormConversa conversa = listaConversa.get(name2);
+            conversa.renderiza();
+        } else {
+            FormConversa conversa = new FormConversa();
+            conversa.setName(cliente.getContatos().getNome()
+                    + contato.getNome());
+            conversa.config();
+            conversa.inicializar(cliente.getContatos().getUrlImage(), contato
+                    .getUrlImage());
+            conversa.renderiza();
+            listaConversa.put(name, conversa);
+        }
 
     }
 
