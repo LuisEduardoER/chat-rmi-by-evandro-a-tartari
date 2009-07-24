@@ -17,6 +17,8 @@ import javax.swing.UIManager;
 
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
+import util.RedimencionaImagemIcon;
+
 import acao.FormConnectListener;
 import excessao.FormConnectException;
 import gerenteDeTelas.Gerente;
@@ -407,8 +409,7 @@ public class FormConnect extends JFrame {
 
     public ImageIcon getImagemContato() {
         if(iconContatos==null){
-            
-            iconContatos = new ImageIcon("imagens/teste.png");
+            RedimencionaImagemIcon.redimencionaImagem("imagens/teste.png");
         }
         return iconContatos;
     }
