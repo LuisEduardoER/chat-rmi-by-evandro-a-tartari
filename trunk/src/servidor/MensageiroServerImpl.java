@@ -23,7 +23,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     private static final long serialVersionUID = -5493710291205128452L;
     private Registry registro;
     private Map<String, IMensageiroCliente> clientes;
-    private List<Contatos> listaConexao;
+    private List<Contatos> listaContatos;
     private List<String> permissoes;
 
     public MensageiroServerImpl(Integer porta) throws RemoteException {
@@ -39,8 +39,9 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 getClientes().put(mensageiro.getContatos().getLogin(),
                         mensageiro);
                 sb.append(" Connectado");
-                getListaConexao().add(mensageiro.getContatos());
+                getContatos().add(mensageiro.getContatos());
                 System.out.println(sb.toString());
+                enviarNotificacao(mensageiro);
                 return "OK";
             } else {
                 System.out.println(sb.toString());
@@ -68,6 +69,18 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         }
         return registro;
     }
+    
+    private void enviarNotificacao(IMensageiroCliente cliente) throws RemoteException{
+    	if(getContatos().size() > 0){
+    		for (Contatos contato : getContatos()) {
+				if(contato.getLogin().equals(cliente.getContatos().getLogin())){
+					cliente.adicionaUsuario(cliente.getContatos());
+				}else{
+					getClientes().get(contato.getLogin()).adicionaContato(cliente.getContatos());
+				}
+			}
+    	}
+    }
 
     /**
      * Getters and Setters
@@ -87,14 +100,14 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public void setListaConexao(List<Contatos> con) {
-        this.listaConexao = con;
+        this.listaContatos = con;
     }
 
-    public List<Contatos> getListaConexao() {
-        if (listaConexao == null) {
-            listaConexao = new ArrayList<Contatos>();
+    public List<Contatos> getContatos() {
+        if (listaContatos == null) {
+            listaContatos = new ArrayList<Contatos>();
         }
-        return listaConexao;
+        return listaContatos;
     }
 
     public void setPermissoes(List<String> permissoes) {
@@ -119,6 +132,10 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             throws RemoteException {
         if(getClientes().get(mensageiro.getContatos().getLogin())!=null){
             getClientes().remove(mensageiro.getContatos().getLogin());
+            getContatos().remove(mensageiro.getContatos());
+            for (Contatos contato : getContatos()) {
+				getClientes().get(contato.getLogin()).removeContato(contato);
+			}
         }
         System.out.println("Saida: "+mensageiro.getContatos().getLogin());
     }
