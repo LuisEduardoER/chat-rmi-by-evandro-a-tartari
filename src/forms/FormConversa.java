@@ -114,12 +114,6 @@ public class FormConversa extends JFrame {
         return new JTextPane();
     }
 
-//    private JTextArea newJTextArea() {
-//        JTextArea area = new JTextArea();
-//        area.setLineWrap(true);
-//        return area;
-//    }
-
     private JScrollPane newJScrollPane(JComponent c) {
         JScrollPane painel = new JScrollPane(c);
         painel
