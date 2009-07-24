@@ -13,5 +13,6 @@ public interface IMensageiroCliente extends Remote {
 	public void adicionaUsuario(Contatos contatos)throws RemoteException;
 	public void adicionaContato(Contatos contatos)throws RemoteException;
 	public void removeContato(Contatos contato) throws RemoteException;
+	public void buscaContatos(Contatos contatos)throws RemoteException;
 
 }
