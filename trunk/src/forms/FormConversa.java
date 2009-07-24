@@ -13,12 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import util.JTextPaneI;
-
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
