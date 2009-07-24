@@ -46,7 +46,8 @@ public class FormServidor extends JFrame {
     public void inicializar() {
         setTitle("Servidor");
         setIconImage(getIcon());
-        setSize(200, 150);
+        setSize(190, 115);
+        setUndecorated(true);
         setContentPane(new Container());
         setResizable(false);
         setLocationRelativeTo(null);
@@ -90,10 +91,10 @@ public class FormServidor extends JFrame {
 
     public static void main(String[] args) throws Exception {
         FormServidor form = new FormServidor();
+        form.setLookAndFeel();
         form.inicializar();
         form.adicionaComponentes();
         form.adicionaListeners();
-        form.setLookAndFeel();
         form.renderizaTela();
     }
 
