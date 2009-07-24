@@ -265,7 +265,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
      * 
      * @return JTextField
      */
-    private JPasswordField getPassWord() {
+    private JTextField getPassWord() {
         return connect.getNome();
     }
 
