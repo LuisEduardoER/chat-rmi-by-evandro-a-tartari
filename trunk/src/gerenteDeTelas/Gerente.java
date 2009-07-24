@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
+import sun.security.action.GetLongAction;
+
 import cliente.MensageiroClienteImpl;
 import contatos.Contatos;
 
@@ -196,5 +198,17 @@ public class Gerente {
         }
 
     }
+
+	public void adicionaContato(Contatos contatos) {
+		getFormListFriends().adicionaContato(contatos);
+	}
+
+	public void adicionaUsuario(Contatos contatos) {
+		getFormListFriends().adicinalUsuario(contatos);
+	}
+
+	public void removeContato(Contatos contatos) {
+		getFormListFriends().removeContato(contatos);
+	}
 
 }
