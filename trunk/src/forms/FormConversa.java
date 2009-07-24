@@ -17,6 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
+import util.JTextPaneI;
+
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
@@ -25,7 +27,7 @@ public class FormConversa extends JFrame {
      * 
      */
     private static final long serialVersionUID = 6449977848107919009L;
-    private JTextArea txtReceptorMensagem;
+    private JTextPaneI txtReceptorMensagem;
     private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
@@ -50,10 +52,9 @@ public class FormConversa extends JFrame {
          * 
          */
         try {
-            txtReceptorMensagem = newJTextArea();
+            txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
-            txtReceptorMensagem.setLineWrap(true);
             txtDescritorMensagem.addKeyListener(listener);
             scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
@@ -69,6 +70,11 @@ public class FormConversa extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private JTextPaneI newJTextAreaA() {
+        JTextPaneI area = new JTextPaneI();
+        return area;
     }
 
     /**
@@ -110,11 +116,11 @@ public class FormConversa extends JFrame {
         return new JTextPane();
     }
 
-    private JTextArea newJTextArea() {
-        JTextArea area = new JTextArea();
-        area.setLineWrap(true);
-        return area;
-    }
+//    private JTextArea newJTextArea() {
+//        JTextArea area = new JTextArea();
+//        area.setLineWrap(true);
+//        return area;
+//    }
 
     private JScrollPane newJScrollPane(JComponent c) {
         JScrollPane painel = new JScrollPane(c);
@@ -179,7 +185,7 @@ public class FormConversa extends JFrame {
         return txtDescritorMensagem;
     }
 
-    public JTextArea getTxtReceptorMensagens() {
+    public JTextPaneI getTxtReceptorMensagens() {
         return txtReceptorMensagem;
     }
 
