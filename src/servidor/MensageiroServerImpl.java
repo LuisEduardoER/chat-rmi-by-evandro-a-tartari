@@ -32,19 +32,23 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(mensageiro.getContatos().getLogin());
         if (getPermissoes().contains(mensageiro.getContatos().getLogin())) {
             if (!getClientes().containsValue(mensageiro)) {
                 getClientes().put(mensageiro.getContatos().getLogin(),
                         mensageiro);
+                sb.append(" Connectado");
                 getListaConexao().add(mensageiro.getContatos());
                 return "OK";
             } else {
+                System.out.println(sb.toString());
                 return "Usuario Já conectado";
             }
         } else {
+            System.out.println(sb.toString());
             return "Usuario não Cadastrado";
         }
-
     }
 
     public void inicializar(Integer porta) throws RemoteException {
