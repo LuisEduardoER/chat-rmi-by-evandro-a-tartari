@@ -40,6 +40,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                         mensageiro);
                 sb.append(" Connectado");
                 getListaConexao().add(mensageiro.getContatos());
+                System.out.println(sb.toString());
                 return "OK";
             } else {
                 System.out.println(sb.toString());
