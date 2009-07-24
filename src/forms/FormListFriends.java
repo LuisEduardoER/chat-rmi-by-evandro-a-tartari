@@ -357,4 +357,9 @@ public class FormListFriends extends JFrame {
         }
         
     }
+
+	public void buscaContatos() {
+		cliente.buscaContatos(cliente.getContatos());
+		
+	}
 }
