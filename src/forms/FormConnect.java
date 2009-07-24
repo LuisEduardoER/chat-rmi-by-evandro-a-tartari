@@ -2,6 +2,7 @@ package forms;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -409,7 +410,8 @@ public class FormConnect extends JFrame {
 
     public ImageIcon getImagemContato() {
         if(iconContatos==null){
-            RedimencionaImagemIcon.redimencionaImagem("imagens/teste.png");
+            URL res = this.getClass().getClassLoader().getResource("imagens/teste.png");
+            RedimencionaImagemIcon.redimencionaImagem(res.getFile());
         }
         return iconContatos;
     }
