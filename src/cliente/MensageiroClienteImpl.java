@@ -76,6 +76,10 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 		gerente.removeContato(contatos);		
 	}
 
+	public void buscaContatos(IMensageiroCliente cliente) throws RemoteException {
+		servidor.enviarNotificacao(cliente);
+	}
+
 
     
 
