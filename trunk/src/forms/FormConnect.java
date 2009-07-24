@@ -45,7 +45,7 @@ public class FormConnect extends JFrame {
     private JTextField txtPortaServico;
     private JTextField txtPortaCliente;
     private JTextField txtLogin;
-    private JPasswordField txtSenha;
+    private JTextField txtNome;
     private JComboBox comboSkin;
     private JComboBox imagem;
     // Botoes
@@ -97,7 +97,7 @@ public class FormConnect extends JFrame {
         txtPortaServico = newJTextField(100, 35, 1);
         txtPortaCliente = newJTextField(100, 65, 2);
         txtLogin = newJTextField(100, 95, 3);
-        txtSenha = newJPasswordField(100, 125, 4);
+        txtNome = newJPasswordField(100, 125, 4);
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
         btnConnectar = newJButton("Connectar", 130, 195);
@@ -299,8 +299,8 @@ public class FormConnect extends JFrame {
      * 
      * @return String
      */
-    public JPasswordField getPassWord() {
-        return txtSenha;
+    public JTextField getNome() {
+        return txtNome;
     }
 
     /**
@@ -341,7 +341,7 @@ public class FormConnect extends JFrame {
         txtPortaServico.addKeyListener(acao);
         txtPortaCliente.addKeyListener(acao);
         txtLogin.addKeyListener(acao);
-        txtSenha.addKeyListener(acao);
+        txtNome.addKeyListener(acao);
         comboSkin.addActionListener(acao);
         btnFileChooser.addActionListener(acao);
     }
@@ -411,7 +411,7 @@ public class FormConnect extends JFrame {
     public ImageIcon getImagemContato() {
         if(iconContatos==null){
             URL res = this.getClass().getClassLoader().getResource("imagens/teste.png");
-            RedimencionaImagemIcon.redimencionaImagem(res.getFile());
+            iconContatos = RedimencionaImagemIcon.redimencionaImagem(res.getFile());
         }
         return iconContatos;
     }
