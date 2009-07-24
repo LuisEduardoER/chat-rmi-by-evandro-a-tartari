@@ -85,9 +85,26 @@ public class Contatos implements Serializable {
     public String getUrlImage() {
         return urlImage;
     }
-    
-    public void setUrlImage(String urlImage){
+
+    public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((login == null) ? 0 : login.hashCode());
+        return result;
+    }
+
+
+    public boolean equals(Object obj) {
+        if(obj instanceof Contatos){
+            Contatos other = (Contatos) obj;
+            return other.getLogin().equals(this.getLogin());
+        }
+        return false;
     }
 
 }

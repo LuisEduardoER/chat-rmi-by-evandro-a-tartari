@@ -9,5 +9,6 @@ public interface IMensageiroCliente extends Remote {
 
     public Boolean findServidor() throws RemoteException;
     public Contatos getContatos() throws RemoteException;
+    public void comunicaSaida()throws RemoteException;
 
 }

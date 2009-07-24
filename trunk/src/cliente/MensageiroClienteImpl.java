@@ -56,10 +56,15 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
             return false;
         }
     }
+    public void comunicaSaida() throws RemoteException {
+        servidor.removeCliente(this);
+    }
 
     public Contatos getContatos() throws RemoteException {
         return con;
     }
+
+
     
 
 }
