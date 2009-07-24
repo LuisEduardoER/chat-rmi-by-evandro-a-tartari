@@ -69,6 +69,8 @@ public class FormConnectListener implements ActionListener, KeyListener {
             }catch (Exception e) {
                 connect.getExcessao().lancaExcessaoSimple("Erro no substance");
             }
+        }else if(verificarAcaoBotao(evento.getActionCommand(), "Imagem")){
+            System.out.println("OK");
         }
 
     }
