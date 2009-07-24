@@ -2,7 +2,6 @@ package forms;
 
 import interfaces.IMensageiroCliente;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -17,9 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
-import javax.swing.text.DefaultHighlighter;
 
-import util.Painter;
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
@@ -35,8 +32,6 @@ public class FormConversa extends JFrame {
     private JButton btnEnviarMensagem;
     private FormConversaListener listener;
     private IMensageiroCliente cliente;
-    private DefaultHighlighter highlighter;
-    private Painter painter;
 
     public FormConversa() {
         listener = new FormConversaListener(this);
@@ -57,11 +52,8 @@ public class FormConversa extends JFrame {
         try {
             txtReceptorMensagem = newJTextArea();
             txtReceptorMensagem.setEditable(false);
-            painter = new Painter(Color.BLUE);
-            highlighter = new DefaultHighlighter();
-            txtReceptorMensagem.setHighlighter(highlighter);
-            highlighter.addHighlight(0, 0, painter);
             txtDescritorMensagem = newJTextPane();
+            txtReceptorMensagem.setLineWrap(true);
             txtDescritorMensagem.addKeyListener(listener);
             scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
@@ -119,10 +111,16 @@ public class FormConversa extends JFrame {
     }
 
     private JTextArea newJTextArea() {
-        JTextArea j = new JTextArea();
-        j.setLineWrap(true);
-        return j;
+        JTextArea area = new JTextArea();
+        area.setLineWrap(true);
+        return area;
     }
+
+    // private JTextArea newJTextArea() {
+    // JTextArea j = new JTextArea();
+    // j.setLineWrap(true);
+    // return j;
+    // }
 
     private JScrollPane newJScrollPane(JComponent c) {
         JScrollPane painel = new JScrollPane(c);
