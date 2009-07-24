@@ -35,7 +35,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         StringBuilder sb = new StringBuilder();
         sb.append(mensageiro.getContatos().getLogin());
         if (getPermissoes().contains(mensageiro.getContatos().getLogin())) {
-            if (!getClientes().containsValue(mensageiro)) {
+            if (getClientes().get(mensageiro.getContatos().getLogin())==null) {
                 getClientes().put(mensageiro.getContatos().getLogin(),
                         mensageiro);
                 sb.append(" Connectado");
