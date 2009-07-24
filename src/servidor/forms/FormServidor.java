@@ -14,6 +14,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+
+import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 import servidor.acao.AcaoFormServidor;
 import servidor.trayicon.TrayManager;
@@ -89,6 +93,7 @@ public class FormServidor extends JFrame {
         form.inicializar();
         form.adicionaComponentes();
         form.adicionaListeners();
+        form.setLookAndFeel();
         form.renderizaTela();
     }
 
@@ -165,6 +170,13 @@ public class FormServidor extends JFrame {
 
     public void setServico(IMensageiroServer servico) {
         this.servico = servico;
+    }
+    public void setLookAndFeel(){
+        try{
+            UIManager.setLookAndFeel((LookAndFeel)new SubstanceDefaultLookAndFeel());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
         
