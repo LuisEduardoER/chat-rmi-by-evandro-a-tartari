@@ -1,6 +1,7 @@
 package contatos;
 
 import java.io.Serializable;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 
@@ -18,6 +19,7 @@ public class Contatos implements Serializable {
     private String login;
     private String senha;
     private ImageIcon icon;
+    private String urlImage;
 
     public String getNome() {
         return nome;
@@ -71,12 +73,21 @@ public class Contatos implements Serializable {
         this.icon = icon;
     }
 
-    public ImageIcon getIcon() {
+    public ImageIcon getImage() {
+        if (icon == null) {
+            ClassLoader clazz = this.getClass().getClassLoader();
+            URL res = clazz.getResource(urlImage);
+            icon = new ImageIcon(res);
+        }
         return icon;
     }
 
-    public ImageIcon getImage() {
-        return icon;
+    public String getUrlImage() {
+        return urlImage;
+    }
+    
+    public void setUrlImage(String urlImage){
+        this.urlImage = urlImage;
     }
 
 }

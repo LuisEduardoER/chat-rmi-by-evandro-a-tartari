@@ -1,5 +1,6 @@
 package forms;
 
+import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.Container;
@@ -40,7 +41,11 @@ public class FormListFriends extends JFrame {
     private JList listaUsuario;
     private JList listaContatos;
     private IMensageiroCliente cliente;
-
+    private Gerente gerente;
+    
+    public FormListFriends(Gerente gerente) {
+        this.gerente = gerente;
+    }
     /**
      * Metodo de Configuracao do frame
      */
@@ -150,7 +155,7 @@ public class FormListFriends extends JFrame {
      * Adiciona Listeners nos componentes
      */
     public void adicionaListener() {
-        FormListFriendsListener listener = new FormListFriendsListener(this);
+        FormListFriendsListener listener = new FormListFriendsListener(this, gerente);
         painelContatos.addKeyListener(listener);
         listaUsuario.addKeyListener(listener);
         listaUsuario.addMouseListener(listener);
@@ -241,7 +246,7 @@ public class FormListFriends extends JFrame {
      */
     protected JMenu newJMenuItens(String nomeMenu, JMenuItem[] items) {
         JMenu menu = newJMenu(nomeMenu);
-        FormListFriendsListener listener = new FormListFriendsListener(this);
+        FormListFriendsListener listener = new FormListFriendsListener(this, gerente);
         for (int i = 0; i < items.length; i++) {
             items[i].addActionListener(listener);
             menu.add(items[i]);
@@ -310,5 +315,9 @@ public class FormListFriends extends JFrame {
     public void setCliente(IMensageiroCliente cliente) {
         this.cliente = cliente;
 
+    }
+
+    public JList getListaContatos() {
+        return listaContatos;
     }
 }

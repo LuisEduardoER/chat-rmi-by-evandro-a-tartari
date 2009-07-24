@@ -4,6 +4,7 @@ import interfaces.IMensageiroCliente;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
@@ -12,12 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
 import javax.swing.border.Border;
-import org.jvnet.substance.SubstanceDefaultLookAndFeel;
+import util.DocumentStyle;
+import util.JTextPaneImpl;
 import acao.FormConversaListener;
 
 public class FormConversa extends JFrame {
@@ -26,7 +25,7 @@ public class FormConversa extends JFrame {
      * 
      */
     private static final long serialVersionUID = 6449977848107919009L;
-    private JTextArea txtReceptorMensagem;
+    private JTextPaneImpl txtReceptorMensagem;
     private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
@@ -42,9 +41,9 @@ public class FormConversa extends JFrame {
      * Inicializa o componente
      */
     public void inicializar(String urlImagemContato, String urlImagemUsuario) {
-        txtReceptorMensagem = newJTextArea();
-        txtReceptorMensagem.setLineWrap(true);
+        txtReceptorMensagem = newJTextPanelImpl();
         txtReceptorMensagem.setEditable(false);
+        txtReceptorMensagem.setDocument(new DocumentStyle(this));
         txtDescritorMensagem = newJTextPane();
         txtDescritorMensagem.addKeyListener(listener);
         scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
@@ -66,6 +65,7 @@ public class FormConversa extends JFrame {
     public void config() {
         setTitle("Titulo a colocar");
         setSize(480, 390);
+        setIconImage(getIcon());
         setLocationRelativeTo(null);
         setResizable(false);
         setContentPane(new Container());
@@ -98,8 +98,8 @@ public class FormConversa extends JFrame {
         return new JTextPane();
     }
 
-    private JTextArea newJTextArea() {
-        return new JTextArea();
+    private JTextPaneImpl newJTextPanelImpl() {
+        return new JTextPaneImpl();
     }
 
     private JScrollPane newJScrollPane(JComponent c) {
@@ -148,12 +148,23 @@ public class FormConversa extends JFrame {
         button.setIcon(icon);
         return button;
     }
+    
+    /**
+     * Cria Uma imagemIcon
+     * @return
+     */
+    private Image getIcon() {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/serverRunning.png");
+        ImageIcon icon = new ImageIcon(res);
+        return icon.getImage();
+    }
 
     public JTextPane getTxtDescritorMensagens() {
         return txtDescritorMensagem;
     }
 
-    public JTextArea getTxtReceptorMensagens() {
+    public JTextPaneImpl getTxtReceptorMensagens() {
         return txtReceptorMensagem;
     }
     
@@ -165,30 +176,5 @@ public class FormConversa extends JFrame {
         return this.cliente;
     }
 
-    /**
-     * Main/ETC TO REMOVE
-     * 
-     * @param args
-     */
-    public static void main(String[] args) {
-        FormConversa conversa = new FormConversa();
-        conversa.setLookAndFeel();
-        conversa.config();
-        conversa.inicializar("imagens/teste.png", "imagens/teste.png");
-        conversa.renderiza();
-    }
-
-    private void setLookAndFeel() {
-        try {
-            UIManager
-                    .setLookAndFeel((LookAndFeel) new SubstanceDefaultLookAndFeel());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-    /**
-     * END TO REMOVE
-     */
 
 }
