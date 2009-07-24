@@ -134,7 +134,7 @@ public class Gerente {
      */
     public void setCon(FormConnect form) {
         getCon().setLogin(form.getLogin().getText());
-        getCon().setSenha(form.getPassWord().getPassword().toString());
+        getCon().setSenha(form.getNome().getPassword().toString());
         getCon().setIpServidor(form.getIpServidor().getText());
         getCon().setPortaServico(
                 Integer.parseInt(form.getPortaServico().getText()));
