@@ -68,6 +68,7 @@ public class FormConnect extends JFrame {
     // Lista dos validadores
     private List<JLabel> lblLista;
     private ImageIcon iconContatos;
+	private String urlImagem;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
@@ -412,7 +413,17 @@ public class FormConnect extends JFrame {
         if(iconContatos==null){
             URL res = this.getClass().getClassLoader().getResource("imagens/teste.png");
             iconContatos = RedimencionaImagemIcon.redimencionaImagem(res.getFile());
+            setUrlImagem(res.getFile());
         }
         return iconContatos;
     }
+
+	public void setUrlImagem(String url) {
+		this.urlImagem = url;
+		
+	}
+	
+	public String getUrlImagem(){
+		return urlImagem;
+	}
 }
