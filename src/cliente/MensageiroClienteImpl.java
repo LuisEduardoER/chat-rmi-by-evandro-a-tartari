@@ -64,6 +64,18 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         return con;
     }
 
+	public void adicionaContato(Contatos contatos) throws RemoteException {
+		gerente.adicionaContato(contatos);
+	}
+
+	public void adicionaUsuario(Contatos contatos) throws RemoteException {
+		gerente.adicionaUsuario(contatos);		
+	}
+
+	public void removeContato(Contatos contatos) throws RemoteException {
+		gerente.removeContato(contatos);		
+	}
+
 
     
 
