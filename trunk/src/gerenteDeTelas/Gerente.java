@@ -67,8 +67,10 @@ public class Gerente {
                     formListFriends.criarBordaPainel(cliente.getContatos()
                             .getNome());
                     formListFriends.adicionaListener();
+                    formListFriends.buscaContatos();
                     formListFriends.renderiza();
                     connect.dispose();
+                    
                 }
 
             } catch (RemoteException e) {
