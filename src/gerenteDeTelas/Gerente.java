@@ -137,6 +137,7 @@ public class Gerente {
                 Integer.parseInt(form.getPortaServico().getText()));
         getCon().setPortaCliente(
                 Integer.parseInt(form.getPortaCliente().getText()));
+        getCon().setIcon(form.getImagemContato());
     }
 
     /**
