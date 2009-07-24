@@ -9,5 +9,5 @@ public interface IMensageiroServer extends Remote{
     public void inicializar(Integer porta) throws RemoteException;
     public void parar()throws RemoteException;
     public void removeCliente(IMensageiroCliente mensageiro) throws RemoteException;
-
+    public void enviarNotificacao(IMensageiroCliente cliente) throws RemoteException;
 }
