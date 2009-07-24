@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
@@ -15,8 +16,6 @@ import forms.FormConversa;
 
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
-    
-    
 
     public FormConversaListener(JFrame frame) {
         this.conversa = (FormConversa) frame;
@@ -71,13 +70,16 @@ public class FormConversaListener implements ActionListener, KeyListener {
     @Deprecated
     public void enviarMensagem(String text) {
         try {
-            getReceptor().append(text+"\n", Color.blue);
+            getReceptor().append(getHora() + ": ", Color.RED);
+            getReceptor().append(text + "\n", Color.blue);
             zeraDescritor();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
+    public String getHora() {
+        return new Date().toString() + "ZeBronha";
+    }
 
 }
