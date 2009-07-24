@@ -14,7 +14,8 @@ import forms.FormConversa;
 
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
-
+    
+    
 
     public FormConversaListener(JFrame frame) {
         this.conversa = (FormConversa) frame;
@@ -69,7 +70,7 @@ public class FormConversaListener implements ActionListener, KeyListener {
     @Deprecated
     public void enviarMensagem(String text) {
         try {
-            getReceptor().append(text);
+            getReceptor().append(text+"\n");
             zeraDescritor();
         } catch (Exception e) {
             e.printStackTrace();
