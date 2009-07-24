@@ -41,7 +41,6 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 sb.append(" Connectado");
                 getContatos().add(mensageiro.getContatos());
                 System.out.println(sb.toString());
-                enviarNotificacao(mensageiro);
                 return "OK";
             } else {
                 System.out.println(sb.toString());
@@ -70,7 +69,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         return registro;
     }
     
-    private void enviarNotificacao(IMensageiroCliente cliente) throws RemoteException{
+    public void enviarNotificacao(IMensageiroCliente cliente) throws RemoteException{
     	if(getContatos().size() > 0){
     		for (Contatos contato : getContatos()) {
 				if(contato.getLogin().equals(cliente.getContatos().getLogin())){
