@@ -1,5 +1,6 @@
 package acao;
 
+import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,9 +8,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
+import util.JTextPaneI;
 import forms.FormConversa;
 
 public class FormConversaListener implements ActionListener, KeyListener {
@@ -39,7 +40,7 @@ public class FormConversaListener implements ActionListener, KeyListener {
         return conversa.getTxtDescritorMensagens();
     }
 
-    private JTextArea getReceptor() {
+    private JTextPaneI getReceptor() {
         return conversa.getTxtReceptorMensagens();
     }
 
@@ -70,11 +71,13 @@ public class FormConversaListener implements ActionListener, KeyListener {
     @Deprecated
     public void enviarMensagem(String text) {
         try {
-            getReceptor().append(text+"\n");
+            getReceptor().append(text+"\n", Color.blue);
             zeraDescritor();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
 }
