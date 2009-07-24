@@ -23,7 +23,7 @@ public class ContatosRender extends JLabel implements ListCellRenderer {
             int index, boolean isSelected, boolean cellHasFocus) {
         Contatos contatos = (Contatos) value;
         setText(contatos.getNome());
-        setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos.getUrlImage()));
+        setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos.getUrlImage(), 60, 60, 1000));
         return this;
     }
 

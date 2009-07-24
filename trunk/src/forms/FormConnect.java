@@ -412,7 +412,7 @@ public class FormConnect extends JFrame {
     public ImageIcon getImagemContato() {
         if(iconContatos==null){
             URL res = this.getClass().getClassLoader().getResource("imagens/teste.png");
-            iconContatos = RedimencionaImagemIcon.redimencionaImagem(res.getFile());
+            iconContatos = RedimencionaImagemIcon.redimencionaImagem(res.getFile(),100, 120, 1000);
             setUrlImagem(res.getFile());
         }
         return iconContatos;

@@ -84,7 +84,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
         } else if (verificarAcaoBotao(evento.getActionCommand(),
                 "ApproveSelection")) {
             String url = chooser.getSelectedFile().getPath();
-            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url);
+            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url, 100, 120, 1000);
             connect.setUrlImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
             connect.setImagemContatos(icon);
