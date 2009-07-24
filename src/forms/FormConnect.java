@@ -407,6 +407,7 @@ public class FormConnect extends JFrame {
 
     public ImageIcon getImagemContato() {
         if(iconContatos==null){
+            
             iconContatos = new ImageIcon("imagens/teste.png");
         }
         return iconContatos;
