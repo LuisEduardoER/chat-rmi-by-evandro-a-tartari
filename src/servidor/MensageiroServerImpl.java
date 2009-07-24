@@ -118,7 +118,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
         if(getClientes().get(mensageiro.getContatos().getLogin())!=null){
-            getClientes().remove(mensageiro);
+            getClientes().remove(mensageiro.getContatos().getLogin());
         }
         System.out.println("Saida: "+mensageiro.getContatos().getLogin());
     }
