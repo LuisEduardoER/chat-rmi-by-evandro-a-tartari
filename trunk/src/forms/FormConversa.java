@@ -45,14 +45,6 @@ public class FormConversa extends JFrame {
      * Inicializa o componente
      */
     public void inicializar(String urlImagemContato, String urlImagemUsuario) {
-        /**
-         * 
-         */
-        urlImagemContato = "imagens/boi.gif";
-        urlImagemUsuario = urlImagemContato;
-        /**
-         * 
-         */
         try {
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
