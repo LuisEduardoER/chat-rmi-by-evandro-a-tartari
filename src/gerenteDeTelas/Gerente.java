@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 import cliente.MensageiroClienteImpl;
+import cliente.Mensagem;
 import contatos.Contatos;
 /**
  * 
@@ -198,6 +199,7 @@ public class Gerente {
 			conversa.config();
 			conversa.inicializar(cliente.getContatos().getUrlImage(), contato
 					.getUrlImage());
+			conversa.setContato(contato);
 			conversa.renderiza();
 			listaConversa.put(name, conversa);
 		}
@@ -215,5 +217,15 @@ public class Gerente {
 	public void removeContato(Contatos contatos) {
 		getFormListFriends().removeContato(contatos);
 	}
+
+	public void enviarMensagem(Mensagem mensagem) {
+		try {
+			this.cliente.enviarMensagem(mensagem);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 
 }
