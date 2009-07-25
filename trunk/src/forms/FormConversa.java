@@ -5,6 +5,7 @@ import interfaces.IMensageiroCliente;
 
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.net.URL;
 
@@ -19,6 +20,7 @@ import javax.swing.border.Border;
 
 import util.JTextPaneI;
 import acao.FormConversaListener;
+import contatos.Contatos;
 
 /**
  * 
@@ -38,7 +40,11 @@ public class FormConversa extends JFrame {
 	private JButton btnEnviarMensagem;
 	private FormConversaListener listener;
 	private IMensageiroCliente cliente;
+	private Contatos contato;
 	private Gerente gerente;
+	private Font font;
+	private Boolean isBold = false;
+	private Boolean isItalic = false;
 
 	public FormConversa(Gerente gerente) {
 		this.gerente = gerente;
@@ -53,6 +59,7 @@ public class FormConversa extends JFrame {
 			txtReceptorMensagem = newJTextAreaA();
 			txtReceptorMensagem.setEditable(false);
 			txtDescritorMensagem = newJTextPane();
+			setFont(txtDescritorMensagem.getFont());
 			txtDescritorMensagem.addKeyListener(listener);
 			scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
 			scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
@@ -194,6 +201,38 @@ public class FormConversa extends JFrame {
 		conversa.config();
 		conversa.inicializar("", "");
 		conversa.renderiza();
+	}
+
+	public void setContato(Contatos contato) {
+		this.contato = contato;
+	}
+
+	public Contatos getContato() {
+		return contato;
+	}
+
+	public Boolean getIsBold() {
+		return isBold;
+	}
+
+	public Boolean getIsItalic() {
+		return isItalic;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	public Font getFont() {
+		return font;
+	}
+
+	public void setIsBold(Boolean isBold) {
+		this.isBold = isBold;
+	}
+
+	public void setIsItalic(Boolean isItalic) {
+		this.isItalic = isItalic;
 	}
 
 }

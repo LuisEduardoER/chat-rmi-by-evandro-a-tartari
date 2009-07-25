@@ -1,5 +1,6 @@
 package cliente;
 
+import java.awt.Font;
 import java.io.Serializable;
 
 public class Mensagem implements Serializable {
@@ -11,16 +12,16 @@ public class Mensagem implements Serializable {
 
 	private String usuarioEnvia;
 	private String mensagem;
-	private Integer fontType;
+	private Font font;
 	private Boolean isBold;
 	private Boolean isItalic;
 	private String contatoRecebe;
 
-	public Mensagem(String usuarioEnvia, String mensagem, Integer fontType,
+	public Mensagem(String usuarioEnvia, String mensagem, Font font,
 			Boolean isBold, Boolean isItalic, String contatoRecebe) {
 		this.setUsuarioEnvia(usuarioEnvia);
 		this.setMensagem(mensagem);
-		this.setFontType(fontType);
+		this.setFont(font);
 		this.setIsBold(isBold);
 		this.setIsItalic(isItalic);
 		this.setContatoRecebe(contatoRecebe);
@@ -40,14 +41,6 @@ public class Mensagem implements Serializable {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
-	}
-
-	public Integer getFontType() {
-		return fontType;
-	}
-
-	public void setFontType(Integer fontType) {
-		this.fontType = fontType;
 	}
 
 	public Boolean getIsBold() {
@@ -72,6 +65,14 @@ public class Mensagem implements Serializable {
 
 	public void setContatoRecebe(String contatoRecebe) {
 		this.contatoRecebe = contatoRecebe;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
+
+	public Font getFont() {
+		return font;
 	}
 
 }

@@ -3,6 +3,8 @@ package interfaces;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import cliente.Mensagem;
+
 import contatos.Contatos;
 /**
  * 
@@ -18,5 +20,6 @@ public interface IMensageiroCliente extends Remote {
 	public void adicionaContato(Contatos contatos)throws RemoteException;
 	public void removeContato(Contatos contato) throws RemoteException;
 	public void buscaContatos(IMensageiroCliente contatos)throws RemoteException;
+	public void enviarMensagem(Mensagem mensagem) throws RemoteException;
 
 }
