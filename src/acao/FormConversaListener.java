@@ -12,6 +12,7 @@ import javax.swing.JTextPane;
 
 import util.JTextPaneI;
 import forms.FormConversa;
+import gerenteDeTelas.Gerente;
 /**
  * 
  * @author evandro.tartari
@@ -19,9 +20,11 @@ import forms.FormConversa;
  */
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
+    private Gerente gerente;
 
-    public FormConversaListener(JFrame frame) {
+    public FormConversaListener(JFrame frame, Gerente gerente) {
         this.conversa = (FormConversa) frame;
+        this.gerente = gerente;
     }
 
     public void actionPerformed(ActionEvent e) {

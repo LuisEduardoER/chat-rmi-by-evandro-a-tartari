@@ -192,7 +192,7 @@ public class Gerente {
 			FormConversa conversa = listaConversa.get(name2);
 			conversa.renderiza();
 		} else {
-			FormConversa conversa = new FormConversa();
+			FormConversa conversa = new FormConversa(this);
 			conversa.setName(cliente.getContatos().getNome()
 					+ contato.getNome());
 			conversa.config();
