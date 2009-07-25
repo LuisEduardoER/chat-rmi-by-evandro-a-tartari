@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;

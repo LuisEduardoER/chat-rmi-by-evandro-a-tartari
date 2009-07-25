@@ -89,7 +89,7 @@ public class FormConnect extends JFrame {
         newJLabel(lblPortaServico, "Porta servico:", 35);
         newJLabel(lblPortaCliente, "Porta resposta:", 65);
         newJLabel(lblLogin, "Login:", 95);
-        newJLabel(lblSenha, "Senha:", 125);
+        newJLabel(lblSenha, "Nome:", 125);
         newJLabel(lblSkin, "Skin:", 155);
         lblResposta = newJLabel(25, 215, 180, Color.RED);
         lblResposta.setHorizontalAlignment(JLabel.CENTER);
