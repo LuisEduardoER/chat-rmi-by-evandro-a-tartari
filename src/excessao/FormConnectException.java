@@ -9,7 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import forms.FormConnect;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormConnectException {
 
     private FormConnect connect;

@@ -11,7 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import servidor.forms.FormServidor;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class SysTrayImpls implements MouseListener, ActionListener {
     private TrayIcon trayIcon;
     private FormServidor servidor;

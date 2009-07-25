@@ -3,8 +3,11 @@ package util;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.*;
-
-/** subclass of JTextArea allowing color attributes */
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class JTextPaneI extends JTextPane {
     /**
      * 

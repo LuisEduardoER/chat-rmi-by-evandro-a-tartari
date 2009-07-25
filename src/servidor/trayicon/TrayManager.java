@@ -10,7 +10,11 @@ import java.awt.TrayIcon;
 import javax.swing.JFrame;
 
 import servidor.forms.FormServidor;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class TrayManager {
 
     private TrayIcon trayIcon;

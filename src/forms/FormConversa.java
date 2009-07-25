@@ -18,7 +18,11 @@ import javax.swing.border.Border;
 
 import util.JTextPaneI;
 import acao.FormConversaListener;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormConversa extends JFrame {
 
     /**

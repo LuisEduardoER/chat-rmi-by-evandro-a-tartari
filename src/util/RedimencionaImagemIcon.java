@@ -5,7 +5,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class RedimencionaImagemIcon {
     public static ImageIcon redimencionaImagem(String urlImagem, Integer size, Integer alt, Integer hints) {
         BufferedImage fundo = null;

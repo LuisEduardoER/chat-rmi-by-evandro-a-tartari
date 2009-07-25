@@ -10,7 +10,11 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ImagePreviewer extends JLabel {
 
     /**

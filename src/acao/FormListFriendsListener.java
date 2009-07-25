@@ -15,7 +15,11 @@ import javax.swing.JFrame;
 import contatos.Contatos;
 import forms.FormListFriends;
 import gerenteDeTelas.Gerente;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormListFriendsListener implements ActionListener, KeyListener,
         MouseListener, WindowListener {
     private FormListFriends formContatos;

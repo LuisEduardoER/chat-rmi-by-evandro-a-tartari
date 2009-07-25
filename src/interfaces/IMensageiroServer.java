@@ -2,7 +2,11 @@ package interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public interface IMensageiroServer extends Remote{
 
     public String registra(IMensageiroCliente mensageiro) throws RemoteException;

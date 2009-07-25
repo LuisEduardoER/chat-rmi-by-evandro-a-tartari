@@ -4,7 +4,11 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public interface IMensageiroCliente extends Remote {
 
     public Boolean findServidor() throws RemoteException;
