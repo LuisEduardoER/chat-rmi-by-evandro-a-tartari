@@ -75,12 +75,12 @@ public class FormListFriends extends JFrame {
 			cons.fill = GridBagConstraints.BOTH;
 			cons.gridx = 0;
 			cons.gridy = 1;
-			cons.weighty = 0.75;
+			cons.weighty = 0.90;
 			cons.weightx = 1;
 			c.add(painelContatos, cons);
 			cons.gridx = 0;
 			cons.gridy = 0;
-			cons.weighty = 0.25;
+			cons.weighty = 0.10;
 			c.add(listaUsuario, cons);
 		} catch (Exception e) {
 			e.printStackTrace();
