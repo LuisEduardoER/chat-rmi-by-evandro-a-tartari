@@ -98,7 +98,7 @@ public class FormConnect extends JFrame {
         txtPortaServico = newJTextField(100, 35, 1);
         txtPortaCliente = newJTextField(100, 65, 2);
         txtLogin = newJTextField(100, 95, 3);
-        txtNome = newJPasswordField(100, 125, 4);
+        txtNome = newJTextField(100, 125, 4);
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
         btnConnectar = newJButton("Connectar", 130, 195);
@@ -150,21 +150,7 @@ public class FormConnect extends JFrame {
         return button;
     }
 
-    /**
-     * Metodo para instanciação de um JPasswordField
-     * 
-     * @param txtPass
-     * @param x
-     * @param y
-     * @return
-     */
-    private JPasswordField newJPasswordField(Integer x, Integer y, Integer id) {
-        JPasswordField txtPass = new JPasswordField();
-        txtPass.setBounds(x, y, 130, 25);
-        txtPass.setName(id.toString());
-        add(txtPass);
-        return txtPass;
-    }
+
 
     /**
      * Metodo para instanciação de um JTextField
