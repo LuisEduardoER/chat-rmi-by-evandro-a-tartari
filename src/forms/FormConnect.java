@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -19,7 +18,6 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 import util.RedimencionaImagemIcon;
-
 import acao.FormConnectListener;
 import excessao.FormConnectException;
 import gerenteDeTelas.Gerente;
