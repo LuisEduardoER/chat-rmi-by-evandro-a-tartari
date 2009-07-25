@@ -10,7 +10,11 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class MensageiroClienteImpl extends UnicastRemoteObject implements
         IMensageiroCliente {
 

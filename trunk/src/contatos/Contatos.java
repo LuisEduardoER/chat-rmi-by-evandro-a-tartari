@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class Contatos implements Serializable {
 
     /**

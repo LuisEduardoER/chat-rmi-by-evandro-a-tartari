@@ -12,7 +12,11 @@ import javax.swing.JTextPane;
 
 import util.JTextPaneI;
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormConversaListener implements ActionListener, KeyListener {
     private FormConversa conversa;
 

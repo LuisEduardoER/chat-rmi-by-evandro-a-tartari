@@ -9,7 +9,11 @@ import javax.swing.ListCellRenderer;
 import util.RedimencionaImagemIcon;
 
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ContatosRender extends JLabel implements ListCellRenderer {
 
     private static final long serialVersionUID = -8711692757853640701L;

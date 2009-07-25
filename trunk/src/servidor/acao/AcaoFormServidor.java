@@ -15,7 +15,11 @@ import javax.swing.JFrame;
 
 import servidor.MensageiroServerImpl;
 import servidor.forms.FormServidor;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class AcaoFormServidor implements ActionListener, KeyListener,
         WindowListener {
     private FormServidor servidor;

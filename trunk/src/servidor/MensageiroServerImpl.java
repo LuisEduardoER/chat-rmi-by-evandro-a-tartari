@@ -13,7 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class MensageiroServerImpl extends UnicastRemoteObject implements
 		IMensageiroServer {
 

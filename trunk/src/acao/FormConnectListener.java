@@ -36,7 +36,11 @@ import util.ImagePreviewer;
 import util.RedimencionaImagemIcon;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormConnectListener implements ActionListener, KeyListener {
     private List<JComponent> componentes;
     private FormConnect connect;

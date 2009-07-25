@@ -22,7 +22,11 @@ import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 import servidor.acao.AcaoFormServidor;
 import servidor.trayicon.TrayManager;
 import util.NumeroMaximoCaracteres;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormServidor extends JFrame {
 
     /**

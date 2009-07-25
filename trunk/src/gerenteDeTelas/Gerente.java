@@ -16,7 +16,11 @@ import javax.swing.JTextField;
 
 import cliente.MensageiroClienteImpl;
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class Gerente {
 
 	/**

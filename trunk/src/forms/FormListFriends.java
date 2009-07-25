@@ -30,7 +30,11 @@ import acao.FormListFriendsListener;
 import java.awt.Toolkit;
 import contatos.Contatos;
 import contatos.render.ContatosRender;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormListFriends extends JFrame {
 
 	/**
