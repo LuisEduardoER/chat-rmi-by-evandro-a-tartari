@@ -352,6 +352,10 @@ public class FormListFriends extends JFrame {
 	public JList getListaContatos() {
 		return listaContatos;
 	}
+	
+	public DefaultListModel getContatos(){
+		return modelContatos;
+	}
 
 	public void removeCliente() {
 		try {

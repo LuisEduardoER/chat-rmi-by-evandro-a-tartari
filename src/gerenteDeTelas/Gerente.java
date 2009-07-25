@@ -14,13 +14,16 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
+import sun.security.action.GetLongAction;
+
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
 import contatos.Contatos;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class Gerente {
 
@@ -224,8 +227,39 @@ public class Gerente {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
+	public void recebeMensagem(Mensagem mensagem) {
+		String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
+		String name2 = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+		if (getListaConversa().get(name) != null) {
+			getListaConversa().get(name).recebeMensagem(mensagem);
+		} else if (getListaConversa().get(name2) != null) {
+			getListaConversa().get(name2).recebeMensagem(mensagem);
+		} else {
+			Contatos contato = new Contatos();
+			contato.setLogin(mensagem.getContatoRecebe());
+			int posicao = getFormListFriends().getContatos().indexOf(contato);
+			if (posicao != -1) {
+				contato = (Contatos) getFormListFriends().getContatos().get(
+						posicao);
+				try {
+					this.controladorConversa(contato);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	public Map<String, FormConversa> getListaConversa() {
+		return listaConversa;
+	}
+
+	public void setListaConversa(Map<String, FormConversa> listaConversa) {
+		this.listaConversa = listaConversa;
+	}
 
 }
