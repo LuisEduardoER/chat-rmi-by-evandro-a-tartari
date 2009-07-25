@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
+import cliente.Mensagem;
+
 import util.JTextPaneI;
 import acao.FormConversaListener;
 import contatos.Contatos;
@@ -233,6 +235,11 @@ public class FormConversa extends JFrame {
 
 	public void setIsItalic(Boolean isItalic) {
 		this.isItalic = isItalic;
+	}
+
+	public void recebeMensagem(Mensagem mensagem) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
