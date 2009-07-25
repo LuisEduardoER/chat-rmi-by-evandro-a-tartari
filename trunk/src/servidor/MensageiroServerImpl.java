@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cliente.Mensagem;
+
 import contatos.Contatos;
 /**
  * 
@@ -152,6 +154,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void enviarMensagem(Mensagem mensagem) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
