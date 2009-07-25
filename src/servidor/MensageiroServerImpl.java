@@ -158,8 +158,9 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
 	@Override
 	public void enviarMensagem(Mensagem mensagem) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		if(getClientes().get(mensagem.getContatoRecebe())!=null){
+			getClientes().get(mensagem.getContatoRecebe()).receberMensagem(mensagem);
+		}
 	}
 
 }
