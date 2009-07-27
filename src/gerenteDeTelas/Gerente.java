@@ -14,8 +14,6 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
-import sun.security.action.GetLongAction;
-
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
 import contatos.Contatos;
