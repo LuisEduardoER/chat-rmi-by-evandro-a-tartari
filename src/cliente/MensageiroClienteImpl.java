@@ -93,7 +93,6 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 		servidor.enviarMensagem(mensagem);
 	}
 
-	@Override
 	public void receberMensagem(Mensagem mensagem) throws RemoteException {
 		gerente.recebeMensagem(mensagem);
 		
