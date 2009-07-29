@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import util.RedimencionaImagemIcon;
-
 import contatos.Contatos;
 /**
  * 
@@ -27,7 +25,7 @@ public class ContatosRender extends JLabel implements ListCellRenderer {
             int index, boolean isSelected, boolean cellHasFocus) {
         Contatos contatos = (Contatos) value;
         setText(contatos.getNome());
-        setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos.getUrlImage(), 60, 60, 1000));
+        setIcon(contatos.getImage());
         return this;
     }
 
