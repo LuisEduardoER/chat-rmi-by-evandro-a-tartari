@@ -58,8 +58,9 @@ public class TrayManager {
         return popup;
     }
 
-    public void criaMenu(String texto) {
+    public void criaMenu(String texto, boolean enable) {
         MenuItem defaultItem = new MenuItem(texto);
+        defaultItem.setEnabled(enable);
         defaultItem.addActionListener(getListener(trayIcon));
         getPopupMenu().add(defaultItem);
     }
@@ -94,6 +95,7 @@ public class TrayManager {
     
     public void inabilitaMenuRun(){
         popup.getItem(3).setEnabled(false);
+        popup.getItem(2).setEnabled(true);
     }
 
     public void habilitaMenuRun() {

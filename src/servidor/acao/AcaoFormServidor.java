@@ -45,6 +45,9 @@ public class AcaoFormServidor implements ActionListener, KeyListener,
                     servidor.getBtnInicializar().setEnabled(false);
                     servidor.refreshIcon("imagens/serverRunning.png");
                     servidor.setServico(servico);
+                    if(servidor.getManager()!=null){
+                        servidor.inabilitarMenuRun();
+                    }
                 } catch (Exception e) {
                     servidor.getLblResposta()
                             .setText("Erro Iniciando Servidor");
