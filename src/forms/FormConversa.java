@@ -228,7 +228,6 @@ public class FormConversa extends JFrame {
 	}
 
 	public void recebeMensagem(Mensagem mensagem) {
-		// TODO Auto-generated method stub
 		
 	}
 
