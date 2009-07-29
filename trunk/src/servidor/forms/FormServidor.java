@@ -170,7 +170,6 @@ public class FormServidor extends JFrame {
     public void parar() {
         try {
             servico.parar();
-            servico = null;
             getLblResposta().setText("Server stoped");
             btnInicializar.setEnabled(true);
         } catch (Exception e) {
@@ -207,6 +206,7 @@ public class FormServidor extends JFrame {
                servico = (IMensageiroServer) new MensageiroServerImpl(8080);
                servico.inicializar(8080);
                btnInicializar.setEnabled(false);
+               txtPortaServidor.setEditable(false);
                lblResposta.setText("Server is running : " + 8080);
                manager.inabilitaMenuRun();
             }else if(servico==null && !txtPortaServidor.getText().equals("")){
@@ -214,8 +214,26 @@ public class FormServidor extends JFrame {
                 servico = (IMensageiroServer) new MensageiroServerImpl(porta);
                 servico.inicializar(porta);
                 btnInicializar.setEnabled(false);
+                txtPortaServidor.setEditable(false);
                 lblResposta.setText("Server is running : " + porta.toString());
                 manager.inabilitaMenuRun();
+            }else{
+                if(txtPortaServidor.getText().equals("")){
+                    servico.clean();
+                    servico.inicializar(8080);
+                    txtPortaServidor.setEditable(false);
+                    btnInicializar.setEnabled(false);
+                    lblResposta.setText("Server is running : " + 8080);
+                    manager.inabilitaMenuRun();
+                }else{
+                    Integer porta = Integer.parseInt(txtPortaServidor.getText());
+                    servico.clean();
+                    servico.inicializar(porta);
+                    txtPortaServidor.setEditable(false);
+                    btnInicializar.setEnabled(false);
+                    lblResposta.setText("Server is running : " + porta.toString());
+                    manager.inabilitaMenuRun();
+                }
             }
         } catch (Exception e) {
             lblResposta.setText(e.getMessage());
