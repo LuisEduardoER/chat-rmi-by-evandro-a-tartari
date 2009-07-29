@@ -90,7 +90,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
             ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url, 100, 120, 1000);
             connect.setUrlImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
-            connect.setImagemContatos(icon);
+            connect.setImagemContatos(RedimencionaImagemIcon.redimencionaImagem(url, 60, 60, 1000));
             connect.getButtonFileChooser().setBorderPainted(false);
             connect.getButtonFileChooser().setBackground(
                     connect.getBackground());
