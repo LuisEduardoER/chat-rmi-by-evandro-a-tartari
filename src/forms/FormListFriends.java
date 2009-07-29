@@ -236,10 +236,11 @@ public class FormListFriends extends JFrame {
 	/**
 	 * remove Contato da listaContatos
 	 * 
-	 * @param obj
+	 * @param contato
 	 */
-	public void removeContato(Contatos obj) {
-		modelContatos.removeElement(obj);
+	public void removeContato(Contatos contato) {
+		modelContatos.removeElement(contato);
+		gerente.verificaInstanciaConversa(contato);
 	}
 
 	/**
