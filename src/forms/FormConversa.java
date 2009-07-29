@@ -47,11 +47,12 @@ public class FormConversa extends JFrame {
     private Font font;
     private Boolean isBold = false;
     private Boolean isItalic = false;
+    private String nomeConversa;
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
         this.cliente = cliente;
-        
+
         listener = new FormConversaListener(this, this.gerente);
     }
 
@@ -91,15 +92,15 @@ public class FormConversa extends JFrame {
      * configuracao do JFrame
      */
     public void config() {
-        try{
-        setSize(480, 390);
-        setIconImage(getIcon());
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setContentPane(new Container());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(NORMAL);
-        }catch (Exception e) {
+        try {
+            setSize(480, 390);
+            setIconImage(getIcon());
+            setLocationRelativeTo(null);
+            setResizable(false);
+            setContentPane(new Container());
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setExtendedState(NORMAL);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -240,15 +241,49 @@ public class FormConversa extends JFrame {
                     mensagem.getUsuarioEnvia())) {
                 txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
                         Color.BLUE);
-                txtReceptorMensagem.append(mensagem.getMensagem()+"\n", Color.RED);
+                txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
+                        Color.RED);
             } else {
                 txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
                         Color.RED);
-                txtReceptorMensagem.append(mensagem.getMensagem()+"\n", Color.BLUE);
+                txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
+                        Color.BLUE);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setNomeConversa(String nomeConversa) {
+        this.nomeConversa = nomeConversa;
+    }
+
+    public String getNomeConversa() {
+        return nomeConversa;
+    }
+
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((nomeConversa == null) ? 0 : nomeConversa.hashCode());
+        return result;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        FormConversa other = (FormConversa) obj;
+        if (nomeConversa == null) {
+            if (other.nomeConversa != null)
+                return false;
+        } else if (!nomeConversa.equals(other.nomeConversa))
+            return false;
+        return true;
     }
 
 }
