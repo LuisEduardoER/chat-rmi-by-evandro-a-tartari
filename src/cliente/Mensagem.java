@@ -16,10 +16,12 @@ public class Mensagem implements Serializable {
 	private Boolean isBold;
 	private Boolean isItalic;
 	private String contatoRecebe;
+	private String nomeEnvia;
 
-	public Mensagem(String usuarioEnvia, String mensagem, Font font,
+	public Mensagem(String usuarioEnvia, String nomeEnvia, String mensagem, Font font,
 			Boolean isBold, Boolean isItalic, String contatoRecebe) {
 		this.setUsuarioEnvia(usuarioEnvia);
+		this.setNomeEnvia(nomeEnvia);
 		this.setMensagem(mensagem);
 		this.setFont(font);
 		this.setIsBold(isBold);
@@ -74,5 +76,13 @@ public class Mensagem implements Serializable {
 	public Font getFont() {
 		return font;
 	}
+
+    public void setNomeEnvia(String nomeEnvia) {
+        this.nomeEnvia = nomeEnvia;
+    }
+
+    public String getNomeEnvia() {
+        return nomeEnvia;
+    }
 
 }
