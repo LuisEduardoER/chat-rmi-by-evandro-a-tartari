@@ -236,7 +236,7 @@ public class Gerente {
 			getListaConversa().get(name2).recebeMensagem(mensagem);
 		} else {
 			Contatos contato = new Contatos();
-			contato.setLogin(mensagem.getContatoRecebe());
+			contato.setLogin(mensagem.getUsuarioEnvia());
 			int posicao = getFormListFriends().getContatos().indexOf(contato);
 			if (posicao != -1) {
 				contato = (Contatos) getFormListFriends().getContatos().get(
