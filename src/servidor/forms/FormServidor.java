@@ -170,6 +170,7 @@ public class FormServidor extends JFrame {
     public void parar() {
         try {
             servico.parar();
+            servico = null;
             getLblResposta().setText("Server stoped");
             btnInicializar.setEnabled(true);
         } catch (Exception e) {
