@@ -225,7 +225,7 @@ public class Gerente {
     }
 
     public void recebeMensagem(Mensagem mensagem) {
-        String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
+        String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
         if (getListaConversa().get(name) != null) {
             getListaConversa().get(name).recebeMensagem(mensagem);
         } else {
@@ -246,22 +246,20 @@ public class Gerente {
     }
 
     private void iniciaConversa(Contatos contato, Mensagem mensagem) {
-        String name;
         try {
-            name = cliente.getContatos().getLogin() + contato.getLogin();
+            String name = cliente.getContatos().getLogin() + contato.getLogin();
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
-                conversa.setNomeConversa(cliente.getContatos().getLogin()
-                        + contato.getLogin());
+                conversa.setNomeConversa(name);
                 conversa.config();
                 conversa.inicializar(contato, cliente.getContatos());
                 conversa.setContato(contato);
                 conversa.recebeMensagem(mensagem);
                 conversa.renderiza();
-                listaConversa.put(conversa.getNomeConversa(), conversa);
+                listaConversa.put(name, conversa);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
