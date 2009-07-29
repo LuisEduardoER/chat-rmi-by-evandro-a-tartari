@@ -226,8 +226,11 @@ public class Gerente {
 
     public void recebeMensagem(Mensagem mensagem) {
         String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        String name2 = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
         if (getListaConversa().get(name) != null) {
             getListaConversa().get(name).recebeMensagem(mensagem);
+        } else if(getListaConversa().get(name2)!=null){
+            getListaConversa().get(name2).recebeMensagem(mensagem);
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
