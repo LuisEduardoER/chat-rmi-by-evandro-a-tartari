@@ -63,8 +63,12 @@ public class SysTrayImpls implements MouseListener, ActionListener {
             ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverNotRunning.png"));
             trayIcon.setImage(icon.getImage());
             servidor.parar();
+            servidor.habilitaMenuRun();
         }else if(e.getActionCommand().equals("Run")){
             servidor.clean();
+            servidor.inabilitarMenuRun();
+            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverRunning.png"));
+            trayIcon.setImage(icon.getImage());
         }
     }
 

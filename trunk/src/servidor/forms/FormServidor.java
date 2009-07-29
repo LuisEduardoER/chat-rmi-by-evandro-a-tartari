@@ -22,10 +22,11 @@ import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 import servidor.acao.AcaoFormServidor;
 import servidor.trayicon.TrayManager;
 import util.NumeroMaximoCaracteres;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class FormServidor extends JFrame {
 
@@ -126,27 +127,27 @@ public class FormServidor extends JFrame {
     }
 
     public void createTrayIcon() {
-        if(manager==null){
+        if (manager == null) {
             manager = new TrayManager(this);
             manager.createTrayIcon("Mensageiro Server is Running", getIcon());
-            manager.criaMenu("Exit");
-            manager.criaMenu("Abrir");
-            manager.criaMenu("Stop");
-            manager.criaMenu("Run");
+            manager.criaMenu("Exit", true);
+            manager.criaMenu("Abrir", true);
+            manager.criaMenu("Stop", false);
+            manager.criaMenu("Run", false);
             manager.adicionaEvento();
             manager.addTrayIcon();
-        }else{
+        } else {
             manager.refresh(icon.getImage(), mensagem);
         }
     }
-    
-    public void refreshIcon(String urlImagem){
-        if(manager!=null)
-            manager=null;
+
+    public void refreshIcon(String urlImagem) {
+        if (manager != null)
+            manager = null;
         this.urlImagem = urlImagem;
-        if(urlImagem.equals("imagens/serverRunning.png")){
+        if (urlImagem.equals("imagens/serverRunning.png")) {
             mensagem = "Server is Running";
-        }else if(urlImagem.equals("imagens/serverNotRunning.png")){
+        } else if (urlImagem.equals("imagens/serverNotRunning.png")) {
             mensagem = "Server not is Running";
         }
         ClassLoader clazz = this.getClass().getClassLoader();
@@ -177,30 +178,37 @@ public class FormServidor extends JFrame {
     public void setServico(IMensageiroServer servico) {
         this.servico = servico;
     }
-    public void setLookAndFeel(){
-        try{
-            UIManager.setLookAndFeel((LookAndFeel)new SubstanceDefaultLookAndFeel());
-        }catch (Exception e) {
+
+    public void setLookAndFeel() {
+        try {
+            UIManager
+                    .setLookAndFeel((LookAndFeel) new SubstanceDefaultLookAndFeel());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void clean() {
-        try{
+        try {
             servico.clean();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
     public void inabilitarMenuRun() {
         manager.inabilitaMenuRun();
     }
-    
-    public void habilitaMenuRun(){
-        manager.habilitaMenuRun();
+
+    public void habilitaMenuRun() {
+        try {
+            Integer porta = Integer.parseInt(getTxtPortaServidor().getText());
+            servico.inicializar(porta);
+            manager.habilitaMenuRun();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-        
 }
