@@ -3,6 +3,7 @@ package forms;
 import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -30,206 +31,219 @@ import contatos.Contatos;
  */
 public class FormConversa extends JFrame {
 
-	/**
+    /**
      * 
      */
-	private static final long serialVersionUID = 6449977848107919009L;
-	private JTextPaneI txtReceptorMensagem;
-	private JTextPane txtDescritorMensagem;
-	private JScrollPane scrollPaneDescritor;
-	private JScrollPane scroolPanelReceptor;
-	private JButton btnEnviarMensagem;
-	private FormConversaListener listener;
-	private IMensageiroCliente cliente;
-	private Contatos contato;
-	private Gerente gerente;
-	private Font font;
-	private Boolean isBold = false;
-	private Boolean isItalic = false;
+    private static final long serialVersionUID = 6449977848107919009L;
+    private JTextPaneI txtReceptorMensagem;
+    private JTextPane txtDescritorMensagem;
+    private JScrollPane scrollPaneDescritor;
+    private JScrollPane scroolPanelReceptor;
+    private JButton btnEnviarMensagem;
+    private FormConversaListener listener;
+    private IMensageiroCliente cliente;
+    private Contatos contato;
+    private Gerente gerente;
+    private Font font;
+    private Boolean isBold = false;
+    private Boolean isItalic = false;
 
-	public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
-		this.gerente = gerente;
-		this.cliente = cliente;
-		listener = new FormConversaListener(this, this.gerente);
-	}
+    public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
+        this.gerente = gerente;
+        this.cliente = cliente;
+        listener = new FormConversaListener(this, this.gerente);
+    }
 
-	/**
-	 * Inicializa o componente
-	 */
-	public void inicializar(Contatos contato, Contatos usuario) {
-		try {
-			txtReceptorMensagem = newJTextAreaA();
-			txtReceptorMensagem.setEditable(false);
-			txtDescritorMensagem = newJTextPane();
-			setFont(txtDescritorMensagem.getFont());
-			txtDescritorMensagem.addKeyListener(listener);
-			scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
-			scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
-			btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
-					"imagens/btnEnviarpressionado.png");
-			adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
-			adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-			adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
-					100, 120);
-			adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
-					100, 80);
-			adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Inicializa o componente
+     */
+    public void inicializar(Contatos contato, Contatos usuario) {
+        try {
+            txtReceptorMensagem = newJTextAreaA();
+            txtReceptorMensagem.setEditable(false);
+            txtDescritorMensagem = newJTextPane();
+            setFont(txtDescritorMensagem.getFont());
+            txtDescritorMensagem.addKeyListener(listener);
+            scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
+            scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
+            btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
+                    "imagens/btnEnviarpressionado.png");
+            adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
+            adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
+            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
+                    100, 120);
+            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
+                    100, 80);
+            adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	private JTextPaneI newJTextAreaA() {
-		JTextPaneI area = new JTextPaneI();
-		return area;
-	}
+    private JTextPaneI newJTextAreaA() {
+        JTextPaneI area = new JTextPaneI();
+        return area;
+    }
 
-	/**
-	 * configuracao do JFrame
-	 */
-	public void config() {
-		setTitle("Titulo a colocar");
-		setSize(480, 390);
-		setIconImage(getIcon());
-		setLocationRelativeTo(null);
-		setResizable(false);
-		setContentPane(new Container());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(NORMAL);
-	}
+    /**
+     * configuracao do JFrame
+     */
+    public void config() {
+        setTitle("Titulo a colocar");
+        setSize(480, 390);
+        setIconImage(getIcon());
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setContentPane(new Container());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(NORMAL);
+    }
 
-	/**
-	 * renderizar componentes da tela
-	 */
-	public void renderiza() {
-		setVisible(true);
-	}
+    /**
+     * renderizar componentes da tela
+     */
+    public void renderiza() {
+        setVisible(true);
+    }
 
-	/**
-	 * Adiciona Componentes na Tela
-	 * 
-	 * @param c
-	 * @param x
-	 * @param y
-	 * @param size
-	 * @param alt
-	 */
-	public void adicionaTela(JComponent c, int x, int y, int size, int alt) {
-		c.setBounds(x, y, size, alt);
-		getContentPane().add(c);
-	}
+    /**
+     * Adiciona Componentes na Tela
+     * 
+     * @param c
+     * @param x
+     * @param y
+     * @param size
+     * @param alt
+     */
+    public void adicionaTela(JComponent c, int x, int y, int size, int alt) {
+        c.setBounds(x, y, size, alt);
+        getContentPane().add(c);
+    }
 
-	private JTextPane newJTextPane() {
-		return new JTextPane();
-	}
+    private JTextPane newJTextPane() {
+        return new JTextPane();
+    }
 
-	private JScrollPane newJScrollPane(JComponent c) {
-		JScrollPane painel = new JScrollPane(c);
-		painel
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		painel
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		return painel;
-	}
+    private JScrollPane newJScrollPane(JComponent c) {
+        JScrollPane painel = new JScrollPane(c);
+        painel
+                .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        painel
+                .setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        return painel;
+    }
 
-	/**
-	 * Instancia um JButton
-	 * 
-	 * @param text
-	 * @return
-	 */
-	private JButton newJButton(String urlImagem, String urlImagem2) {
-		ClassLoader clazz = this.getClass().getClassLoader();
-		URL res = clazz.getResource(urlImagem);
-		ImageIcon icone = new ImageIcon(res);
-		JButton button = new JButton();
-		button.setBorderPainted(false);
-		button.setSize(new Dimension(100, 50));
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setIcon(icone);
-		URL res2 = clazz.getResource(urlImagem2);
-		button.setPressedIcon(new ImageIcon(res2));
-		button.setActionCommand("enviar");
-		button.addActionListener(listener);
-		return button;
-	}
+    /**
+     * Instancia um JButton
+     * 
+     * @param text
+     * @return
+     */
+    private JButton newJButton(String urlImagem, String urlImagem2) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        ImageIcon icone = new ImageIcon(res);
+        JButton button = new JButton();
+        button.setBorderPainted(false);
+        button.setSize(new Dimension(100, 50));
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setIcon(icone);
+        URL res2 = clazz.getResource(urlImagem2);
+        button.setPressedIcon(new ImageIcon(res2));
+        button.setActionCommand("enviar");
+        button.addActionListener(listener);
+        return button;
+    }
 
-	private JButton getImagemIcon(ImageIcon imagem, int width, int heigth) {
-		ImageIcon icon = imagem;
-		JButton button = new JButton();
-		Border border = BorderFactory.createCompoundBorder();
-		button.setBorder(border);
-		button.setBorderPainted(false);
-		button.setContentAreaFilled(false);
-		button.setFocusPainted(false);
-		button.setMaximumSize(new Dimension(width, heigth));
-		button.setIcon(icon);
-		return button;
-	}
+    private JButton getImagemIcon(ImageIcon imagem, int width, int heigth) {
+        ImageIcon icon = imagem;
+        JButton button = new JButton();
+        Border border = BorderFactory.createCompoundBorder();
+        button.setBorder(border);
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setMaximumSize(new Dimension(width, heigth));
+        button.setIcon(icon);
+        return button;
+    }
 
-	/**
-	 * Cria Uma imagemIcon
-	 * 
-	 * @return
-	 */
-	private Image getIcon() {
-		ClassLoader clazz = this.getClass().getClassLoader();
-		URL res = clazz.getResource("imagens/serverRunning.png");
-		ImageIcon icon = new ImageIcon(res);
-		return icon.getImage();
-	}
+    /**
+     * Cria Uma imagemIcon
+     * 
+     * @return
+     */
+    private Image getIcon() {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/serverRunning.png");
+        ImageIcon icon = new ImageIcon(res);
+        return icon.getImage();
+    }
 
-	public JTextPane getTxtDescritorMensagens() {
-		return txtDescritorMensagem;
-	}
+    public JTextPane getTxtDescritorMensagens() {
+        return txtDescritorMensagem;
+    }
 
-	public JTextPaneI getTxtReceptorMensagens() {
-		return txtReceptorMensagem;
-	}
+    public JTextPaneI getTxtReceptorMensagens() {
+        return txtReceptorMensagem;
+    }
 
-	public void setCliente(IMensageiroCliente cliente) {
-		this.cliente = cliente;
-	}
+    public void setCliente(IMensageiroCliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public IMensageiroCliente getCliente() {
-		return this.cliente;
-	}
+    public IMensageiroCliente getCliente() {
+        return this.cliente;
+    }
 
-	public void setContato(Contatos contato) {
-		this.contato = contato;
-	}
+    public void setContato(Contatos contato) {
+        this.contato = contato;
+    }
 
-	public Contatos getContato() {
-		return contato;
-	}
+    public Contatos getContato() {
+        return contato;
+    }
 
-	public Boolean getIsBold() {
-		return isBold;
-	}
+    public Boolean getIsBold() {
+        return isBold;
+    }
 
-	public Boolean getIsItalic() {
-		return isItalic;
-	}
+    public Boolean getIsItalic() {
+        return isItalic;
+    }
 
-	public void setFont(Font font) {
-		this.font = font;
-	}
+    public void setFont(Font font) {
+        this.font = font;
+    }
 
-	public Font getFont() {
-		return font;
-	}
+    public Font getFont() {
+        return font;
+    }
 
-	public void setIsBold(Boolean isBold) {
-		this.isBold = isBold;
-	}
+    public void setIsBold(Boolean isBold) {
+        this.isBold = isBold;
+    }
 
-	public void setIsItalic(Boolean isItalic) {
-		this.isItalic = isItalic;
-	}
+    public void setIsItalic(Boolean isItalic) {
+        this.isItalic = isItalic;
+    }
 
-	public void recebeMensagem(Mensagem mensagem) {
-		
-	}
+    public void recebeMensagem(Mensagem mensagem) {
+        try {
+            if (this.cliente.getContatos().getLogin().equals(
+                    mensagem.getUsuarioEnvia())) {
+                txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
+                        Color.BLUE);
+                txtReceptorMensagem.append(mensagem.getMensagem()+"\n", Color.RED);
+            } else {
+                txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
+                        Color.RED);
+                txtReceptorMensagem.append(mensagem.getMensagem()+"\n", Color.BLUE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
