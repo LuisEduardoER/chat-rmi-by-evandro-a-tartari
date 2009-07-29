@@ -198,8 +198,7 @@ public class Gerente {
 			conversa.setName(cliente.getContatos().getNome()
 					+ contato.getNome());
 			conversa.config();
-			conversa.inicializar(cliente.getContatos().getUrlImage(), contato
-					.getUrlImage());
+			conversa.inicializar(cliente.getContatos(), contato);
 			conversa.setContato(contato);
 			conversa.renderiza();
 			listaConversa.put(name, conversa);
