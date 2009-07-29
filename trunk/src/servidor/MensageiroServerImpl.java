@@ -142,7 +142,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 			getClientes().remove(mensageiro.getContatos().getLogin());
 			getContatos().remove(mensageiro.getContatos());
 			for (Contatos contato : getContatos()) {
-				getClientes().get(contato.getLogin()).removeContato(contato);
+				getClientes().get(contato.getLogin()).removeContato(mensageiro.getContatos());
 			}
 		}
 		System.out.println("Saida: " + mensageiro.getContatos().getLogin());
