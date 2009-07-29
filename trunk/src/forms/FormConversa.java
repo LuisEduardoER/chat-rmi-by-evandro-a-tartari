@@ -18,10 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
-import cliente.Mensagem;
-
 import util.JTextPaneI;
 import acao.FormConversaListener;
+import cliente.Mensagem;
 import contatos.Contatos;
 
 /**
@@ -56,7 +55,7 @@ public class FormConversa extends JFrame {
 	/**
 	 * Inicializa o componente
 	 */
-	public void inicializar(String urlImagemContato, String urlImagemUsuario) {
+	public void inicializar(Contatos contato, Contatos usuario) {
 		try {
 			txtReceptorMensagem = newJTextAreaA();
 			txtReceptorMensagem.setEditable(false);
@@ -69,9 +68,9 @@ public class FormConversa extends JFrame {
 					"imagens/btnEnviarpressionado.png");
 			adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
 			adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-			adicionaTela(getImagemIcon(urlImagemContato, 100, 120), 360, 5,
+			adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
 					100, 120);
-			adicionaTela(getImagemIcon(urlImagemUsuario, 100, 80), 360, 230,
+			adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
 					100, 80);
 			adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
 		} catch (Exception e) {
@@ -155,10 +154,8 @@ public class FormConversa extends JFrame {
 		return button;
 	}
 
-	private JButton getImagemIcon(String urlImagem, int width, int heigth) {
-		ClassLoader clazz = this.getClass().getClassLoader();
-		URL res = clazz.getResource(urlImagem);
-		ImageIcon icon = new ImageIcon(res);
+	private JButton getImagemIcon(ImageIcon imagem, int width, int heigth) {
+		ImageIcon icon = imagem;
 		JButton button = new JButton();
 		Border border = BorderFactory.createCompoundBorder();
 		button.setBorder(border);
@@ -196,13 +193,6 @@ public class FormConversa extends JFrame {
 
 	public IMensageiroCliente getCliente() {
 		return this.cliente;
-	}
-
-	public static void main(String[] args) {
-		FormConversa conversa = new FormConversa(new Gerente());
-		conversa.config();
-		conversa.inicializar("", "");
-		conversa.renderiza();
 	}
 
 	public void setContato(Contatos contato) {
