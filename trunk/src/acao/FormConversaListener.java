@@ -83,7 +83,7 @@ public class FormConversaListener implements ActionListener, KeyListener {
 	private Mensagem getMensagem(String text) {
 		try {
 			Mensagem m = new Mensagem(conversa.getCliente().getContatos().getLogin(),
-					text, conversa.getFont(), conversa.getIsBold(),
+			        conversa.getCliente().getContatos().getNome(),text, conversa.getFont(), conversa.getIsBold(),
 					conversa.getIsItalic(), conversa.getContato().getLogin());
 			return m;
 		} catch (RemoteException e) {
