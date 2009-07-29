@@ -292,4 +292,9 @@ public class Gerente {
         this.listaConversa = listaConversa;
     }
 
+    public void fechouConversa(FormConversa conversa) {
+        getListaConversa().remove(conversa.getNomeConversa());
+        
+    }
+
 }
