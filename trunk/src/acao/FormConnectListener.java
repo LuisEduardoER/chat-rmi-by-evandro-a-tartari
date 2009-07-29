@@ -117,6 +117,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
             chooser.addActionListener(this);
             chooser.setFileFilter(getFilter());
             chooser.setAccessory(view);
+            chooser.setAcceptAllFileFilterUsed(false);
         } else {
             frame.setExtendedState(JFrame.NORMAL);
             frame.setVisible(true);
