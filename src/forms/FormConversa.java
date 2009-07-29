@@ -244,7 +244,7 @@ public class FormConversa extends JFrame {
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
                         Color.BLUE);
             } else {
-                txtReceptorMensagem.append(mensagem.getUsuarioEnvia()+": ",
+                txtReceptorMensagem.append(mensagem.getNomeEnvia()+": ",
                         Color.RED);
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
                         Color.RED);
