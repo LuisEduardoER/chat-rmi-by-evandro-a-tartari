@@ -252,7 +252,10 @@ public class Gerente {
 	}
 
 	public Map<String, FormConversa> getListaConversa() {
-		return listaConversa;
+		if(listaConversa==null){
+		    listaConversa = new HashMap<String, FormConversa>();
+		}
+	    return listaConversa;
 	}
 
 	public void setListaConversa(Map<String, FormConversa> listaConversa) {
