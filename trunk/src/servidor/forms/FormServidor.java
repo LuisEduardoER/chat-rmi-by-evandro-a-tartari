@@ -185,5 +185,14 @@ public class FormServidor extends JFrame {
         }
     }
 
+    public void clean() {
+        try{
+            servico.clean();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
         
 }
