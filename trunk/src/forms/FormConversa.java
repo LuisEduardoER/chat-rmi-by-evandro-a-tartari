@@ -51,6 +51,7 @@ public class FormConversa extends JFrame {
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
         this.cliente = cliente;
+        
         listener = new FormConversaListener(this, this.gerente);
     }
 
@@ -59,6 +60,7 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
+            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
@@ -90,7 +92,6 @@ public class FormConversa extends JFrame {
      */
     public void config() {
         try{
-        setTitle(cliente.getContatos().getLogin());
         setSize(480, 390);
         setIconImage(getIcon());
         setLocationRelativeTo(null);
