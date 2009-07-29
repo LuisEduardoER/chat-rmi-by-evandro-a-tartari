@@ -240,7 +240,6 @@ public class FormListFriends extends JFrame {
 	 */
 	public void removeContato(Contatos obj) {
 		modelContatos.removeElement(obj);
-		listaContatos.setModel(modelContatos);
 	}
 
 	/**
