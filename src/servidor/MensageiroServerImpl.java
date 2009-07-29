@@ -163,4 +163,9 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 		}
 	}
 
+    public void clean() throws RemoteException {
+        getClientes().clear();
+        getContatos().clear();
+    }
+
 }

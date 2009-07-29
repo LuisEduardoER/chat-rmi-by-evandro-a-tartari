@@ -54,7 +54,7 @@ public class AcaoFormServidor implements ActionListener, KeyListener,
         } else if (evento.getActionCommand().equals("Fechar")) {
             servidor.dispose();
             System.exit(0);
-        }
+        } 
     }
 
     /**

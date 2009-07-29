@@ -30,6 +30,7 @@ import acao.FormListFriendsListener;
 import java.awt.Toolkit;
 import contatos.Contatos;
 import contatos.render.ContatosRender;
+import contatos.render.UsuarioRender;
 /**
  * 
  * @author evandro.tartari
@@ -96,7 +97,9 @@ public class FormListFriends extends JFrame {
 		modelContatos = newDefaultListModel();
 		listaUsuario = newJList(modelUsuario);
 		listaUsuario.setEnabled(false);
+		listaUsuario.setCellRenderer(new UsuarioRender());
 		listaContatos = newJList(modelContatos);
+		listaContatos.setCellRenderer(new ContatosRender());
 		painelContatos.setViewportView(listaContatos);
 		adiciona(new JComponent[] { listaUsuario, painelContatos });
 	}
@@ -141,7 +144,6 @@ public class FormListFriends extends JFrame {
 	 */
 	private JList newJList(DefaultListModel model) {
 		JList lista = new JList(model);
-		lista.setCellRenderer(new ContatosRender());
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		return lista;
 	}
