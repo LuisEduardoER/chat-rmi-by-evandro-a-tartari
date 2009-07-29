@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 import cliente.Mensagem;
-
 import contatos.Contatos;
 /**
  * 
@@ -159,6 +158,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 	public void enviarMensagem(Mensagem mensagem) throws RemoteException {
 		if(getClientes().get(mensagem.getContatoRecebe())!=null){
 			getClientes().get(mensagem.getContatoRecebe()).receberMensagem(mensagem);
+			getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(mensagem);
 		}
 	}
 
