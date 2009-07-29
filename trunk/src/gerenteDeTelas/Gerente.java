@@ -187,17 +187,13 @@ public class Gerente {
 
     public void controladorConversa(Contatos contato) throws Exception {
         String name = cliente.getContatos().getLogin() + contato.getLogin();
-        String name2 = contato.getLogin() + cliente.getContatos().getLogin();
         if (listaConversa.get(name) != null) {
             FormConversa conversa = listaConversa.get(name);
             conversa.setExtendedState(JFrame.NORMAL);
-        } else if (listaConversa.get(name2) != null) {
-            FormConversa conversa = listaConversa.get(name2);
-            conversa.setExtendedState(JFrame.NORMAL);
         } else {
             FormConversa conversa = new FormConversa(this, cliente);
-            conversa.setNomeConversa(cliente.getContatos().getNome()
-                    + contato.getNome());
+            conversa.setNomeConversa(cliente.getContatos().getLogin()
+                    + contato.getLogin());
             conversa.config();
             conversa.inicializar(contato, cliente.getContatos());
             conversa.setContato(contato);
@@ -230,11 +226,8 @@ public class Gerente {
 
     public void recebeMensagem(Mensagem mensagem) {
         String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
-        String name2 = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
         if (getListaConversa().get(name) != null) {
             getListaConversa().get(name).recebeMensagem(mensagem);
-        } else if (getListaConversa().get(name2) != null) {
-            getListaConversa().get(name2).recebeMensagem(mensagem);
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
@@ -256,18 +249,13 @@ public class Gerente {
         String name;
         try {
             name = cliente.getContatos().getLogin() + contato.getLogin();
-            String name2 = contato.getLogin()
-                    + cliente.getContatos().getLogin();
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
-            } else if (listaConversa.get(name2) != null) {
-                FormConversa conversa = listaConversa.get(name2);
-                conversa.setExtendedState(JFrame.ICONIFIED);
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
-                conversa.setNomeConversa(cliente.getContatos().getNome()
-                        + contato.getNome());
+                conversa.setNomeConversa(cliente.getContatos().getLogin()
+                        + contato.getLogin());
                 conversa.config();
                 conversa.inicializar(contato, cliente.getContatos());
                 conversa.setContato(contato);
