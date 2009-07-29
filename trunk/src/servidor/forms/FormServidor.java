@@ -19,6 +19,7 @@ import javax.swing.UIManager;
 
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
+import servidor.MensageiroServerImpl;
 import servidor.acao.AcaoFormServidor;
 import servidor.trayicon.TrayManager;
 import util.NumeroMaximoCaracteres;
@@ -46,7 +47,8 @@ public class FormServidor extends JFrame {
     private String urlImagem = "imagens/serverNotRunning.png";
     private ImageIcon icon;
     private String mensagem = "Server not Running";
-    private Boolean activeStop=false;
+    private Boolean activeStop = false;
+    private Boolean activeRun = true;
     private TrayManager manager;
 
     public void inicializar() {
@@ -133,8 +135,8 @@ public class FormServidor extends JFrame {
             manager.createTrayIcon("Mensageiro Server is Running", getIcon());
             manager.criaMenu("Exit", true);
             manager.criaMenu("Abrir", true);
-            manager.criaMenu("Stop", activeStop);
-            manager.criaMenu("Run", false);
+            manager.criaMenu("Stop", getActiveStop());
+            manager.criaMenu("Run", getActiveRun());
             manager.adicionaEvento();
             manager.addTrayIcon();
         } else {
@@ -199,17 +201,29 @@ public class FormServidor extends JFrame {
     }
 
     public void inabilitarMenuRun() {
-        manager.inabilitaMenuRun();
+        try {
+            if(servico==null&&txtPortaServidor.getText().equals("")){
+               servico = (IMensageiroServer) new MensageiroServerImpl(8080);
+               servico.inicializar(8080);
+               btnInicializar.setEnabled(false);
+               lblResposta.setText("Server is running : " + 8080);
+               manager.inabilitaMenuRun();
+            }else if(servico==null && !txtPortaServidor.getText().equals("")){
+                Integer porta = Integer.parseInt(txtPortaServidor.getText());
+                servico = (IMensageiroServer) new MensageiroServerImpl(porta);
+                servico.inicializar(porta);
+                btnInicializar.setEnabled(false);
+                lblResposta.setText("Server is running : " + porta.toString());
+                manager.inabilitaMenuRun();
+            }
+        } catch (Exception e) {
+            lblResposta.setText(e.getMessage());
+        }
     }
 
     public void habilitaMenuRun() {
-        try {
-            Integer porta = Integer.parseInt(getTxtPortaServidor().getText());
-            servico.inicializar(porta);
-            manager.habilitaMenuRun();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        manager.habilitaMenuRun();
+
     }
 
     public void setActiveStop(Boolean activeStop) {
@@ -218,6 +232,14 @@ public class FormServidor extends JFrame {
 
     public Boolean getActiveStop() {
         return activeStop;
+    }
+
+    public void setActiveRun(Boolean activeRun) {
+        this.activeRun = activeRun;
+    }
+
+    public Boolean getActiveRun() {
+        return activeRun;
     }
 
 }
