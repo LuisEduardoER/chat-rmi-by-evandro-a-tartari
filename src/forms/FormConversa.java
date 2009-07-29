@@ -100,6 +100,7 @@ public class FormConversa extends JFrame {
             setContentPane(new Container());
             setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             setExtendedState(NORMAL);
+            addWindowListener(listener);
         } catch (Exception e) {
             e.printStackTrace();
         }
