@@ -223,7 +223,8 @@ public class FormListFriends extends JFrame {
 	 * @param contato
 	 */
 	public void adicinalUsuario(Contatos contato) {
-		modelUsuario.addElement(contato);
+		modelUsuario.addElement(contato.getImage());
+		modelUsuario.addElement(contato.getNome());
 	}
 
 	/**
