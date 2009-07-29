@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class Contatos implements Serializable {
 
@@ -86,15 +87,6 @@ public class Contatos implements Serializable {
         return icon;
     }
 
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
-    }
-
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -102,9 +94,8 @@ public class Contatos implements Serializable {
         return result;
     }
 
-
     public boolean equals(Object obj) {
-        if(obj instanceof Contatos){
+        if (obj instanceof Contatos) {
             Contatos other = (Contatos) obj;
             return other.getLogin().equals(this.getLogin());
         }
