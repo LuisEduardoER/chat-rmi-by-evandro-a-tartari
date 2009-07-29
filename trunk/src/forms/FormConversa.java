@@ -239,15 +239,15 @@ public class FormConversa extends JFrame {
         try {
             if (this.cliente.getContatos().getLogin().equals(
                     mensagem.getUsuarioEnvia())) {
-                txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
+                txtReceptorMensagem.append(mensagem.getUsuarioEnvia()+": ",
                         Color.BLUE);
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
-                        Color.RED);
+                        Color.BLUE);
             } else {
-                txtReceptorMensagem.append(mensagem.getUsuarioEnvia(),
+                txtReceptorMensagem.append(mensagem.getUsuarioEnvia()+": ",
                         Color.RED);
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
-                        Color.BLUE);
+                        Color.RED);
             }
         } catch (Exception e) {
             e.printStackTrace();
