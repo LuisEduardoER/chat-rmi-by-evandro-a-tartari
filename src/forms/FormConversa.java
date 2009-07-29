@@ -89,7 +89,8 @@ public class FormConversa extends JFrame {
      * configuracao do JFrame
      */
     public void config() {
-        setTitle("Titulo a colocar");
+        try{
+        setTitle(cliente.getContatos().getLogin());
         setSize(480, 390);
         setIconImage(getIcon());
         setLocationRelativeTo(null);
@@ -97,6 +98,9 @@ public class FormConversa extends JFrame {
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(NORMAL);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
