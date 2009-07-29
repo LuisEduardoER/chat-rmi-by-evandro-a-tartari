@@ -92,8 +92,13 @@ public class TrayManager {
         }
     }
     
-    public void inabilitaMenu(){
+    public void inabilitaMenuRun(){
         popup.getItem(3).setEnabled(false);
+    }
+
+    public void habilitaMenuRun() {
+        popup.getItem(3).setEnabled(true);
+        
     }
     
 

@@ -195,8 +195,11 @@ public class FormServidor extends JFrame {
     }
 
     public void inabilitarMenuRun() {
-        
-        
+        manager.inabilitaMenuRun();
+    }
+    
+    public void habilitaMenuRun(){
+        manager.habilitaMenuRun();
     }
 
         
