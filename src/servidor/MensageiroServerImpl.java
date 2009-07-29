@@ -129,6 +129,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 			permissoes.add("venilton.junior");
 			permissoes.add("andre.freitas");
 			permissoes.add("andre.bacaglini");
+			permissoes.add("harry.pereira");
 
 		}
 		return permissoes;
