@@ -240,7 +240,7 @@ public class FormConversa extends JFrame {
         try {
             if (this.cliente.getContatos().getLogin().equals(
                     mensagem.getUsuarioEnvia())) {
-                txtReceptorMensagem.append(mensagem.getUsuarioEnvia()+": ",
+                txtReceptorMensagem.append(mensagem.getNomeEnvia()+": ",
                         Color.BLUE);
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
                         Color.BLUE);
