@@ -286,4 +286,19 @@ public class Gerente {
         
     }
 
+    public void verificaInstanciaConversa(Contatos contato) {
+        try{
+        String name = cliente.getContatos().getLogin() + contato.getLogin();
+        String name2 = contato.getLogin()+cliente.getContatos().getLogin();
+        if(getListaConversa().get(name)!=null){
+            getListaConversa().get(name).dispose();
+        }else if(getListaConversa().get(name2)!=null){
+            getListaConversa().get(name2).dispose();
+        }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
 }
