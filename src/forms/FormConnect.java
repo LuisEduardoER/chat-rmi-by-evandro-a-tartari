@@ -2,6 +2,7 @@ package forms;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,7 @@ public class FormConnect extends JFrame {
         setTitle("MsRamister");
         setResizable(false);
         setSize(250, 400);
+        setIconImage(getImage());
         setLocationRelativeTo(null);
         setContentPane(new Container());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -410,4 +412,13 @@ public class FormConnect extends JFrame {
 	public String getUrlImagem(){
 		return urlImagem;
 	}
+	
+	private Image getImage(){
+	    ClassLoader clazz = this.getClass().getClassLoader();
+	    URL res = clazz.getResource("imagens/serverRunning.png");
+	    ImageIcon iconImage = new ImageIcon(res);
+	    return iconImage.getImage();
+	}
+	
+	
 }
