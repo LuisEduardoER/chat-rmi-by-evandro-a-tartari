@@ -91,5 +91,10 @@ public class TrayManager {
             ex.printStackTrace();
         }
     }
+    
+    public void inabilitaMenu(){
+        popup.getItem(3).setEnabled(false);
+    }
+    
 
 }
