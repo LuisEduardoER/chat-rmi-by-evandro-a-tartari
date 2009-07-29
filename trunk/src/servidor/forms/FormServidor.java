@@ -132,6 +132,7 @@ public class FormServidor extends JFrame {
             manager.criaMenu("Exit");
             manager.criaMenu("Abrir");
             manager.criaMenu("Stop");
+            manager.criaMenu("Run");
             manager.adicionaEvento();
             manager.addTrayIcon();
         }else{
