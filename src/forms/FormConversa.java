@@ -47,8 +47,9 @@ public class FormConversa extends JFrame {
 	private Boolean isBold = false;
 	private Boolean isItalic = false;
 
-	public FormConversa(Gerente gerente) {
+	public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
 		this.gerente = gerente;
+		this.cliente = cliente;
 		listener = new FormConversaListener(this, this.gerente);
 	}
 

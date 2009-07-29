@@ -194,7 +194,7 @@ public class Gerente {
 			FormConversa conversa = listaConversa.get(name2);
 			conversa.renderiza();
 		} else {
-			FormConversa conversa = new FormConversa(this);
+			FormConversa conversa = new FormConversa(this, cliente);
 			conversa.setName(cliente.getContatos().getNome()
 					+ contato.getNome());
 			conversa.config();
@@ -262,4 +262,5 @@ public class Gerente {
 		this.listaConversa = listaConversa;
 	}
 
+	
 }
