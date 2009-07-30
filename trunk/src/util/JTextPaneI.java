@@ -1,12 +1,18 @@
 package util;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.text.*;
+import java.awt.Color;
+
+import javax.swing.JTextPane;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+
+import cliente.Mensagem;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class JTextPaneI extends JTextPane {
     /**
@@ -21,21 +27,29 @@ public class JTextPaneI extends JTextPane {
     }
 
     /** append text */
-    public void append(String string, Color color, Boolean isBold, Boolean isItalic) {
+    public void append(Mensagem mensagem, Boolean isContato) {
         try {
-            SimpleAttributeSet attr = new SimpleAttributeSet();
-            StyleConstants.setForeground(attr, color);
-            StyleConstants.setBold(attr, isBold);
-            StyleConstants.setItalic(attr, isItalic);
-            m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), string, attr);
+            if(isContato){
+                SimpleAttributeSet attr = new SimpleAttributeSet();
+                StyleConstants.setForeground(attr, Color.RED);
+                StyleConstants.setFontSize(attr, mensagem.getFontSize());
+                m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                        .getLength(), mensagem.getUsuarioEnvia(), attr);
+                attr = new SimpleAttributeSet();
+                StyleConstants.setFontFamily(attr, mensagem.getFontFamily());
+                StyleConstants.setForeground(attr, mensagem.getColor());
+                StyleConstants.setFontSize(attr, mensagem.getFontSize());
+                StyleConstants.setBold(attr, mensagem.getIsBold());
+                StyleConstants.setItalic(attr, mensagem.getIsItalic());
+                m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                        .getLength(), mensagem.getMensagem()+"\n", attr);
+            }else{
+                
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /** append text in default color */
-    protected void append(String string) {
-        append(string, Color.BLUE, false, false);
-    }
 }
