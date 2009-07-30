@@ -21,10 +21,12 @@ public class JTextPaneI extends JTextPane {
     }
 
     /** append text */
-    public void append(String string, Color color) {
+    public void append(String string, Color color, Boolean isBold, Boolean isItalic) {
         try {
             SimpleAttributeSet attr = new SimpleAttributeSet();
             StyleConstants.setForeground(attr, color);
+            StyleConstants.setBold(attr, isBold);
+            StyleConstants.setItalic(attr, isItalic);
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
                     .getLength(), string, attr);
         } catch (Exception e) {
@@ -33,7 +35,7 @@ public class JTextPaneI extends JTextPane {
     }
 
     /** append text in default color */
-    public void append(String string) {
-        append(string, Color.BLUE);
+    protected void append(String string) {
+        append(string, Color.BLUE, false, false);
     }
 }
