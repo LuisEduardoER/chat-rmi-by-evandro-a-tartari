@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -45,6 +46,7 @@ public class FormConversa extends JFrame {
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
+    private JButton btnPaletaCores;
     private JToggleButton btnNegrito;
     private JToggleButton btnItalico;
     private JComboBox comboTamanhofonte;
@@ -60,6 +62,9 @@ public class FormConversa extends JFrame {
     private String nomeConversa;
     private Color color;
     private Integer fontSize;
+    private JFrame paletaCores;
+    private JColorChooser jColorChooser;
+    private JButton btnPaleta;
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
@@ -73,7 +78,7 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            // setTitle(contato.getLogin());
+            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
@@ -84,27 +89,27 @@ public class FormConversa extends JFrame {
                     "Negrito");
             btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
                     "Italico");
+            btnPaletaCores = newJButtonImagem("imagens/cores.png");
             comboTamanhofonte = newJComboBox(getValoresComboFont());
             comboTamanhofonte.setActionCommand("TamFonte");
             comboTipoFonte = newJComboBox(getTipoFonte());
             comboTipoFonte.setActionCommand("TipoFonte");
-            setFont(txtDescritorMensagem.getFont());
             txtDescritorMensagem.addKeyListener(listener);
             scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
             adicionaTela(scroolPanelReceptor, 5, 5, 340, 200);
-            adicionaTela(btnNegrito, 50, 207, 20, 20);
-            adicionaTela(btnItalico, 80, 207, 20, 20);
+            adicionaTela(btnNegrito, 30, 207, 20, 20);
+            adicionaTela(btnItalico, 55, 207, 20, 20);
+            adicionaTela(btnPaletaCores, 80, 207, 20, 20);
             adicionaTela(comboTamanhofonte, 110, 207, 40, 20);
             adicionaTela(comboTipoFonte, 155, 207, 170, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-            // adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
-            // 100, 120);
-            // adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360,
-            // 230,
-            // 100, 80);
+            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
+                    100, 120);
+            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
+                    100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,6 +209,22 @@ public class FormConversa extends JFrame {
         return button;
     }
 
+    private JButton newJButtonImagem(String urlImagem) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        ImageIcon icone = new ImageIcon(res);
+        JButton button = new JButton();
+        button.setBorderPainted(false);
+        button.setSize(new Dimension(20, 20));
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setIcon(icone);
+        button.setActionCommand("cores");
+        button.addActionListener(listener);
+        button.addMouseListener(listener);
+        return button;
+    }
+
     private JButton getImagemIcon(ImageIcon imagem, int width, int heigth) {
         ImageIcon icon = imagem;
         JButton button = new JButton();
@@ -237,8 +258,8 @@ public class FormConversa extends JFrame {
     }
 
     private String[] getValoresComboFont() {
-        return new String[] { "8", "9", "10","11", "12", "13", "14", "15", "16",
-                "17", "18", "19", "20", "21", "22", "23", "24" };
+        return new String[] { "8", "9", "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21", "22", "23", "24" };
     }
 
     private String[] getTipoFonte() {
@@ -324,9 +345,52 @@ public class FormConversa extends JFrame {
         this.isItalic = isItalic;
     }
 
+    public void addBorderBtnPaletaCores() {
+        btnPaletaCores.setBorderPainted(true);
+    }
+
+    public void removeBorderBtnPaletaCores() {
+        btnPaletaCores.setBorderPainted(false);
+    }
+
+    public void instanciaPaletaCores() {
+        paletaCores = getPaletaCores();
+        paletaCores.setVisible(true);
+    }
+
+    public void fechaPaletaCores() {
+        paletaCores.dispose();
+        jColorChooser = null;
+    }
+
+    private JFrame getPaletaCores() {
+        paletaCores = new JFrame();
+        paletaCores.setDefaultCloseOperation(ICONIFIED);
+        paletaCores.setExtendedState(NORMAL);
+        paletaCores.setSize(310, 335);
+        paletaCores.setContentPane(new Container());
+        paletaCores.setLocationRelativeTo(btnPaletaCores);
+        jColorChooser = new JColorChooser();
+        jColorChooser.setBounds(5, 5, 300, 300);
+        btnPaleta = new JButton("OK");
+        btnPaleta.setActionCommand("btnPaleta");
+        btnPaleta.addActionListener(listener);
+        btnPaleta.setBounds(125, 310, 60, 20);
+        jColorChooser.addMouseListener(listener);
+        paletaCores.add(jColorChooser);
+        paletaCores.add(btnPaleta);
+        paletaCores.setUndecorated(true);
+        return paletaCores;
+    }
+
+    public JColorChooser getJColorChooser() {
+        return jColorChooser;
+    }
+
     public void recebeMensagem(Mensagem mensagem) {
         try {
-            txtReceptorMensagem.append(mensagem, isContato(mensagem.getUsuarioEnvia()));
+            txtReceptorMensagem.append(mensagem, isContato(mensagem
+                    .getUsuarioEnvia()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -335,14 +399,20 @@ public class FormConversa extends JFrame {
     public void setNomeConversa(String nomeConversa) {
         this.nomeConversa = nomeConversa;
     }
+
     public Color getColor() {
-        if(color==null){
+        if (color == null) {
             color = Color.BLACK;
         }
         return color;
     }
-    
-    public void setColor(Color color){
+
+    public void setColor(Color color) {
+        StyleConstants.setForeground(simpleAttributeSet, color);
+        String text = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
+        txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
+        txtDescritorMensagem.setText(text);
         this.color = color;
     }
 
@@ -378,8 +448,8 @@ public class FormConversa extends JFrame {
         this.txtDescritorMensagem.setEnabled(false);
         this.btnEnviarMensagem.setEnabled(false);
     }
-    
-    public Boolean isContato(String login){
+
+    public Boolean isContato(String login) {
         try {
             return !cliente.getContatos().getLogin().equals(login);
         } catch (RemoteException e) {
@@ -395,21 +465,5 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnItalico() {
         return btnItalico;
     }
-
-    /**
-     * TO REMOVE
-     */
-    public static void main(String[] args) {
-        FormConversa conversa = new FormConversa();
-        conversa.config();
-        conversa.inicializar(null, null);
-        conversa.renderiza();
-    }
-
-    public FormConversa() {
-        listener = new FormConversaListener(this, null);
-    }
-
-
 
 }
