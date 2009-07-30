@@ -100,7 +100,7 @@ public class TrayManager {
 
     public void habilitaMenuRun() {
         popup.getItem(3).setEnabled(true);
-        
+        popup.getItem(2).setEnabled(false);
     }
     
 
