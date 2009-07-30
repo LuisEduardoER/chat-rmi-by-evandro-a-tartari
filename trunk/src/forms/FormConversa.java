@@ -287,4 +287,10 @@ public class FormConversa extends JFrame {
         return true;
     }
 
+    public void disableChat() {
+        this.txtDescritorMensagem.setEnabled(false);
+        this.btnEnviarMensagem.setEnabled(false);
+        
+    }
+
 }
