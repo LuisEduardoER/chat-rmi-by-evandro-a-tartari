@@ -63,6 +63,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
         } else if (e.getActionCommand().equals("cores")) {
             conversa.instanciaPaletaCores();
+        } else if (e.getActionCommand().equals("btnPaleta")) {
+            if (conversa.getJColorChooser().getColor() != null) {
+                conversa.setColor(conversa.getJColorChooser().getColor());
+                conversa.fechaPaletaCores();
+            }
         }
 
     }
