@@ -1,6 +1,7 @@
 package acao;
 
 import java.awt.Event;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -34,12 +35,14 @@ import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 import util.FileFilterImpl;
 import util.ImagePreviewer;
 import util.RedimencionaImagemIcon;
+import ThreadsCliente.ThreadFonts;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class FormConnectListener implements ActionListener, KeyListener {
     private List<JComponent> componentes;
@@ -49,6 +52,8 @@ public class FormConnectListener implements ActionListener, KeyListener {
     private JFileChooser chooser = new JFileChooser();
     private JFrame frame;
     private ImagePreviewer view = new ImagePreviewer(chooser);
+    private Map<String, Font> mapaFontes;
+    private ThreadFonts thread;
 
     /**
      * Construtor padrao passando o JFrame ao qual ele responde
@@ -60,7 +65,8 @@ public class FormConnectListener implements ActionListener, KeyListener {
         connect = (FormConnect) frame;
         this.gerente = gerente;
         componentes = new ArrayList<JComponent>();
-
+        thread = new ThreadFonts(this);
+        thread.start();
     }
 
     /**
@@ -87,10 +93,12 @@ public class FormConnectListener implements ActionListener, KeyListener {
         } else if (verificarAcaoBotao(evento.getActionCommand(),
                 "ApproveSelection")) {
             String url = chooser.getSelectedFile().getPath();
-            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url, 100, 120, 1000);
+            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url,
+                    100, 120, 1000);
             connect.setUrlImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
-            connect.setImagemContatos(RedimencionaImagemIcon.redimencionaImagem(url, 60, 60, 1000));
+            connect.setImagemContatos(RedimencionaImagemIcon
+                    .redimencionaImagem(url, 60, 60, 1000));
             connect.getButtonFileChooser().setBorderPainted(false);
             connect.getButtonFileChooser().setBackground(
                     connect.getBackground());
@@ -376,6 +384,14 @@ public class FormConnectListener implements ActionListener, KeyListener {
         filter.addExtension("png");
         filter.setDescription("Image files");
         return filter;
+    }
+
+    public void setMapFontes(Map<String, Font> mapaFontes) {
+        this.mapaFontes = mapaFontes;
+    }
+
+    public Map<String, Font> getMapFontes() {
+        return mapaFontes;
     }
 
 }
