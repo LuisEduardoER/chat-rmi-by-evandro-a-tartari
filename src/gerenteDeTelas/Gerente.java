@@ -228,7 +228,7 @@ public class Gerente {
         String name2 = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
         if (getListaConversa().get(name) != null) {
             getListaConversa().get(name).recebeMensagem(mensagem);
-        } else if(getListaConversa().get(name2)!=null){
+        } else if (getListaConversa().get(name2) != null) {
             getListaConversa().get(name2).recebeMensagem(mensagem);
         } else {
             Contatos contato = new Contatos();
@@ -282,22 +282,25 @@ public class Gerente {
 
     public void fechouConversa(FormConversa conversa) {
         getListaConversa().remove(conversa.getNomeConversa());
-        
+
     }
 
     public void verificaInstanciaConversa(Contatos contato) {
-        try{
-        String name = cliente.getContatos().getLogin() + contato.getLogin();
-        String name2 = contato.getLogin()+cliente.getContatos().getLogin();
-        if(getListaConversa().get(name)!=null){
-            getListaConversa().get(name).disableChat();
-        }else if(getListaConversa().get(name2)!=null){
-            getListaConversa().get(name2).disableChat();
-        }
-        }catch (Exception e) {
+        try {
+            String name = cliente.getContatos().getLogin() + contato.getLogin();
+            String name2 = contato.getLogin()
+                    + cliente.getContatos().getLogin();
+            if (getListaConversa().get(name) != null) {
+                getListaConversa().get(name).disableChat();
+                getListaConversa().remove(getListaConversa().get(name));
+            } else if (getListaConversa().get(name2) != null) {
+                getListaConversa().get(name2).disableChat();
+                getListaConversa().remove(getListaConversa().get(name2));
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
 }
