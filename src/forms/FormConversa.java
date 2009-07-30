@@ -507,21 +507,21 @@ public class FormConversa extends JFrame {
         return btnItalico;
     }
 
-    /**
-     * TO REMOVE
-     */
-    public static void main(String[] args) {
-        FormConversa conversa = new FormConversa();
-        conversa.config();
-        conversa.inicializar(null, null);
-        conversa.renderiza();
-    }
-
-    public FormConversa() {
-        listener = new FormConversaListener(this, null);
-    }
-    /**
-     * END TO REMOVE
-     */
+//    /**
+//     * TO REMOVE
+//     */
+//    public static void main(String[] args) {
+//        FormConversa conversa = new FormConversa();
+//        conversa.config();
+//        conversa.inicializar(null, null);
+//        conversa.renderiza();
+//    }
+//
+//    public FormConversa() {
+//        listener = new FormConversaListener(this, null);
+//    }
+//    /**
+//     * END TO REMOVE
+//     */
 
 }
