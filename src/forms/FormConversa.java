@@ -272,6 +272,9 @@ public class FormConversa extends JFrame {
     }
 
     public Integer getFontSize() {
+        if (fontSize == null) {
+            fontSize = txtDescritorMensagem.getFont().getSize();
+        }
         return fontSize;
     }
 
@@ -304,6 +307,9 @@ public class FormConversa extends JFrame {
     }
 
     public String getFontFamily() {
+        if(fontFamily==null){
+            fontFamily = txtDescritorMensagem.getFont().getFamily();
+        }
         return fontFamily;
     }
 
