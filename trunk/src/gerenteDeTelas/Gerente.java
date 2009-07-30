@@ -290,9 +290,9 @@ public class Gerente {
         String name = cliente.getContatos().getLogin() + contato.getLogin();
         String name2 = contato.getLogin()+cliente.getContatos().getLogin();
         if(getListaConversa().get(name)!=null){
-            getListaConversa().get(name).dispose();
+            getListaConversa().get(name).disableChat();
         }else if(getListaConversa().get(name2)!=null){
-            getListaConversa().get(name2).dispose();
+            getListaConversa().get(name2).disableChat();
         }
         }catch (Exception e) {
             e.printStackTrace();
