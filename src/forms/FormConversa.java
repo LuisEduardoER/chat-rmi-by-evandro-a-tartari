@@ -8,7 +8,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Window;
 import java.net.URL;
 import java.rmi.RemoteException;
 
