@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
@@ -22,14 +24,14 @@ import gerenteDeTelas.Gerente;
  * 
  */
 public class FormConversaListener implements ActionListener, KeyListener,
-        WindowListener {
+        WindowListener, MouseListener {
     private FormConversa conversa;
     private Gerente gerente;
-    
+
     public FormConversaListener(JFrame frame, Gerente gerente) {
         this.conversa = (FormConversa) frame;
         this.gerente = gerente;
-    
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -56,9 +58,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
             }
         } else if (e.getActionCommand().equals("TamFonte")) {
             conversa.setFontSize();
-        }else if(e.getActionCommand().equals("TipoFonte")){
+        } else if (e.getActionCommand().equals("TipoFonte")) {
             conversa.setFontFamily();
-            
+
+        } else if (e.getActionCommand().equals("cores")) {
+            conversa.instanciaPaletaCores();
         }
 
     }
@@ -108,7 +112,8 @@ public class FormConversaListener implements ActionListener, KeyListener,
         try {
             Mensagem m = new Mensagem(conversa.getCliente().getContatos()
                     .getLogin(), conversa.getCliente().getContatos().getNome(),
-                    text, conversa.getFontSize(), conversa.getFontFamily(), conversa.getColor() ,conversa.getIsBold(), conversa
+                    text, conversa.getFontSize(), conversa.getFontFamily(),
+                    conversa.getColor(), conversa.getIsBold(), conversa
                             .getIsItalic(), conversa.getContato().getLogin());
             return m;
         } catch (RemoteException e) {
@@ -137,6 +142,23 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void windowOpened(WindowEvent e) {
+    }
+
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        conversa.addBorderBtnPaletaCores();
+    }
+
+    public void mouseExited(MouseEvent e) {
+        conversa.removeBorderBtnPaletaCores();
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
     }
 
 }
