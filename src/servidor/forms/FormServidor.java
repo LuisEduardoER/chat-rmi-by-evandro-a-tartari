@@ -171,7 +171,9 @@ public class FormServidor extends JFrame {
         try {
             servico.parar();
             getLblResposta().setText("Server stoped");
+            txtPortaServidor.setEnabled(true);
             btnInicializar.setEnabled(true);
+            txtPortaServidor.requestFocus();
         } catch (Exception e) {
             getLblResposta().setText("Erro parando o servico");
             e.printStackTrace();
@@ -202,14 +204,16 @@ public class FormServidor extends JFrame {
 
     public void inabilitarMenuRun() {
         try {
-            if(servico==null&&txtPortaServidor.getText().equals("")){
-               servico = (IMensageiroServer) new MensageiroServerImpl(8080);
-               servico.inicializar(8080);
-               btnInicializar.setEnabled(false);
-               txtPortaServidor.setEditable(false);
-               lblResposta.setText("Server is running : " + 8080);
-               manager.inabilitaMenuRun();
-            }else if(servico==null && !txtPortaServidor.getText().equals("")){
+            if (servico == null && txtPortaServidor.getText().equals("")) {
+                servico = (IMensageiroServer) new MensageiroServerImpl(8080);
+                servico.inicializar(8080);
+                btnInicializar.setEnabled(false);
+                txtPortaServidor.setEditable(false);
+                lblResposta.setText("Server is running : " + 8080);
+                manager.inabilitaMenuRun();
+                refreshIcon("imagens/serverRunning.png");
+            } else if (servico == null
+                    && !txtPortaServidor.getText().equals("")) {
                 Integer porta = Integer.parseInt(txtPortaServidor.getText());
                 servico = (IMensageiroServer) new MensageiroServerImpl(porta);
                 servico.inicializar(porta);
@@ -217,22 +221,27 @@ public class FormServidor extends JFrame {
                 txtPortaServidor.setEditable(false);
                 lblResposta.setText("Server is running : " + porta.toString());
                 manager.inabilitaMenuRun();
-            }else{
-                if(txtPortaServidor.getText().equals("")){
+                refreshIcon("imagens/serverRunning.png");
+            } else {
+                if (txtPortaServidor.getText().equals("")) {
                     servico.clean();
                     servico.inicializar(8080);
                     txtPortaServidor.setEditable(false);
                     btnInicializar.setEnabled(false);
                     lblResposta.setText("Server is running : " + 8080);
                     manager.inabilitaMenuRun();
-                }else{
-                    Integer porta = Integer.parseInt(txtPortaServidor.getText());
+                    refreshIcon("imagens/serverRunning.png");
+                } else {
+                    Integer porta = Integer
+                            .parseInt(txtPortaServidor.getText());
                     servico.clean();
                     servico.inicializar(porta);
                     txtPortaServidor.setEditable(false);
                     btnInicializar.setEnabled(false);
-                    lblResposta.setText("Server is running : " + porta.toString());
+                    lblResposta.setText("Server is running : "
+                            + porta.toString());
                     manager.inabilitaMenuRun();
+                    refreshIcon("imagens/serverRunning.png");
                 }
             }
         } catch (Exception e) {

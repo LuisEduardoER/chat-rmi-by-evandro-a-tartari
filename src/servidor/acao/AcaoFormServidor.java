@@ -45,10 +45,12 @@ public class AcaoFormServidor implements ActionListener, KeyListener,
                     servidor.getBtnInicializar().setEnabled(false);
                     servidor.refreshIcon("imagens/serverRunning.png");
                     servidor.setServico(servico);
-                    servidor.setActiveStop(true);
                     if(servidor.getManager()!=null){
                         servidor.inabilitarMenuRun();
                     }
+                    servidor.setActiveStop(true);
+                    servidor.setActiveRun(false);
+                    servidor.getTxtPortaServidor().setEnabled(false);
                 } catch (Exception e) {
                     servidor.getLblResposta()
                             .setText("Erro Iniciando Servidor");
@@ -82,6 +84,12 @@ public class AcaoFormServidor implements ActionListener, KeyListener,
                         servidor.getBtnInicializar().setEnabled(false);
                         servidor.refreshIcon("imagens/serverRunning.png");
                         servidor.setServico(servico);
+                        if(servidor.getManager()!=null){
+                            servidor.inabilitarMenuRun();
+                        }
+                        servidor.setActiveStop(true);
+                        servidor.setActiveRun(false);
+                        servidor.getTxtPortaServidor().setEnabled(false);
                     } catch (Exception e) {
                         servidor.getLblResposta().setText(
                                 "Erro Iniciando Servidor");
