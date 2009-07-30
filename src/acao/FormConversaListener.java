@@ -1,5 +1,6 @@
 package acao;
 
+import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
@@ -66,8 +68,13 @@ public class FormConversaListener implements ActionListener, KeyListener,
             conversa.instanciaPaletaCores();
         } else if (e.getActionCommand().equals("btnPaleta")) {
             if (conversa.getJColorChooser().getColor() != null) {
-                conversa.setColor(conversa.getJColorChooser().getColor());
-                conversa.fechaPaletaCores();
+                if (conversa.getJColorChooser().getColor().equals(Color.WHITE)) {
+                    conversa.setColor(Color.black);
+                    conversa.fechaPaletaCores();
+                } else {
+                    conversa.setColor(conversa.getJColorChooser().getColor());
+                    conversa.fechaPaletaCores();
+                }
             }
         }
 
@@ -94,6 +101,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
             if (e.getModifiers() == 0) {
                 e.consume();
                 enviarMensagem(getText());
+            }
+        }else if(e.getKeyCode()==Event.ESCAPE){
+            if(e.getModifiers()==0){
+                e.consume();
+                conversa.getPaleta().dispose();
             }
         }
 
@@ -172,11 +184,13 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void mouseEntered(MouseEvent e) {
-        conversa.addBorderBtnPaletaCores();
+        JButton button = (JButton) e.getComponent();
+        conversa.addBorderBtnPaletaCores(button);
     }
 
     public void mouseExited(MouseEvent e) {
-        conversa.removeBorderBtnPaletaCores();
+        JButton button = (JButton) e.getComponent();
+        conversa.removeBorderBtnPaletaCores(button);
     }
 
     public void mousePressed(MouseEvent e) {
