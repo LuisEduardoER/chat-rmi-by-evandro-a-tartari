@@ -1,7 +1,6 @@
 package acao;
 
 import java.awt.Event;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,7 +34,6 @@ import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 import util.FileFilterImpl;
 import util.ImagePreviewer;
 import util.RedimencionaImagemIcon;
-import ThreadsCliente.ThreadFonts;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
@@ -52,8 +50,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
     private JFileChooser chooser = new JFileChooser();
     private JFrame frame;
     private ImagePreviewer view = new ImagePreviewer(chooser);
-    private Map<String, Font> mapaFontes;
-    private ThreadFonts thread;
+    
 
     /**
      * Construtor padrao passando o JFrame ao qual ele responde
@@ -65,8 +62,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
         connect = (FormConnect) frame;
         this.gerente = gerente;
         componentes = new ArrayList<JComponent>();
-        thread = new ThreadFonts(this);
-        thread.start();
+        
     }
 
     /**
@@ -386,12 +382,8 @@ public class FormConnectListener implements ActionListener, KeyListener {
         return filter;
     }
 
-    public void setMapFontes(Map<String, Font> mapaFontes) {
-        this.mapaFontes = mapaFontes;
-    }
 
-    public Map<String, Font> getMapFontes() {
-        return mapaFontes;
-    }
+
+
 
 }

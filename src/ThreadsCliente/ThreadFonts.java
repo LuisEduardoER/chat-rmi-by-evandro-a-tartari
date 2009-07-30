@@ -4,13 +4,13 @@ import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
-import acao.FormConnectListener;
+import acao.FormConversaListener;
 
 public class ThreadFonts extends Thread{
-    private FormConnectListener listener;
+    private FormConversaListener listener;
     private Map<String, Font> mapaFontes;
     private ClassLoader clazz;
-    public ThreadFonts(FormConnectListener listener) {
+    public ThreadFonts(FormConversaListener listener) {
         this.listener = listener;
         mapaFontes = new HashMap<String, Font>();
         clazz = this.getClass().getClassLoader();

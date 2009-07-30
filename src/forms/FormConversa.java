@@ -13,11 +13,15 @@ import java.net.URL;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JToggleButton;
 import javax.swing.border.Border;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
 import acao.FormConversaListener;
@@ -40,11 +44,16 @@ public class FormConversa extends JFrame {
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
+    private JToggleButton btnNegrito;
+    private JToggleButton btnItalico;
+    private JComboBox comboTamanhofonte;
+    private JComboBox comboTipoFonte;
     private FormConversaListener listener;
     private IMensageiroCliente cliente;
     private Contatos contato;
     private Gerente gerente;
     private Font font;
+    private SimpleAttributeSet simpleAttributeSet;
     private Boolean isBold = false;
     private Boolean isItalic = false;
     private String nomeConversa;
@@ -61,22 +70,35 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            setTitle(contato.getLogin());
+//            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
+            simpleAttributeSet = new SimpleAttributeSet();
+            txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet,
+                    true);
+            btnNegrito = newJToggleButton(getImageIcon("imagens/negrito.png"),
+                    "Negrito");
+            btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
+                    "Italico");
+            comboTamanhofonte = newJComboBox("Fonte", getValoresComboFont());
+            comboTipoFonte = newJComboBox("TipoFonte", getTipoFonte());
             setFont(txtDescritorMensagem.getFont());
             txtDescritorMensagem.addKeyListener(listener);
             scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
-            adicionaTela(scroolPanelReceptor, 5, 5, 340, 220);
+            adicionaTela(scroolPanelReceptor, 5, 5, 340, 200);
+            adicionaTela(btnNegrito, 50, 207, 20, 20);
+            adicionaTela(btnItalico, 80, 207, 20, 20);
+            adicionaTela(comboTamanhofonte, 110, 207, 40, 20);
+            adicionaTela(comboTipoFonte, 155, 207, 110, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
-                    100, 120);
-            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
-                    100, 80);
+//            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
+//                    100, 120);
+//            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
+//                    100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,6 +151,20 @@ public class FormConversa extends JFrame {
 
     private JTextPane newJTextPane() {
         return new JTextPane();
+    }
+    
+    private JComboBox newJComboBox(String action, String[] valores){
+        JComboBox combo = new JComboBox(valores);
+        combo.setActionCommand("Fonte");
+        combo.addActionListener(listener);
+        return combo;
+    }
+
+    private JToggleButton newJToggleButton(ImageIcon icon, String action) {
+        JToggleButton toggle = new JToggleButton(icon);
+        toggle.setActionCommand(action);
+        toggle.addActionListener(listener);
+        return toggle;
     }
 
     private JScrollPane newJScrollPane(JComponent c) {
@@ -188,6 +224,23 @@ public class FormConversa extends JFrame {
         return icon.getImage();
     }
 
+    private ImageIcon getImageIcon(String urlImage) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImage);
+        ImageIcon icon = new ImageIcon(res);
+        return icon;
+    }
+    
+    private String[] getValoresComboFont(){
+        return new String[]{"8", "9", "11", "12", "13", "14", 
+        "15","16", "17", "18", "19", "20", "21", "22", "23", 
+        "24"};
+    }
+    
+    private String[] getTipoFonte(){
+        return new String[]{"Arial", "Times New Roman"};
+    }
+
     public JTextPane getTxtDescritorMensagens() {
         return txtDescritorMensagem;
     }
@@ -221,6 +274,11 @@ public class FormConversa extends JFrame {
     }
 
     public void setFont(Font font) {
+        StyleConstants.setFontSize(simpleAttributeSet, font.getSize());
+        String text = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
+        txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
+        txtDescritorMensagem.setText(text);
         this.font = font;
     }
 
@@ -229,10 +287,20 @@ public class FormConversa extends JFrame {
     }
 
     public void setIsBold(Boolean isBold) {
+        StyleConstants.setBold(simpleAttributeSet, isBold);
+        String text = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
+        txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
+        txtDescritorMensagem.setText(text);
         this.isBold = isBold;
     }
 
     public void setIsItalic(Boolean isItalic) {
+        StyleConstants.setItalic(simpleAttributeSet, isItalic);
+        String text = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
+        txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
+        txtDescritorMensagem.setText(text);
         this.isItalic = isItalic;
     }
 
@@ -240,15 +308,19 @@ public class FormConversa extends JFrame {
         try {
             if (this.cliente.getContatos().getLogin().equals(
                     mensagem.getUsuarioEnvia())) {
-                txtReceptorMensagem.append(mensagem.getNomeEnvia()+": ",
-                        Color.BLUE);
+                txtReceptorMensagem.append(mensagem.getNomeEnvia() + ": ",
+                        Color.BLUE, mensagem.getIsBold(), mensagem
+                                .getIsItalic());
                 txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
-                        Color.BLUE);
+                        Color.BLUE, mensagem.getIsBold(), mensagem
+                                .getIsItalic());
             } else {
-                txtReceptorMensagem.append(mensagem.getNomeEnvia()+": ",
-                        Color.RED);
-                txtReceptorMensagem.append(mensagem.getMensagem() + "\n",
-                        Color.RED);
+                txtReceptorMensagem
+                        .append(mensagem.getNomeEnvia() + ": ", Color.RED,
+                                mensagem.getIsBold(), mensagem.getIsItalic());
+                txtReceptorMensagem
+                        .append(mensagem.getMensagem() + "\n", Color.RED,
+                                mensagem.getIsBold(), mensagem.getIsItalic());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -290,7 +362,28 @@ public class FormConversa extends JFrame {
     public void disableChat() {
         this.txtDescritorMensagem.setEnabled(false);
         this.btnEnviarMensagem.setEnabled(false);
-        
+
     }
 
+    public JToggleButton getBtnNegrito() {
+        return btnNegrito;
+    }
+
+    public JToggleButton getBtnItalico() {
+        return btnItalico;
+    }
+
+     /**
+     * TO REMOVE
+     */
+     public static void main(String[] args) {
+     FormConversa conversa = new FormConversa();
+     conversa.config();
+     conversa.inicializar(null, null);
+     conversa.renderiza();
+     }
+    
+     public FormConversa() {
+     listener = new FormConversaListener(this, null);
+     }
 }

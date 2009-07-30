@@ -1,6 +1,7 @@
 package acao;
 
 import java.awt.Event;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -8,12 +9,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
+import ThreadsCliente.ThreadFonts;
 import cliente.Mensagem;
-
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
 
@@ -26,10 +28,14 @@ public class FormConversaListener implements ActionListener, KeyListener,
         WindowListener {
     private FormConversa conversa;
     private Gerente gerente;
+    private Map<String, Font> mapaFontes;
+    private ThreadFonts thread;
 
     public FormConversaListener(JFrame frame, Gerente gerente) {
         this.conversa = (FormConversa) frame;
         this.gerente = gerente;
+        thread = new ThreadFonts(this);
+        thread.start();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -131,4 +137,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
     public void windowOpened(WindowEvent e) {
     }
 
+    public Map<String, Font> getMapFontes() {
+        return mapaFontes;
+    }
+
+    public void setMapFontes(Map<String, Font> mapaFontes) {
+        this.mapaFontes = mapaFontes;
+    }
 }
