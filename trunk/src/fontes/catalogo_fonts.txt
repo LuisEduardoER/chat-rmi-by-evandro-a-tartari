@@ -1,0 +1,41 @@
+01 - Arial
+02 - Arial Italico
+03 - Arial Negrito
+04 - Arial Negrito-Italico
+05 - Arial Black
+06 - Bernard MT
+07 - Brush Script MT
+08 - Comic Sans MS
+09 - Comic Sans MS Negrito
+10 - Copperplate Gothic Bold
+11 - Copperplate Gothic Ligth
+12 - Courier New
+13 - Courier New Italico
+14 - Courier New Negrito
+15 - Courier New Negrito-Italico
+16 - French Script MT
+17 - Gill Sans MT
+18 - Imprint MT
+19 - Blackadder ITC
+20 - Lucida Calligraphy Italic
+21 - Matrix MT
+22 - Matura MT
+23 - Monotype Corsiva
+24 - Niagara Engraved
+25 - Niagara Solid
+26 - Palace Script MT
+27 - Parchment
+28 - Rage Italic
+29 - Script MT
+30 - Scriptina Alternates
+31 - Scriptina
+32 - Showcard Gothic
+33 - Time New Roman
+34 - Time New Roman Negrito
+35 - Time New Roman Negrito-Italico
+36 - Time New Roman Italico
+37 - Verdana
+38 - Verdana Negrito
+39 - Verdana Italico
+40 - Verdana Negrito-Italico
+41 - Viner Hand ITC
