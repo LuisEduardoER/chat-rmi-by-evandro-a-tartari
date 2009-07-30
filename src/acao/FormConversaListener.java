@@ -1,7 +1,6 @@
 package acao;
 
 import java.awt.Event;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,12 +8,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.rmi.RemoteException;
-import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
-import ThreadsCliente.ThreadFonts;
 import cliente.Mensagem;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
@@ -28,14 +25,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
         WindowListener {
     private FormConversa conversa;
     private Gerente gerente;
-    private Map<String, Font> mapaFontes;
-    private ThreadFonts thread;
-
+    
     public FormConversaListener(JFrame frame, Gerente gerente) {
         this.conversa = (FormConversa) frame;
         this.gerente = gerente;
-        thread = new ThreadFonts(this);
-        thread.start();
+    
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -44,22 +38,27 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 enviarMensagem(getText());
             }
 
-        }else if(e.getActionCommand().equals("Negrito")){
-            if(conversa.getBtnNegrito().isSelected()){
+        } else if (e.getActionCommand().equals("Negrito")) {
+            if (conversa.getBtnNegrito().isSelected()) {
                 conversa.setIsBold(true);
                 conversa.getTxtDescritorMensagens().requestFocus();
-            }else if(!conversa.getBtnNegrito().isSelected()){
+            } else if (!conversa.getBtnNegrito().isSelected()) {
                 conversa.setIsBold(false);
                 conversa.getTxtDescritorMensagens().requestFocus();
             }
-        }else if(e.getActionCommand().equals("Italico")){
-            if(conversa.getBtnItalico().isSelected()){
+        } else if (e.getActionCommand().equals("Italico")) {
+            if (conversa.getBtnItalico().isSelected()) {
                 conversa.setIsItalic(true);
                 conversa.getTxtDescritorMensagens().requestFocus();
-            }else if(!conversa.getBtnItalico().isSelected()){
+            } else if (!conversa.getBtnItalico().isSelected()) {
                 conversa.setIsItalic(false);
                 conversa.getTxtDescritorMensagens().requestFocus();
             }
+        } else if (e.getActionCommand().equals("TamFonte")) {
+            conversa.setFontSize();
+        }else if(e.getActionCommand().equals("TipoFonte")){
+            conversa.setFontFamily();
+            
         }
 
     }
@@ -109,7 +108,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         try {
             Mensagem m = new Mensagem(conversa.getCliente().getContatos()
                     .getLogin(), conversa.getCliente().getContatos().getNome(),
-                    text, conversa.getFont(), conversa.getIsBold(), conversa
+                    text, conversa.getFontSize(), conversa.getFontFamily(), conversa.getColor() ,conversa.getIsBold(), conversa
                             .getIsItalic(), conversa.getContato().getLogin());
             return m;
         } catch (RemoteException e) {
@@ -117,9 +116,11 @@ public class FormConversaListener implements ActionListener, KeyListener,
         }
         return null;
     }
+
     public void windowClosing(WindowEvent e) {
         gerente.fechouConversa(conversa);
     }
+
     public void windowActivated(WindowEvent e) {
     }
 
@@ -128,6 +129,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     public void windowDeactivated(WindowEvent e) {
     }
+
     public void windowDeiconified(WindowEvent e) {
     }
 
@@ -137,11 +139,4 @@ public class FormConversaListener implements ActionListener, KeyListener,
     public void windowOpened(WindowEvent e) {
     }
 
-    public Map<String, Font> getMapFontes() {
-        return mapaFontes;
-    }
-
-    public void setMapFontes(Map<String, Font> mapaFontes) {
-        this.mapaFontes = mapaFontes;
-    }
 }
