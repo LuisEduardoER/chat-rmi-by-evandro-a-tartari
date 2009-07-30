@@ -15,17 +15,19 @@ public class Mensagem implements Serializable {
     private String contatoRecebe;
     private String nomeEnvia;
     private String fontFamily;
+    private String dataHora;
     private Integer fontSize;
     private Boolean isBold;
     private Boolean isItalic;
     private Color color;
 
     public Mensagem(String usuarioEnvia, String nomeEnvia, String mensagem,
-            Integer fontSize, String fontFamily, Color color, Boolean isBold,
-            Boolean isItalic, String contatoRecebe) {
+            String dataHora, Integer fontSize, String fontFamily, Color color,
+            Boolean isBold, Boolean isItalic, String contatoRecebe) {
         this.setUsuarioEnvia(usuarioEnvia);
         this.setNomeEnvia(nomeEnvia);
         this.setMensagem(mensagem);
+        this.setDataHora(dataHora);
         this.setFontSize(fontSize);
         this.setFontFamily(fontFamily);
         this.setColor(color);
@@ -104,6 +106,14 @@ public class Mensagem implements Serializable {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public String getDataHora() {
+        return dataHora;
     }
 
 }
