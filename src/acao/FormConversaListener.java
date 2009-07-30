@@ -33,11 +33,27 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().endsWith("enviar")) {
+        if (e.getActionCommand().equals("enviar")) {
             if (isValid()) {
                 enviarMensagem(getText());
             }
 
+        }else if(e.getActionCommand().equals("Negrito")){
+            if(conversa.getBtnNegrito().isSelected()){
+                conversa.setIsBold(true);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            }else if(!conversa.getBtnNegrito().isSelected()){
+                conversa.setIsBold(false);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            }
+        }else if(e.getActionCommand().equals("Italico")){
+            if(conversa.getBtnItalico().isSelected()){
+                conversa.setIsItalic(true);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            }else if(!conversa.getBtnItalico().isSelected()){
+                conversa.setIsItalic(false);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            }
         }
 
     }
