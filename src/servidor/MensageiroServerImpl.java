@@ -171,6 +171,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void chamarAtencao(Mensagem mensagem, Contatos contato)
             throws RemoteException {
         getClientes().get(contato.getLogin()).receberChamadaAtencao(mensagem);
+        mensagem.setMensagem("Você pediu a atenção de "+contato.getNome());
+        getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(mensagem);
     }
 
 }
