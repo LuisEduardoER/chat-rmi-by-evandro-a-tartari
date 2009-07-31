@@ -20,12 +20,12 @@ import servidor.forms.FormServidor;
  * @author evandro.tartari
  *
  */
-public class AcaoFormServidor implements ActionListener, KeyListener,
+public class FormServidorListener implements ActionListener, KeyListener,
         WindowListener {
     private FormServidor servidor;
     private IMensageiroServer servico;
 
-    public AcaoFormServidor(JFrame servidor) {
+    public FormServidorListener(JFrame servidor) {
         this.servidor = (FormServidor) servidor;
     }
 
