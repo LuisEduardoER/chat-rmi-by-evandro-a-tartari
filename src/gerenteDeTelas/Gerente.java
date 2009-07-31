@@ -5,7 +5,6 @@ import forms.FormConversa;
 import forms.FormListFriends;
 import interfaces.IMensageiroCliente;
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -270,9 +270,10 @@ public class Gerente {
 
     }
 
-    private void iniciaConversa(Contatos contato, File file) {
+    private void iniciaConversa(EnviaArquivo arquivo) {
         try {
-            String name = cliente.getContatos().getLogin() + contato.getLogin();
+            String name = cliente.getContatos().getLogin()
+                    + arquivo.getContatoEnvia().getLogin();
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
@@ -280,9 +281,34 @@ public class Gerente {
                 FormConversa conversa = new FormConversa(this, cliente);
                 conversa.setNomeConversa(name);
                 conversa.config();
-                conversa.inicializar(contato, cliente.getContatos());
-                conversa.setContato(contato);
-                conversa.recebeArquivo(contato, file);
+                conversa.inicializar(arquivo.getContatoEnvia(), cliente
+                        .getContatos());
+                conversa.setContato(arquivo.getContatoEnvia());
+                conversa.recebeArquivo(arquivo);
+                conversa.renderiza();
+                listaConversa.put(name, conversa);
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    private void iniciaReciboAviso(EnviaArquivo arquivo) {
+        try {
+            String name = cliente.getContatos().getLogin()
+                    + arquivo.getContatoEnvia().getLogin();
+            if (listaConversa.get(name) != null) {
+                FormConversa conversa = listaConversa.get(name);
+                conversa.setExtendedState(JFrame.ICONIFIED);
+            } else {
+                FormConversa conversa = new FormConversa(this, cliente);
+                conversa.setNomeConversa(name);
+                conversa.config();
+                conversa.inicializar(arquivo.getContatoEnvia(), cliente
+                        .getContatos());
+                conversa.setContato(arquivo.getContatoEnvia());
+                conversa.recebeAviso(arquivo);
                 conversa.renderiza();
                 listaConversa.put(name, conversa);
             }
@@ -363,39 +389,68 @@ public class Gerente {
 
     }
 
-    public void enviaArquivo(Contatos contato, String url) {
+    public void enviaArquivo(Contatos contatoCliente, Contatos contatoRecebe,
+            String url) {
         try {
-            File file = new File(url);
-            cliente.enviaArquivo(contato, file);
+            EnviaArquivo arquivo = new EnviaArquivo(url, contatoRecebe,
+                    contatoCliente);
+            cliente.enviaArquivo(arquivo);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void recebeArquivo(Contatos contato, File file) {
+    public void recebeArquivo(EnviaArquivo arquivo) {
         try {
-            String name = cliente.getContatos().getLogin() + contato.getLogin();
-            String name2 = contato.getLogin()
-                    + cliente.getContatos().getLogin();
+            String name = arquivo.getContatoEnvia().getLogin()
+                    + arquivo.getContatoRecebe().getLogin();
+            String name2 = arquivo.getContatoRecebe().getLogin()
+                    + arquivo.getContatoEnvia().getLogin();
             if (getListaConversa().get(name) != null) {
-                getListaConversa().get(name).recebeArquivo(contato, file);
+                getListaConversa().get(name).recebeArquivo(arquivo);
             } else if (getListaConversa().get(name2) != null) {
-                getListaConversa().get(name2).recebeArquivo(contato, file);
+                getListaConversa().get(name2).recebeArquivo(arquivo);
             } else {
                 int posicao = getFormListFriends().getContatos().indexOf(
-                        contato);
+                        arquivo.getContatoEnvia());
                 if (posicao != -1) {
-                    contato = (Contatos) getFormListFriends().getContatos()
-                            .get(posicao);
-                    this.iniciaConversa(contato, file);
+                    Contatos contato = (Contatos) getFormListFriends()
+                            .getContatos().get(posicao);
+                    this.iniciaConversa(arquivo);
                     name = cliente.getContatos().getLogin()
                             + contato.getLogin();
-                    getListaConversa().get(name).disparaThread();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void recebeAvisoEnvioCompleto(EnviaArquivo arquivo) {
+        try {
+            String name = arquivo.getContatoEnvia().getLogin()
+                    + arquivo.getContatoRecebe().getLogin();
+            String name2 = arquivo.getContatoRecebe().getLogin()
+                    + arquivo.getContatoEnvia().getLogin();
+            if (getListaConversa().get(name) != null) {
+                getListaConversa().get(name).recebeAviso(arquivo);
+            } else if (getListaConversa().get(name2) != null) {
+                getListaConversa().get(name2).recebeAviso(arquivo);
+            } else {
+                int posicao = getFormListFriends().getContatos().indexOf(
+                        arquivo.getContatoEnvia());
+                if (posicao != -1) {
+                    Contatos contato = (Contatos) getFormListFriends()
+                            .getContatos().get(posicao);
+                    this.iniciaReciboAviso(arquivo);
+                    name = cliente.getContatos().getLogin()
+                            + contato.getLogin();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
