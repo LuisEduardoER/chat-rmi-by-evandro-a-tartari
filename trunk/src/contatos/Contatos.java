@@ -25,6 +25,7 @@ public class Contatos implements Serializable {
     private String senha;
     private ImageIcon icon;
     private String urlImage;
+    private ImageIcon iconeChat;
 
     public String getNome() {
         return nome;
@@ -87,6 +88,14 @@ public class Contatos implements Serializable {
         return icon;
     }
 
+    public void setIconeChat(ImageIcon iconeChat) {
+        this.iconeChat = iconeChat;
+    }
+
+    public ImageIcon getIconeChat() {
+        return iconeChat;
+    }
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -101,5 +110,6 @@ public class Contatos implements Serializable {
         }
         return false;
     }
+
 
 }
