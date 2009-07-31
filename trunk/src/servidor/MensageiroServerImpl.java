@@ -174,5 +174,5 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         mensagem.setMensagem("Você pediu a atenção de "+contato.getNome());
         getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(mensagem);
     }
-
+   
 }
