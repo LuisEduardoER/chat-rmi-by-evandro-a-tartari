@@ -98,4 +98,15 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 		
 	}
 
+    public void chamarAtencao(Mensagem mensagem, Contatos contato)
+            throws RemoteException {
+        servidor.chamarAtencao(mensagem, contato);
+        
+    }
+
+    public void receberChamadaAtencao(Mensagem mensagem) throws RemoteException {
+        gerente.receberChamadaAtencao(mensagem);
+        
+    }
+
 }
