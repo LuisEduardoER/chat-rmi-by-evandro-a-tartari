@@ -15,9 +15,6 @@ public class ThreadAlerta extends Thread {
         if (x == null && y == null) {
             x = this.conversa.getLocation().x;
             y = this.conversa.getLocation().y;
-            conversa.getBtnAlerta().setEnabled(false);
-            conversa.removeBorderBtnPaletaCores(conversa.getBtnAlerta());
-            conversa.getBtnAlerta().setEnabled(false);
         }
     }
 
