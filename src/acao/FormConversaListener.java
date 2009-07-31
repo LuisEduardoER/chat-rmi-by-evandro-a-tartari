@@ -159,7 +159,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else {
             dataHora += minuto.toString() + ")";
         }
-        return null;
+        return dataHora;
     }
 
     public void windowClosing(WindowEvent e) {
