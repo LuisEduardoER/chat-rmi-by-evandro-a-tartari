@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
+import ThreadsCliente.ThreadAlerta;
+
 import cliente.Mensagem;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
@@ -30,11 +32,10 @@ public class FormConversaListener implements ActionListener, KeyListener,
         WindowListener, MouseListener {
     private FormConversa conversa;
     private Gerente gerente;
-
+    
     public FormConversaListener(JFrame frame, Gerente gerente) {
         this.conversa = (FormConversa) frame;
         this.gerente = gerente;
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -76,9 +77,14 @@ public class FormConversaListener implements ActionListener, KeyListener,
                     conversa.fechaPaletaCores();
                 }
             }
+        } else if (e.getActionCommand().equals("alerta")) {
+            conversa.getTxtDescritorMensagens().requestFocus();
+            conversa.getBtnAlerta().setEnabled(false);
+            this.disparaThread();
         }
 
     }
+
 
     private boolean isValid() {
         return !getDescritor().getText().trim().equals("");
@@ -102,8 +108,8 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 e.consume();
                 enviarMensagem(getText());
             }
-        }else if(e.getKeyCode()==Event.ESCAPE){
-            if(e.getModifiers()==0){
+        } else if (e.getKeyCode() == Event.ESCAPE) {
+            if (e.getModifiers() == 0) {
                 e.consume();
                 conversa.getPaleta().dispose();
             }
@@ -155,7 +161,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else {
             dataHora += minuto.toString() + ")";
         }
-        return dataHora;
+        return null;
     }
 
     public void windowClosing(WindowEvent e) {
@@ -185,7 +191,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     public void mouseEntered(MouseEvent e) {
         JButton button = (JButton) e.getComponent();
-        conversa.addBorderBtnPaletaCores(button);
+        if (button.isEnabled()) {
+            conversa.addBorderBtnPaletaCores(button);
+        }
     }
 
     public void mouseExited(MouseEvent e) {
@@ -197,6 +205,13 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void mouseReleased(MouseEvent e) {
+    }
+
+    
+
+    private void disparaThread() {
+        new ThreadAlerta(conversa).start();
+        enviarMensagem("está pedindo sua atenção");
     }
 
 }
