@@ -95,8 +95,17 @@ public class FormConversa extends JFrame {
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
             btnAlerta = newJButtonImagem("imagens/atencaoNormal.png",
                     "imagens/atencaoDesabilitado.png", "alerta");
-            btnSendFile = newJButtonImagem("imagens/enviarArquivo.png",
+            btnSendFile = newJButtonImagem("imagens/enviarArquivo.png","imagens/enviarArquivoDesabilitado.png",
                     "sendFile");
+            /**
+             *TO REMOVE 
+             */
+            btnSendFile.setEnabled(false);
+            /**
+             * END TO REMOVE
+             */
+            
+            
             comboTamanhofonte = newJComboBox(getValoresComboFont());
             comboTamanhofonte.setActionCommand("TamFonte");
             comboTipoFonte = newJComboBox(getTipoFonte());
