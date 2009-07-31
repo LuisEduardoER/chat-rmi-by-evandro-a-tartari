@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
 import ThreadsCliente.ThreadEnviaArquivo;
+import ThreadsCliente.ThreadEnviarMensagem;
 
 import cliente.Mensagem;
 import forms.FormConversa;
@@ -41,7 +42,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             if (isValid()) {
-                enviarMensagem(getText());
+                new ThreadEnviarMensagem(this);
             }
 
         } else if (e.getActionCommand().equals("Negrito")) {
@@ -99,7 +100,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         return conversa.getTxtDescritorMensagens();
     }
 
-    private String getText() {
+    public String getText() {
         return conversa.getTxtDescritorMensagens().getText();
     }
 
