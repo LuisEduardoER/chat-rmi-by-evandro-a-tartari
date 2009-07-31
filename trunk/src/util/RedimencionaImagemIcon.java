@@ -38,4 +38,18 @@ public class RedimencionaImagemIcon {
         ImageIcon jpg = new ImageIcon(imagem);
         return jpg;
     }
+    
+    public static ImageIcon redimencionaImagem(ImageIcon icon,Integer size, Integer alt, Integer hints ){
+        
+        try {
+            Image image = icon.getImage();
+            image = image.getScaledInstance(size, alt, hints);
+            ImageIcon jpg = new ImageIcon(image);
+            return jpg;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ImageIcon();
+        
+    }
 }
