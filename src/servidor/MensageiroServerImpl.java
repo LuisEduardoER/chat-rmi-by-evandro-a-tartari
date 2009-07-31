@@ -135,7 +135,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
-        new ThreadRemove(this, mensageiro).start();
+        new ThreadRemove(this, mensageiro.getContatos()).start();
     }
 
     public void parar() {

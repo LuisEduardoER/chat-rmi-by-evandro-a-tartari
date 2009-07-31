@@ -1,29 +1,29 @@
 package servidor.ThreadsServidor;
 
-import interfaces.IMensageiroCliente;
 import servidor.MensageiroServerImpl;
 import contatos.Contatos;
 
 public class ThreadRemove extends Thread{
     private MensageiroServerImpl servidor;
-    private IMensageiroCliente mensageiro;
+    private Contatos contatos;
 
-    public ThreadRemove(MensageiroServerImpl servidor, IMensageiroCliente mensageiro) {
+    public ThreadRemove(MensageiroServerImpl servidor, Contatos contatos) {
         this.servidor = servidor;
-        this.mensageiro = mensageiro;
+        this.contatos = contatos;
+        
     }
     
     public void run(){
         try{
-        if (servidor.getClientes().get(mensageiro.getContatos().getLogin()) != null) {
-            servidor.getClientes().remove(mensageiro.getContatos().getLogin());
-            servidor.getContatos().remove(mensageiro.getContatos());
+        if (servidor.getClientes().get(contatos.getLogin()) != null) {
+            servidor.getClientes().remove(contatos.getLogin());
+            servidor.getContatos().remove(contatos);
             for (Contatos contato : servidor.getContatos()) {
                 servidor.getClientes().get(contato.getLogin()).removeContato(
-                        mensageiro.getContatos());
+                        contatos);
             }
         }
-        System.out.println("Saida: " + mensageiro.getContatos().getLogin());
+        System.out.println("Saida: " + contatos.getLogin());
         }catch (Exception e) {
             e.printStackTrace();
         }
