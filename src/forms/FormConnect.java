@@ -67,7 +67,7 @@ public class FormConnect extends JFrame {
     // Lista dos validadores
     private List<JLabel> lblLista;
     private ImageIcon iconContatos;
-	private String urlImagem;
+    private String urlImagem;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
@@ -149,8 +149,6 @@ public class FormConnect extends JFrame {
         add(button);
         return button;
     }
-
-
 
     /**
      * Metodo para instanciação de um JTextField
@@ -392,33 +390,33 @@ public class FormConnect extends JFrame {
 
     public void setImagemContatos(ImageIcon icon) {
         this.iconContatos = icon;
-        
+
     }
 
     public ImageIcon getImagemContato() {
-        if(iconContatos==null){
-            URL res = this.getClass().getClassLoader().getResource("imagens/teste.png");
-            iconContatos = RedimencionaImagemIcon.redimencionaImagem(res.getFile(),60, 60, 1000);
-            setUrlImagem(res.getFile());
+        if (iconContatos == null) {
+            ClassLoader clazz = this.getClass().getClassLoader();
+            iconContatos = RedimencionaImagemIcon.redimencionaImagem(clazz
+                    .getResourceAsStream("imagens/teste.png"), 60, 60, 1000);
+            setUrlImagem(clazz.getResource("imagens/teste.png").getFile());
         }
         return iconContatos;
     }
 
-	public void setUrlImagem(String url) {
-		this.urlImagem = url;
-		
-	}
-	
-	public String getUrlImagem(){
-		return urlImagem;
-	}
-	
-	private Image getImage(){
-	    ClassLoader clazz = this.getClass().getClassLoader();
-	    URL res = clazz.getResource("imagens/serverRunning.png");
-	    ImageIcon iconImage = new ImageIcon(res);
-	    return iconImage.getImage();
-	}
-	
-	
+    public void setUrlImagem(String url) {
+        this.urlImagem = url;
+
+    }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    private Image getImage() {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/serverRunning.png");
+        ImageIcon iconImage = new ImageIcon(res);
+        return iconImage.getImage();
+    }
+
 }
