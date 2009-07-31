@@ -534,6 +534,15 @@ public class FormConversa extends JFrame {
         btnSendFile.setEnabled(true);
 
     }
+    
+    public void avisaArquivoRecebido(EnviaArquivo arquivo) {
+        Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
+                .getContatoEnvia().getNome(), "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"+arquivo.getNomeArquivo(), "",
+                getFontSize(), getFontFamily(), getColor(), getIsBold(),
+                getIsItalic(), arquivo.getContatoRecebe().getNome());
+        txtReceptorMensagem.append(m, false);
+        
+    }
 
     public void recebeArquivo(EnviaArquivo arquivo) {
         new ThreadRecebeArquivo(arquivo, this, cliente).start();
@@ -618,5 +627,7 @@ public class FormConversa extends JFrame {
     // /**
     // * END TO REMOVE
     // */
+
+
 
 }
