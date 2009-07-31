@@ -47,6 +47,7 @@ public class ThreadRecebeArquivo extends Thread {
                 fos.close();
                 arquivo.setRetorno("Arquivo recebido com sucesso por "
                         + arquivo.getContatoRecebe().getNome());
+                conversa.avisaArquivoRecebido(arquivo);
                 cliente.enviaAvisoEnvioCompleto(arquivo);
             } catch (Exception e) {
                 e.printStackTrace();
