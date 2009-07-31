@@ -5,6 +5,8 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import util.RedimencionaImagemIcon;
+
 /**
  * 
  * @author evandro.tartari
@@ -24,6 +26,8 @@ public class Contatos implements Serializable {
     private String login;
     private String senha;
     private ImageIcon icon;
+    private ImageIcon iconUsuario;
+    private ImageIcon iconContato;
     private String urlImage;
 
     public String getNome() {
@@ -76,6 +80,23 @@ public class Contatos implements Serializable {
 
     public void setIcon(ImageIcon icon) {
         this.icon = icon;
+    }
+
+    public ImageIcon getIconUsuario() {
+        return iconUsuario;
+    }
+
+    public void setIconUsuario(ImageIcon iconUsuario) {
+        this.iconUsuario = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 100, 80, 1000);
+        this.iconContato = iconUsuario;
+    }
+
+    public ImageIcon getIconContato() {
+        return iconContato;
+    }
+
+    public void setIconContato(ImageIcon iconContato) {
+        this.iconContato = iconContato;
     }
 
     public ImageIcon getImage() {
