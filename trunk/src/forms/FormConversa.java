@@ -80,7 +80,7 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-//            setTitle(contato.getLogin());
+            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
@@ -114,10 +114,10 @@ public class FormConversa extends JFrame {
             adicionaTela(comboTamanhofonte, 130, 207, 40, 20);
             adicionaTela(comboTipoFonte, 175, 207, 169, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-//            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
-//                    100, 120);
-//            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
-//                    100, 80);
+            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
+                    100, 120);
+            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
+                    100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
         } catch (Exception e) {
             e.printStackTrace();
@@ -527,22 +527,22 @@ public class FormConversa extends JFrame {
         return btnItalico;
     }
 
-     /**
-     * TO REMOVE
-     */
-     public static void main(String[] args) {
-     FormConversa conversa = new FormConversa();
-     conversa.config();
-     conversa.inicializar(null, null);
-     conversa.renderiza();
-     }
-    
-     public FormConversa() {
-     listener = new FormConversaListener(this, null);
-     }
-     /**
-     * END TO REMOVE
-     */
+//     /**
+//     * TO REMOVE
+//     */
+//     public static void main(String[] args) {
+//     FormConversa conversa = new FormConversa();
+//     conversa.config();
+//     conversa.inicializar(null, null);
+//     conversa.renderiza();
+//     }
+//    
+//     public FormConversa() {
+//     listener = new FormConversaListener(this, null);
+//     }
+//     /**
+//     * END TO REMOVE
+//     */
 
 
 }
