@@ -6,6 +6,7 @@ import interfaces.IMensageiroCliente;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.net.URL;
@@ -188,6 +189,7 @@ public class FormConversa extends JFrame {
 
     private JLabel newJLabel(String nome, Boolean isContato) {
         JLabel lbl = new JLabel(nome, JLabel.CENTER);
+        lbl.setFont(new Font("verdana", Font.BOLD, 18));
         if (isContato)
             lbl.setForeground(Color.RED);
         else
