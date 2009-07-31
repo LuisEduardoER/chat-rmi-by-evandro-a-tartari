@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
 import servidor.MensageiroServerImpl;
-import servidor.acao.AcaoFormServidor;
+import servidor.acao.FormServidorListener;
 import servidor.trayicon.TrayManager;
 import util.NumeroMaximoCaracteres;
 
@@ -85,7 +85,7 @@ public class FormServidor extends JFrame {
     }
 
     private void adicionaListeners() {
-        AcaoFormServidor acao = new AcaoFormServidor(this);
+        FormServidorListener acao = new FormServidorListener(this);
         txtPortaServidor.addKeyListener(acao);
         btnFechar.addActionListener(acao);
         btnInicializar.addActionListener(acao);

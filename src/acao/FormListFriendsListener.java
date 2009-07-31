@@ -104,6 +104,8 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
     }
 
     public void windowIconified(WindowEvent e) {
+        formContatos.createTrayIcon();
+        formContatos.setVisible(false);
     }
 
     public void windowOpened(WindowEvent e) {

@@ -10,7 +10,6 @@ import java.awt.TrayIcon;
 import javax.swing.JFrame;
 
 import forms.FormListFriends;
-import gerenteDeTelas.Gerente;
 
 public class TrayManagerFormListFriend {
     private TrayIcon trayIcon;
@@ -20,7 +19,7 @@ public class TrayManagerFormListFriend {
     private FormListFriends servidor;
     
 
-    public TrayManagerFormListFriend(JFrame frame, Gerente gerente) {
+    public TrayManagerFormListFriend(JFrame frame) {
         this.servidor = (FormListFriends) frame;
     }
 
