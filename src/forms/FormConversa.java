@@ -484,6 +484,7 @@ public class FormConversa extends JFrame {
     }
     
     public void disparaThread() {
+        this.setExtendedState(NORMAL);
         new ThreadAlerta(this).start();
     }
 
