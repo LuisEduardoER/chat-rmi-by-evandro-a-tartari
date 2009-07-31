@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
@@ -46,6 +47,8 @@ public class FormConversa extends JFrame {
      */
     private static final long serialVersionUID = 6449977848107919009L;
     private JTextPaneI txtReceptorMensagem;
+    private JLabel lblNomeContato;
+    private JLabel lblNomeUsuario;
     private JTextPane txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
@@ -112,6 +115,8 @@ public class FormConversa extends JFrame {
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
+            lblNomeContato = newJLabel(contato.getNome(), true);
+            lblNomeUsuario = newJLabel(usuario.getNome(), false);
             adicionaTela(scroolPanelReceptor, 5, 5, 340, 200);
             adicionaTela(btnNegrito, 6, 207, 20, 20);
             adicionaTela(btnItalico, 31, 207, 20, 20);
@@ -121,10 +126,11 @@ public class FormConversa extends JFrame {
             adicionaTela(comboTamanhofonte, 130, 207, 40, 20);
             adicionaTela(comboTipoFonte, 175, 207, 169, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-            adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120), 360, 5,
-                    100, 120);
-            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 360, 230,
-                    100, 80);
+            adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120),
+                    360, 5, 100, 120);
+            adicionaTela(lblNomeContato, 360, 130, 100, 20);
+            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 360,
+                    230, 100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
@@ -178,6 +184,15 @@ public class FormConversa extends JFrame {
 
     private JTextPane newJTextPane() {
         return new JTextPane();
+    }
+
+    private JLabel newJLabel(String nome, Boolean isContato) {
+        JLabel lbl = new JLabel(nome, JLabel.CENTER);
+        if (isContato)
+            lbl.setForeground(Color.RED);
+        else
+            lbl.setForeground(Color.BLUE);
+        return lbl;
     }
 
     private JComboBox newJComboBox(String[] valores) {
