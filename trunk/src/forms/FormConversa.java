@@ -93,7 +93,8 @@ public class FormConversa extends JFrame {
             btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
                     "Italico");
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
-            btnAlerta = newJButtonImagem("imagens/atencaoNormal.png", "imagens/atencaoDesabilitado.png","alerta");
+            btnAlerta = newJButtonImagem("imagens/atencaoNormal.png",
+                    "imagens/atencaoDesabilitado.png", "alerta");
             btnSendFile = newJButtonImagem("imagens/enviarArquivo.png",
                     "sendFile");
             comboTamanhofonte = newJComboBox(getValoresComboFont());
@@ -120,6 +121,7 @@ public class FormConversa extends JFrame {
             adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
                     100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
+            txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,7 +242,9 @@ public class FormConversa extends JFrame {
         button.addMouseListener(listener);
         return button;
     }
-    private JButton newJButtonImagem(String urlImagem,String urlImagem2 ,String actionCommand) {
+
+    private JButton newJButtonImagem(String urlImagem, String urlImagem2,
+            String actionCommand) {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource(urlImagem);
         ImageIcon icone = new ImageIcon(res);
@@ -325,6 +329,7 @@ public class FormConversa extends JFrame {
     }
 
     public void setContato(Contatos contato) {
+        txtDescritorMensagem.requestFocus();
         this.contato = contato;
     }
 
@@ -444,15 +449,16 @@ public class FormConversa extends JFrame {
     public JColorChooser getJColorChooser() {
         return jColorChooser;
     }
+
     public JButton getBtnAlerta() {
         return btnAlerta;
     }
-
 
     public void recebeMensagem(Mensagem mensagem) {
         try {
             txtReceptorMensagem.append(mensagem, isContato(mensagem
                     .getUsuarioEnvia()));
+            txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -477,12 +483,12 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setText(text);
         this.color = color;
     }
-    
+
     public void chamarAtencao(Mensagem mensagem) {
         gerente.chamarAtencao(mensagem, getContato());
-        
+
     }
-    
+
     public void disparaThread() {
         this.setExtendedState(NORMAL);
         new ThreadAlerta(this).start();
@@ -538,24 +544,21 @@ public class FormConversa extends JFrame {
         return btnItalico;
     }
 
-
-
-//     /**
-//     * TO REMOVE
-//     */
-//     public static void main(String[] args) {
-//     FormConversa conversa = new FormConversa();
-//     conversa.config();
-//     conversa.inicializar(null, null);
-//     conversa.renderiza();
-//     }
-//    
-//     public FormConversa() {
-//     listener = new FormConversaListener(this, null);
-//     }
-//     /**
-//     * END TO REMOVE
-//     */
-
+    // /**
+    // * TO REMOVE
+    // */
+    // public static void main(String[] args) {
+    // FormConversa conversa = new FormConversa();
+    // conversa.config();
+    // conversa.inicializar(null, null);
+    // conversa.renderiza();
+    // }
+    //    
+    // public FormConversa() {
+    // listener = new FormConversaListener(this, null);
+    // }
+    // /**
+    // * END TO REMOVE
+    // */
 
 }
