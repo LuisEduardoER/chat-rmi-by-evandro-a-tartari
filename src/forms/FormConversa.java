@@ -27,7 +27,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
-import util.RedimencionaImagemIcon;
 import ThreadsCliente.ThreadAlerta;
 import ThreadsCliente.ThreadRecebeArquivo;
 import acao.FormConversaListener;
@@ -122,12 +121,10 @@ public class FormConversa extends JFrame {
             adicionaTela(comboTamanhofonte, 130, 207, 40, 20);
             adicionaTela(comboTipoFonte, 175, 207, 169, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-            adicionaTela(getImagemIcon(RedimencionaImagemIcon
-                    .redimencionaImagem(contato.getImage(), 100, 120, 2000),
-                    100, 120), 360, 5, 100, 120);
-            adicionaTela(getImagemIcon(RedimencionaImagemIcon
-                    .redimencionaImagem(usuario.getImage(), 100, 80, 2000),
-                    100, 80), 360, 230, 100, 80);
+            adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120), 360, 5,
+                    100, 120);
+            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 360, 230,
+                    100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {

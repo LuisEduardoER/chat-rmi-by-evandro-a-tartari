@@ -11,6 +11,7 @@ public class ThreadEnviaNotificacao extends Thread {
     public ThreadEnviaNotificacao(MensageiroServerImpl servidor,
             IMensageiroCliente cliente) {
         this.servidor = servidor;
+        this.cliente = cliente;
     }
 
     public void run() {

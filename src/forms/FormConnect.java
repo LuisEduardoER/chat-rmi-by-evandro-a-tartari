@@ -68,6 +68,7 @@ public class FormConnect extends JFrame {
     private List<JLabel> lblLista;
     private ImageIcon iconContatos;
     private String urlImagem;
+    private ImageIcon iconUsuario;
 
     /**
      * Formulario Responsavel pela conexão que será efetuada entre o cliente e o
@@ -417,6 +418,22 @@ public class FormConnect extends JFrame {
         URL res = clazz.getResource("imagens/serverRunning.png");
         ImageIcon iconImage = new ImageIcon(res);
         return iconImage.getImage();
+    }
+
+    public void setImagemUsuario(ImageIcon icon) {
+        this.setIconUsuario(icon);
+
+    }
+
+    public void setIconUsuario(ImageIcon iconUsuario) {
+        this.iconUsuario = iconUsuario;
+    }
+
+    public ImageIcon getIconUsuario() {
+        if(iconUsuario==null){
+            iconUsuario = getImagemContato();
+        }
+        return iconUsuario;
     }
 
 }
