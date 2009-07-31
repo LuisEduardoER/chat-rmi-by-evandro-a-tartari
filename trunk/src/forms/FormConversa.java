@@ -8,8 +8,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.net.URL;
 import java.rmi.RemoteException;
 
@@ -21,7 +19,6 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
@@ -30,8 +27,8 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
-import util.RedimencionaImagemIcon;
 import ThreadsCliente.ThreadAlerta;
+import ThreadsCliente.ThreadRecebeArquivo;
 import acao.FormConversaListener;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
@@ -534,41 +531,12 @@ public class FormConversa extends JFrame {
                 getFontSize(), getFontFamily(), getColor(), getIsBold(),
                 getIsItalic(), arquivo.getContatoRecebe().getNome());
         txtReceptorMensagem.append(m, true);
+        btnSendFile.setEnabled(true);
 
     }
 
     public void recebeArquivo(EnviaArquivo arquivo) {
-        ClassLoader clazz = this.getClass().getClassLoader();
-        String mensagemTela = contato.getNome() + " enviou um arquivo: "
-                + arquivo.getNomeArquivo();
-        int retorno = JOptionPane
-                .showOptionDialog(this, mensagemTela,
-                        "Notificação de recebimentp de arquivo",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        RedimencionaImagemIcon.redimencionaImagem(clazz
-                                .getResourceAsStream("imagens/file.png"), 35,
-                                35, 1000), null, null);
-        if (retorno == 0) {
-            try {
-                File file = new File("C:/MsMunica/");
-                if (!file.exists()) {
-                    file.mkdir();
-                }
-                String caminho = "C:/MsMunica/" + arquivo.getNomeArquivo();
-                FileOutputStream fos = new FileOutputStream(caminho);
-                byte[] buffer = arquivo.getFile();
-                fos.write(buffer);
-                fos.flush();
-                fos.close();
-                cliente.enviaAvisoEnvioCompleto(arquivo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (retorno == 1) {
-
-        }
-
+        new ThreadRecebeArquivo(arquivo, this, cliente).start();
     }
 
     public void chamarAtencao(Mensagem mensagem) {
