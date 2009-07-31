@@ -42,7 +42,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("enviar")) {
             if (isValid()) {
-                new ThreadEnviarMensagem(this);
+                new ThreadEnviarMensagem(this).start();
             }
 
         } else if (e.getActionCommand().equals("Negrito")) {
