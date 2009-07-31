@@ -17,8 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
-import ThreadsCliente.ThreadAlerta;
-
 import cliente.Mensagem;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
@@ -80,7 +78,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else if (e.getActionCommand().equals("alerta")) {
             conversa.getTxtDescritorMensagens().requestFocus();
             conversa.getBtnAlerta().setEnabled(false);
-            this.disparaThread();
+            conversa.chamarAtencao(getMensagem("está pedindo sua atenção"));
         }
 
     }
@@ -209,9 +207,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     
 
-    private void disparaThread() {
-        new ThreadAlerta(conversa).start();
-        enviarMensagem("está pedindo sua atenção");
-    }
+    
+        
+        
+    
 
 }

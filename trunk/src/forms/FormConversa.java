@@ -26,6 +26,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
+import ThreadsCliente.ThreadAlerta;
 import acao.FormConversaListener;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -476,6 +477,15 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setText(text);
         this.color = color;
     }
+    
+    public void chamarAtencao(Mensagem mensagem) {
+        gerente.chamarAtencao(mensagem, getContato());
+        
+    }
+    
+    public void disparaThread() {
+        new ThreadAlerta(this).start();
+    }
 
     public String getNomeConversa() {
         return nomeConversa;
@@ -526,6 +536,8 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnItalico() {
         return btnItalico;
     }
+
+
 
 //     /**
 //     * TO REMOVE

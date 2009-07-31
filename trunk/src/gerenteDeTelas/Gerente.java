@@ -303,4 +303,40 @@ public class Gerente {
 
     }
 
+    public void chamarAtencao(Mensagem mensagem, Contatos contato) {
+        try {
+            cliente.chamarAtencao(mensagem, contato);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void receberChamadaAtencao(Mensagem mensagem) {
+        String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
+        String name2 = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        if (getListaConversa().get(name) != null) {
+            getListaConversa().get(name).recebeMensagem(mensagem);
+            getListaConversa().get(name).disparaThread();
+        } else if (getListaConversa().get(name2) != null) {
+            getListaConversa().get(name2).recebeMensagem(mensagem);
+            getListaConversa().get(name2).disparaThread();
+        } else {
+            Contatos contato = new Contatos();
+            contato.setLogin(mensagem.getUsuarioEnvia());
+            int posicao = getFormListFriends().getContatos().indexOf(contato);
+            if (posicao != -1) {
+                contato = (Contatos) getFormListFriends().getContatos().get(
+                        posicao);
+                try {
+                    this.iniciaConversa(contato, mensagem);
+                    name = cliente.getContatos().getLogin() + contato.getLogin();
+                    getListaConversa().get(name).disparaThread();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
+
 }
