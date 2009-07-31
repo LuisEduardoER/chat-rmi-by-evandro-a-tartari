@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
@@ -225,30 +226,10 @@ public class Gerente {
     }
 
     public void recebeMensagem(Mensagem mensagem) {
-        String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
-        String name2 = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
-        if (getListaConversa().get(name) != null) {
-            getListaConversa().get(name).recebeMensagem(mensagem);
-        } else if (getListaConversa().get(name2) != null) {
-            getListaConversa().get(name2).recebeMensagem(mensagem);
-        } else {
-            Contatos contato = new Contatos();
-            contato.setLogin(mensagem.getUsuarioEnvia());
-            int posicao = getFormListFriends().getContatos().indexOf(contato);
-            if (posicao != -1) {
-                contato = (Contatos) getFormListFriends().getContatos().get(
-                        posicao);
-                try {
-                    this.iniciaConversa(contato, mensagem);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
+        new ThreadRecebeMensagem(this, mensagem).start();
     }
 
-    private void iniciaConversa(Contatos contato, Mensagem mensagem) {
+    public void iniciaConversa(Contatos contato, Mensagem mensagem) {
         try {
             String name = cliente.getContatos().getLogin() + contato.getLogin();
             if (listaConversa.get(name) != null) {
