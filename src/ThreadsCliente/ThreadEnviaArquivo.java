@@ -16,7 +16,7 @@ public class ThreadEnviaArquivo extends Thread{
     }
     public void run() {
         try{
-        conversa.getFileChooser().getSelectedFile().getPath();
+        url = conversa.getFileChooser().getSelectedFile().getPath();
         gerente.enviaArquivo(conversa.getCliente().getContatos(), conversa.getContato(), url);
         conversa.fechaEnviaArquivo();
         }catch (Exception e) {
