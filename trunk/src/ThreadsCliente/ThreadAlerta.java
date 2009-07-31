@@ -1,7 +1,5 @@
 package ThreadsCliente;
 
-import javax.swing.JFrame;
-
 import forms.FormConversa;
 
 public class ThreadAlerta extends Thread {
@@ -28,7 +26,6 @@ public class ThreadAlerta extends Thread {
             int xI = -8;
             int yI = -8;
             int var = 16;
-            conversa.setExtendedState(JFrame.NORMAL);
             while (i < 150) {
                 conversa.setLocation(x + xI, y + yI);
                 xI += var;
