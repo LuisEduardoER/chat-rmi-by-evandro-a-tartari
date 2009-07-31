@@ -4,6 +4,7 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 import interfaces.IMensageiroServer;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -106,6 +107,17 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 
     public void receberChamadaAtencao(Mensagem mensagem) throws RemoteException {
         gerente.receberChamadaAtencao(mensagem);
+        
+    }
+
+    public void enviaArquivo(Contatos contato, File file) throws RemoteException {
+        servidor.enviaArquivo(contato, file);
+        
+    }
+
+    public void recebeArquivo(Contatos contato, File file)
+            throws RemoteException {
+        gerente.recebeArquivo(contato, file);
         
     }
 
