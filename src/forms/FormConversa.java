@@ -80,7 +80,7 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            setTitle(contato.getLogin());
+//            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextAreaA();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
@@ -92,7 +92,7 @@ public class FormConversa extends JFrame {
             btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
                     "Italico");
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
-            btnAlerta = newJButtonImagem("imagens/atencao.png", "alerta");
+            btnAlerta = newJButtonImagem("imagens/atencaoNormal.png", "imagens/atencaoDesabilitado.png","alerta");
             btnSendFile = newJButtonImagem("imagens/enviarArquivo.png",
                     "sendFile");
             comboTamanhofonte = newJComboBox(getValoresComboFont());
@@ -114,10 +114,10 @@ public class FormConversa extends JFrame {
             adicionaTela(comboTamanhofonte, 130, 207, 40, 20);
             adicionaTela(comboTipoFonte, 175, 207, 169, 20);
             adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
-            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
-                    100, 120);
-            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
-                    100, 80);
+//            adicionaTela(getImagemIcon(contato.getImage(), 100, 120), 360, 5,
+//                    100, 120);
+//            adicionaTela(getImagemIcon(usuario.getImage(), 100, 80), 360, 230,
+//                    100, 80);
             adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,6 +234,24 @@ public class FormConversa extends JFrame {
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
         button.setIcon(icone);
+        button.setActionCommand(actionCommand);
+        button.addActionListener(listener);
+        button.addMouseListener(listener);
+        return button;
+    }
+    private JButton newJButtonImagem(String urlImagem,String urlImagem2 ,String actionCommand) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        ImageIcon icone = new ImageIcon(res);
+        JButton button = new JButton();
+        button.setBorderPainted(false);
+        button.setSize(new Dimension(20, 20));
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setIcon(icone);
+        res = clazz.getResource(urlImagem2);
+        icone = new ImageIcon(res);
+        button.setDisabledIcon(icone);
         button.setActionCommand(actionCommand);
         button.addActionListener(listener);
         button.addMouseListener(listener);
@@ -425,6 +443,10 @@ public class FormConversa extends JFrame {
     public JColorChooser getJColorChooser() {
         return jColorChooser;
     }
+    public JButton getBtnAlerta() {
+        return btnAlerta;
+    }
+
 
     public void recebeMensagem(Mensagem mensagem) {
         try {
@@ -505,21 +527,22 @@ public class FormConversa extends JFrame {
         return btnItalico;
     }
 
-    // /**
-    // * TO REMOVE
-    // */
-    // public static void main(String[] args) {
-    // FormConversa conversa = new FormConversa();
-    // conversa.config();
-    // conversa.inicializar(null, null);
-    // conversa.renderiza();
-    // }
-    //
-    // public FormConversa() {
-    // listener = new FormConversaListener(this, null);
-    // }
-    // /**
-    // * END TO REMOVE
-    // */
+     /**
+     * TO REMOVE
+     */
+     public static void main(String[] args) {
+     FormConversa conversa = new FormConversa();
+     conversa.config();
+     conversa.inicializar(null, null);
+     conversa.renderiza();
+     }
+    
+     public FormConversa() {
+     listener = new FormConversaListener(this, null);
+     }
+     /**
+     * END TO REMOVE
+     */
+
 
 }
