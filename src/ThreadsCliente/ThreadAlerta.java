@@ -46,7 +46,7 @@ public class ThreadAlerta extends Thread {
     private void setEnableButton() {
         if (!conversa.getBtnAlerta().isEnabled()) {
             try {
-                this.sleep(5000);
+                this.sleep(10000);
                 conversa.getBtnAlerta().setEnabled(true);
             } catch (Exception e) {
                 e.printStackTrace();
