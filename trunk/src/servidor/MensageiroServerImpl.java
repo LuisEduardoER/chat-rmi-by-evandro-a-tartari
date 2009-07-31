@@ -3,7 +3,6 @@ package servidor;
 import interfaces.IMensageiroCliente;
 import interfaces.IMensageiroServer;
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
 
@@ -180,9 +180,15 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(mensagem);
     }
 
-    public void enviaArquivo(Contatos contato, File file)
+    public void enviaArquivo(EnviaArquivo arquivo) throws RemoteException {
+        getClientes().get(arquivo.getContatoRecebe().getLogin()).recebeArquivo(
+                arquivo);
+    }
+
+    public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException {
-        getClientes().get(contato.getLogin()).recebeArquivo(contato, file);
+        getClientes().get(arquivo.getContatoEnvia().getLogin()).recebeAvisoEnvioCompleto(arquivo);
+        
     }
 
 }

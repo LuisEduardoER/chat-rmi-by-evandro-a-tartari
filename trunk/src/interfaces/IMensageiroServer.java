@@ -1,12 +1,11 @@
 package interfaces;
 
-import java.io.File;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import contatos.Contatos;
-
+import cliente.EnviaArquivo;
 import cliente.Mensagem;
+import contatos.Contatos;
 /**
  * 
  * @author evandro.tartari
@@ -22,5 +21,6 @@ public interface IMensageiroServer extends Remote{
 	public void enviarMensagem(Mensagem mensagem)throws RemoteException;
     public void clean()throws RemoteException;
     public void chamarAtencao(Mensagem mensagem, Contatos contato)throws RemoteException;
-    public void enviaArquivo(Contatos contato, File file)throws RemoteException;
+    public void enviaArquivo(EnviaArquivo arquivo)throws RemoteException;
+    public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)throws RemoteException;
 }

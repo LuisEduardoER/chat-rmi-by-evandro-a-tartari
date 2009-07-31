@@ -82,9 +82,13 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else if (e.getActionCommand().equals("sendFile")) {
             conversa.instanciaEnviaArquivo();
         } else if (e.getActionCommand().equals("ApproveSelection")) {
+            try{
             String url = conversa.getFileChooser().getSelectedFile().getPath();
-            gerente.enviaArquivo(conversa.getContato(), url);
+            gerente.enviaArquivo(conversa.getCliente().getContatos(), conversa.getContato(), url);
             conversa.fechaEnviaArquivo();
+            }catch (Exception e1) {
+                e1.printStackTrace();
+            }
         } else if (e.getActionCommand().equals("CancelSelection")) {
             conversa.fechaEnviaArquivo();
         }

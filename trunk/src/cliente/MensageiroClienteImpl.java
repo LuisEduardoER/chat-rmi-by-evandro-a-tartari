@@ -4,7 +4,6 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 import interfaces.IMensageiroServer;
 
-import java.io.File;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -110,15 +109,26 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         
     }
 
-    public void enviaArquivo(Contatos contato, File file) throws RemoteException {
-        servidor.enviaArquivo(contato, file);
+    public void enviaArquivo(EnviaArquivo arquivo) throws RemoteException {
+        servidor.enviaArquivo(arquivo);
         
     }
 
-    public void recebeArquivo(Contatos contato, File file)
+    public void recebeArquivo(EnviaArquivo arquivo) throws RemoteException {
+        gerente.recebeArquivo(arquivo);
+        
+    }
+
+    public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException {
-        gerente.recebeArquivo(contato, file);
+        servidor.enviaAvisoEnvioCompleto(arquivo);
         
     }
 
+    public void recebeAvisoEnvioCompleto(EnviaArquivo arquivo) throws RemoteException {
+       gerente.recebeAvisoEnvioCompleto(arquivo);
+        
+    }
+
+ 
 }

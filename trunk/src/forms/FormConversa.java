@@ -8,6 +8,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.rmi.RemoteException;
 
@@ -17,7 +19,9 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
@@ -26,8 +30,10 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
+import util.RedimencionaImagemIcon;
 import ThreadsCliente.ThreadAlerta;
 import acao.FormConversaListener;
+import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
 
@@ -68,6 +74,8 @@ public class FormConversa extends JFrame {
     private JButton btnPaleta;
     private JButton btnSendFile;
     private JButton btnAlerta;
+    private JFrame enviaArquivo;
+    private JFileChooser fileChooser;
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
@@ -95,17 +103,8 @@ public class FormConversa extends JFrame {
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
             btnAlerta = newJButtonImagem("imagens/atencaoNormal.png",
                     "imagens/atencaoDesabilitado.png", "alerta");
-            btnSendFile = newJButtonImagem("imagens/enviarArquivo.png","imagens/enviarArquivoDesabilitado.png",
-                    "sendFile");
-            /**
-             *TO REMOVE 
-             */
-            btnSendFile.setEnabled(false);
-            /**
-             * END TO REMOVE
-             */
-            
-            
+            btnSendFile = newJButtonImagem("imagens/enviarArquivo.png",
+                    "imagens/enviarArquivoDesabilitado.png", "sendFile");
             comboTamanhofonte = newJComboBox(getValoresComboFont());
             comboTamanhofonte.setActionCommand("TamFonte");
             comboTipoFonte = newJComboBox(getTipoFonte());
@@ -421,7 +420,13 @@ public class FormConversa extends JFrame {
     }
 
     public void instanciaPaletaCores() {
+        btnPaletaCores.setEnabled(false);
         getPaletaCores().setVisible(true);
+    }
+
+    public void instanciaEnviaArquivo() {
+        btnSendFile.setEnabled(false);
+        getEnviaArquivo().setVisible(true);
     }
 
     public void fechaPaletaCores() {
@@ -429,6 +434,16 @@ public class FormConversa extends JFrame {
         paletaCores.dispose();
         jColorChooser = null;
         btnPaleta = null;
+    }
+
+    public void fechaEnviaArquivo() {
+        txtDescritorMensagem.requestFocus();
+        enviaArquivo.dispose();
+        fileChooser = null;
+    }
+
+    public JFileChooser getFileChooser() {
+        return fileChooser;
     }
 
     public JFrame getPaleta() {
@@ -453,6 +468,26 @@ public class FormConversa extends JFrame {
         paletaCores.add(btnPaleta);
         paletaCores.setUndecorated(true);
         return paletaCores;
+    }
+
+    public JFrame getEnviaArquivo() {
+        enviaArquivo = new JFrame();
+        enviaArquivo.setDefaultCloseOperation(ICONIFIED);
+        enviaArquivo.setExtendedState(NORMAL);
+        enviaArquivo.setSize(510, 300);
+        enviaArquivo.setContentPane(new Container());
+        enviaArquivo.setLocationRelativeTo(txtReceptorMensagem);
+        fileChooser = new JFileChooser();
+        fileChooser.setBounds(0, 0, 510, 300);
+        fileChooser.addActionListener(listener);
+        fileChooser.requestFocus();
+        enviaArquivo.add(fileChooser);
+        enviaArquivo.setUndecorated(true);
+        return enviaArquivo;
+    }
+
+    public JButton getBtnSendFile() {
+        return btnSendFile;
     }
 
     public JColorChooser getJColorChooser() {
@@ -491,6 +526,49 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
         txtDescritorMensagem.setText(text);
         this.color = color;
+    }
+
+    public void recebeAviso(EnviaArquivo arquivo) {
+        Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
+                .getContatoEnvia().getNome(), arquivo.getRetorno(), "",
+                getFontSize(), getFontFamily(), getColor(), getIsBold(),
+                getIsItalic(), arquivo.getContatoRecebe().getNome());
+        txtReceptorMensagem.append(m, true);
+
+    }
+
+    public void recebeArquivo(EnviaArquivo arquivo) {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        String mensagemTela = contato.getNome() + " enviou um arquivo: "
+                + arquivo.getNomeArquivo();
+        int retorno = JOptionPane
+                .showOptionDialog(this, mensagemTela,
+                        "Notificação de recebimentp de arquivo",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        RedimencionaImagemIcon.redimencionaImagem(clazz
+                                .getResourceAsStream("imagens/file.png"), 35,
+                                35, 1000), null, null);
+        if (retorno == 0) {
+            try {
+                File file = new File("C:/MsMunica/");
+                if (!file.exists()) {
+                    file.mkdir();
+                }
+                String caminho = "C:/MsMunica/" + arquivo.getNomeArquivo();
+                FileOutputStream fos = new FileOutputStream(caminho);
+                byte[] buffer = arquivo.getFile();
+                fos.write(buffer);
+                fos.flush();
+                fos.close();
+                cliente.enviaAvisoEnvioCompleto(arquivo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (retorno == 1) {
+
+        }
+
     }
 
     public void chamarAtencao(Mensagem mensagem) {
@@ -534,6 +612,8 @@ public class FormConversa extends JFrame {
     public void disableChat() {
         this.txtDescritorMensagem.setEnabled(false);
         this.btnEnviarMensagem.setEnabled(false);
+        this.btnSendFile.setEnabled(false);
+        this.btnAlerta.setEnabled(false);
     }
 
     public Boolean isContato(String login) {
@@ -552,7 +632,7 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnItalico() {
         return btnItalico;
     }
-
+    //
     // /**
     // * TO REMOVE
     // */
@@ -562,10 +642,11 @@ public class FormConversa extends JFrame {
     // conversa.inicializar(null, null);
     // conversa.renderiza();
     // }
-    //    
+    //
     // public FormConversa() {
     // listener = new FormConversaListener(this, null);
     // }
+    //
     // /**
     // * END TO REMOVE
     // */
