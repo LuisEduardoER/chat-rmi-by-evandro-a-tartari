@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import servidor.ThreadsServidor.ThreadArquivo;
+import servidor.ThreadsServidor.ThreadChamarAtencao;
+import servidor.ThreadsServidor.ThreadEnviaNotificacao;
+import servidor.ThreadsServidor.ThreadEnviarMensagem;
+import servidor.ThreadsServidor.ThreadRemove;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -78,17 +83,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void enviarNotificacao(IMensageiroCliente cliente)
             throws RemoteException {
-        if (getContatos().size() > 0) {
-            for (Contatos contato : getContatos()) {
-                if (contato.getLogin().equals(cliente.getContatos().getLogin())) {
-                    cliente.adicionaUsuario(cliente.getContatos());
-                } else {
-                    cliente.adicionaContato(contato);
-                    getClientes().get(contato.getLogin()).adicionaContato(
-                            cliente.getContatos());
-                }
-            }
-        }
+        new ThreadEnviaNotificacao(this, cliente).start();
     }
 
     /**
@@ -140,15 +135,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
-        if (getClientes().get(mensageiro.getContatos().getLogin()) != null) {
-            getClientes().remove(mensageiro.getContatos().getLogin());
-            getContatos().remove(mensageiro.getContatos());
-            for (Contatos contato : getContatos()) {
-                getClientes().get(contato.getLogin()).removeContato(
-                        mensageiro.getContatos());
-            }
-        }
-        System.out.println("Saida: " + mensageiro.getContatos().getLogin());
+        new ThreadRemove(this, mensageiro).start();
     }
 
     public void parar() {
@@ -160,12 +147,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public void enviarMensagem(Mensagem mensagem) throws RemoteException {
-        if (getClientes().get(mensagem.getContatoRecebe()) != null) {
-            getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(
-                    mensagem);
-            getClientes().get(mensagem.getContatoRecebe()).receberMensagem(
-                    mensagem);
-        }
+        new ThreadEnviarMensagem(this, mensagem).start();
     }
 
     public void clean() throws RemoteException {
@@ -175,20 +157,18 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void chamarAtencao(Mensagem mensagem, Contatos contato)
             throws RemoteException {
-        getClientes().get(contato.getLogin()).receberChamadaAtencao(mensagem);
-        mensagem.setMensagem("Você pediu a atenção de " + contato.getNome());
-        getClientes().get(mensagem.getUsuarioEnvia()).receberMensagem(mensagem);
+        new ThreadChamarAtencao(this, mensagem, contato).start();
     }
 
     public void enviaArquivo(EnviaArquivo arquivo) throws RemoteException {
-        getClientes().get(arquivo.getContatoRecebe().getLogin()).recebeArquivo(
-                arquivo);
+        new ThreadArquivo(this, arquivo).start();
     }
 
     public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException {
-        getClientes().get(arquivo.getContatoEnvia().getLogin()).recebeAvisoEnvioCompleto(arquivo);
-        
+        getClientes().get(arquivo.getContatoEnvia().getLogin())
+                .recebeAvisoEnvioCompleto(arquivo);
+
     }
 
 }
