@@ -90,8 +90,8 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            setTitle(contato.getLogin());
-            txtReceptorMensagem = newJTextAreaA();
+            // setTitle(contato.getLogin());
+            txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
             simpleAttributeSet = new SimpleAttributeSet();
@@ -118,28 +118,29 @@ public class FormConversa extends JFrame {
                     "imagens/btnEnviarpressionado.png");
             lblNomeContato = newJLabel(contato.getNome(), true);
             lblNomeUsuario = newJLabel(usuario.getNome(), false);
-            adicionaTela(scroolPanelReceptor, 5, 5, 340, 200);
-            adicionaTela(btnNegrito, 6, 207, 20, 20);
-            adicionaTela(btnItalico, 31, 207, 20, 20);
-            adicionaTela(btnPaletaCores, 56, 207, 20, 20);
-            adicionaTela(btnSendFile, 81, 207, 20, 20);
-            adicionaTela(btnAlerta, 106, 207, 20, 20);
-            adicionaTela(comboTamanhofonte, 130, 207, 40, 20);
-            adicionaTela(comboTipoFonte, 175, 207, 169, 20);
-            adicionaTela(scrollPaneDescritor, 5, 230, 340, 120);
+            adicionaTela(scroolPanelReceptor, 5, 5, 390, 250);
+            adicionaTela(btnNegrito, 6, 257, 20, 20);
+            adicionaTela(btnItalico, 31, 257, 20, 20);
+            adicionaTela(btnPaletaCores, 56, 257, 20, 20);
+            adicionaTela(btnSendFile, 81, 257, 20, 20);
+            adicionaTela(btnAlerta, 106, 257, 20, 20);
+            adicionaTela(comboTamanhofonte, 130, 257, 40, 20);
+            adicionaTela(comboTipoFonte, 175, 257, 169, 20);
+            adicionaTela(scrollPaneDescritor, 5, 280, 390, 145);
             adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120),
-                    360, 5, 100, 120);
-            adicionaTela(lblNomeContato, 360, 130, 100, 20);
-            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 360,
-                    230, 100, 80);
-            adicionaTela(btnEnviarMensagem, 365, 305, 90, 50);
+                    405, 5, 110, 130);
+            adicionaTela(lblNomeContato, 388, 135, 140, 20);
+            adicionaTela(lblNomeUsuario, 388, 365, 140, 20);
+            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 405,
+                    281, 110, 80);
+            adicionaTela(btnEnviarMensagem, 415, 379, 90, 50);
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private JTextPaneI newJTextAreaA() {
+    private JTextPaneI newJTextPanelI() {
         JTextPaneI area = new JTextPaneI();
         return area;
     }
@@ -149,7 +150,7 @@ public class FormConversa extends JFrame {
      */
     public void config() {
         try {
-            setSize(480, 390);
+            setSize(530, 462);
             setIconImage(getIcon());
             setLocationRelativeTo(null);
             setResizable(false);
@@ -189,7 +190,8 @@ public class FormConversa extends JFrame {
 
     private JLabel newJLabel(String nome, Boolean isContato) {
         JLabel lbl = new JLabel(nome, JLabel.CENTER);
-        lbl.setFont(new Font("verdana", Font.BOLD, 18));
+        lbl.setFont(new Font("verdana", Font.BOLD, 14));
+        lbl.setBackground(Color.BLACK);
         if (isContato)
             lbl.setForeground(Color.RED);
         else
@@ -628,23 +630,23 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnItalico() {
         return btnItalico;
     }
-    //
-    // /**
-    // * TO REMOVE
-    // */
-    // public static void main(String[] args) {
-    // FormConversa conversa = new FormConversa();
-    // conversa.config();
-    // conversa.inicializar(null, null);
-    // conversa.renderiza();
-    // }
-    //
-    // public FormConversa() {
-    // listener = new FormConversaListener(this, null);
-    // }
-    //
-    // /**
-    // * END TO REMOVE
-    // */
+
+    /**
+     * TO REMOVE
+     */
+    public static void main(String[] args) {
+        FormConversa conversa = new FormConversa();
+        conversa.config();
+        conversa.inicializar(null, null);
+        conversa.renderiza();
+    }
+
+    public FormConversa() {
+        listener = new FormConversaListener(this, null);
+    }
+
+    /**
+     * END TO REMOVE
+     */
 
 }
