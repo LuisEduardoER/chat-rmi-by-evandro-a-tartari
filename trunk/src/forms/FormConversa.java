@@ -120,8 +120,9 @@ public class FormConversa extends JFrame {
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
-            lblNomeContato = newJLabel(contato.getNome(), true);
-            lblNomeUsuario = newJLabel(usuario.getNome(), false);
+            lblNomeContato = newJLabel(contato.getNome().substring(0, 14), true);
+            lblNomeUsuario = newJLabel(usuario.getNome().substring(0, 14),
+                    false);
             adicionaTela(scroolPanelReceptor, 5, 5, 390, 250);
             adicionaTela(btnNegrito, 6, 257, 20, 20);
             adicionaTela(btnItalico, 33, 257, 20, 20);
