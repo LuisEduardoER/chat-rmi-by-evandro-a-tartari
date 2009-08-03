@@ -4,6 +4,7 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -56,6 +57,7 @@ public class FormListFriends extends JFrame {
     private JScrollPane scrollContatos;
     private JToolBar painelBotoes;
     private JPanel painelUsuario;
+    private JPanel painelStatus;
     private DefaultListModel modelContatos;
     private JList listaContatos;
     private IMensageiroCliente cliente;
@@ -100,6 +102,7 @@ public class FormListFriends extends JFrame {
         modelContatos = newDefaultListModel();
         listaContatos = newJList(modelContatos);
         painelUsuario = newJPanel();
+        painelStatus = newJPanel();
         listaContatos.setCellRenderer(new ContatosRender());
         scrollContatos.setViewportView(listaContatos);
         btnAdicionaContato = newJButton("imagens/adicionaContato.gif",
@@ -116,8 +119,9 @@ public class FormListFriends extends JFrame {
         adicionaPainelBotoes(new JComponent[] { btnAdicionaContato, btnChat,
                 btnOpenDownloads, btnRemoveContato });
         adicionaTela(painelUsuario, 5, 0, 245, 120);
-        adicionaTela(painelBotoes, 5, 120, 245, 28);
-        adicionaTela(scrollContatos, 5, 148, 245, 560);
+        adicionaTela(painelStatus, 5, 120, 245, 20);
+        adicionaTela(painelBotoes, 5, 140, 245, 28);
+        adicionaTela(scrollContatos, 5, 168, 245, 570);
         modelContatos.addElement(new Contatos(" Friends"));
         disableButtons();
 
@@ -197,12 +201,18 @@ public class FormListFriends extends JFrame {
         combo.setRenderer(new ComboCellRender());
         combo.setActionCommand("Estado");
         combo.setBounds(50, 120, 150, 20);
-        Object[] onLine = new Object[] { "On Line",
-                getImageIcon("imagens/online.png") };
-        Object[] ausente = new Object[] { "Ausente",
-                getImageIcon("imagens/ausente.png") };
-        Object[] ocupado = new Object[] { "Ocupado",
-                getImageIcon("imagens/ocupado.png") };
+        Object[] onLine = new Object[] {
+                "On Line",
+                RedimencionaImagemIcon.redimencionaImagem(
+                        getImageIcon("imagens/online.png"), 10, 10, 1500) };
+        Object[] ausente = new Object[] {
+                "Ausente",
+                RedimencionaImagemIcon.redimencionaImagem(
+                        getImageIcon("imagens/ausente.png"), 10, 10, 1500) };
+        Object[] ocupado = new Object[] {
+                "Ocupado",
+                RedimencionaImagemIcon.redimencionaImagem(
+                        getImageIcon("imagens/ocupado.png"), 10, 10, 1500) };
         combo.addItem(onLine);
         combo.addItem(ausente);
         combo.addItem(ocupado);
@@ -293,27 +303,22 @@ public class FormListFriends extends JFrame {
     }
 
     public void adicionaUsuario(Contatos contatos) {
-        Border borda = BorderFactory.createLoweredBevelBorder();
-        JPanel painelPrincipal = new JPanel();
-        painelPrincipal.setBorder(borda);
         ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(contatos
                 .getIconUsuario(), 50, 50, 1500);
         String nome = contatos.getNome();
         JLabel lbl = new JLabel("", JLabel.CENTER);
-        lbl.setBounds(0, 0, 50, 50);
+        lbl.setBounds(30, 30, 50, 50);
         lbl.setIcon(icon);
-        painelPrincipal.add(lbl);
-        painelPrincipal.setBounds(30, 30, 50, 50);
-        painelUsuario.add(painelPrincipal);
+        painelUsuario.add(lbl);
         lbl = new JLabel(nome, JLabel.CENTER);
-        lbl.setBounds(30, 85, 80, 30);
+        lbl.setBounds(30, 85, 100, 30);
+        lbl.setForeground(Color.BLUE);
         lbl.setFont(new Font("verdana", Font.BOLD, 13));
         painelUsuario.add(lbl);
-        painelPrincipal = new JPanel();
         status = newJComboBox();
         status.addActionListener(listener);
         status.setSelectedIndex(0);
-        painelUsuario.add(status);
+        painelStatus.add(status);
         setVisible(true);
     }
 
