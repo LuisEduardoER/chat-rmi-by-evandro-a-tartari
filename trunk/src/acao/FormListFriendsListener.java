@@ -1,5 +1,6 @@
 package acao;
 
+import java.awt.Desktop;
 import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,16 +10,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
 
 import javax.swing.JFrame;
 
 import contatos.Contatos;
 import forms.FormListFriends;
 import gerenteDeTelas.Gerente;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class FormListFriendsListener implements ActionListener, KeyListener,
         MouseListener, WindowListener {
@@ -37,6 +40,16 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
             formContatos.removeCliente();
             formContatos.dispose();
             System.exit(0);
+        } else if (e.getActionCommand().equals("Downloads")) {
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                File file = new File("C:\\MsMundica");
+                if (!file.exists())
+                    file.mkdir();
+                desktop.open(file);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
 
     }
