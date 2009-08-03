@@ -79,7 +79,6 @@ public class FormConversa extends JFrame {
     private JButton btnAlerta;
     private JFrame enviaArquivo;
     private JFileChooser fileChooser;
-    
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
@@ -104,7 +103,8 @@ public class FormConversa extends JFrame {
                     "Negrito");
             btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
                     "Italico");
-            btnSublinhado = newJToggleButton(getImageIcon("imagens/sublinhado.png"), "Sublinhado");
+            btnSublinhado = newJToggleButton(
+                    getImageIcon("imagens/sublinhado.png"), "Sublinhado");
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
             btnAlerta = newJButtonImagem("imagens/atencaoNormal.png",
                     "imagens/atencaoDesabilitado.png", "alerta");
@@ -125,7 +125,7 @@ public class FormConversa extends JFrame {
             adicionaTela(scroolPanelReceptor, 5, 5, 390, 250);
             adicionaTela(btnNegrito, 6, 257, 20, 20);
             adicionaTela(btnItalico, 33, 257, 20, 20);
-            adicionaTela(btnSublinhado, 60, 257, 20,20);
+            adicionaTela(btnSublinhado, 60, 257, 20, 20);
             adicionaTela(btnPaletaCores, 87, 257, 20, 20);
             adicionaTela(btnSendFile, 114, 257, 20, 20);
             adicionaTela(btnAlerta, 141, 257, 20, 20);
@@ -373,8 +373,8 @@ public class FormConversa extends JFrame {
     public Boolean getIsItalic() {
         return isItalic;
     }
-    
-    public Boolean getIsSublinhado(){
+
+    public Boolean getIsSublinhado() {
         return isSublinhado;
     }
 
@@ -422,8 +422,8 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setText(text);
         this.isItalic = isItalic;
     }
-    
-    public void setIsSublinhado(Boolean isSublinhado){
+
+    public void setIsSublinhado(Boolean isSublinhado) {
         StyleConstants.setUnderline(simpleAttributeSet, isSublinhado);
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
@@ -566,7 +566,8 @@ public class FormConversa extends JFrame {
         Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
                 .getContatoEnvia().getNome(), arquivo.getRetorno(), "",
                 getFontSize(), getFontFamily(), getColor(), getIsBold(),
-                getIsItalic(), arquivo.getContatoRecebe().getNome());
+                getIsItalic(), getIsSublinhado(), arquivo.getContatoRecebe()
+                        .getNome());
         txtReceptorMensagem.append(m, true);
         btnSendFile.setEnabled(true);
 
@@ -578,7 +579,7 @@ public class FormConversa extends JFrame {
                 "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
                         + arquivo.getNomeArquivo(), "", getFontSize(),
                 getFontFamily(), getColor(), getIsBold(), getIsItalic(),
-                arquivo.getContatoRecebe().getNome());
+                getIsSublinhado(), arquivo.getContatoRecebe().getNome());
         txtReceptorMensagem.append(m, false);
 
     }
@@ -648,8 +649,8 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnItalico() {
         return btnItalico;
     }
-    
-    public JToggleButton getBtnSublinhado(){
+
+    public JToggleButton getBtnSublinhado() {
         return btnSublinhado;
     }
 
