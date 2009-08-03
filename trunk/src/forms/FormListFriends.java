@@ -74,6 +74,7 @@ public class FormListFriends extends JFrame {
     private List<Contatos> modelAux;
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
+    private JLabel lblUsuario = new JLabel();
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
@@ -313,17 +314,16 @@ public class FormListFriends extends JFrame {
 
     public void adicionaUsuario(Contatos contatos) {
         painelUsuario.setComponentOrientation(ComponentOrientation.UNKNOWN);
-        JLabel lbl = new JLabel();
-        lbl.setBounds(50, 20, 150, 100);
-        lbl.setVerticalAlignment(JLabel.CENTER);
-        lbl.setHorizontalAlignment(JLabel.CENTER);
-        lbl.setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos
+        lblUsuario.setBounds(50, 20, 150, 100);
+        lblUsuario.setVerticalAlignment(JLabel.CENTER);
+        lblUsuario.setHorizontalAlignment(JLabel.CENTER);
+        lblUsuario.setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos
                 .getIconUsuario(), 60, 60, 1000));
-        lbl.setText(contatos.getNome());
-        lbl.setBounds(30, 85, 100, 30);
-        lbl.setForeground(Color.BLUE);
-        lbl.setFont(new Font("verdana", Font.BOLD, 14));
-        painelUsuario.add(lbl);
+        lblUsuario.setText(contatos.getNome());
+        lblUsuario.setBounds(30, 85, 100, 30);
+        lblUsuario.setForeground(Color.BLUE);
+        lblUsuario.setFont(new Font("verdana", Font.BOLD, 14));
+        painelUsuario.add(lblUsuario);
         status = newJComboBox();
         status.addActionListener(listener);
         painelStatus.add(status);
@@ -524,6 +524,9 @@ public class FormListFriends extends JFrame {
        return this.cliente;
        
     }
+    public JLabel getLblNome() {
+        return lblUsuario;
+    }
 
     public boolean getIsListaAberta() {
         return isListaAberta;
@@ -532,5 +535,7 @@ public class FormListFriends extends JFrame {
     public JComboBox getComboEstado() {
         return status;
     }
+
+    
 
 }
