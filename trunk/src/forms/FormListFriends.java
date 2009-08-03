@@ -69,7 +69,9 @@ public class FormListFriends extends JFrame {
     private JComboBox status;
     private TrayManagerFormListFriend trayManager;
     private FormListFriendsListener listener;
+    private DefaultListModel modelAux;
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
+    private Boolean isListaAberta = true;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
@@ -100,6 +102,7 @@ public class FormListFriends extends JFrame {
     public void inicializa() {
         scrollContatos = newJScrollPane();
         modelContatos = newDefaultListModel();
+        modelAux = newDefaultListModel();
         listaContatos = newJList(modelContatos);
         painelUsuario = newJPanel();
         painelStatus = newJPanel();
@@ -299,7 +302,11 @@ public class FormListFriends extends JFrame {
      * @param contato
      */
     public void adicionaContato(Contatos contato) {
-        new ThreadAdicionaContato(modelContatos, contato).start();
+        if(isListaAberta){
+            new ThreadAdicionaContato(modelContatos, contato).start();
+        }else{
+            new ThreadAdicionaContato(modelAux, contato).start();
+        }
     }
 
     public void adicionaUsuario(Contatos contatos) {
@@ -493,6 +500,31 @@ public class FormListFriends extends JFrame {
             e.printStackTrace();
         }
 
+    }
+
+    public void IsListaAberta(boolean isListaAberta, Contatos contato) {
+        if (isListaAberta) {
+            modelContatos.clear();
+            modelContatos = modelAux;
+            modelAux.clear();
+        } else {
+            modelAux = modelContatos;
+            modelContatos.clear();
+            modelContatos.addElement(contato);
+        }
+        this.isListaAberta = isListaAberta;
+    }
+
+    public void adicionaContatoAux(Contatos contato) {
+        modelAux.addElement(contato);
+    }
+
+    public DefaultListModel getModelAux() {
+        return modelAux;
+    }
+
+    public boolean getIsListaAberta() {
+        return isListaAberta;
     }
 
 }

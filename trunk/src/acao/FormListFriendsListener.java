@@ -85,9 +85,16 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
+                } else {
+                    Contatos contato = (Contatos) formContatos
+                            .getListaContatos().getSelectedValue();
+                    if (formContatos.getIsListaAberta()) {
+                        contato.setIconListaFechada();
+                        formContatos.IsListaAberta(false, contato);
+                    } else {
+                        formContatos.IsListaAberta(true, contato);
+                    }
                 }
-            }else{
-                
             }
         }
 

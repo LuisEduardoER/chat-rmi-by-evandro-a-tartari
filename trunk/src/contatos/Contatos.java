@@ -105,7 +105,13 @@ public class Contatos implements Serializable {
         this.iconContato = iconUsuario;
         this.icon = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 25, 25, 1500);
     }
-
+    
+    public void setIconListaFechada(){
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/grupoFechado.png");
+        icon = new ImageIcon(res);
+    }
+    
     public ImageIcon getIconContato() {
         return iconContato;
     }
