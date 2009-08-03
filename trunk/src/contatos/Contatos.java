@@ -36,6 +36,13 @@ public class Contatos implements Serializable {
     public Contatos(String nome){
         setNome(nome);
     }
+    
+    public Contatos(String nome, String urlImagem){
+        URL res = this.getClass().getClassLoader().getResource(urlImagem);
+        setIcon(new ImageIcon(res));
+        setIconUsuario(new ImageIcon(res));
+        setNome(nome);
+    }
 
     public String getNome() {
         return nome;
@@ -86,7 +93,7 @@ public class Contatos implements Serializable {
     }
 
     public void setIcon(ImageIcon icon) {
-        this.icon = RedimencionaImagemIcon.redimencionaImagem(icon, 50, 50, 1500);
+        this.icon = RedimencionaImagemIcon.redimencionaImagem(icon, 25, 25, 1500);
     }
 
     public ImageIcon getIconUsuario() {
@@ -96,6 +103,7 @@ public class Contatos implements Serializable {
     public void setIconUsuario(ImageIcon iconUsuario) {
         this.iconUsuario = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 110, 80, 1000);
         this.iconContato = iconUsuario;
+        this.icon = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 25, 25, 1500);
     }
 
     public ImageIcon getIconContato() {
