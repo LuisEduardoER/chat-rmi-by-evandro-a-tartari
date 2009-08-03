@@ -77,7 +77,6 @@ public class Gerente {
                     formListFriends.buscaContatos();
                     formListFriends.renderiza();
                     connect.dispose();
-
                 }
 
             } catch (RemoteException e) {
