@@ -209,7 +209,7 @@ public class Gerente {
     }
 
     public void adicionaUsuario(Contatos contatos) {
-        getFormListFriends().adicinalUsuario(contatos);
+        getFormListFriends().adicionalUsuario(contatos);
     }
 
     public void removeContato(Contatos contatos) {
