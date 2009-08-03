@@ -25,5 +25,5 @@ public interface IMensageiroServer extends Remote{
     public void chamarAtencao(Mensagem mensagem, Contatos contato)throws RemoteException;
     public void enviaArquivo(EnviaArquivo arquivo)throws RemoteException;
     public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)throws RemoteException;
-    public void notificaStatus(Status status)throws RemoteException;
+    public void notificaStatus(Status status, Contatos contato)throws RemoteException;
 }

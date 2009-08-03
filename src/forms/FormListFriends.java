@@ -304,9 +304,9 @@ public class FormListFriends extends JFrame {
      * @param contato
      */
     public void adicionaContato(Contatos contato) {
-        if(isListaAberta==true){
+        if (isListaAberta == true) {
             new ThreadAdicionaContato(modelContatos, contato).start();
-        }else if(isListaAberta==false){
+        } else if (isListaAberta == false) {
             modelAux.add(contato);
         }
     }
@@ -326,7 +326,6 @@ public class FormListFriends extends JFrame {
         painelUsuario.add(lbl);
         status = newJComboBox();
         status.addActionListener(listener);
-        status.setSelectedIndex(0);
         painelStatus.add(status);
         setVisible(true);
     }
@@ -513,7 +512,7 @@ public class FormListFriends extends JFrame {
             modelAux = new ArrayList<Contatos>();
         } else {
             for (int i = 0; i < modelContatos.getSize(); i++) {
-                modelAux.add((Contatos)modelContatos.getElementAt(i));
+                modelAux.add((Contatos) modelContatos.getElementAt(i));
             }
             modelContatos.clear();
             modelContatos.addElement(contato);
@@ -521,8 +520,17 @@ public class FormListFriends extends JFrame {
         this.isListaAberta = isListaAberta;
     }
 
+    public IMensageiroCliente getClienteContatos() {
+       return this.cliente;
+       
+    }
+
     public boolean getIsListaAberta() {
         return isListaAberta;
+    }
+
+    public JComboBox getComboEstado() {
+        return status;
     }
 
 }
