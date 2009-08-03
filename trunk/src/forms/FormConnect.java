@@ -424,7 +424,7 @@ public class FormConnect extends JFrame {
     }
 
     public void setImagemUsuario(ImageIcon icon) {
-        this.setIconUsuario(icon);
+        this.iconUsuario = icon;
 
     }
 
@@ -433,8 +433,9 @@ public class FormConnect extends JFrame {
     }
 
     public ImageIcon getIconUsuario() {
-        if(iconUsuario==null){
-            iconUsuario = getImagemContato();
+        if (iconUsuario == null) {
+            iconUsuario = RedimencionaImagemIcon.redimencionaImagem(
+                    getImagemContato(), 110, 130, 1200);
         }
         return iconUsuario;
     }
