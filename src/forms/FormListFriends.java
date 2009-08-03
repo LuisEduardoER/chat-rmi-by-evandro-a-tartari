@@ -303,17 +303,17 @@ public class FormListFriends extends JFrame {
     }
 
     public void adicionaUsuario(Contatos contatos) {
-        ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(contatos
-                .getIconUsuario(), 50, 50, 1500);
-        String nome = contatos.getNome();
-        JLabel lbl = new JLabel("", JLabel.CENTER);
-        lbl.setBounds(30, 30, 50, 50);
-        lbl.setIcon(icon);
-        painelUsuario.add(lbl);
-        lbl = new JLabel(nome, JLabel.CENTER);
+        painelUsuario.setComponentOrientation(ComponentOrientation.UNKNOWN);
+        JLabel lbl = new JLabel();
+        lbl.setBounds(50, 20, 150, 100);
+        lbl.setVerticalAlignment(JLabel.CENTER);
+        lbl.setHorizontalAlignment(JLabel.CENTER);
+        lbl.setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos
+                .getIconUsuario(), 60, 60, 1500));
+        lbl.setText(contatos.getNome());
         lbl.setBounds(30, 85, 100, 30);
         lbl.setForeground(Color.BLUE);
-        lbl.setFont(new Font("verdana", Font.BOLD, 13));
+        lbl.setFont(new Font("verdana", Font.BOLD, 14));
         painelUsuario.add(lbl);
         status = newJComboBox();
         status.addActionListener(listener);
