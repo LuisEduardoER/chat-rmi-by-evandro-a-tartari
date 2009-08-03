@@ -88,7 +88,7 @@ public class FormListFriends extends JFrame {
             setTitle(cliente.getContatos().getNome());
             setIconImage(getIcon());
             setContentPane(new Container());
-            setSize(250, (int) dimensao.getHeight() - 30);
+            setSize(250, (int) dimensao.getHeight() - 40);
             setResizable(true);
             setUndecorated(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -126,7 +126,7 @@ public class FormListFriends extends JFrame {
         adicionaTela(painelUsuario, 5, 0, 245, 120);
         adicionaTela(painelStatus, 5, 120, 245, 20);
         adicionaTela(painelBotoes, 5, 140, 245, 28);
-        adicionaTela(scrollContatos, 5, 168, 245, 570);
+        adicionaTela(scrollContatos, 5, 168, 245, 530);
         modelContatos.addElement(new Contatos(" Friends"));
         disableButtons();
 
