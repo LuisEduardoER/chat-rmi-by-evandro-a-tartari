@@ -1,4 +1,3 @@
 - falta Colocar icone pasta Arquivos Recebidos;
-- falta Colorca nome janela conversa;
-- acertar icone conversa para ser maior;
 - acertar janela de contatos e colocar mais funcionalidades;
+
