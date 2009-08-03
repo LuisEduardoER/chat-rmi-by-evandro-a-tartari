@@ -16,7 +16,6 @@ import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadEnviaNotificacao;
 import servidor.ThreadsServidor.ThreadEnviarMensagem;
-import servidor.ThreadsServidor.ThreadRemove;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -135,7 +134,19 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
-        new ThreadRemove(this, mensageiro.getContatos()).start();
+        try {
+            if (getClientes().get(mensageiro.getContatos().getLogin()) != null) {
+                getClientes().remove(mensageiro.getContatos().getLogin());
+                getContatos().remove(mensageiro.getContatos());
+                for (Contatos contato : getContatos()) {
+                    getClientes().get(contato.getLogin())
+                            .removeContato(mensageiro.getContatos());
+                }
+            }
+            System.out.println("Saida: " + mensageiro.getContatos().getLogin());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void parar() {
