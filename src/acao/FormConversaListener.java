@@ -61,7 +61,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 conversa.setIsItalic(false);
                 conversa.getTxtDescritorMensagens().requestFocus();
             }
-        }else if(e.getActionCommand().equals("Sublinhado")){
+        } else if (e.getActionCommand().equals("Sublinhado")) {
             if (conversa.getBtnSublinhado().isSelected()) {
                 conversa.setIsSublinhado(true);
                 conversa.getTxtDescritorMensagens().requestFocus();
@@ -69,7 +69,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 conversa.setIsSublinhado(false);
                 conversa.getTxtDescritorMensagens().requestFocus();
             }
-        }else if (e.getActionCommand().equals("TamFonte")) {
+        } else if (e.getActionCommand().equals("TamFonte")) {
             conversa.setFontSize();
         } else if (e.getActionCommand().equals("TipoFonte")) {
             conversa.setFontFamily();
@@ -153,7 +153,8 @@ public class FormConversaListener implements ActionListener, KeyListener,
                     text, getDataHora(), conversa.getFontSize(), conversa
                             .getFontFamily(), conversa.getColor(), conversa
                             .getIsBold(), conversa.getIsItalic(), conversa
-                            .getContato().getLogin());
+                            .getIsSublinhado(), conversa.getContato()
+                            .getLogin());
             return m;
         } catch (RemoteException e) {
             e.printStackTrace();
