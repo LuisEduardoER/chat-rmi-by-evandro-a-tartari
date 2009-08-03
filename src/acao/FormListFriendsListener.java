@@ -15,6 +15,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import status.Status;
 import contatos.Contatos;
 import forms.FormListFriends;
 import gerenteDeTelas.Gerente;
@@ -50,6 +51,32 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
                 desktop.open(file);
             } catch (Exception e2) {
                 e2.printStackTrace();
+            }
+        } else if (e.getActionCommand().equals("Estado")) {
+            Object[] object = (Object[]) formContatos.getComboEstado()
+                    .getSelectedItem();
+            System.out.println(object[0]);
+            if (object[0].equals("On Line")) {
+                try {
+                    formContatos.getClienteContatos().notificaStatus(
+                            Status.OnLine);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            } else if (object[0].equals("Ausente")) {
+                try {
+                    formContatos.getClienteContatos().notificaStatus(
+                            Status.Ausente);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            } else if (object[0].equals("Ocupado")) {
+                try {
+                    formContatos.getClienteContatos().notificaStatus(
+                            Status.Ocupado);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         }
 
