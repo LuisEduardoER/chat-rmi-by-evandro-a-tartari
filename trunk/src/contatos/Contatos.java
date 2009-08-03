@@ -37,7 +37,7 @@ public class Contatos implements Serializable {
     public Contatos(String url){
         URL res = this.getClass().getClassLoader().getResource(url);
         setIcon(new ImageIcon(res));
-        setNome("ABCDEFGHIJLMNOP");
+        setNome("ABCDEFGHIJLMNOP-ADSD-DS");
     }
 
     public String getNome() {
