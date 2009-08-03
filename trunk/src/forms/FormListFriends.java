@@ -309,7 +309,7 @@ public class FormListFriends extends JFrame {
         lbl.setVerticalAlignment(JLabel.CENTER);
         lbl.setHorizontalAlignment(JLabel.CENTER);
         lbl.setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos
-                .getIconUsuario(), 60, 60, 1500));
+                .getIconUsuario(), 60, 60, 1000));
         lbl.setText(contatos.getNome());
         lbl.setBounds(30, 85, 100, 30);
         lbl.setForeground(Color.BLUE);
