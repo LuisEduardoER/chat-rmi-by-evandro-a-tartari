@@ -9,6 +9,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import status.Status;
+
 import contatos.Contatos;
 
 /**
@@ -127,6 +129,11 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 
     public void recebeAvisoEnvioCompleto(EnviaArquivo arquivo) throws RemoteException {
        gerente.recebeAvisoEnvioCompleto(arquivo);
+        
+    }
+
+    public void notificaStatus(Status status) throws RemoteException {
+        servidor.notificaStatus(status);
         
     }
 
