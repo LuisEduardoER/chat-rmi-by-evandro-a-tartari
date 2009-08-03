@@ -133,11 +133,11 @@ public class FormConversa extends JFrame {
             adicionaTela(comboTamanhofonte, 168, 257, 40, 20);
             adicionaTela(comboTipoFonte, 218, 257, 176, 20);
             adicionaTela(scrollPaneDescritor, 5, 280, 390, 145);
-            adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120),
+            adicionaTela(getImagemIcon(contato.getIconContato(), 110, 130),
                     405, 5, 110, 130);
             adicionaTela(lblNomeContato, 388, 135, 140, 20);
             adicionaTela(lblNomeUsuario, 388, 365, 140, 20);
-            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 100, 80), 405,
+            adicionaTela(getImagemIcon(usuario.getIconUsuario(), 110, 80), 405,
                     281, 110, 80);
             adicionaTela(btnEnviarMensagem, 415, 379, 90, 50);
             txtDescritorMensagem.requestFocus();
