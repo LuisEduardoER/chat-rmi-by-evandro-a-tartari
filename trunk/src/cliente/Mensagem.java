@@ -19,11 +19,12 @@ public class Mensagem implements Serializable {
     private Integer fontSize;
     private Boolean isBold;
     private Boolean isItalic;
+    private Boolean isSublinhado;
     private Color color;
 
     public Mensagem(String usuarioEnvia, String nomeEnvia, String mensagem,
             String dataHora, Integer fontSize, String fontFamily, Color color,
-            Boolean isBold, Boolean isItalic, String contatoRecebe) {
+            Boolean isBold, Boolean isItalic, Boolean isSublinhado, String contatoRecebe) {
         this.setUsuarioEnvia(usuarioEnvia);
         this.setNomeEnvia(nomeEnvia);
         this.setMensagem(mensagem);
@@ -33,6 +34,7 @@ public class Mensagem implements Serializable {
         this.setColor(color);
         this.setIsBold(isBold);
         this.setIsItalic(isItalic);
+        this.setIsSublinhado(isSublinhado);
         this.setContatoRecebe(contatoRecebe);
     }
 
@@ -114,6 +116,14 @@ public class Mensagem implements Serializable {
 
     public String getDataHora() {
         return dataHora;
+    }
+
+    public void setIsSublinhado(Boolean isSublinhado) {
+        this.isSublinhado = isSublinhado;
+    }
+
+    public Boolean getIsSublinhado() {
+        return isSublinhado;
     }
 
 }
