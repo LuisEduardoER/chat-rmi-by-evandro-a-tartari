@@ -68,8 +68,8 @@ public class Gerente {
                 if (retorno == true) {
                     formListFriends = getFormListFriends();
                     formListFriends.setCliente(cliente);
-                    formListFriends.inicializa();
                     formListFriends.config();
+                    formListFriends.inicializa();
                     formListFriends.createMenuBar();
                     formListFriends.criarBordaPainel(cliente.getContatos()
                             .getNome());
@@ -209,7 +209,7 @@ public class Gerente {
     }
 
     public void adicionaUsuario(Contatos contatos) {
-        getFormListFriends().adicionalUsuario(contatos);
+        getFormListFriends().adicionaUsuario(contatos);
     }
 
     public void removeContato(Contatos contatos) {
