@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import contatos.Contatos;
@@ -89,9 +90,17 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
     }
 
     public void mouseEntered(MouseEvent e) {
+        if (e.getComponent() instanceof JButton) {
+            JButton button = (JButton) e.getComponent();
+            formContatos.bordaBotao(button, true);
+        }
     }
 
     public void mouseExited(MouseEvent e) {
+        if (e.getComponent() instanceof JButton) {
+            JButton button = (JButton) e.getComponent();
+            formContatos.bordaBotao(button, false);
+        }
     }
 
     public void mousePressed(MouseEvent e) {
