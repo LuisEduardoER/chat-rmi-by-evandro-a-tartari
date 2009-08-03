@@ -61,7 +61,15 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 conversa.setIsItalic(false);
                 conversa.getTxtDescritorMensagens().requestFocus();
             }
-        } else if (e.getActionCommand().equals("TamFonte")) {
+        }else if(e.getActionCommand().equals("Sublinhado")){
+            if (conversa.getBtnSublinhado().isSelected()) {
+                conversa.setIsSublinhado(true);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            } else if (!conversa.getBtnSublinhado().isSelected()) {
+                conversa.setIsSublinhado(false);
+                conversa.getTxtDescritorMensagens().requestFocus();
+            }
+        }else if (e.getActionCommand().equals("TamFonte")) {
             conversa.setFontSize();
         } else if (e.getActionCommand().equals("TipoFonte")) {
             conversa.setFontFamily();
