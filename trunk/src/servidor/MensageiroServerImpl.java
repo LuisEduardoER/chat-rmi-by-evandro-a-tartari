@@ -16,6 +16,7 @@ import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadEnviaNotificacao;
 import servidor.ThreadsServidor.ThreadEnviarMensagem;
+import status.Status;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -139,8 +140,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 getClientes().remove(mensageiro.getContatos().getLogin());
                 getContatos().remove(mensageiro.getContatos());
                 for (Contatos contato : getContatos()) {
-                    getClientes().get(contato.getLogin())
-                            .removeContato(mensageiro.getContatos());
+                    getClientes().get(contato.getLogin()).removeContato(
+                            mensageiro.getContatos());
                 }
             }
             System.out.println("Saida: " + mensageiro.getContatos().getLogin());
@@ -179,6 +180,18 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             throws RemoteException {
         getClientes().get(arquivo.getContatoEnvia().getLogin())
                 .recebeAvisoEnvioCompleto(arquivo);
+
+    }
+
+    public void notificaStatus(Status status, Contatos contato)
+            throws RemoteException {
+        for (Contatos contatoZ : getContatos()) {
+            if (contatoZ.equals(contato)) {
+                getClientes().get(contato).recebeNotificacao(contato, status);
+            } else {
+                getClientes().get(contatoZ).recebeNotificacao(contato, status);
+            }
+        }
 
     }
 

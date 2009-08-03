@@ -15,6 +15,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import status.Status;
+
 import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
@@ -432,6 +434,11 @@ public class Gerente {
             e.printStackTrace();
         }
 
+    }
+
+    public void recebeNotificacao(Contatos contato, Status status) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
