@@ -92,6 +92,7 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
                         contato.setIconListaFechada();
                         formContatos.IsListaAberta(false, contato);
                     } else {
+                        contato.setIconListaAberta();
                         formContatos.IsListaAberta(true, contato);
                     }
                 }
