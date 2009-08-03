@@ -112,6 +112,12 @@ public class Contatos implements Serializable {
         icon = new ImageIcon(res);
     }
     
+    public void setIconListaAberta() {
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource("imagens/grupoAberto.png");
+        icon = new ImageIcon(res);
+    }
+    
     public ImageIcon getIconContato() {
         return iconContato;
     }
@@ -143,5 +149,7 @@ public class Contatos implements Serializable {
         }
         return false;
     }
+
+
 
 }

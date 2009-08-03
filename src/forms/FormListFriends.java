@@ -14,6 +14,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -69,12 +71,13 @@ public class FormListFriends extends JFrame {
     private JComboBox status;
     private TrayManagerFormListFriend trayManager;
     private FormListFriendsListener listener;
-    private DefaultListModel modelAux;
+    private List<Contatos> modelAux;
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
+        modelAux = new ArrayList<Contatos>();
     }
 
     /**
@@ -102,7 +105,6 @@ public class FormListFriends extends JFrame {
     public void inicializa() {
         scrollContatos = newJScrollPane();
         modelContatos = newDefaultListModel();
-        modelAux = newDefaultListModel();
         listaContatos = newJList(modelContatos);
         painelUsuario = newJPanel();
         painelStatus = newJPanel();
@@ -305,7 +307,7 @@ public class FormListFriends extends JFrame {
         if(isListaAberta==true){
             new ThreadAdicionaContato(modelContatos, contato).start();
         }else if(isListaAberta==false){
-            new ThreadAdicionaContato(modelAux, contato).start();
+            modelAux.add(contato);
         }
     }
 
@@ -505,22 +507,18 @@ public class FormListFriends extends JFrame {
     public void IsListaAberta(boolean isListaAberta, Contatos contato) {
         if (isListaAberta) {
             modelContatos.clear();
-            modelContatos = modelAux;
-            modelAux.clear();
+            for (int i = 0; i < modelAux.size(); i++) {
+                modelContatos.addElement(modelAux.get(i));
+            }
+            modelAux = new ArrayList<Contatos>();
         } else {
-            modelAux = modelContatos;
+            for (int i = 0; i < modelContatos.getSize(); i++) {
+                modelAux.add((Contatos)modelContatos.getElementAt(i));
+            }
             modelContatos.clear();
             modelContatos.addElement(contato);
         }
         this.isListaAberta = isListaAberta;
-    }
-
-    public void adicionaContatoAux(Contatos contato) {
-        modelAux.addElement(contato);
-    }
-
-    public DefaultListModel getModelAux() {
-        return modelAux;
     }
 
     public boolean getIsListaAberta() {
