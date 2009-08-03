@@ -90,7 +90,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
                 "ApproveSelection")) {
             String url = chooser.getSelectedFile().getPath();
             ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url,
-                    100, 120, 1000);
+                    110, 130, 1000);
             connect.setUrlImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
             connect.setImagemUsuario(icon);
