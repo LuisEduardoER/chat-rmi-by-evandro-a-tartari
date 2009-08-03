@@ -3,12 +3,12 @@ package forms;
 import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
-import java.awt.Container;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -16,13 +16,16 @@ import java.rmi.RemoteException;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
@@ -46,13 +49,17 @@ public class FormListFriends extends JFrame {
      */
     private static final long serialVersionUID = -4098352435404830798L;
     private JScrollPane painelContatos;
+    private JToolBar painelBotoes;
     private DefaultListModel modelUsuario;
     private DefaultListModel modelContatos;
     private JList listaUsuario;
     private JList listaContatos;
     private IMensageiroCliente cliente;
     private Gerente gerente;
+    private JButton btnOpenDownloads;
+    private JButton btnChat;
     private TrayManagerFormListFriend trayManager;
+    private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
@@ -63,30 +70,14 @@ public class FormListFriends extends JFrame {
      */
     public void config() {
         try {
-            setTitle(cliente.getContatos().getNome());
+            // setTitle(cliente.getContatos().getNome());
             setIconImage(getIcon());
-            Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
             setSize(250, (int) dimensao.getHeight() - 30);
             setResizable(true);
             setUndecorated(true);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             int x = (int) (dimensao.getWidth() - 250);
             setLocation(x, 0);
-            Container c = this.getContentPane();
-            GridBagConstraints cons = new GridBagConstraints();
-            GridBagLayout layout = new GridBagLayout();
-            c.setLayout(layout);
-            cons.anchor = GridBagConstraints.SOUTHEAST;
-            cons.fill = GridBagConstraints.BOTH;
-            cons.gridx = 0;
-            cons.gridy = 1;
-            cons.weighty = 0.90;
-            cons.weightx = 1;
-            c.add(painelContatos, cons);
-            cons.gridx = 0;
-            cons.gridy = 0;
-            cons.weighty = 0.10;
-            c.add(listaUsuario, cons);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,7 +96,24 @@ public class FormListFriends extends JFrame {
         listaContatos = newJList(modelContatos);
         listaContatos.setCellRenderer(new ContatosRender());
         painelContatos.setViewportView(listaContatos);
-        adiciona(new JComponent[] { listaUsuario, painelContatos });
+        btnOpenDownloads = newJButton("imagens/downloads.png", "Downloads", 25,
+                0, 20, 20);
+        btnChat = newJButton("imagens/chat.png", "Chat", 0, 0, 20, 20);
+        painelBotoes = newJToolBar();
+        adicionaPainelBotoes(new JComponent[] { btnChat, btnOpenDownloads });
+        adicionaTela(painelBotoes, 0, 0, 250, 28);
+        adicionaTela(listaUsuario, 0, 28, 250, 100);
+        int altura = (int) (dimensao.getHeight() - 130);
+        adicionaTela(painelContatos, 0, 128, 250, altura);
+        /**
+         * TO REMOVE
+         */
+        painelContatos.setBackground(Color.black);
+        listaContatos.setBackground(Color.black);
+        listaUsuario.setBackground(Color.blue);
+        /**
+         * END TO REMOVE
+         */
     }
 
     /**
@@ -113,9 +121,15 @@ public class FormListFriends extends JFrame {
      * 
      * @param components
      */
-    private void adiciona(JComponent[] components) {
-        for (int i = 0; i < components.length; i++) {
-            add(components[i]);
+    private void adicionaTela(JComponent c, Integer x, Integer y, Integer size,
+            Integer alt) {
+        c.setBounds(x, y, size, alt);
+        add(c);
+    }
+
+    private void adicionaPainelBotoes(JComponent[] componentes) {
+        for (int i = 0; i < componentes.length; i++) {
+            painelBotoes.add((JButton) componentes[i]);
         }
     }
 
@@ -128,6 +142,31 @@ public class FormListFriends extends JFrame {
         JScrollPane painel = new JScrollPane(
                 JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        return painel;
+    }
+
+    private JButton newJButton(String urlImagem, String action, Integer x,
+            Integer y, Integer size, Integer alt) {
+        Insets ins = new Insets(0,0,0,0);
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(urlImagem);
+        ImageIcon icon = new ImageIcon(res);
+        JButton btn = new JButton();
+        btn.setMargin(ins);
+        btn.setBorderPainted(false);
+        btn.setContentAreaFilled(false);
+        btn.setFocusPainted(false);
+        btn.setIcon(icon);
+        btn.setActionCommand(action);
+        btn.setBounds(x, y, size, alt);
+        return btn;
+    }
+
+    private JToolBar newJToolBar() {
+        JToolBar painel = new JToolBar();
+        Insets ins = new Insets(0,0,0,0);
+        painel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        painel.setMargin(ins);
         return painel;
     }
 
@@ -182,6 +221,7 @@ public class FormListFriends extends JFrame {
         listaUsuario.addMouseListener(listener);
         listaContatos.addMouseListener(listener);
         listaContatos.addKeyListener(listener);
+        btnOpenDownloads.addActionListener(listener);
         addWindowListener(listener);
     }
 
@@ -393,5 +433,17 @@ public class FormListFriends extends JFrame {
             e.printStackTrace();
         }
 
+    }
+
+    public static void main(String[] args) {
+        FormListFriends lista = new FormListFriends();
+        lista.inicializa();
+        lista.config();
+        lista.createMenuBar();
+        lista.adicionaListener();
+        lista.renderiza();
+    }
+
+    public FormListFriends() {
     }
 }
