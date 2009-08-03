@@ -28,16 +28,13 @@ public class Contatos implements Serializable {
     private ImageIcon icon;
     private ImageIcon iconUsuario;
     private ImageIcon iconContato;
-    private String urlImage;
+    
     
     public Contatos() {
-        // TODO Auto-generated constructor stub
     }
     
-    public Contatos(String url){
-        URL res = this.getClass().getClassLoader().getResource(url);
-        setIcon(new ImageIcon(res));
-        setNome("ABCDEFGHIJLMNOP-ADSD-DS");
+    public Contatos(String nome){
+        setNome(nome);
     }
 
     public String getNome() {
@@ -112,7 +109,7 @@ public class Contatos implements Serializable {
     public ImageIcon getImage() {
         if (icon == null) {
             ClassLoader clazz = this.getClass().getClassLoader();
-            URL res = clazz.getResource(urlImage);
+            URL res = clazz.getResource("imagens/grupoAberto.png");
             icon = new ImageIcon(res);
         }
         return icon;
