@@ -4,7 +4,6 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -79,7 +78,7 @@ public class FormListFriends extends JFrame {
      */
     public void config() {
         try {
-            // setTitle(cliente.getContatos().getNome());
+            setTitle(cliente.getContatos().getNome());
             setIconImage(getIcon());
             setContentPane(new Container());
             setSize(250, (int) dimensao.getHeight() - 30);
@@ -116,19 +115,11 @@ public class FormListFriends extends JFrame {
         painelBotoes = newJToolBar();
         adicionaPainelBotoes(new JComponent[] { btnAdicionaContato, btnChat,
                 btnOpenDownloads, btnRemoveContato });
-        adicionaTela(painelBotoes, 0, 0, 250, 28);
-        adicionaTela(painelUsuario, 0, 28, 250, 100);
-        adicionaTela(scrollContatos, 0, 128, 250, 580);
+        adicionaTela(painelUsuario, 5, 0, 245, 120);
+        adicionaTela(painelBotoes, 5, 120, 245, 28);
+        adicionaTela(scrollContatos, 5, 148, 245, 560);
+        modelContatos.addElement(new Contatos(" Friends"));
         disableButtons();
-        /**
-         * TO REMOVE
-         */
-        scrollContatos.setBackground(Color.black);
-        listaContatos.setBackground(Color.black);
-        painelUsuario.setBackground(Color.blue);
-        /**
-         * END TO REMOVE
-         */
 
     }
 
@@ -205,7 +196,7 @@ public class FormListFriends extends JFrame {
         JComboBox combo = new JComboBox();
         combo.setRenderer(new ComboCellRender());
         combo.setActionCommand("Estado");
-        combo.setBounds(70, 170, 250, 20);
+        combo.setBounds(50, 120, 150, 20);
         Object[] onLine = new Object[] { "On Line",
                 getImageIcon("imagens/online.png") };
         Object[] ausente = new Object[] { "Ausente",
@@ -305,7 +296,8 @@ public class FormListFriends extends JFrame {
         Border borda = BorderFactory.createLoweredBevelBorder();
         JPanel painelPrincipal = new JPanel();
         painelPrincipal.setBorder(borda);
-        ImageIcon icon = contatos.getImage();
+        ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(contatos
+                .getIconUsuario(), 50, 50, 1500);
         String nome = contatos.getNome();
         JLabel lbl = new JLabel("", JLabel.CENTER);
         lbl.setBounds(0, 0, 50, 50);
@@ -314,8 +306,8 @@ public class FormListFriends extends JFrame {
         painelPrincipal.setBounds(30, 30, 50, 50);
         painelUsuario.add(painelPrincipal);
         lbl = new JLabel(nome, JLabel.CENTER);
-        lbl.setBounds(55, 55, 80, 30);
-        lbl.setFont(new Font("verdana", Font.BOLD, 14));
+        lbl.setBounds(30, 85, 80, 30);
+        lbl.setFont(new Font("verdana", Font.BOLD, 13));
         painelUsuario.add(lbl);
         painelPrincipal = new JPanel();
         status = newJComboBox();
@@ -403,7 +395,7 @@ public class FormListFriends extends JFrame {
     private ImageIcon getImageIcon(String urlImage) {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource(urlImage);
-        ImageIcon icon = new ImageIcon(res); 
+        ImageIcon icon = new ImageIcon(res);
         return icon;
     }
 
@@ -496,20 +488,6 @@ public class FormListFriends extends JFrame {
             e.printStackTrace();
         }
 
-    }
-
-    public static void main(String[] args) {
-        FormListFriends lista = new FormListFriends();
-        Contatos contato = new Contatos("imagens/teste.png");
-        lista.config();
-        lista.inicializa();
-        lista.createMenuBar();
-        lista.adicionaListener();
-        lista.adicionaContato(contato);
-        lista.renderiza();
-    }
-
-    public FormListFriends() {
     }
 
 }
