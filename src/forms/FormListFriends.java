@@ -302,9 +302,9 @@ public class FormListFriends extends JFrame {
      * @param contato
      */
     public void adicionaContato(Contatos contato) {
-        if(isListaAberta){
+        if(isListaAberta==true){
             new ThreadAdicionaContato(modelContatos, contato).start();
-        }else{
+        }else if(isListaAberta==false){
             new ThreadAdicionaContato(modelAux, contato).start();
         }
     }
