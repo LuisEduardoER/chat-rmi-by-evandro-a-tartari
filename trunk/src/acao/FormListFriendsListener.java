@@ -78,12 +78,16 @@ public class FormListFriendsListener implements ActionListener, KeyListener,
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() % 2 == 0) {
             if (formContatos.getListaContatos().getSelectedIndex() != -1) {
-                try {
-                    gerente.controladorConversa((Contatos) formContatos
-                            .getListaContatos().getSelectedValue());
-                } catch (Exception e1) {
-                    e1.printStackTrace();
+                if (formContatos.getListaContatos().getSelectedIndex() != 0) {
+                    try {
+                        gerente.controladorConversa((Contatos) formContatos
+                                .getListaContatos().getSelectedValue());
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                 }
+            }else{
+                
             }
         }
 
