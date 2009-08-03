@@ -57,6 +57,7 @@ public class FormConversa extends JFrame {
     private JButton btnPaletaCores;
     private JToggleButton btnNegrito;
     private JToggleButton btnItalico;
+    private JToggleButton btnSublinhado;
     private JComboBox comboTamanhofonte;
     private JComboBox comboTipoFonte;
     private FormConversaListener listener;
@@ -67,6 +68,7 @@ public class FormConversa extends JFrame {
     private SimpleAttributeSet simpleAttributeSet;
     private Boolean isBold = false;
     private Boolean isItalic = false;
+    private Boolean isSublinhado = false;
     private String nomeConversa;
     private Color color;
     private Integer fontSize;
@@ -77,6 +79,7 @@ public class FormConversa extends JFrame {
     private JButton btnAlerta;
     private JFrame enviaArquivo;
     private JFileChooser fileChooser;
+    
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
@@ -90,7 +93,7 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            // setTitle(contato.getLogin());
+            setTitle(contato.getLogin());
             txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
@@ -101,6 +104,7 @@ public class FormConversa extends JFrame {
                     "Negrito");
             btnItalico = newJToggleButton(getImageIcon("imagens/italico.png"),
                     "Italico");
+            btnSublinhado = newJToggleButton(getImageIcon("imagens/sublinhado.png"), "Sublinhado");
             btnPaletaCores = newJButtonImagem("imagens/cores.png", "cores");
             btnAlerta = newJButtonImagem("imagens/atencaoNormal.png",
                     "imagens/atencaoDesabilitado.png", "alerta");
@@ -120,12 +124,13 @@ public class FormConversa extends JFrame {
             lblNomeUsuario = newJLabel(usuario.getNome(), false);
             adicionaTela(scroolPanelReceptor, 5, 5, 390, 250);
             adicionaTela(btnNegrito, 6, 257, 20, 20);
-            adicionaTela(btnItalico, 31, 257, 20, 20);
-            adicionaTela(btnPaletaCores, 56, 257, 20, 20);
-            adicionaTela(btnSendFile, 81, 257, 20, 20);
-            adicionaTela(btnAlerta, 106, 257, 20, 20);
-            adicionaTela(comboTamanhofonte, 130, 257, 40, 20);
-            adicionaTela(comboTipoFonte, 175, 257, 169, 20);
+            adicionaTela(btnItalico, 33, 257, 20, 20);
+            adicionaTela(btnSublinhado, 60, 257, 20,20);
+            adicionaTela(btnPaletaCores, 87, 257, 20, 20);
+            adicionaTela(btnSendFile, 114, 257, 20, 20);
+            adicionaTela(btnAlerta, 141, 257, 20, 20);
+            adicionaTela(comboTamanhofonte, 168, 257, 40, 20);
+            adicionaTela(comboTipoFonte, 218, 257, 176, 20);
             adicionaTela(scrollPaneDescritor, 5, 280, 390, 145);
             adicionaTela(getImagemIcon(contato.getIconContato(), 100, 120),
                     405, 5, 110, 130);
@@ -368,6 +373,10 @@ public class FormConversa extends JFrame {
     public Boolean getIsItalic() {
         return isItalic;
     }
+    
+    public Boolean getIsSublinhado(){
+        return isSublinhado;
+    }
 
     public String getFontFamily() {
         if (fontFamily == null) {
@@ -412,6 +421,15 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
         txtDescritorMensagem.setText(text);
         this.isItalic = isItalic;
+    }
+    
+    public void setIsSublinhado(Boolean isSublinhado){
+        StyleConstants.setUnderline(simpleAttributeSet, isSublinhado);
+        String text = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
+        txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
+        txtDescritorMensagem.setText(text);
+        this.isSublinhado = isSublinhado;
     }
 
     public void addBorderBtnPaletaCores(JButton button) {
@@ -629,6 +647,10 @@ public class FormConversa extends JFrame {
 
     public JToggleButton getBtnItalico() {
         return btnItalico;
+    }
+    
+    public JToggleButton getBtnSublinhado(){
+        return btnSublinhado;
     }
 
     /**
