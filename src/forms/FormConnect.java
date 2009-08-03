@@ -100,7 +100,7 @@ public class FormConnect extends JFrame {
         txtPortaCliente = newJTextField(100, 65, 2);
         txtLogin = newJTextField(100, 95, 3);
         txtNome = newJTextField(100, 125, 4);
-        txtNome.setDocument(new NumeroMaximoCaracteres(15));
+        txtNome.setDocument(new NumeroMaximoCaracteres(23));
         txtNome.setToolTipText("Numero maximo de caracteres nome '15'");
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
