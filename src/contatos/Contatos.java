@@ -87,7 +87,7 @@ public class Contatos implements Serializable {
     }
 
     public void setIconUsuario(ImageIcon iconUsuario) {
-        this.iconUsuario = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 100, 80, 1000);
+        this.iconUsuario = RedimencionaImagemIcon.redimencionaImagem(iconUsuario, 110, 80, 1000);
         this.iconContato = iconUsuario;
     }
 
