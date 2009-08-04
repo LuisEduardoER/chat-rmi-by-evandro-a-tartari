@@ -15,18 +15,16 @@ public class ThreadRecebeMensagem extends Thread {
 
     public void run() {
         String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
-        String name2 = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
         if (gerente.getListaConversa().get(name) != null) {
             gerente.getListaConversa().get(name).recebeMensagem(mensagem);
-        } else if (gerente.getListaConversa().get(name2) != null) {
-            gerente.getListaConversa().get(name2).recebeMensagem(mensagem);
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
-            int posicao = gerente.getFormListFriends().getContatos().indexOf(contato);
+            int posicao = gerente.getFormListFriends().getContatos().indexOf(
+                    contato);
             if (posicao != -1) {
-                contato = (Contatos) gerente.getFormListFriends().getContatos().get(
-                        posicao);
+                contato = (Contatos) gerente.getFormListFriends().getContatos()
+                        .get(posicao);
                 try {
                     gerente.iniciaConversa(contato, mensagem);
                 } catch (Exception e) {
