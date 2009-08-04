@@ -205,13 +205,9 @@ public class Gerente {
 
     }
 
-    public void adicionaContato(Contatos contatos) {
-        getFormListFriends().adicionaContato(contatos);
-    }
-    
     public void carregaContatos(List<Contatos> contatos) {
         getFormListFriends().carregaContatos(contatos);
-        
+
     }
 
     public void adicionaUsuario(Contatos contatos) {
@@ -234,10 +230,10 @@ public class Gerente {
     public void recebeMensagem(Mensagem mensagem) {
         new ThreadRecebeMensagem(this, mensagem).start();
     }
-    
+
     public void mensagemEnviada(Mensagem mensagem) {
         new ThreadMensagemEnviada(this, mensagem).start();
-        
+
     }
 
     public void iniciaConversa(Contatos contato, Mensagem mensagem) {
@@ -445,10 +441,4 @@ public class Gerente {
 
     }
 
-
-
-
-
-    
-    
 }
