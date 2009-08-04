@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import ThreadsCliente.ThreadMensagemEnviada;
@@ -441,6 +442,11 @@ public class Gerente {
             e.printStackTrace();
         }
 
+    }
+
+    public void servidorFechando() {
+       JOptionPane.showMessageDialog(null, "Servidor Fechou! Esta Janela será encerrada", "Aviso de Fechamento!!!", JOptionPane.QUESTION_MESSAGE);
+        
     }
 
 }
