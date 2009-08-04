@@ -320,7 +320,8 @@ public class FormListFriends extends JFrame {
     }
 
     public void carregaContatos(List<Contatos> contatos) {
-        new ThreadCarregaContatos(contatos, modelContatos, listaApresentacao, modelAux, isListaAberta).start();
+        new ThreadCarregaContatos(contatos, modelContatos, listaApresentacao,
+                modelAux, isListaAberta).start();
     }
 
     public void adicionaUsuario(Contatos contatos) {
