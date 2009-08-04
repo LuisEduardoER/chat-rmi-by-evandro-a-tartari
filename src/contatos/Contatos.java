@@ -35,6 +35,7 @@ public class Contatos implements Serializable {
     
     public Contatos(String nome){
         setNome(nome);
+        setLogin("");
     }
     
     public Contatos(String nome, String urlImagem){
@@ -42,6 +43,7 @@ public class Contatos implements Serializable {
         setIcon(new ImageIcon(res));
         setIconUsuario(new ImageIcon(res));
         setNome(nome);
+        setLogin("");
     }
 
     public String getNome() {
