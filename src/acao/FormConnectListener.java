@@ -71,6 +71,7 @@ public class FormConnectListener implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent evento) {
         if (verificarAcaoBotao(evento.getActionCommand(), "Connectar")) {
             if (isValid()) {
+                connect.disableButtonConnect();
                 gerente.connectar(connect);
             } else
                 LancaExcessao("*Campos Obrigatorios");
@@ -166,10 +167,13 @@ public class FormConnectListener implements ActionListener, KeyListener {
                 else if (verificador(getLogin()))
                     getPassWord().requestFocus();
                 else if (verificador(getPassWord())) {
-                    if (isValid())
+                    if (isValid()){
+                        connect.disableButtonConnect();
                         gerente.connectar(connect);
-                    else
+                    }else{
                         LancaExcessao("*Campos Obrigatorios");
+                        connect.enableButtonConnect();
+                    }
                 }
 
             }
