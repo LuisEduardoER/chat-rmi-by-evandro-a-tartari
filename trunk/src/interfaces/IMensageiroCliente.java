@@ -51,4 +51,6 @@ public interface IMensageiroCliente extends Remote {
     public void recebeAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException;
 
+    public void mensagemEnviada(Mensagem mensagem) throws RemoteException;
+
 }
