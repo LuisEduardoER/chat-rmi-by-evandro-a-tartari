@@ -17,7 +17,6 @@ public class TrayManagerFormListFriend {
     private PopupMenu popup;
     private TrayManagerFormListFriendsListener listenerSysTray;
     private FormListFriends servidor;
-    
 
     public TrayManagerFormListFriend(JFrame frame) {
         this.servidor = (FormListFriends) frame;
@@ -42,7 +41,8 @@ public class TrayManagerFormListFriend {
 
     private TrayManagerFormListFriendsListener getListener(TrayIcon trayIcon) {
         if (listenerSysTray == null) {
-            listenerSysTray = new TrayManagerFormListFriendsListener(trayIcon, servidor, tray);
+            listenerSysTray = new TrayManagerFormListFriendsListener(trayIcon,
+                    servidor, tray);
         }
         return listenerSysTray;
     }
@@ -87,16 +87,6 @@ public class TrayManagerFormListFriend {
         } catch (AWTException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public void inabilitaMenuRun() {
-        popup.getItem(3).setEnabled(false);
-        popup.getItem(2).setEnabled(true);
-    }
-
-    public void habilitaMenuRun() {
-        popup.getItem(3).setEnabled(true);
-        popup.getItem(2).setEnabled(false);
     }
 
 }
