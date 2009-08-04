@@ -30,22 +30,32 @@ public class ThreadCarregaContatos extends Thread {
 
     public void run() {
         for (Contatos contato : contatos) {
-            try {
-                if (contato.equals(form.getCliente().getContatos())) {
-                    form.adicionaUsuario(contato);
-                } else {
-                    if (isListaAberta == true) {
-                        new ThreadAdicionaContato(modelContatos, contato,
-                                listaApresentacao).start();
-                    } else if (isListaAberta == false) {
-                        modelAux.add(contato);
-                        Collections.sort(modelAux, new ContatosComparator());
+            if (!listaApresentacao.contains(contato)
+                    || !modelAux.contains(contato)) {
+                try {
+                    if (contato.equals(form.getCliente().getContatos())) {
+                        if (form.getLblUsuario() == null)
+                            form.adicionaUsuario(contato);
+                    } else {
+                        if (isListaAberta == true) {
+                            Contatos first = new Contatos(" Friends");
+                            listaApresentacao.add(contato);
+                            Collections.sort(listaApresentacao, new ContatosComparator());
+                            modelContatos.clear();
+                            modelContatos.addElement(first);
+                            for (int i = 0; i < listaApresentacao.size(); i++) {
+                                modelContatos.addElement(listaApresentacao.get(i));
+                            }
+                        } else if (isListaAberta == false) {
+                            modelAux.add(contato);
+                            Collections
+                                    .sort(modelAux, new ContatosComparator());
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
         }
     }
 }
