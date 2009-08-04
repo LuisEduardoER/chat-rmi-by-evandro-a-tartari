@@ -15,7 +15,6 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -41,11 +40,9 @@ import javax.swing.border.TitledBorder;
 import util.ComboCellRender;
 import util.RedimencionaImagemIcon;
 import SysTrayClient.TrayManagerFormListFriend;
-import ThreadsCliente.ThreadAdicionaContato;
 import ThreadsCliente.ThreadCarregaContatos;
 import acao.FormListFriendsListener;
 import contatos.Contatos;
-import contatos.ContatosComparator;
 import contatos.render.ContatosRender;
 
 /**
@@ -305,20 +302,10 @@ public class FormListFriends extends JFrame {
     }
 
     /**
-     * adiciona Contato na listaContatos
+     * adiciona Contatos na listaContatos
      * 
      * @param contato
      */
-    public void adicionaContato(Contatos contato) {
-        if (isListaAberta == true) {
-            new ThreadAdicionaContato(modelContatos, contato, listaApresentacao)
-                    .start();
-        } else if (isListaAberta == false) {
-            modelAux.add(contato);
-            Collections.sort(modelAux, new ContatosComparator());
-        }
-    }
-
     public void carregaContatos(List<Contatos> contatos) {
         new ThreadCarregaContatos(contatos, modelContatos, listaApresentacao,
                 modelAux, isListaAberta, this).start();
