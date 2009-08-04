@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -43,6 +44,7 @@ import SysTrayClient.TrayManagerFormListFriend;
 import ThreadsCliente.ThreadCarregaContatos;
 import acao.FormListFriendsListener;
 import contatos.Contatos;
+import contatos.ContatosComparator;
 import contatos.render.ContatosRender;
 
 /**
@@ -75,7 +77,7 @@ public class FormListFriends extends JFrame {
     private List<Contatos> listaApresentacao;
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
-    private JLabel lblUsuario = new JLabel();
+    private JLabel lblUsuario;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
@@ -313,6 +315,7 @@ public class FormListFriends extends JFrame {
 
     public void adicionaUsuario(Contatos contatos) {
         painelUsuario.setComponentOrientation(ComponentOrientation.UNKNOWN);
+        lblUsuario = new JLabel();
         lblUsuario.setBounds(50, 20, 150, 100);
         lblUsuario.setVerticalAlignment(JLabel.CENTER);
         lblUsuario.setHorizontalAlignment(JLabel.CENTER);
@@ -336,7 +339,18 @@ public class FormListFriends extends JFrame {
      * @param contato
      */
     public void removeContato(Contatos contato) {
-        modelContatos.removeElement(contato);
+        ContatosComparator c = new ContatosComparator();
+        if (isListaAberta) {
+            modelContatos.clear();
+            listaApresentacao.remove(contato);
+            Collections.sort(listaApresentacao, c);
+            for (Contatos contatoZ : listaApresentacao) {
+                modelContatos.addElement(contatoZ);
+            }
+        } else {
+            modelAux.remove(contato);
+            Collections.sort(modelAux, c);
+        }
         gerente.verificaInstanciaConversa(contato);
     }
 
@@ -536,6 +550,10 @@ public class FormListFriends extends JFrame {
 
     public JComboBox getComboEstado() {
         return status;
+    }
+
+    public JLabel getLblUsuario() {
+        return lblUsuario;
     }
 
 }
