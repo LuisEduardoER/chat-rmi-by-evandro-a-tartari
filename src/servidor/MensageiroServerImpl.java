@@ -192,7 +192,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     }
 
-    public void finalize() throws RemoteException {
+    public void finalizar() throws RemoteException {
         if (getClientes().size() > 0) {
             for (Contatos contato : getContatos()) {
                 new ThreadXException(getClientes(), contato);
