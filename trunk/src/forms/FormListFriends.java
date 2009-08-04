@@ -15,6 +15,7 @@ import java.awt.Toolkit;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -43,6 +44,7 @@ import SysTrayClient.TrayManagerFormListFriend;
 import ThreadsCliente.ThreadAdicionaContato;
 import acao.FormListFriendsListener;
 import contatos.Contatos;
+import contatos.ContatosComparator;
 import contatos.render.ContatosRender;
 
 /**
@@ -72,6 +74,7 @@ public class FormListFriends extends JFrame {
     private TrayManagerFormListFriend trayManager;
     private FormListFriendsListener listener;
     private List<Contatos> modelAux;
+    private List<Contatos> listaApresentacao;
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
     private JLabel lblUsuario = new JLabel();
@@ -79,6 +82,7 @@ public class FormListFriends extends JFrame {
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
+        listaApresentacao = new ArrayList<Contatos>();
     }
 
     /**
@@ -306,9 +310,11 @@ public class FormListFriends extends JFrame {
      */
     public void adicionaContato(Contatos contato) {
         if (isListaAberta == true) {
-            new ThreadAdicionaContato(modelContatos, contato).start();
+            new ThreadAdicionaContato(modelContatos, contato, listaApresentacao)
+                    .start();
         } else if (isListaAberta == false) {
             modelAux.add(contato);
+            Collections.sort(modelAux, new ContatosComparator());
         }
     }
 
@@ -505,25 +511,27 @@ public class FormListFriends extends JFrame {
 
     public void IsListaAberta(boolean isListaAberta, Contatos contato) {
         if (isListaAberta) {
-            modelContatos.clear();
+            modelAux.set(0, contato);
             for (int i = 0; i < modelAux.size(); i++) {
                 modelContatos.addElement(modelAux.get(i));
             }
             modelAux = new ArrayList<Contatos>();
         } else {
+            modelAux.add(contato);
             for (int i = 0; i < modelContatos.getSize(); i++) {
-                modelAux.add((Contatos) modelContatos.getElementAt(i));
+                if (i != 0) {
+                    modelAux.add((Contatos) modelContatos.getElementAt(i));
+                }
             }
-            modelContatos.clear();
-            modelContatos.addElement(contato);
         }
         this.isListaAberta = isListaAberta;
     }
 
     public IMensageiroCliente getClienteContatos() {
-       return this.cliente;
-       
+        return this.cliente;
+
     }
+
     public JLabel getLblNome() {
         return lblUsuario;
     }
@@ -535,7 +543,5 @@ public class FormListFriends extends JFrame {
     public JComboBox getComboEstado() {
         return status;
     }
-
-    
 
 }
