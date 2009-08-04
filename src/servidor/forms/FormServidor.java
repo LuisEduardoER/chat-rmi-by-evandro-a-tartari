@@ -272,4 +272,21 @@ public class FormServidor extends JFrame {
         return activeRun;
     }
 
+    public void finalizar() {
+        try{
+        servico.finalize();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void fechaTudo(){
+        try{
+            servico.finalize();
+            servico.fecharTudo();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+
 }
