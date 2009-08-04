@@ -207,6 +207,11 @@ public class Gerente {
     public void adicionaContato(Contatos contatos) {
         getFormListFriends().adicionaContato(contatos);
     }
+    
+    public void carregaContatos(List<Contatos> contatos) {
+        getFormListFriends().carregaContatos(contatos);
+        
+    }
 
     public void adicionaUsuario(Contatos contatos) {
         getFormListFriends().adicionaUsuario(contatos);
@@ -433,6 +438,8 @@ public class Gerente {
         }
 
     }
+
+
 
     
     

@@ -42,6 +42,7 @@ import util.ComboCellRender;
 import util.RedimencionaImagemIcon;
 import SysTrayClient.TrayManagerFormListFriend;
 import ThreadsCliente.ThreadAdicionaContato;
+import ThreadsCliente.ThreadCarregaContatos;
 import acao.FormListFriendsListener;
 import contatos.Contatos;
 import contatos.ContatosComparator;
@@ -316,6 +317,10 @@ public class FormListFriends extends JFrame {
             modelAux.add(contato);
             Collections.sort(modelAux, new ContatosComparator());
         }
+    }
+
+    public void carregaContatos(List<Contatos> contatos) {
+        new ThreadCarregaContatos(contatos, modelContatos, listaApresentacao, modelAux, isListaAberta).start();
     }
 
     public void adicionaUsuario(Contatos contatos) {
