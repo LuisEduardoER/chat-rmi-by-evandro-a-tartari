@@ -200,7 +200,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         }
         getClientes().clear();
         getContatos().clear();
-        super.finalize();
+        System.exit(0);
     }
 
 }
