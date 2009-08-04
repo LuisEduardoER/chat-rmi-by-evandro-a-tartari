@@ -17,10 +17,10 @@ import servidor.forms.FormServidor;
  */
 public class TrayManager {
 
-    private static TrayIcon trayIcon;
-    private static SystemTray tray;
-    private static PopupMenu popup;
-    private static SysTrayImpls listenerSysTray;
+    private TrayIcon trayIcon;
+    private SystemTray tray;
+    private PopupMenu popup;
+    private SysTrayImpls listenerSysTray;
     private FormServidor servidor;
 
     public TrayManager(JFrame frame) {
@@ -94,13 +94,13 @@ public class TrayManager {
     }
     
     public void inabilitaMenuRun(){
-        popup.getItem(3).setEnabled(false);
-        popup.getItem(2).setEnabled(true);
+        getPopupMenu().getItem(3).setEnabled(false);
+        getPopupMenu().getItem(2).setEnabled(true);
     }
 
     public void habilitaMenuRun() {
-        popup.getItem(3).setEnabled(true);
-        popup.getItem(2).setEnabled(false);
+        getPopupMenu().getItem(3).setEnabled(true);
+        getPopupMenu().getItem(2).setEnabled(false);
     }
     
 
