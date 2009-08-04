@@ -189,5 +189,17 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 .recebeAvisoEnvioCompleto(arquivo);
 
     }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if(getClientes().size() > 0){
+            for (Contatos contato : getContatos()) {
+                getClientes().get(contato.getLogin()).servidorFechando(); 
+            } 
+               
+            
+        }
+    }
 
 }
