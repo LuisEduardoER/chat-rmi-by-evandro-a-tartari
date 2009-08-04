@@ -512,17 +512,17 @@ public class FormListFriends extends JFrame {
     public void IsListaAberta(boolean isListaAberta, Contatos contato) {
         if (isListaAberta) {
             modelAux.set(0, contato);
+            modelContatos.clear();
             for (int i = 0; i < modelAux.size(); i++) {
                 modelContatos.addElement(modelAux.get(i));
             }
             modelAux = new ArrayList<Contatos>();
         } else {
-            modelAux.add(contato);
             for (int i = 0; i < modelContatos.getSize(); i++) {
-                if (i != 0) {
-                    modelAux.add((Contatos) modelContatos.getElementAt(i));
-                }
+                modelAux.add((Contatos) modelContatos.getElementAt(i));
             }
+            modelContatos.clear();
+            modelContatos.addElement(modelAux.get(0));
         }
         this.isListaAberta = isListaAberta;
     }
