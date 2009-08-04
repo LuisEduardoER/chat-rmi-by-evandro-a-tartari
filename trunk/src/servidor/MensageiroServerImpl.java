@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadEnviarMensagem;
@@ -66,6 +68,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         try {
             registro = getRegistry(porta);
             registro.bind("MensageiroServer", this);
+            JOptionPane.showMessageDialog(null, "Servidor Iniciado "
+                    + getClientes().size() + " " + getContatos().size(), "Servidor Rodando", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         }
