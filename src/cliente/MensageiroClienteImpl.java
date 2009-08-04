@@ -103,6 +103,11 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 		gerente.recebeMensagem(mensagem);
 		
 	}
+	
+    public void mensagemEnviada(Mensagem mensagem) throws RemoteException {
+        gerente.mensagemEnviada(mensagem);
+        
+    }
 
     public void chamarAtencao(Mensagem mensagem, Contatos contato)
             throws RemoteException {
@@ -135,6 +140,8 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
        gerente.recebeAvisoEnvioCompleto(arquivo);
         
     }
+
+
 
 
 
