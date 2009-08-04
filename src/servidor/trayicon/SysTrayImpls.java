@@ -11,10 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import servidor.forms.FormServidor;
+
 /**
  * 
  * @author evandro.tartari
- *
+ * 
  */
 public class SysTrayImpls implements MouseListener, ActionListener {
     private static TrayIcon trayIcon;
@@ -54,20 +55,24 @@ public class SysTrayImpls implements MouseListener, ActionListener {
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
         } else if (e.getActionCommand().equals("Exit")) {
-            System.exit(0);
+            servidor.finalizar();
+            servidor.fechaTudo();
         } else if (e.getActionCommand().equals("Abrir")) {
             servidor.setVisible(true);
             tray.remove(trayIcon);
             servidor.setExtendedState(JFrame.NORMAL);
         } else if (e.getActionCommand().equals("Stop")) {
-            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverNotRunning.png"));
+            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader()
+                    .getResource("imagens/serverNotRunning.png"));
             trayIcon.setImage(icon.getImage());
             servidor.parar();
+            servidor.finalizar();
             servidor.habilitaMenuRun();
-        }else if(e.getActionCommand().equals("Run")){
+        } else if (e.getActionCommand().equals("Run")) {
             servidor.inabilitarMenuRun();
             servidor.clean();
-            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader().getResource("imagens/serverRunning.png"));
+            ImageIcon icon = new ImageIcon(this.getClass().getClassLoader()
+                    .getResource("imagens/serverRunning.png"));
             trayIcon.setImage(icon.getImage());
         }
     }
