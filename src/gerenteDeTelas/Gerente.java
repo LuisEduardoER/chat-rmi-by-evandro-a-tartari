@@ -15,7 +15,6 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import status.Status;
 import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
@@ -435,31 +434,6 @@ public class Gerente {
 
     }
 
-    @SuppressWarnings("static-access")
-    public void recebeNotificacao(Contatos contato, Status status) {
-        try {
-            if (this.cliente.getContatos().equals(contato)) {
-                String nome="";
-                if(contato.getNome().contains(status.Ausente.getDescricao())||contato.getNome().contains(status.Ocupado.getDescricao())){
-                    nome = contato.getNome().replace(status.Ocupado.getDescricao(), "");
-                    nome = contato.getNome().replace(status.Ausente.getDescricao(), "");
-                }
-                nome = contato.getNome()+status.getDescricao();
-                getFormListFriends().getLblNome().setText(nome);
-            } else {
-                String nome="";
-                if(contato.getNome().contains(status.Ausente.getDescricao())||contato.getNome().contains(status.Ocupado.getDescricao())){
-                    nome = contato.getNome().replace(status.Ocupado.getDescricao(), "");
-                    nome = contato.getNome().replace(status.Ausente.getDescricao(), "");
-                }
-                int posicao = getFormListFriends().getContatos().indexOf(contato);
-                nome = contato.getNome()+status.getDescricao();
-                ((Contatos)getFormListFriends().getContatos().get(posicao)).setNome(nome);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
+    
+    
 }

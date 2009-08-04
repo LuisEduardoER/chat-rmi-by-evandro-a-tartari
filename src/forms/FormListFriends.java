@@ -333,6 +333,7 @@ public class FormListFriends extends JFrame {
         status = newJComboBox();
         status.addActionListener(listener);
         painelStatus.add(status);
+        status.setEnabled(false);
         setVisible(true);
     }
 
