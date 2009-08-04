@@ -251,7 +251,7 @@ public class FormServidor extends JFrame {
 
     public void habilitaMenuRun() {
         try {
-            manager.habilitaMenuRun();
+            getManager().habilitaMenuRun();
         } catch (Exception e) {
             e.printStackTrace();
         }
