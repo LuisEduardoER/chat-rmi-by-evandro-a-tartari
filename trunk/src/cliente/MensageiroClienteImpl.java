@@ -9,7 +9,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import status.Status;
 import contatos.Contatos;
 
 /**
@@ -131,16 +130,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         
     }
 
-    public void notificaStatus(Status status) throws RemoteException {
-        servidor.notificaStatus(status, getContatos());
-        
-    }
 
-    public void recebeNotificacao(Contatos contato, Status status)
-            throws RemoteException {
-        gerente.recebeNotificacao(contato, status);
-        
-    }
     
     
 
