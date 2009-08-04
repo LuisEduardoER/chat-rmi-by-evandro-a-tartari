@@ -341,12 +341,19 @@ public class FormListFriends extends JFrame {
     public void removeContato(Contatos contato) {
         ContatosComparator c = new ContatosComparator();
         if (isListaAberta) {
+            Contatos contatoS = (Contatos) modelContatos.getElementAt(0);
+            List<Contatos> aux = listaApresentacao;
+            if(!aux.contains(contatoS)){
+                aux.add(0, contatoS);
+            }
             modelContatos.clear();
-            listaApresentacao.remove(contato);
-            Collections.sort(listaApresentacao, c);
-            for (Contatos contatoZ : listaApresentacao) {
+            aux.remove(contato);
+            Collections.sort(aux, c);
+            for (Contatos contatoZ : aux) {
                 modelContatos.addElement(contatoZ);
             }
+            aux.remove(0);
+            listaApresentacao = aux;
         } else {
             modelAux.remove(contato);
             Collections.sort(modelAux, c);
