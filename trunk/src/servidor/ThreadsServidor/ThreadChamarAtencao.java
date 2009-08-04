@@ -24,7 +24,7 @@ public class ThreadChamarAtencao extends Thread {
             mensagem
                     .setMensagem("Você pediu a atenção de " + contato.getNome());
             servidor.getClientes().get(mensagem.getUsuarioEnvia())
-                    .receberMensagem(mensagem);
+                    .mensagemEnviada(mensagem);
         } catch (Exception e) {
             e.printStackTrace();
         }
