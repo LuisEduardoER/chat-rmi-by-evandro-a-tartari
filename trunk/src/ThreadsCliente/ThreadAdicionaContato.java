@@ -21,8 +21,8 @@ public class ThreadAdicionaContato extends Thread {
     }
 
     public void run() {
-        Contatos first = new Contatos(" Friends", "imagens/grupoAberto.png");
-        Contatos last = new Contatos(" Offline", "imagens/grupoAberto.png");
+        Contatos first = new Contatos(" Friends");
+        Contatos last = new Contatos(" Offline");
         apresentacao.add(contato);
         Collections.sort(apresentacao, new ContatosComparator());
         apresentacao.add(0, contato);
