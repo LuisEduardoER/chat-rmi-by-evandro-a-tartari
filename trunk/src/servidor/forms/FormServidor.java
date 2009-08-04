@@ -274,7 +274,7 @@ public class FormServidor extends JFrame {
 
     public void finalizar() {
         try{
-        servico.finalize();
+        servico.finalizar();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -282,7 +282,7 @@ public class FormServidor extends JFrame {
     
     public void fechaTudo(){
         try{
-            servico.finalize();
+            servico.finalizar();
             servico.fecharTudo();
             }catch (Exception e) {
                 e.printStackTrace();
