@@ -69,7 +69,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             registro = getRegistry(porta);
             registro.bind("MensageiroServer", this);
             JOptionPane.showMessageDialog(null, "Servidor Iniciado "
-                    + getClientes().size() + " " + getContatos().size(), "Servidor Rodando", JOptionPane.WARNING_MESSAGE);
+                    + getClientes().size() + " " + getContatos().size(),
+                    "Servidor Rodando", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -189,17 +190,17 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 .recebeAvisoEnvioCompleto(arquivo);
 
     }
-    
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        if(getClientes().size() > 0){
+
+    public void finalize() throws Throwable {
+        if (getClientes().size() > 0) {
             for (Contatos contato : getContatos()) {
-                getClientes().get(contato.getLogin()).servidorFechando(); 
-            } 
-               
-            
+                getClientes().get(contato.getLogin()).servidorFechando();
+            }
+
         }
+        getClientes().clear();
+        getContatos().clear();
+        super.finalize();
     }
 
 }
