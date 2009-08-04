@@ -1,3 +1,2 @@
 - limpar o codigo. Buscar Alta Performance.
-- melhorar o servidor.
 
