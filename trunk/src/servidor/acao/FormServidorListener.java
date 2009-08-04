@@ -58,8 +58,8 @@ public class FormServidorListener implements ActionListener, KeyListener,
                 }
             }
         } else if (evento.getActionCommand().equals("Fechar")) {
-            servidor.dispose();
-            System.exit(0);
+            servidor.finalizar();
+            servidor.fechaTudo();
         } 
     }
 
