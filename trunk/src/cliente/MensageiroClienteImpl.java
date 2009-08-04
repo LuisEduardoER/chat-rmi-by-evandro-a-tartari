@@ -137,6 +137,11 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         
     }
 
+    public void servidorFechando() throws RemoteException {
+        gerente.servidorFechando();
+        
+    }
+
 
 
 
