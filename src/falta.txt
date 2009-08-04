@@ -1,4 +1,2 @@
-- falta Colocar icone pasta Arquivos Recebidos;
-- acertar janela de contatos e colocar mais funcionalidades;
 - limpar o codigo. Buscar Alta Performance.
 
