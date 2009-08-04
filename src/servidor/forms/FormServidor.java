@@ -251,6 +251,9 @@ public class FormServidor extends JFrame {
 
     public void habilitaMenuRun() {
         try {
+            if(getManager()==null){
+                createTrayIcon();
+            }
             getManager().habilitaMenuRun();
         } catch (Exception e) {
             e.printStackTrace();
