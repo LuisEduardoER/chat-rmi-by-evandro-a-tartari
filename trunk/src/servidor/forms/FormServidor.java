@@ -49,7 +49,7 @@ public class FormServidor extends JFrame {
     private String mensagem = "Server not Running";
     private Boolean activeStop = false;
     private Boolean activeRun = true;
-    private TrayManager manager;
+    private static TrayManager manager;
 
     public void inicializar() {
         setTitle("Servidor");
@@ -145,8 +145,6 @@ public class FormServidor extends JFrame {
     }
 
     public void refreshIcon(String urlImagem) {
-        if (manager != null)
-            manager = null;
         this.urlImagem = urlImagem;
         if (urlImagem.equals("imagens/serverRunning.png")) {
             mensagem = "Server is Running";
@@ -160,7 +158,7 @@ public class FormServidor extends JFrame {
     }
 
     public void setManager(TrayManager manager) {
-        this.manager = manager;
+        FormServidor.manager = manager;
     }
 
     public TrayManager getManager() {
@@ -251,9 +249,6 @@ public class FormServidor extends JFrame {
 
     public void habilitaMenuRun() {
         try {
-            if(getManager()==null){
-                createTrayIcon();
-            }
             getManager().habilitaMenuRun();
         } catch (Exception e) {
             e.printStackTrace();
