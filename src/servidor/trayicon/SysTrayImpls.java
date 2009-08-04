@@ -17,14 +17,14 @@ import servidor.forms.FormServidor;
  *
  */
 public class SysTrayImpls implements MouseListener, ActionListener {
-    private TrayIcon trayIcon;
+    private static TrayIcon trayIcon;
     private FormServidor servidor;
-    private SystemTray tray;
+    private static SystemTray tray;
 
     public SysTrayImpls(TrayIcon trayIcon, JFrame frame, SystemTray tray) {
-        this.trayIcon = trayIcon;
+        SysTrayImpls.trayIcon = trayIcon;
         servidor = (FormServidor) frame;
-        this.tray = tray;
+        SysTrayImpls.tray = tray;
     }
 
     public void mouseClicked(MouseEvent e) {

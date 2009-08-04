@@ -17,10 +17,10 @@ import servidor.forms.FormServidor;
  */
 public class TrayManager {
 
-    private TrayIcon trayIcon;
-    private SystemTray tray;
-    private PopupMenu popup;
-    private SysTrayImpls listenerSysTray;
+    private static TrayIcon trayIcon;
+    private static SystemTray tray;
+    private static PopupMenu popup;
+    private static SysTrayImpls listenerSysTray;
     private FormServidor servidor;
 
     public TrayManager(JFrame frame) {
