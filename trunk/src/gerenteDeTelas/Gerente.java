@@ -446,7 +446,7 @@ public class Gerente {
 
     public void servidorFechando() {
        JOptionPane.showMessageDialog(null, "Servidor Fechou! Esta Janela será encerrada", "Aviso de Fechamento!!!", JOptionPane.QUESTION_MESSAGE);
-        
+       System.exit(0);
     }
 
 }
