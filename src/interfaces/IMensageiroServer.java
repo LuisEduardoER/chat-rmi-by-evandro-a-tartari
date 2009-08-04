@@ -39,7 +39,7 @@ public interface IMensageiroServer extends Remote {
     public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException;
 
-    public void finalize()throws RemoteException;
+    public void finalizar()throws RemoteException;
 
     public void fecharTudo()throws RemoteException;
 
