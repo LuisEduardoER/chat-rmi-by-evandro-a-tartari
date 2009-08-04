@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadEnviarMensagem;
+import servidor.ThreadsServidor.ThreadXException;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -194,10 +195,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void finalize() throws RemoteException {
         if (getClientes().size() > 0) {
             for (Contatos contato : getContatos()) {
-                getClientes().get(contato.getLogin()).servidorFechando();
+                new ThreadXException(getClientes(), contato);
             }
 
         }
+        getClientes().clear();
+        getContatos().clear();
     }
 
     public void fecharTudo() {
