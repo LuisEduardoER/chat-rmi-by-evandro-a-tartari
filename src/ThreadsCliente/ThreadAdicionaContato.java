@@ -22,7 +22,6 @@ public class ThreadAdicionaContato extends Thread {
 
     public void run() {
         Contatos first = new Contatos(" Friends");
-        Contatos last = new Contatos(" Offline");
         apresentacao.add(contato);
         Collections.sort(apresentacao, new ContatosComparator());
         modelContatos.clear();
@@ -30,6 +29,5 @@ public class ThreadAdicionaContato extends Thread {
         for (int i = 0; i < apresentacao.size(); i++) {
             modelContatos.addElement(apresentacao.get(i));
         }
-        modelContatos.addElement(last);
     }
 }
