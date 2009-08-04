@@ -18,13 +18,10 @@ public class ThreadEnviaNotificacao extends Thread {
         try {
             if (servidor.getContatos().size() > 0) {
                 for (Contatos contato : servidor.getContatos()) {
-                    if (contato.getLogin().equals(
-                            cliente.getContatos().getLogin())) {
-                        cliente.adicionaUsuario(cliente.getContatos());
-                    } else {
-                        cliente.adicionaContato(contato);
-                        servidor.getClientes().get(contato.getLogin())
-                                .adicionaContato(cliente.getContatos());
+                    if(cliente.getContatos().equals(contato)){
+                        cliente.carregaContatos(servidor.getContatos());
+                    }else{
+                        servidor.getClientes().get(contato.getLogin()).adicionaContato(contato);
                     }
                 }
             }

@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import contatos.Contatos;
 
@@ -75,6 +76,11 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 	public void adicionaContato(Contatos contatos) throws RemoteException {
 		gerente.adicionaContato(contatos);
 	}
+	
+    public void carregaContatos(List<Contatos> contatos) throws RemoteException {
+        gerente.carregaContatos(contatos);
+        
+    }
 
 	public void adicionaUsuario(Contatos contatos) throws RemoteException {
 		gerente.adicionaUsuario(contatos);
@@ -129,6 +135,8 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
        gerente.recebeAvisoEnvioCompleto(arquivo);
         
     }
+
+
 
 
     
