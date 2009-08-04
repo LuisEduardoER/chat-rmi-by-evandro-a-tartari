@@ -440,4 +440,14 @@ public class FormConnect extends JFrame {
         return iconUsuario;
     }
 
+    public void disableButtonConnect() {
+        btnConnectar.setEnabled(false);
+        
+    }
+
+    public void enableButtonConnect() {
+        btnConnectar.setEnabled(true);
+        
+    }
+
 }
