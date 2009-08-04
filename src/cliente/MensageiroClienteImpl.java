@@ -73,11 +73,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 		return con;
 	}
 
-	public void adicionaContato(Contatos contatos) throws RemoteException {
-		gerente.adicionaContato(contatos);
-	}
-	
-    public void carregaContatos(List<Contatos> contatos) throws RemoteException {
+	public void carregaContatos(List<Contatos> contatos) throws RemoteException {
         gerente.carregaContatos(contatos);
         
     }
