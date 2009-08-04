@@ -14,7 +14,6 @@ import java.util.Map;
 
 import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
-import servidor.ThreadsServidor.ThreadEnviaNotificacao;
 import servidor.ThreadsServidor.ThreadEnviarMensagem;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
@@ -82,7 +81,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void enviarNotificacao(IMensageiroCliente cliente)
             throws RemoteException {
-        new ThreadEnviaNotificacao(this, cliente).start();
+        if (getContatos().size() > 0) {
+            for (Contatos contato : getContatos()) {
+                getClientes().get(contato.getLogin()).carregaContatos(
+                        getContatos());
+            }
+        }
     }
 
     /**
