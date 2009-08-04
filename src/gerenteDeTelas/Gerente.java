@@ -82,10 +82,12 @@ public class Gerente {
 
             } catch (RemoteException e) {
                 frame.getExcessao().lancaExcessao(e.getMessage());
+                frame.enableButtonConnect();
             }
         } else {
             frame.getExcessao().setaListaExcessao(listaExcessaoConnectForm);
             frame.getExcessao().lancaExcessao("*Campo numerico");
+            frame.enableButtonConnect();
         }
     }
 
