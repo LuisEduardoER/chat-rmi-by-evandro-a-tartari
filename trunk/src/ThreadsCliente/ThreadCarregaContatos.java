@@ -30,13 +30,11 @@ public class ThreadCarregaContatos extends Thread {
 
     public void run() {
         for (Contatos contato : contatos) {
-            if (!listaApresentacao.contains(contato)
-                    || !modelAux.contains(contato)) {
                 try {
                     if (contato.equals(form.getCliente().getContatos())) {
                         if (form.getLblUsuario() == null)
                             form.adicionaUsuario(contato);
-                    } else {
+                    } else if(!listaApresentacao.contains(contato)&&!modelAux.contains(contato)){
                         if (isListaAberta == true) {
                             Contatos first = new Contatos(" Friends");
                             listaApresentacao.add(contato);
@@ -51,6 +49,7 @@ public class ThreadCarregaContatos extends Thread {
                             Collections
                                     .sort(modelAux, new ContatosComparator());
                         }
+                        
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -58,4 +57,3 @@ public class ThreadCarregaContatos extends Thread {
             }
         }
     }
-}
