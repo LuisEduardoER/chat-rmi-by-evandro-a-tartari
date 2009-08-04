@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import ThreadsCliente.ThreadMensagemEnviada;
 import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
@@ -233,6 +234,11 @@ public class Gerente {
     public void recebeMensagem(Mensagem mensagem) {
         new ThreadRecebeMensagem(this, mensagem).start();
     }
+    
+    public void mensagemEnviada(Mensagem mensagem) {
+        new ThreadMensagemEnviada(this, mensagem).start();
+        
+    }
 
     public void iniciaConversa(Contatos contato, Mensagem mensagem) {
         try {
@@ -438,6 +444,8 @@ public class Gerente {
         }
 
     }
+
+
 
 
 
