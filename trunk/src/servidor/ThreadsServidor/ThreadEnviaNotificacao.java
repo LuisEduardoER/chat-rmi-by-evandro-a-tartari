@@ -1,5 +1,7 @@
 package servidor.ThreadsServidor;
 
+import java.util.List;
+
 import interfaces.IMensageiroCliente;
 import servidor.MensageiroServerImpl;
 import contatos.Contatos;
@@ -18,10 +20,13 @@ public class ThreadEnviaNotificacao extends Thread {
         try {
             if (servidor.getContatos().size() > 0) {
                 for (Contatos contato : servidor.getContatos()) {
-                    if(cliente.getContatos().equals(contato)){
-                        cliente.carregaContatos(servidor.getContatos());
-                    }else{
-                        servidor.getClientes().get(contato.getLogin()).adicionaContato(contato);
+                    if (cliente.getContatos().equals(contato)) {
+                        cliente.adicionaUsuario(contato);
+                    } else {
+                        List<Contatos> contatos = servidor.getContatos();
+                        contatos.remove(contato);
+                        servidor.getClientes().get(contato.getLogin())
+                                .carregaContatos(contatos);
                     }
                 }
             }
