@@ -14,8 +14,8 @@ public class ThreadPiscaJanela extends Thread {
         try{
         int i = 0;
         while (i < 2) {
-            this.sleep(500);
             conversa.setVisible(true);
+            this.sleep(1000);
             i++;
         }
         }catch (Exception e) {
