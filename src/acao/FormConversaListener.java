@@ -181,7 +181,8 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     @SuppressWarnings("deprecation")
     public void windowClosing(WindowEvent e) {
-        ThreadPiscaJanela.currentThread().destroy();
+        if (ThreadPiscaJanela.currentThread() != null)
+            ThreadPiscaJanela.currentThread().destroy();
         gerente.fechouConversa(conversa);
     }
 
