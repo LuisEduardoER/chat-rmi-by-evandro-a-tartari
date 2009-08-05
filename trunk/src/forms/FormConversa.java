@@ -28,8 +28,8 @@ import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import util.HoraMensagem;
 import util.JTextPaneI;
+import util.Util;
 import ThreadsCliente.ThreadAlerta;
 import ThreadsCliente.ThreadRecebeArquivo;
 import acao.FormConversaListener;
@@ -572,24 +572,14 @@ public class FormConversa extends JFrame {
     }
 
     public void recebeAviso(EnviaArquivo arquivo) {
-        Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
-                .getContatoEnvia().getNome(), arquivo.getRetorno(),
-                HoraMensagem.getDataHora(), getFontSize(), getFontFamily(), getColor(),
-                getIsBold(), getIsItalic(), getIsSublinhado(), arquivo
-                        .getContatoRecebe().getNome());
+        Mensagem m = Util.newMensagemRecebeAviso(arquivo, this);
         txtReceptorMensagem.append(m, true);
         btnSendFile.setEnabled(true);
 
     }
 
     public void avisaArquivoRecebido(EnviaArquivo arquivo) {
-        Mensagem m = new Mensagem(arquivo.getContatoRecebe().getLogin(),
-                arquivo.getContatoRecebe().getNome(),
-                "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
-                        + arquivo.getNomeArquivo() + "\n", HoraMensagem.getDataHora(),
-                getFontSize(), getFontFamily(), getColor(), getIsBold(),
-                getIsItalic(), getIsSublinhado(), arquivo.getContatoRecebe()
-                        .getNome());
+        Mensagem m = Util.newMensagemArquivoRecebido(arquivo, this);
         txtReceptorMensagem.append(m, false);
 
     }
