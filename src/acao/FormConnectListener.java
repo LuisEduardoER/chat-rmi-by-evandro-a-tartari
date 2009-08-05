@@ -31,9 +31,9 @@ import org.jvnet.substance.skin.SubstanceNebulaBrickWallLookAndFeel;
 import org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel;
 import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
-import util.FileFilterImpl;
-import util.ImagePreviewer;
 import util.Util;
+import util.componente.FileFilterImpl;
+import util.componente.ImagePreviewer;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
