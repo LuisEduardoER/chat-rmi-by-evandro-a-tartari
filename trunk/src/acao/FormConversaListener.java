@@ -179,10 +179,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
         return dataHora;
     }
 
-    @SuppressWarnings("deprecation")
     public void windowClosing(WindowEvent e) {
         if (ThreadPiscaJanela.currentThread() != null)
-            ThreadPiscaJanela.currentThread().destroy();
+            ThreadPiscaJanela.currentThread().interrupt();
         gerente.fechouConversa(conversa);
     }
 
