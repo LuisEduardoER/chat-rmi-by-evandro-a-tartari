@@ -35,18 +35,18 @@ public class ThreadRecebeArquivo extends Thread {
                                 35, 1000), null, null);
         if (retorno == 0) {
             try {
-                File file = new File("C:/MsMunica/");
+                File file = new File("C:/MsMundica/");
                 if (!file.exists()) {
                     file.mkdir();
                 }
-                String caminho = "C:/MsMunica/" + arquivo.getNomeArquivo();
+                String caminho = "C:/MsMundica/" + arquivo.getNomeArquivo();
                 FileOutputStream fos = new FileOutputStream(caminho);
                 byte[] buffer = arquivo.getFile();
                 fos.write(buffer);
                 fos.flush();
                 fos.close();
                 arquivo.setRetorno("Arquivo recebido com sucesso por "
-                        + arquivo.getContatoRecebe().getNome());
+                        + arquivo.getContatoRecebe().getNome()+"\n");
                 conversa.avisaArquivoRecebido(arquivo);
                 cliente.enviaAvisoEnvioCompleto(arquivo);
             } catch (Exception e) {
