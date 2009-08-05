@@ -1,4 +1,5 @@
-- limpar o codigo. Buscar Alta Performance.
+- limpar o codigo. Buscar Alta Performance. Pegar metodos 
+duplicatos em varias classes e montar uma class util.
 
 Release 2.0 - Incluir
 - migrar tudo para Java.net;
