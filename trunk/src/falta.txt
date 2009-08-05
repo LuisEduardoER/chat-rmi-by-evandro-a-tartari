@@ -6,5 +6,6 @@ Release 2.0 - Incluir
   (btnAdicionaContato, btnRemoveContato , btnChat);
 - Verificar possibilidade de colocar imagem na tela junto com 
 texto;  
+- Mudar o botao de enviar;
 
 
