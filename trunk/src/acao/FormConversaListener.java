@@ -90,7 +90,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else if (e.getActionCommand().equals("alerta")) {
             conversa.getTxtDescritorMensagens().requestFocus();
             conversa.getBtnAlerta().setEnabled(false);
-            conversa.chamarAtencao(getMensagem("está pedindo sua atenção"));
+            conversa.chamarAtencao(getMensagem("está pedindo sua atenção\n"));
         } else if (e.getActionCommand().equals("sendFile")) {
             conversa.instanciaEnviaArquivo();
         } else if (e.getActionCommand().equals("ApproveSelection")) {
