@@ -1,6 +1,13 @@
 package util;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.InputStream;
 import java.util.Calendar;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
@@ -56,4 +63,48 @@ public class Util {
                 conversa.getIsItalic(), conversa.getIsSublinhado(), arquivo
                         .getContatoRecebe().getNome());
     }
+    public static class RedimencionaImagemIcon {
+        public static ImageIcon redimencionaImagem(InputStream urlImagem,
+                Integer size, Integer alt, Integer hints) {
+            BufferedImage fundo = null;
+            try {
+                fundo = ImageIO.read(urlImagem);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Image imagem = fundo.getScaledInstance(size, alt, hints);
+            ImageIcon jpg = new ImageIcon(imagem);
+            return jpg;
+        }
+
+        public static ImageIcon redimencionaImagem(String urlImagem, Integer size,
+                Integer alt, Integer hints) {
+            BufferedImage fundo = null;
+            try {
+                fundo = ImageIO.read(new File(urlImagem));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Image imagem = fundo.getScaledInstance(size, alt, hints);
+            ImageIcon jpg = new ImageIcon(imagem);
+            return jpg;
+        }
+
+        public static ImageIcon redimencionaImagem(ImageIcon icon, Integer size,
+                Integer alt, Integer hints) {
+
+            try {
+                Image image = icon.getImage();
+                image = image.getScaledInstance(size, alt, hints);
+                ImageIcon jpg = new ImageIcon(image);
+                return jpg;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return new ImageIcon();
+
+        }
+    }
+
 }
+
