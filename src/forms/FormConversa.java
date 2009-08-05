@@ -584,7 +584,7 @@ public class FormConversa extends JFrame {
     public void avisaArquivoRecebido(EnviaArquivo arquivo) {
         Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
                 .getContatoEnvia().getNome(),
-                "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
+                "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\ \n"
                         + arquivo.getNomeArquivo(), "", getFontSize(),
                 getFontFamily(), getColor(), getIsBold(), getIsItalic(),
                 getIsSublinhado(), arquivo.getContatoRecebe().getNome());
