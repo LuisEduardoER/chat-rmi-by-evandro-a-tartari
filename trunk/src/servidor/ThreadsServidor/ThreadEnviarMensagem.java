@@ -15,7 +15,7 @@ public class ThreadEnviarMensagem extends Thread {
     public void run() {
         try {
             if (servidor.getClientes().get(mensagem.getContatoRecebe()) != null) {
-                new ThreadEnviarMensagem(servidor, mensagem).start();
+                new ThreadMensagemEnviada(servidor, mensagem).start();
                 new ThreadMensagemEnviou(servidor, mensagem).start();
             }
         } catch (Exception e) {
