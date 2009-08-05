@@ -52,7 +52,6 @@ public class ThreadCarregaContatos extends Thread {
                     }
 
                 }
-                form.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
