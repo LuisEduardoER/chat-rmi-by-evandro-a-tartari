@@ -43,7 +43,7 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setBold(attr, mensagem.getIsBold());
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), mensagem.getMensagem() + "\n", attr);
+                        .getLength(), mensagem.getMensagem() , attr);
             } else {
                 SimpleAttributeSet attr = new SimpleAttributeSet();
                 StyleConstants.setForeground(attr, Color.BLUE);
@@ -58,7 +58,7 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setBold(attr, mensagem.getIsBold());
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), mensagem.getMensagem() + "\n", attr);
+                        .getLength(), mensagem.getMensagem() , attr);
             }
 
         } catch (Exception e) {
