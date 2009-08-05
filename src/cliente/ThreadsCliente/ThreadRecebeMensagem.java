@@ -1,8 +1,11 @@
 package cliente.ThreadsCliente;
 
+import gerenteDeTelas.Gerente;
+
+import javax.swing.JFrame;
+
 import cliente.Mensagem;
 import contatos.Contatos;
-import gerenteDeTelas.Gerente;
 
 public class ThreadRecebeMensagem extends Thread {
     private Gerente gerente;
@@ -17,6 +20,7 @@ public class ThreadRecebeMensagem extends Thread {
         String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
         if (gerente.getListaConversa().get(name) != null) {
             gerente.getListaConversa().get(name).recebeMensagem(mensagem);
+            if(gerente.getListaConversa().get(name).getExtendedState()==JFrame.ICONIFIED)
             new ThreadPiscaJanela(gerente.getListaConversa().get(name)).start();
         } else {
             Contatos contato = new Contatos();

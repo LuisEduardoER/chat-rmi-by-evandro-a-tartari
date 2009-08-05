@@ -245,7 +245,7 @@ public class Gerente {
             String name = cliente.getContatos().getLogin() + contato.getLogin();
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
-                conversa.setExtendedState(JFrame.ICONIFIED);
+                if(conversa.getExtendedState()==JFrame.ICONIFIED)
                 new ThreadPiscaJanela(conversa).start();
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
@@ -254,6 +254,7 @@ public class Gerente {
                 conversa.inicializar(contato, cliente.getContatos());
                 conversa.setContato(contato);
                 conversa.recebeMensagem(mensagem);
+                conversa.setExtendedState(JFrame.ICONIFIED);
                 conversa.renderiza();
                 listaConversa.put(name, conversa);
                 new ThreadPiscaJanela(conversa).start();
