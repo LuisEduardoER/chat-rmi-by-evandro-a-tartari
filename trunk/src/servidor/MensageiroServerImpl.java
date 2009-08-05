@@ -198,7 +198,11 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void finalizar() throws RemoteException {
         if (getClientes().size() > 0) {
             for (Contatos contato : getContatos()) {
+                try{
                 getClientes().get(contato.getLogin()).servidorFechando();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }
