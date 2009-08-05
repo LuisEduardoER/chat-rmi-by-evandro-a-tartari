@@ -8,6 +8,9 @@ import java.util.Calendar;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
@@ -63,6 +66,7 @@ public class Util {
                 conversa.getIsItalic(), conversa.getIsSublinhado(), arquivo
                         .getContatoRecebe().getNome());
     }
+
     public static class RedimencionaImagemIcon {
         public static ImageIcon redimencionaImagem(InputStream urlImagem,
                 Integer size, Integer alt, Integer hints) {
@@ -77,8 +81,8 @@ public class Util {
             return jpg;
         }
 
-        public static ImageIcon redimencionaImagem(String urlImagem, Integer size,
-                Integer alt, Integer hints) {
+        public static ImageIcon redimencionaImagem(String urlImagem,
+                Integer size, Integer alt, Integer hints) {
             BufferedImage fundo = null;
             try {
                 fundo = ImageIO.read(new File(urlImagem));
@@ -90,8 +94,8 @@ public class Util {
             return jpg;
         }
 
-        public static ImageIcon redimencionaImagem(ImageIcon icon, Integer size,
-                Integer alt, Integer hints) {
+        public static ImageIcon redimencionaImagem(ImageIcon icon,
+                Integer size, Integer alt, Integer hints) {
 
             try {
                 Image image = icon.getImage();
@@ -106,5 +110,31 @@ public class Util {
         }
     }
 
-}
+    public class NumeroMaximoCaracteres extends PlainDocument {
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -5345956100765302098L;
+        private int iMaxLength;
 
+        public NumeroMaximoCaracteres(int maxlen) {
+            super();
+            iMaxLength = maxlen;
+        }
+
+        public void insertString(int offset, String str, AttributeSet attr)
+                throws BadLocationException {
+            if (str == null)
+                return;
+
+            if (iMaxLength <= 0) {
+                super.insertString(offset, str, attr);
+                return;
+            }
+
+            int ilen = (getLength() + str.length());
+            if (ilen <= iMaxLength)
+                super.insertString(offset, str, attr);
+        }
+    }
+}
