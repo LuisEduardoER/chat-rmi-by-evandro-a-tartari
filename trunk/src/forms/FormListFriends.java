@@ -38,12 +38,11 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import util.ComboCellRender;
+import util.Util;
+import acao.FormListFriendsListener;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
-
-import util.ComboCellRender;
-import util.RedimencionaImagemIcon;
-import acao.FormListFriendsListener;
 import contatos.Contatos;
 import contatos.ContatosComparator;
 import contatos.render.ContatosRender;
@@ -183,7 +182,7 @@ public class FormListFriends extends JFrame {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource(urlImagem);
         ImageIcon icon = new ImageIcon(res);
-        icon = RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
+        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
         JButton btn = new JButton();
         btn.setMargin(ins);
         btn.setBorderPainted(false);
@@ -194,7 +193,7 @@ public class FormListFriends extends JFrame {
         btn.setBounds(x, y, size, alt);
         res = clazz.getResource(urlImagemDesabilitado);
         icon = new ImageIcon(res);
-        icon = RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
+        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
         btn.setDisabledIcon(icon);
         return btn;
     }
@@ -214,15 +213,15 @@ public class FormListFriends extends JFrame {
         combo.setBounds(50, 120, 150, 20);
         Object[] onLine = new Object[] {
                 "On Line",
-                RedimencionaImagemIcon.redimencionaImagem(
+                Util.RedimencionaImagemIcon.redimencionaImagem(
                         getImageIcon("imagens/online.png"), 10, 10, 1500) };
         Object[] ausente = new Object[] {
                 "Ausente",
-                RedimencionaImagemIcon.redimencionaImagem(
+                Util.RedimencionaImagemIcon.redimencionaImagem(
                         getImageIcon("imagens/ausente.png"), 10, 10, 1500) };
         Object[] ocupado = new Object[] {
                 "Ocupado",
-                RedimencionaImagemIcon.redimencionaImagem(
+                Util.RedimencionaImagemIcon.redimencionaImagem(
                         getImageIcon("imagens/ocupado.png"), 10, 10, 1500) };
         combo.addItem(onLine);
         combo.addItem(ausente);
@@ -320,7 +319,7 @@ public class FormListFriends extends JFrame {
         lblUsuario.setBounds(50, 20, 150, 100);
         lblUsuario.setVerticalAlignment(JLabel.CENTER);
         lblUsuario.setHorizontalAlignment(JLabel.CENTER);
-        lblUsuario.setIcon(RedimencionaImagemIcon.redimencionaImagem(contatos
+        lblUsuario.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(contatos
                 .getIconUsuario(), 60, 60, 1000));
         lblUsuario.setText(contatos.getNome());
         lblUsuario.setBounds(30, 85, 100, 30);

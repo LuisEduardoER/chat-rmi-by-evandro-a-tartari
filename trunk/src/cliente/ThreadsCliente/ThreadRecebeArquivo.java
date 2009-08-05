@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import util.RedimencionaImagemIcon;
+import util.Util;
 import cliente.EnviaArquivo;
 import forms.FormConversa;
 
@@ -30,7 +30,7 @@ public class ThreadRecebeArquivo extends Thread {
                         "Notificação de recebimentp de arquivo",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
-                        RedimencionaImagemIcon.redimencionaImagem(clazz
+                        Util.RedimencionaImagemIcon.redimencionaImagem(clazz
                                 .getResourceAsStream("imagens/file.png"), 35,
                                 35, 1000), null, null);
         if (retorno == 0) {

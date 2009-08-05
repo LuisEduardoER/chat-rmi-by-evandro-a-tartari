@@ -18,8 +18,7 @@ import javax.swing.UIManager;
 
 import org.jvnet.substance.SubstanceDefaultLookAndFeel;
 
-import util.NumeroMaximoCaracteres;
-import util.RedimencionaImagemIcon;
+import util.Util;
 import acao.FormConnectListener;
 import excessao.FormConnectException;
 import gerenteDeTelas.Gerente;
@@ -100,7 +99,7 @@ public class FormConnect extends JFrame {
         txtPortaCliente = newJTextField(100, 65, 2);
         txtLogin = newJTextField(100, 95, 3);
         txtNome = newJTextField(100, 125, 4);
-        txtNome.setDocument(new NumeroMaximoCaracteres(23));
+        txtNome.setDocument(new Util.NumeroMaximoCaracteres(23));
         txtNome.setToolTipText("Numero maximo de caracteres nome '15'");
         comboSkin = newJCombobox(100, 157);
         btnCancelar = newJButton("Fechar", 15, 195);
@@ -400,7 +399,7 @@ public class FormConnect extends JFrame {
     public ImageIcon getImagemContato() {
         if (iconContatos == null) {
             ClassLoader clazz = this.getClass().getClassLoader();
-            iconContatos = RedimencionaImagemIcon.redimencionaImagem(clazz
+            iconContatos = Util.RedimencionaImagemIcon.redimencionaImagem(clazz
                     .getResourceAsStream("imagens/teste.png"), 60, 60, 1000);
             setUrlImagem(clazz.getResource("imagens/teste.png").getFile());
         }
@@ -434,7 +433,7 @@ public class FormConnect extends JFrame {
 
     public ImageIcon getIconUsuario() {
         if (iconUsuario == null) {
-            iconUsuario = RedimencionaImagemIcon.redimencionaImagem(
+            iconUsuario = Util.RedimencionaImagemIcon.redimencionaImagem(
                     getImagemContato(), 110, 130, 1200);
         }
         return iconUsuario;
