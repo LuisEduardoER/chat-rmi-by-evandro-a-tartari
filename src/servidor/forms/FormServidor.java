@@ -288,5 +288,13 @@ public class FormServidor extends JFrame {
                 e.printStackTrace();
             }
     }
+    
+    
+    @Override
+    public void dispose() {
+        super.dispose();
+        finalizar();
+        fechaTudo();
+    }
 
 }
