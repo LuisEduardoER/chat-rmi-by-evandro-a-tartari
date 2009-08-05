@@ -30,11 +30,11 @@ import javax.swing.text.StyleConstants;
 
 import util.JTextPaneI;
 import util.Util;
-import ThreadsCliente.ThreadAlerta;
-import ThreadsCliente.ThreadRecebeArquivo;
 import acao.FormConversaListener;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
+import cliente.ThreadsCliente.ThreadAlerta;
+import cliente.ThreadsCliente.ThreadRecebeArquivo;
 import contatos.Contatos;
 
 /**

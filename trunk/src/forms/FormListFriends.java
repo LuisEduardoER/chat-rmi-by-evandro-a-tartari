@@ -38,10 +38,11 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import cliente.SysTrayClient.TrayManagerFormListFriend;
+import cliente.ThreadsCliente.ThreadCarregaContatos;
+
 import util.ComboCellRender;
 import util.RedimencionaImagemIcon;
-import SysTrayClient.TrayManagerFormListFriend;
-import ThreadsCliente.ThreadCarregaContatos;
 import acao.FormListFriendsListener;
 import contatos.Contatos;
 import contatos.ContatosComparator;

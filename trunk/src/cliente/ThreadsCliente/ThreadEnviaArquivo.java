@@ -1,4 +1,4 @@
-package ThreadsCliente;
+package cliente.ThreadsCliente;
 
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;

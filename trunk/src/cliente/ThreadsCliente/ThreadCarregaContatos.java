@@ -1,4 +1,4 @@
-package ThreadsCliente;
+package cliente.ThreadsCliente;
 
 import java.util.Collections;
 import java.util.List;

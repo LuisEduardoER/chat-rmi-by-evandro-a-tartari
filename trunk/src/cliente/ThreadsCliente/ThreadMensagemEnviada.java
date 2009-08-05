@@ -1,23 +1,22 @@
-package ThreadsCliente;
+package cliente.ThreadsCliente;
 
-import cliente.Mensagem;
 import contatos.Contatos;
 import gerenteDeTelas.Gerente;
+import cliente.Mensagem;
 
-public class ThreadRecebeMensagem extends Thread {
+public class ThreadMensagemEnviada extends Thread {
     private Gerente gerente;
     private Mensagem mensagem;
 
-    public ThreadRecebeMensagem(Gerente gerente, Mensagem mensagem) {
+    public ThreadMensagemEnviada(Gerente gerente, Mensagem mensagem) {
         this.gerente = gerente;
         this.mensagem = mensagem;
     }
 
     public void run() {
-        String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
         if (gerente.getListaConversa().get(name) != null) {
             gerente.getListaConversa().get(name).recebeMensagem(mensagem);
-            new ThreadPiscaJanela(gerente.getListaConversa().get(name)).start();
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
