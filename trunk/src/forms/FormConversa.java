@@ -11,7 +11,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,6 +28,7 @@ import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import util.HoraMensagem;
 import util.JTextPaneI;
 import ThreadsCliente.ThreadAlerta;
 import ThreadsCliente.ThreadRecebeArquivo;
@@ -573,10 +573,10 @@ public class FormConversa extends JFrame {
 
     public void recebeAviso(EnviaArquivo arquivo) {
         Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
-                .getContatoEnvia().getNome(), arquivo.getRetorno(), getDataHora(),
-                getFontSize(), getFontFamily(), getColor(), getIsBold(),
-                getIsItalic(), getIsSublinhado(), arquivo.getContatoRecebe()
-                        .getNome());
+                .getContatoEnvia().getNome(), arquivo.getRetorno(),
+                HoraMensagem.getDataHora(), getFontSize(), getFontFamily(), getColor(),
+                getIsBold(), getIsItalic(), getIsSublinhado(), arquivo
+                        .getContatoRecebe().getNome());
         txtReceptorMensagem.append(m, true);
         btnSendFile.setEnabled(true);
 
@@ -586,7 +586,7 @@ public class FormConversa extends JFrame {
         Mensagem m = new Mensagem(arquivo.getContatoRecebe().getLogin(),
                 arquivo.getContatoRecebe().getNome(),
                 "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
-                        + arquivo.getNomeArquivo() + "\n", getDataHora(),
+                        + arquivo.getNomeArquivo() + "\n", HoraMensagem.getDataHora(),
                 getFontSize(), getFontFamily(), getColor(), getIsBold(),
                 getIsItalic(), getIsSublinhado(), arquivo.getContatoRecebe()
                         .getNome());
@@ -662,23 +662,6 @@ public class FormConversa extends JFrame {
 
     public JToggleButton getBtnSublinhado() {
         return btnSublinhado;
-    }
-
-    public String getDataHora() {
-        Integer hora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        Integer minuto = Calendar.getInstance().get(Calendar.MINUTE);
-        String dataHora = "";
-        if (hora < 10) {
-            dataHora = "(0" + hora.toString() + ":";
-        } else {
-            dataHora = "(" + hora.toString() + ":";
-        }
-        if (minuto < 10) {
-            dataHora += "0" + minuto.toString() + ")";
-        } else {
-            dataHora += minuto.toString() + ")";
-        }
-        return dataHora;
     }
 
 }
