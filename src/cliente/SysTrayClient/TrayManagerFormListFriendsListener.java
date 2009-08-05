@@ -1,4 +1,4 @@
-package SysTrayClient;
+package cliente.SysTrayClient;
 
 import java.awt.SystemTray;
 import java.awt.TrayIcon;

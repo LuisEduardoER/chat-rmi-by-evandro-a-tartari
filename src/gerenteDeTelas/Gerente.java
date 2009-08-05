@@ -16,12 +16,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import ThreadsCliente.ThreadMensagemEnviada;
-import ThreadsCliente.ThreadPiscaJanela;
-import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
+import cliente.ThreadsCliente.ThreadMensagemEnviada;
+import cliente.ThreadsCliente.ThreadPiscaJanela;
+import cliente.ThreadsCliente.ThreadRecebeMensagem;
 import contatos.Contatos;
 
 /**

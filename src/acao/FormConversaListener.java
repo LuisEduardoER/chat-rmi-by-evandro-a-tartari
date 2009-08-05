@@ -16,10 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
 import util.Util;
-import ThreadsCliente.ThreadEnviaArquivo;
-import ThreadsCliente.ThreadEnviarMensagem;
-import ThreadsCliente.ThreadPiscaJanela;
 import cliente.Mensagem;
+import cliente.ThreadsCliente.ThreadEnviaArquivo;
+import cliente.ThreadsCliente.ThreadEnviarMensagem;
+import cliente.ThreadsCliente.ThreadPiscaJanela;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
 
