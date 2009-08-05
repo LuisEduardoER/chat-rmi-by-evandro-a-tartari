@@ -1,5 +1,6 @@
 - limpar o codigo. Buscar Alta Performance. Pegar metodos 
 duplicatos em varias classes e montar uma class util.
+- ajeitar layout do FormListFriends/
 
 Release 2.0 - Incluir
 - migrar tudo para Java.net;
@@ -7,7 +8,8 @@ Release 2.0 - Incluir
   (btnAdicionaContato, btnRemoveContato , btnChat);
 - Verificar possibilidade de colocar imagem na tela junto com 
 texto JTextPanelI;  
-- Mudar o botao de enviar;
+- Mudar o botao de enviar FormConversa;
 - Colocar popup torradeira no chat vide sample ToasterSample;
+- Fazer Um form para conferencia com varias pessoas(btnChat);
 
 
