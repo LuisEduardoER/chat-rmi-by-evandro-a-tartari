@@ -18,7 +18,6 @@ import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadMensagemEnviada;
 import servidor.ThreadsServidor.ThreadMensagemEnviou;
-import servidor.ThreadsServidor.ThreadXException;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -199,7 +198,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void finalizar() throws RemoteException {
         if (getClientes().size() > 0) {
             for (Contatos contato : getContatos()) {
-                new ThreadXException(getClientes(), contato);
+                getClientes().get(contato.getLogin()).servidorFechando();
             }
 
         }
