@@ -28,8 +28,8 @@ import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import util.JTextPaneI;
 import util.Util;
+import util.componente.JTextPaneI;
 import acao.FormConversaListener;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
