@@ -151,6 +151,8 @@ public class FormServidorListener implements ActionListener, KeyListener,
     }
 
     public void windowClosing(WindowEvent e) {
+        servidor.finalizar();
+        servidor.fechaTudo();
     }
 
     public void windowDeactivated(WindowEvent e) {
