@@ -180,6 +180,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     public void windowClosing(WindowEvent e) {
         gerente.fechouConversa(conversa);
+        Thread.interrupted();
     }
 
     public void windowActivated(WindowEvent e) {
