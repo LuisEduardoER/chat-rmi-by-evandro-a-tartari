@@ -1,2 +1,10 @@
 - limpar o codigo. Buscar Alta Performance.
 
+Release 2.0 - Incluir
+- migrar tudo para Java.net;
+- Implemenção dos botões da tela de FormListFriends;
+  (btnAdicionaContato, btnRemoveContato , btnChat);
+- Verificar possibilidade de colocar imagem na tela junto com 
+texto;  
+
+
