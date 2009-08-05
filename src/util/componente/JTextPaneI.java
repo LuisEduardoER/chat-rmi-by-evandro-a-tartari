@@ -1,4 +1,4 @@
-package util;
+package util.componente;
 
 import java.awt.Color;
 
