@@ -573,7 +573,7 @@ public class FormConversa extends JFrame {
 
     public void recebeAviso(EnviaArquivo arquivo) {
         Mensagem m = new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
-                .getContatoEnvia().getNome(), arquivo.getRetorno(), "",
+                .getContatoEnvia().getNome(), arquivo.getRetorno(), getDataHora(),
                 getFontSize(), getFontFamily(), getColor(), getIsBold(),
                 getIsItalic(), getIsSublinhado(), arquivo.getContatoRecebe()
                         .getNome());
