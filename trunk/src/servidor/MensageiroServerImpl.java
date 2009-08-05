@@ -201,7 +201,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
                 for (Contatos contato : getContatos()) {
                     getClientes().get(contato.getLogin()).servidorFechando();
                 }
-                
+                getClientes().clear();
+                getContatos().clear();    
             }
         } catch (Exception e) {
             getClientes().clear();
