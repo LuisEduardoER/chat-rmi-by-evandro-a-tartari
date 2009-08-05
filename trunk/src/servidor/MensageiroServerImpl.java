@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 
 import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
-import servidor.ThreadsServidor.ThreadEnviarMensagem;
+import servidor.ThreadsServidor.ThreadMensagemEnviada;
+import servidor.ThreadsServidor.ThreadMensagemEnviou;
 import servidor.ThreadsServidor.ThreadXException;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
@@ -168,7 +169,10 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public void enviarMensagem(Mensagem mensagem) throws RemoteException {
-        new ThreadEnviarMensagem(this, mensagem).start();
+        if (getClientes().get(mensagem.getContatoRecebe()) != null) {
+            new ThreadMensagemEnviada(this, mensagem).start();
+            new ThreadMensagemEnviou(this, mensagem).start();
+        }
     }
 
     public void clean() throws RemoteException {
