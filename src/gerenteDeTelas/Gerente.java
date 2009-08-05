@@ -448,6 +448,7 @@ public class Gerente {
     }
 
     public void servidorFechando() {
+       getFormListFriends().setExtendedState(JFrame.NORMAL);
        JOptionPane.showMessageDialog(null, "Servidor Fechou! Esta Janela será encerrada", "Aviso de Fechamento!!!", JOptionPane.QUESTION_MESSAGE);
        getFormListFriends().dispose();
        System.exit(0);
