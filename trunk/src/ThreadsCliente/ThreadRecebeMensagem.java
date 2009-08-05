@@ -17,6 +17,7 @@ public class ThreadRecebeMensagem extends Thread {
         String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
         if (gerente.getListaConversa().get(name) != null) {
             gerente.getListaConversa().get(name).recebeMensagem(mensagem);
+            new ThreadPiscaJanela(gerente.getListaConversa().get(name)).start();
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
