@@ -19,6 +19,7 @@ import javax.swing.JTextPane;
 
 import ThreadsCliente.ThreadEnviaArquivo;
 import ThreadsCliente.ThreadEnviarMensagem;
+import ThreadsCliente.ThreadPiscaJanela;
 
 import cliente.Mensagem;
 import forms.FormConversa;
@@ -178,9 +179,10 @@ public class FormConversaListener implements ActionListener, KeyListener,
         return dataHora;
     }
 
+    @SuppressWarnings("deprecation")
     public void windowClosing(WindowEvent e) {
+        ThreadPiscaJanela.currentThread().destroy();
         gerente.fechouConversa(conversa);
-        Thread.interrupted();
     }
 
     public void windowActivated(WindowEvent e) {
