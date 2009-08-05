@@ -10,13 +10,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
-import util.HoraMensagem;
+import util.Util;
 import ThreadsCliente.ThreadEnviaArquivo;
 import ThreadsCliente.ThreadEnviarMensagem;
 import ThreadsCliente.ThreadPiscaJanela;
@@ -147,15 +146,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     private Mensagem getMensagem(String text) {
         try {
-            Mensagem m = new Mensagem(conversa.getCliente().getContatos()
-                    .getLogin(), conversa.getCliente().getContatos().getNome(),
-                    text, HoraMensagem.getDataHora(), conversa.getFontSize(), conversa
-                            .getFontFamily(), conversa.getColor(), conversa
-                            .getIsBold(), conversa.getIsItalic(), conversa
-                            .getIsSublinhado(), conversa.getContato()
-                            .getLogin());
+            Mensagem m = Util.newMensagem(conversa, text);
             return m;
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
