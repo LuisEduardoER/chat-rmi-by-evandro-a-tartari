@@ -38,8 +38,8 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import util.ComboCellRender;
 import util.Util;
+import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
