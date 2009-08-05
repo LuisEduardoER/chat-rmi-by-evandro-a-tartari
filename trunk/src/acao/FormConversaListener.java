@@ -117,6 +117,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == Event.ENTER) {
             if (e.getModifiers() == 0) {
                 e.consume();
@@ -128,10 +131,6 @@ public class FormConversaListener implements ActionListener, KeyListener,
                 conversa.getPaleta().dispose();
             }
         }
-
-    }
-
-    public void keyReleased(KeyEvent e) {
     }
 
     public void keyTyped(KeyEvent e) {
