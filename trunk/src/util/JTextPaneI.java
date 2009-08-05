@@ -41,6 +41,7 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setForeground(attr, mensagem.getColor());
                 StyleConstants.setFontSize(attr, mensagem.getFontSize());
                 StyleConstants.setBold(attr, mensagem.getIsBold());
+                StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
                         .getLength(), mensagem.getMensagem() , attr);
@@ -57,6 +58,7 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setFontSize(attr, mensagem.getFontSize());
                 StyleConstants.setBold(attr, mensagem.getIsBold());
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
+                StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
                         .getLength(), mensagem.getMensagem() , attr);
             }
