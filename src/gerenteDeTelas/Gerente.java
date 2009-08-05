@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import ThreadsCliente.ThreadMensagemEnviada;
+import ThreadsCliente.ThreadPiscaJanela;
 import ThreadsCliente.ThreadRecebeMensagem;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
@@ -245,6 +246,7 @@ public class Gerente {
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
+                new ThreadPiscaJanela(conversa).start();
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
                 conversa.setNomeConversa(name);
@@ -254,6 +256,7 @@ public class Gerente {
                 conversa.recebeMensagem(mensagem);
                 conversa.renderiza();
                 listaConversa.put(name, conversa);
+                new ThreadPiscaJanela(conversa).start();
             }
         } catch (RemoteException e) {
             e.printStackTrace();
