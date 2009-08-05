@@ -33,7 +33,7 @@ import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
 import util.FileFilterImpl;
 import util.ImagePreviewer;
-import util.RedimencionaImagemIcon;
+import util.Util;
 import forms.FormConnect;
 import gerenteDeTelas.Gerente;
 
@@ -90,12 +90,12 @@ public class FormConnectListener implements ActionListener, KeyListener {
         } else if (verificarAcaoBotao(evento.getActionCommand(),
                 "ApproveSelection")) {
             String url = chooser.getSelectedFile().getPath();
-            ImageIcon icon = RedimencionaImagemIcon.redimencionaImagem(url,
+            ImageIcon icon = Util.RedimencionaImagemIcon.redimencionaImagem(url,
                     110, 130, 1000);
             connect.setUrlImagem(url);
             connect.getButtonFileChooser().setIcon(icon);
             connect.setImagemUsuario(icon);
-            connect.setImagemContatos(RedimencionaImagemIcon
+            connect.setImagemContatos(Util.RedimencionaImagemIcon
                     .redimencionaImagem(url, 60, 60, 1000));
             connect.getButtonFileChooser().setBorderPainted(false);
             connect.getButtonFileChooser().setBackground(

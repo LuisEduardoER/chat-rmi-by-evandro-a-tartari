@@ -110,7 +110,7 @@ public class Util {
         }
     }
 
-    public class NumeroMaximoCaracteres extends PlainDocument {
+    public static class NumeroMaximoCaracteres extends PlainDocument {
         /**
          * 
          */
