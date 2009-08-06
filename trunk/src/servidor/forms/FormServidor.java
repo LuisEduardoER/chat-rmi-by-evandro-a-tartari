@@ -273,23 +273,25 @@ public class FormServidor extends JFrame {
     }
 
     public void finalizar() {
-        try{
-        servico.finalizar();
-        }catch (Exception e) {
+        try {
+            if (servico != null)
+                servico.finalizar();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void fechaTudo(){
-        try{
-            servico.finalizar();
-            servico.fecharTudo();
-            }catch (Exception e) {
-                e.printStackTrace();
+
+    public void fechaTudo() {
+        try {
+            if (servico != null) {
+                servico.finalizar();
+                servico.fecharTudo();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
-    
+
     @Override
     public void dispose() {
         super.dispose();
