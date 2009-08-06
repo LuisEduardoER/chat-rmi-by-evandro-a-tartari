@@ -23,11 +23,13 @@ public class FormEmotions extends JFrame {
     private List<String> listaEmotions;
     private Map<String, String> mapaEmotions;
     private FormEmotionsListener listener;
+    private JButton btnEmotions;
 
-    public FormEmotions() {
+    public FormEmotions(JButton btnEmotions, FormConversa formConversa) {
         listaEmotions = newArrayList();
         mapaEmotions = newHashMap();
-        listener = new FormEmotionsListener(mapaEmotions);
+        listener = new FormEmotionsListener(mapaEmotions, formConversa);
+        this.btnEmotions = btnEmotions;
     }
 
     public void inicializar() {
@@ -57,6 +59,7 @@ public class FormEmotions extends JFrame {
             add(btn);
         }
         setSize(100, 82);
+        setLocationRelativeTo(btnEmotions);
         setUndecorated(true);
         setVisible(true);
 
@@ -102,7 +105,7 @@ public class FormEmotions extends JFrame {
     }
 
     public static void main(String[] args) {
-        FormEmotions emotions = new FormEmotions();
+        FormEmotions emotions = new FormEmotions(null, null);
         emotions.inicializar();
     }
 }
