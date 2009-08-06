@@ -159,8 +159,13 @@ public class JTextPaneI extends JTextPane {
 
     private void compondoMensagemComIcone(Mensagem mensagem, Color cor,
             String icon, boolean head) {
-        URL res = this.getClass().getClassLoader().getResource(Util.Emotions.getEmotions().get(icon));
-        insertIcon(new ImageIcon(res));
+        URL res = this.getClass().getClassLoader().getResource(
+                Util.Emotions.getEmotions().get(icon));
+        if (res != null) {
+            insertIcon(new ImageIcon(res));
+        } else {
+            compondoMensagemSemIcone(mensagem, cor, icon, head);
+        }
     }
 
     private void newSimpleAttributeSet() {
