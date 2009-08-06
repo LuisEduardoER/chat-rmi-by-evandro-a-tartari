@@ -13,6 +13,7 @@ import java.net.URL;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -51,7 +52,7 @@ public class FormConversa extends JFrame {
     private JTextPaneI txtReceptorMensagem;
     private JLabel lblNomeContato;
     private JLabel lblNomeUsuario;
-    private JTextPane txtDescritorMensagem;
+    private JTextPaneI txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
     private JScrollPane scroolPanelReceptor;
     private JButton btnEnviarMensagem;
@@ -78,7 +79,9 @@ public class FormConversa extends JFrame {
     private JButton btnPaleta;
     private JButton btnSendFile;
     private JButton btnAlerta;
+    private JButton btnEmotions;
     private JFrame enviaArquivo;
+    private FormEmotions emotions;
     private JFileChooser fileChooser;
     private StringBuffer sb;
 
@@ -101,7 +104,7 @@ public class FormConversa extends JFrame {
             setTitle(sb.toString());
             txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
-            txtDescritorMensagem = newJTextPane();
+            txtDescritorMensagem = newJTextPanelI();
             simpleAttributeSet = new SimpleAttributeSet();
             txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet,
                     true);
@@ -116,6 +119,8 @@ public class FormConversa extends JFrame {
                     "imagens/atencaoDesabilitado.png", "alerta");
             btnSendFile = newJButtonImagem("imagens/enviarArquivo.png",
                     "imagens/enviarArquivoDesabilitado.png", "sendFile");
+            btnEmotions = newJButtonImagem("imagens/spark/smile.png",
+                    "imagens/spark/smile.png", "emotions");
             comboTamanhofonte = newJComboBox(getValoresComboFont());
             comboTamanhofonte.setActionCommand("TamFonte");
             comboTipoFonte = newJComboBox(getTipoFonte());
@@ -142,9 +147,10 @@ public class FormConversa extends JFrame {
             adicionaTela(btnSublinhado, 60, 257, 20, 20);
             adicionaTela(btnPaletaCores, 87, 257, 20, 20);
             adicionaTela(btnSendFile, 114, 257, 20, 20);
-            adicionaTela(btnAlerta, 141, 257, 20, 20);
-            adicionaTela(comboTamanhofonte, 168, 257, 40, 20);
-            adicionaTela(comboTipoFonte, 218, 257, 176, 20);
+            adicionaTela(btnEmotions, 141, 257, 20, 20);
+            adicionaTela(btnAlerta, 168, 257, 20, 20);
+            adicionaTela(comboTamanhofonte, 195, 257, 40, 20);
+            adicionaTela(comboTipoFonte, 242, 257, 152, 20);
             adicionaTela(scrollPaneDescritor, 5, 280, 390, 145);
             adicionaTela(getImagemIcon(contato.getIconContato(), 110, 130),
                     405, 5, 110, 130);
@@ -203,9 +209,7 @@ public class FormConversa extends JFrame {
         getContentPane().add(c);
     }
 
-    private JTextPane newJTextPane() {
-        return new JTextPane();
-    }
+
 
     private JLabel newJLabel(String nome, Boolean isContato) {
         JLabel lbl = new JLabel(nome, JLabel.CENTER);
@@ -447,24 +451,13 @@ public class FormConversa extends JFrame {
     }
 
     public void addBorderBtnPaletaCores(JButton button) {
-        if (button.getActionCommand().equals("cores")) {
-            btnPaletaCores.setBorderPainted(true);
-        } else if (button.getActionCommand().equals("alerta")) {
-            btnAlerta.setBorderPainted(true);
-        } else if (button.getActionCommand().equals("sendFile")) {
-            btnSendFile.setBorderPainted(true);
-        }
-
+        button.setBorderPainted(true);
+        button.setContentAreaFilled(true);
     }
 
     public void removeBorderBtnPaletaCores(JButton button) {
-        if (button.getActionCommand().equals("cores")) {
-            btnPaletaCores.setBorderPainted(false);
-        } else if (button.getActionCommand().equals("alerta")) {
-            btnAlerta.setBorderPainted(false);
-        } else if (button.getActionCommand().equals("sendFile")) {
-            btnSendFile.setBorderPainted(false);
-        }
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
     }
 
     public void instanciaPaletaCores() {
@@ -475,6 +468,10 @@ public class FormConversa extends JFrame {
     public void instanciaEnviaArquivo() {
         btnSendFile.setEnabled(false);
         getEnviaArquivo().setVisible(true);
+    }
+    public void instanciaEmotions() {
+        btnEmotions.setEnabled(false);
+        getEmotions().setVisible(true);
     }
 
     public void fechaPaletaCores() {
@@ -533,6 +530,22 @@ public class FormConversa extends JFrame {
         enviaArquivo.setUndecorated(true);
         return enviaArquivo;
     }
+    
+    public JFrame getEmotions(){
+        if(emotions==null){
+            emotions = new FormEmotions(btnEmotions, this);
+            emotions.inicializar();
+        }
+        return emotions;
+    }
+    
+    public void addImagen(String text, Icon icon) {
+        txtDescritorMensagem.addImage(text, icon);
+        getEmotions().dispose();
+        emotions = null;
+        btnEmotions.setEnabled(true);
+    }
+
 
     public JButton getBtnSendFile() {
         return btnSendFile;
@@ -658,5 +671,4 @@ public class FormConversa extends JFrame {
     public JToggleButton getBtnSublinhado() {
         return btnSublinhado;
     }
-
 }
