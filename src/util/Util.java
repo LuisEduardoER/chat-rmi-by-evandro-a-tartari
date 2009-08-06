@@ -4,7 +4,11 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -136,5 +140,52 @@ public class Util {
             if (ilen <= iMaxLength)
                 super.insertString(offset, str, attr);
         }
+    }
+
+    public static class Emotions {
+        private static List<String> listaEmotions;
+        private static Map<String, String> mapaEmotions;
+        
+        public static List<String> getListEmotions() {
+            if (listaEmotions == null) {
+                listaEmotions = new ArrayList<String>();
+                listaEmotions.add("imagens/spark/adore.png");
+                listaEmotions.add("imagens/spark/amazed.png");
+                listaEmotions.add("imagens/spark/beat_brick.png");
+                listaEmotions.add("imagens/spark/big_smile.png");
+                listaEmotions.add("imagens/spark/boss.png");
+                listaEmotions.add("imagens/spark/canny.png");
+                listaEmotions.add("imagens/spark/choler.png");
+                listaEmotions.add("imagens/spark/confuse.png");
+                listaEmotions.add("imagens/spark/embarrassed.png");
+                listaEmotions.add("imagens/spark/hell_boy.png");
+                listaEmotions.add("imagens/spark/look_down.png");
+                listaEmotions.add("imagens/spark/matrix.png");
+                listaEmotions.add("imagens/spark/sad.png");
+                listaEmotions.add("imagens/spark/smile.png");
+                listaEmotions.add("imagens/spark/spidy.png");
+                listaEmotions.add("imagens/spark/sweet_kiss.png");
+                listaEmotions.add("imagens/spark/thbbbpt.png");
+                listaEmotions.add("imagens/spark/tire.png");
+                listaEmotions.add("imagens/spark/too_sad.png");
+                listaEmotions.add("imagens/spark/waaaht.png");
+            }
+            return listaEmotions;
+        }
+
+        public static Map<String, String> getEmotions() {
+            if (mapaEmotions == null) {
+                mapaEmotions = new HashMap<String, String>();
+                for (String caminho : Emotions.getListEmotions()) {
+                    String action = "<"+caminho.substring(caminho.lastIndexOf("/") + 1,
+                            caminho.lastIndexOf("."))+">";
+                    mapaEmotions.put(action, caminho);
+                }
+            }
+            return mapaEmotions;
+
+        }
+        
+
     }
 }
