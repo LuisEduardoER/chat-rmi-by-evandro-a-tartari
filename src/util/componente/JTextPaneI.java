@@ -2,7 +2,6 @@ package util.componente;
 
 import java.awt.Color;
 
-import javax.swing.Icon;
 import javax.swing.JTextPane;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
@@ -68,15 +67,7 @@ public class JTextPaneI extends JTextPane {
         }
     }
 
-    public void addImage(String text, Icon icon) {
-        try {
-            StyleConstants.setIcon(getInputAttributes(), icon);
-            m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), text, getInputAttributes());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    
 
 
 }
