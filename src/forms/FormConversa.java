@@ -80,11 +80,12 @@ public class FormConversa extends JFrame {
     private JButton btnAlerta;
     private JFrame enviaArquivo;
     private JFileChooser fileChooser;
+    private StringBuffer sb;
 
     public FormConversa(Gerente gerente, IMensageiroCliente cliente) {
         this.gerente = gerente;
         this.cliente = cliente;
-
+        sb = new StringBuffer();
         listener = new FormConversaListener(this, this.gerente);
     }
 
@@ -93,7 +94,11 @@ public class FormConversa extends JFrame {
      */
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
-            setTitle(contato.getLogin());
+            sb.append("Conversa: ");
+            sb.append(usuario.getNome());
+            sb.append(" - ");
+            sb.append(contato.getNome());
+            setTitle(sb.toString());
             txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPane();
