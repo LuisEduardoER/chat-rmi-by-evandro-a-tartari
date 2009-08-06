@@ -13,7 +13,6 @@ import java.net.URL;
 import java.rmi.RemoteException;
 
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -539,7 +538,7 @@ public class FormConversa extends JFrame {
         return emotions;
     }
     
-    public void addImagen(String text, Icon icon) {
+    public void addImagen(String text) {
         txtDescritorMensagem.setText(txtDescritorMensagem.getText()+" "+text);
         getEmotions().dispose();
         emotions = null;
