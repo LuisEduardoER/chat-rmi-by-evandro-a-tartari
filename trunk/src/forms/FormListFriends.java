@@ -182,7 +182,8 @@ public class FormListFriends extends JFrame {
         ClassLoader clazz = this.getClass().getClassLoader();
         URL res = clazz.getResource(urlImagem);
         ImageIcon icon = new ImageIcon(res);
-        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
+        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20,
+                1500);
         JButton btn = new JButton();
         btn.setMargin(ins);
         btn.setBorderPainted(false);
@@ -193,7 +194,8 @@ public class FormListFriends extends JFrame {
         btn.setBounds(x, y, size, alt);
         res = clazz.getResource(urlImagemDesabilitado);
         icon = new ImageIcon(res);
-        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20, 1500);
+        icon = Util.RedimencionaImagemIcon.redimencionaImagem(icon, 20, 20,
+                1500);
         btn.setDisabledIcon(icon);
         return btn;
     }
@@ -319,8 +321,8 @@ public class FormListFriends extends JFrame {
         lblUsuario.setBounds(50, 20, 150, 100);
         lblUsuario.setVerticalAlignment(JLabel.CENTER);
         lblUsuario.setHorizontalAlignment(JLabel.CENTER);
-        lblUsuario.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(contatos
-                .getIconUsuario(), 60, 60, 1000));
+        lblUsuario.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(
+                contatos.getIconUsuario(), 60, 60, 1000));
         lblUsuario.setText(contatos.getNome());
         lblUsuario.setBounds(30, 85, 100, 30);
         lblUsuario.setForeground(Color.BLUE);
@@ -343,7 +345,7 @@ public class FormListFriends extends JFrame {
         if (isListaAberta) {
             Contatos contatoS = (Contatos) modelContatos.getElementAt(0);
             List<Contatos> aux = listaApresentacao;
-            if(!aux.contains(contatoS)){
+            if (!aux.contains(contatoS)) {
                 aux.add(0, contatoS);
             }
             modelContatos.clear();
@@ -436,7 +438,8 @@ public class FormListFriends extends JFrame {
     public void createTrayIcon() {
         if (trayManager == null) {
             trayManager = new TrayManagerFormListFriend(this);
-            trayManager.createTrayIcon("MsMundica is active", getIcon());
+            trayManager.createTrayIcon("MsMundica is active - "
+                    + getNomeCliente(), getIcon());
             trayManager.criaMenu("Exit", true);
             trayManager.criaMenu("Abrir", true);
             trayManager.adicionaEvento();
@@ -544,7 +547,15 @@ public class FormListFriends extends JFrame {
 
     public IMensageiroCliente getCliente() {
         return this.cliente;
+    }
 
+    public String getNomeCliente() {
+        try {
+            return getCliente().getContatos().getNome();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public JLabel getLblNome() {
