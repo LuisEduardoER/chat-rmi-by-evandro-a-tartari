@@ -86,85 +86,71 @@ public class JTextPaneI extends JTextPane {
     }
 
     private void adicionaMensagemComIcone(Mensagem mensagem, Color color) {
-        boolean head = true;
-        while (mensagem.getMensagem().length() > 0) {
-            int posFinal = mensagem.getMensagem().indexOf("<");
-            if (posFinal != -1) {
-                if (posFinal != 0) {
-                    String text = mensagem.getMensagem().substring(0,
-                            posFinal - 1);
-                    int posIcon = mensagem.getMensagem().indexOf(">");
-                    if (posIcon != -1) {
-                        String icon = mensagem.getMensagem().substring(
-                                posFinal + 1, posIcon);
-                        String rest = mensagem.getMensagem().substring(
-                                posIcon + 1);
-                        compondoMensagemSemIcone(mensagem, color, text, head);
-                        head = false;
-                        compondoMensagemComIcone(mensagem, color, icon, head);
-                        mensagem.setMensagem(rest);
-                    } else {
-                        compondoMensagemSemIcone(mensagem, color, mensagem
-                                .getMensagem(), head);
-                    }
-                } else if (posFinal == 0) {
-                    int posIcon = mensagem.getMensagem().indexOf(">");
-                    if (posIcon != -1) {
-                        String icon = mensagem.getMensagem().substring(
-                                posFinal, posIcon);
-                        String rest = mensagem.getMensagem().substring(
-                                posIcon + 1);
-                        compondoMensagemComIcone(mensagem, color, icon, head);
-                        head = false;
-                        mensagem.setMensagem(rest);
-                    } else {
-                        compondoMensagemSemIcone(mensagem, color, mensagem
-                                .getMensagem(), head);
-                    }
+        String[] msg = mensagem.getMensagem().split("<");
+        montaHeader(mensagem, color);
+        for (int i = 0; i < msg.length; i++) {
+            if (msg[i].contains(">")) {
+                String[] msg2 = msg[i].split(">");
+                for (int j = 0; j < msg2.length; j++) {
+                    if (j == 0)
+                        adicionaIcon(mensagem, color, msg2[j]);
+                    else
+                        adicionaText(mensagem, color, msg2[j]);
                 }
-
             } else {
-                compondoMensagemSemIcone(mensagem, color, mensagem
-                        .getMensagem(), head);
+                adicionaText(mensagem, color, msg[i]);
             }
         }
+
     }
 
-    private void compondoMensagemSemIcone(Mensagem mensagem, Color cor,
-            String text, boolean head) {
+    private void montaHeader(Mensagem mensagem, Color color) {
         try {
-            if (head == true) {
+            StyleConstants.setForeground(attr, color);
+            StyleConstants.setFontSize(attr, mensagem.getFontSize());
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), mensagem.getDataHora() + " "
+                    + mensagem.getNomeEnvia() + ": ", attr);
+            newSimpleAttributeSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-                StyleConstants.setForeground(attr, cor);
-                StyleConstants.setFontSize(attr, mensagem.getFontSize());
-                m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), mensagem.getDataHora() + " "
-                        + mensagem.getNomeEnvia() + ": ", attr);
-                newSimpleAttributeSet();
-            } else {
-                StyleConstants.setFontFamily(attr, mensagem.getFontFamily());
-                StyleConstants.setForeground(attr, mensagem.getColor());
-                StyleConstants.setFontSize(attr, mensagem.getFontSize());
-                StyleConstants.setBold(attr, mensagem.getIsBold());
-                StyleConstants.setItalic(attr, mensagem.getIsItalic());
-                StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
-                m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), text, attr);
-                newSimpleAttributeSet();
-            }
+    }
+
+    private void adicionaText(Mensagem mensagem, Color color, String text) {
+        try {
+            StyleConstants.setFontFamily(attr, mensagem.getFontFamily());
+            StyleConstants.setForeground(attr, mensagem.getColor());
+            StyleConstants.setFontSize(attr, mensagem.getFontSize());
+            StyleConstants.setBold(attr, mensagem.getIsBold());
+            StyleConstants.setItalic(attr, mensagem.getIsItalic());
+            StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), text, attr);
+            newSimpleAttributeSet();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void compondoMensagemComIcone(Mensagem mensagem, Color cor,
-            String icon, boolean head) {
-        URL res = this.getClass().getClassLoader().getResource(
-                Util.Emotions.getEmotions().get(icon));
-        if (res != null) {
-            insertIcon(new ImageIcon(res));
+    private void adicionaIcon(Mensagem mensagem, Color color, String urlMapIcon) {
+        newSimpleAttributeSet();
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(Util.Emotions.getEmotions().get(
+                "<" + urlMapIcon + ">"));
+        ImageIcon icon = new ImageIcon(res);
+        if (icon != null) {
+            try {
+                StyleConstants.setIcon(attr, icon);
+                m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                        .getLength(), " ", attr);
+                newSimpleAttributeSet();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
-            compondoMensagemSemIcone(mensagem, cor, icon, head);
+            adicionaText(mensagem, color, urlMapIcon);
         }
     }
 
