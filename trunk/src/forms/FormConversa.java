@@ -539,7 +539,12 @@ public class FormConversa extends JFrame {
     }
     
     public void addImagen(String text) {
-        txtDescritorMensagem.setText(txtDescritorMensagem.getText()+" "+text);
+        int insert = txtDescritorMensagem.getCaretPosition();
+        String texto = txtDescritorMensagem.getText();
+        String strTela = texto.substring(0, insert);
+        strTela += text.trim();
+        strTela += texto.substring(insert);
+        txtDescritorMensagem.setText(strTela);
         getEmotions().dispose();
         emotions = null;
         btnEmotions.setEnabled(true);
