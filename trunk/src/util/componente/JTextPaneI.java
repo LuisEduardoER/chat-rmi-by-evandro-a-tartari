@@ -2,6 +2,7 @@ package util.componente;
 
 import java.awt.Color;
 
+import javax.swing.Icon;
 import javax.swing.JTextPane;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
@@ -20,7 +21,6 @@ public class JTextPaneI extends JTextPane {
      */
     private static final long serialVersionUID = -2460848497705216042L;
     private DefaultStyledDocument m_defaultStyledDocument = new DefaultStyledDocument();
-
     /** constructor */
     public JTextPaneI() {
         this.setDocument(m_defaultStyledDocument);
@@ -44,7 +44,7 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), mensagem.getMensagem() , attr);
+                        .getLength(), mensagem.getMensagem(), attr);
             } else {
                 SimpleAttributeSet attr = new SimpleAttributeSet();
                 StyleConstants.setForeground(attr, Color.BLUE);
@@ -60,12 +60,23 @@ public class JTextPaneI extends JTextPane {
                 StyleConstants.setItalic(attr, mensagem.getIsItalic());
                 StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                        .getLength(), mensagem.getMensagem() , attr);
+                        .getLength(), mensagem.getMensagem(), attr);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void addImage(String text, Icon icon) {
+        try {
+            StyleConstants.setIcon(getInputAttributes(), icon);
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), text, getInputAttributes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
