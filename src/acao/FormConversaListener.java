@@ -94,6 +94,8 @@ public class FormConversaListener implements ActionListener, KeyListener,
             new ThreadEnviaArquivo(conversa, gerente).start();
         } else if (e.getActionCommand().equals("CancelSelection")) {
             conversa.fechaEnviaArquivo();
+        }else if(e.getActionCommand().equals("emotions")){
+            conversa.instanciaEmotions();
         }
 
     }
