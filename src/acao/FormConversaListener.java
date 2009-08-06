@@ -19,7 +19,6 @@ import util.Util;
 import cliente.Mensagem;
 import cliente.ThreadsCliente.ThreadEnviaArquivo;
 import cliente.ThreadsCliente.ThreadEnviarMensagem;
-import cliente.ThreadsCliente.ThreadPiscaJanela;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
 
@@ -155,8 +154,6 @@ public class FormConversaListener implements ActionListener, KeyListener,
     }
 
     public void windowClosing(WindowEvent e) {
-        if (ThreadPiscaJanela.currentThread() != null)
-            ThreadPiscaJanela.currentThread().interrupt();
         gerente.fechouConversa(conversa);
     }
 
