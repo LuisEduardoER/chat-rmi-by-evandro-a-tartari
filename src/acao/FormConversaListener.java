@@ -131,6 +131,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
         } else if (e.getKeyCode() == Event.ESCAPE) {
             if (e.getModifiers() == 0) {
                 e.consume();
+                if(conversa.getPaleta()!=null)
                 conversa.getPaleta().dispose();
             }
         }
