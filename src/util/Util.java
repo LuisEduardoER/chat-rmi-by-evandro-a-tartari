@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -186,6 +187,39 @@ public class Util {
 
         }
         
+
+    }
+    public static class FormatedText{
+        public static String findTags(String mensagem) {
+            String[] msg = mensagem.split(" ");
+            String msgFormatada = "";
+            for (int i = 0; i < msg.length; i++) {
+                msgFormatada += getMsg(msg[i]) + " ";
+            }
+            return msgFormatada;
+        }
+
+        private static String getMsg(String msg) {
+            Set<String> key = Util.Emotions.getEmotions().keySet();
+            for (String keyWord : key) {
+                if (msg.contains(keyWord)) {
+                    String replacement = keyWord.replace("<", " ");
+                    replacement = replacement.replace(">", " ");
+                    msg = msg.replace(keyWord, replacement);
+                }
+            }
+            msg = msg.replace("<", "&lt;");
+            msg = msg.replace(">", "&gt;");
+            for (String keyWord : key) {
+                String replacement = keyWord.replace("<", " ");
+                replacement = replacement.replace(">", " ");
+                if (msg.contains(replacement)) {
+                    msg = msg.replace(replacement, keyWord);
+                }
+
+            }
+            return msg;
+        }
 
     }
 }
