@@ -550,7 +550,7 @@ public class FormConversa extends JFrame {
         btnEmotions.setEnabled(true);
         txtDescritorMensagem.appendMsgIcon(Util.FormatedText.findTags(strTela)
                 .trim(), new Object[] { getFontFamily(), getColor(),
-                getFontSize(), getIsBold(), getIsSublinhado() });
+                getFontSize(), getIsBold(), getIsItalic(), getIsSublinhado() });
         txtDescritorMensagem.requestFocus();
     }
 
