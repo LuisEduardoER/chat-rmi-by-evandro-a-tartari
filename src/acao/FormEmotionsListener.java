@@ -4,8 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+
+import util.Util;
 
 import forms.FormConversa;
 
@@ -17,7 +21,10 @@ public class FormEmotionsListener implements ActionListener, MouseListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        conversa.addImagem(e.getActionCommand());
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(Util.Emotions.getEmotions().get(e.getActionCommand()));
+        ImageIcon icon = new ImageIcon(res);
+        conversa.addImagem(icon, e.getActionCommand());
     }
 
     public void mouseClicked(MouseEvent e) {
