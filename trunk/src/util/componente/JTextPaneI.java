@@ -185,15 +185,24 @@ public class JTextPaneI extends JTextPane {
 
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 37) {
-                    ((JTextPaneI) e.getComponent())
-                            .setCaretPosition(newPosition(((JTextPaneI) e
-                                    .getComponent()).getCaretPosition(),
-                                    getText(), true));
+                    if (e.getModifiers() == 0) {
+                        ((JTextPaneI) e.getComponent())
+                                .setCaretPosition(newPosition(((JTextPaneI) e
+                                        .getComponent()).getCaretPosition(),
+                                        getText(), true));
+                    }
+                    if (e.getModifiers() == 1) {
+                        selectTextPrevious((JTextPaneI) e.getComponent());
+                    }
                 } else if (e.getKeyCode() == 39) {
-                    ((JTextPaneI) e.getComponent())
-                            .setCaretPosition(newPosition(((JTextPaneI) e
-                                    .getComponent()).getCaretPosition(),
-                                    getText(), false));
+                    if (e.getModifiers() == 0) {
+                        ((JTextPaneI) e.getComponent())
+                                .setCaretPosition(newPosition(((JTextPaneI) e
+                                        .getComponent()).getCaretPosition(),
+                                        getText(), false));
+                    } else if (e.getModifiers() == 1) {
+                        selectTextNext((JTextPaneI) e.getComponent());
+                    }
                 } else if (e.getKeyCode() == Event.BACK_SPACE) {
                     ((JTextPaneI) e.getComponent()).setText(deleteTag(
                             ((JTextPaneI) e.getComponent()).getCaretPosition(),
@@ -202,14 +211,36 @@ public class JTextPaneI extends JTextPane {
 
             }
 
+            private void selectTextPrevious(JTextPaneI comp) {
+                String text = comp.getText();
+                int position = comp.getCaretPosition();
+                if (PreviusIsEndTag(position, text)) {
+                    int positionInit = pegaTag(text, position, true);
+                    if (position != positionInit) {
+                        comp.moveCaretPosition(positionInit);
+                    }
+                }
+            }
+
+            private void selectTextNext(JTextPaneI comp) {
+                String text = comp.getText();
+                int position = comp.getCaretPosition();
+                if (NextStartTag(position, text)) {
+                    int positionEnd = pegaTag(text, position, false);
+                    if (position != positionEnd) {
+                        comp.moveCaretPosition(positionEnd);
+                    }
+                }
+            }
+
             private String deleteTag(int position, String text) {
                 if (position == 0)
                     return text;
                 else {
                     if (PreviusIsEndTag(position, text)) {
                         int positionInit = pegaTag(text, position, true) - 1;
-                        if(positionInit==-1)
-                            positionInit=0;
+                        if (positionInit == -1)
+                            positionInit = 0;
                         text = text.substring(0, positionInit + 1);
                         return text;
                     } else
@@ -306,13 +337,9 @@ public class JTextPaneI extends JTextPane {
             }
 
             public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
-
             }
 
             public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
-
             }
         });
     }
