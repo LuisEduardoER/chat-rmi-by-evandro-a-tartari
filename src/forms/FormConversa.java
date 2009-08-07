@@ -104,6 +104,7 @@ public class FormConversa extends JFrame {
             txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPanelI();
+            txtDescritorMensagem.addKeyListenerTag();
             simpleAttributeSet = new SimpleAttributeSet();
             txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet,
                     true);
