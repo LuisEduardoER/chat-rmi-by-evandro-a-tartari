@@ -1,6 +1,9 @@
 package util.componente;
 
 import java.awt.Color;
+import java.awt.Event;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.Set;
 
@@ -78,8 +81,7 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setItalic(attr, mensagem.getIsItalic());
             StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), getTextFormat(mensagem.getMensagem()),
-                    attr);
+                    .getLength(), getTextFormat(mensagem.getMensagem()), attr);
             insertTabulacao();
             newSimpleAttributeSet();
         } catch (Exception e) {
@@ -176,6 +178,143 @@ public class JTextPaneI extends JTextPane {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void addKeyListenerTag() {
+        addKeyListener(new KeyListener() {
+
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 37) {
+                    ((JTextPaneI) e.getComponent())
+                            .setCaretPosition(newPosition(((JTextPaneI) e
+                                    .getComponent()).getCaretPosition(),
+                                    getText(), true));
+                } else if (e.getKeyCode() == 39) {
+                    ((JTextPaneI) e.getComponent())
+                            .setCaretPosition(newPosition(((JTextPaneI) e
+                                    .getComponent()).getCaretPosition(),
+                                    getText(), false));
+                } else if (e.getKeyCode() == Event.BACK_SPACE) {
+                    ((JTextPaneI) e.getComponent()).setText(deleteTag(
+                            ((JTextPaneI) e.getComponent()).getCaretPosition(),
+                            getText()));
+                }
+
+            }
+
+            private String deleteTag(int position, String text) {
+                if (position == 0)
+                    return text;
+                else {
+                    if (PreviusIsEndTag(position, text)) {
+                        int positionInit = pegaTag(text, position, true) - 1;
+                        if(positionInit==-1)
+                            positionInit=0;
+                        text = text.substring(0, positionInit + 1);
+                        return text;
+                    } else
+                        return text;
+                }
+            }
+
+            private int newPosition(int position, String text, boolean back) {
+                if (back) {
+                    if (position == 0)
+                        return 0;
+                    else {
+                        if (PreviusIsEndTag(position, text))
+                            return pegaTag(text, position, back);
+                        else
+                            return position;
+                    }
+                } else {
+                    if (position == text.length())
+                        return position;
+                    else {
+                        if (NextStartTag(position, text))
+                            return pegaTag(text, position, back);
+                        else
+                            return position;
+                    }
+                }
+            }
+
+            private int pegaTag(String text, int position, boolean back) {
+                if (back) {
+                    Integer positionInit = null;
+                    for (int i = position - 1; i >= 0; i--) {
+                        if (((Character) text.charAt(i)).toString().equals("<")) {
+                            positionInit = i;
+                            break;
+                        }
+                    }
+                    if (positionInit != null) {
+                        String tag = text.substring(positionInit, position);
+                        if (verificaTag(tag))
+                            if (positionInit > 0)
+                                return positionInit + 1;
+                            else
+                                return positionInit;
+                        else
+                            return position;
+                    } else {
+                        return position;
+                    }
+                } else {
+                    Integer positionEnd = null;
+                    for (int i = position; i < text.length(); i++) {
+                        if (((Character) text.charAt(i)).toString().equals(">")) {
+                            positionEnd = i;
+                            break;
+                        }
+                    }
+                    if (positionEnd != null) {
+                        String tag = text.substring(position, positionEnd + 1);
+                        if (verificaTag(tag))
+                            return positionEnd;
+                        else
+                            return position;
+                    } else {
+                        return position;
+                    }
+                }
+            }
+
+            private boolean verificaTag(String tag) {
+                Set<String> keyWord = Util.Emotions.getEmotions().keySet();
+                for (String key : keyWord) {
+                    if (key.equals(tag))
+                        return true;
+
+                }
+                return false;
+            }
+
+            private boolean NextStartTag(int position, String text) {
+                if (((Character) text.charAt(position)).toString().equals("<"))
+                    return true;
+                else
+                    return false;
+            }
+
+            private boolean PreviusIsEndTag(int position, String text) {
+                if (((Character) text.charAt(position - 1)).toString().equals(
+                        ">"))
+                    return true;
+                else
+                    return false;
+            }
+
+            public void keyReleased(KeyEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            public void keyTyped(KeyEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
 }
