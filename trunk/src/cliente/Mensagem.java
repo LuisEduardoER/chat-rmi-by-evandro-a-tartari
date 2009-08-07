@@ -2,7 +2,6 @@ package cliente;
 
 import java.awt.Color;
 import java.io.Serializable;
-import java.util.Set;
 
 import util.Util;
 
@@ -55,7 +54,7 @@ public class Mensagem implements Serializable {
     }
 
     public void setMensagem(String mensagem) {
-        String msg = findTags(mensagem).trim();
+        String msg = Util.FormatedText.findTags(mensagem).trim();
         if (msg.trim().endsWith("\r\n")) {
             int posicao = msg.lastIndexOf("\r\n");
             if(posicao==-1)
@@ -142,35 +141,5 @@ public class Mensagem implements Serializable {
         return isSublinhado;
     }
 
-    private String findTags(String mensagem) {
-        String[] msg = mensagem.split(" ");
-        String msgFormatada = "";
-        for (int i = 0; i < msg.length; i++) {
-            msgFormatada += getMsg(msg[i]) + " ";
-        }
-        return msgFormatada;
-    }
-
-    private String getMsg(String msg) {
-        Set<String> key = Util.Emotions.getEmotions().keySet();
-        for (String keyWord : key) {
-            if (msg.contains(keyWord)) {
-                String replacement = keyWord.replace("<", " ");
-                replacement = replacement.replace(">", " ");
-                msg = msg.replace(keyWord, replacement);
-            }
-        }
-        msg = msg.replace("<", "&lt;");
-        msg = msg.replace(">", "&gt;");
-        for (String keyWord : key) {
-            String replacement = keyWord.replace("<", " ");
-            replacement = replacement.replace(">", " ");
-            if (msg.contains(replacement)) {
-                msg = msg.replace(replacement, keyWord);
-            }
-
-        }
-        return msg;
-    }
-
+    
 }
