@@ -140,6 +140,61 @@ public class JTextPaneI extends JTextPane {
         }
     }
 
+    private void adicionaText(String mensagem, Object[] config) {
+        try {
+            StyleConstants.setFontFamily(attr, (String) config[0]);
+            StyleConstants.setForeground(attr, (Color) config[1]);
+            StyleConstants.setFontSize(attr, (Integer) config[2]);
+            StyleConstants.setBold(attr, (Boolean) config[3]);
+            StyleConstants.setItalic(attr, (Boolean) config[4]);
+            StyleConstants.setUnderline(attr, (Boolean) config[5]);
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), getTextFormat(mensagem), attr);
+            newSimpleAttributeSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void appendMsgIcon(String mensagem, Object[] config) {
+        String[] msg = mensagem.split("<");
+        for (int i = 0; i < msg.length; i++) {
+            if (msg[i].contains(">")) {
+                String[] msg2 = msg[i].split(">");
+                for (int j = 0; j < msg2.length; j++) {
+                    if (j == 0)
+                        adicionaIcon(mensagem, config, msg2[j]);
+                    else
+                        adicionaText(mensagem, config);
+                }
+            } else {
+                adicionaText(mensagem, config);
+            }
+        }
+        insertTabulacao();
+    }
+
+    private void adicionaIcon(String mensagem, Object[] config,
+            String urlMapIcon) {
+        newSimpleAttributeSet();
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(Util.Emotions.getEmotions().get(
+                "<" + urlMapIcon + ">"));
+        ImageIcon icon = new ImageIcon(res);
+        if (icon != null) {
+            try {
+                StyleConstants.setIcon(attr, icon);
+                m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                        .getLength(), " ", attr);
+                newSimpleAttributeSet();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            adicionaText(urlMapIcon, config);
+        }
+    }
+
     private void adicionaIcon(Mensagem mensagem, Color color, String urlMapIcon) {
         newSimpleAttributeSet();
         ClassLoader clazz = this.getClass().getClassLoader();
@@ -352,9 +407,10 @@ public class JTextPaneI extends JTextPane {
                 String text = ((JTextPaneI) e.getComponent()).getText();
                 if (position == 0) {
                     ((JTextPaneI) e.getComponent()).setCaretPosition(position);
-                }if(position==text.length()){
+                }
+                if (position == text.length()) {
                     ((JTextPaneI) e.getComponent()).setCaretPosition(position);
-                }else {
+                } else {
                     if (isTag(position, text)) {
                         if (isVerificaTag(position, text)) {
                             ((JTextPaneI) e.getComponent())
