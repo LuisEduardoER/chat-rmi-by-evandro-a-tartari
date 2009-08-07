@@ -124,6 +124,9 @@ public class FormConversaListener implements ActionListener, KeyListener,
             if (e.getModifiers() == 0) {
                 e.consume();
                 enviarMensagem(getText());
+            }else if (e.getModifiers() == 1) {
+                e.consume();
+                conversa.getTxtDescritorMensagens().setText(conversa.getTxtDescritorMensagens().getText()+"\n");
             }
         } else if (e.getKeyCode() == Event.ESCAPE) {
             if (e.getModifiers() == 0) {
