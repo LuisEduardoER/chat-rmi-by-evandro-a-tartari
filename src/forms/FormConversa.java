@@ -209,8 +209,6 @@ public class FormConversa extends JFrame {
         getContentPane().add(c);
     }
 
-
-
     private JLabel newJLabel(String nome, Boolean isContato) {
         JLabel lbl = new JLabel(nome, JLabel.CENTER);
         lbl.setFont(new Font("verdana", Font.BOLD, 14));
@@ -469,6 +467,7 @@ public class FormConversa extends JFrame {
         btnSendFile.setEnabled(false);
         getEnviaArquivo().setVisible(true);
     }
+
     public void instanciaEmotions() {
         btnEmotions.setEnabled(false);
         getEmotions().setVisible(true);
@@ -530,28 +529,30 @@ public class FormConversa extends JFrame {
         enviaArquivo.setUndecorated(true);
         return enviaArquivo;
     }
-    
-    public JFrame getEmotions(){
-        if(emotions==null){
+
+    public JFrame getEmotions() {
+        if (emotions == null) {
             emotions = new FormEmotions(btnEmotions, this);
             emotions.inicializar();
         }
         return emotions;
     }
-    
+
     public void addImagem(ImageIcon icon, String text) {
         int insert = txtDescritorMensagem.getCaretPosition();
         String texto = txtDescritorMensagem.getText();
+        txtDescritorMensagem.setText("");
         String strTela = texto.substring(0, insert);
         strTela += text.trim();
         strTela += texto.substring(insert);
-        txtDescritorMensagem.setText(strTela);
         getEmotions().dispose();
         emotions = null;
         btnEmotions.setEnabled(true);
+        txtDescritorMensagem.appendMsgIcon(Util.FormatedText.findTags(strTela)
+                .trim(), new Object[] { getFontFamily(), getColor(),
+                getFontSize(), getIsBold(), getIsSublinhado() });
         txtDescritorMensagem.requestFocus();
     }
-
 
     public JButton getBtnSendFile() {
         return btnSendFile;
