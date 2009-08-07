@@ -2,6 +2,9 @@ package cliente;
 
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.Set;
+
+import util.Util;
 
 public class Mensagem implements Serializable {
 
@@ -24,7 +27,8 @@ public class Mensagem implements Serializable {
 
     public Mensagem(String usuarioEnvia, String nomeEnvia, String mensagem,
             String dataHora, Integer fontSize, String fontFamily, Color color,
-            Boolean isBold, Boolean isItalic, Boolean isSublinhado, String contatoRecebe) {
+            Boolean isBold, Boolean isItalic, Boolean isSublinhado,
+            String contatoRecebe) {
         this.setUsuarioEnvia(usuarioEnvia);
         this.setNomeEnvia(nomeEnvia);
         this.setMensagem(mensagem);
@@ -51,7 +55,7 @@ public class Mensagem implements Serializable {
     }
 
     public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+        this.mensagem = findTags(mensagem);
     }
 
     public Boolean getIsBold() {
@@ -124,6 +128,37 @@ public class Mensagem implements Serializable {
 
     public Boolean getIsSublinhado() {
         return isSublinhado;
+    }
+
+    private String findTags(String mensagem) {
+        String[] msg = mensagem.split(" ");
+        String msgFormatada = "";
+        for (int i = 0; i < msg.length; i++) {
+            msgFormatada += getMsg(msg[i])+" ";
+        }
+        return msgFormatada;
+    }
+
+    private String getMsg(String msg) {
+        Set<String> key = Util.Emotions.getEmotions().keySet();
+        for (String keyWord : key) {
+            if (msg.contains(keyWord)) {
+                String replacement = keyWord.replace("<", " ");
+                replacement = replacement.replace(">", " ");
+                msg = msg.replace(keyWord, replacement);
+            }
+        }
+        msg = msg.replace("<", "&lt;");
+        msg = msg.replace(">", "&gt;");
+        for (String keyWord : key) {
+            String replacement = keyWord.replace("<", " ");
+            replacement = replacement.replace(">", " ");
+            if (msg.contains(replacement)) {
+                msg = msg.replace(replacement, keyWord);
+            }
+
+        }
+        return msg;
     }
 
 }
