@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.Set;
 
@@ -180,7 +182,7 @@ public class JTextPaneI extends JTextPane {
         }
     }
 
-    public void addKeyListenerTag() {
+    public void addListenersTag() {
         addKeyListener(new KeyListener() {
 
             public void keyPressed(KeyEvent e) {
@@ -341,6 +343,117 @@ public class JTextPaneI extends JTextPane {
 
             public void keyTyped(KeyEvent e) {
             }
+        });
+        addMouseListener(new MouseListener() {
+
+            public void mouseClicked(MouseEvent e) {
+                int position = ((JTextPaneI) e.getComponent())
+                        .getCaretPosition();
+                String text = ((JTextPaneI) e.getComponent()).getText();
+                if (position == 0) {
+                    ((JTextPaneI) e.getComponent()).setCaretPosition(position);
+                }if(position==text.length()){
+                    ((JTextPaneI) e.getComponent()).setCaretPosition(position);
+                }else {
+                    if (isTag(position, text)) {
+                        if (isVerificaTag(position, text)) {
+                            ((JTextPaneI) e.getComponent())
+                                    .setCaretPosition(newPosition(position,
+                                            text));
+                        } else {
+                            ((JTextPaneI) e.getComponent())
+                                    .setCaretPosition(position);
+                        }
+                    } else {
+                        ((JTextPaneI) e.getComponent())
+                                .setCaretPosition(position);
+                    }
+                }
+            }
+
+            private boolean isVerificaTag(int position, String text) {
+                Integer positionEnd = null;
+                Integer positionInit = null;
+                for (int i = position; i < text.length(); i++) {
+                    if (((Character) text.charAt(i)).toString().equals(">")) {
+                        positionEnd = i;
+                        break;
+                    } else if (((Character) text.charAt(i)).toString().equals(
+                            "<")) {
+                        positionEnd = null;
+                        break;
+                    }
+                }
+                for (int i = position; i >= 0; i--) {
+                    if (((Character) text.charAt(i)).toString().equals("<")) {
+                        positionInit = i;
+                        break;
+                    } else if (((Character) text.charAt(i)).toString().equals(
+                            ">")) {
+                        positionInit = null;
+                        break;
+                    }
+                }
+                if (positionInit != null && positionEnd != null) {
+                    String tag = text.substring(positionInit, positionEnd + 1);
+                    if (verificaTag(tag)) {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+
+            private boolean verificaTag(String tag) {
+                Set<String> keyWord = Util.Emotions.getEmotions().keySet();
+                for (String key : keyWord) {
+                    if (key.equals(tag))
+                        return true;
+                }
+                return false;
+            }
+
+            private Integer newPosition(int position, String text) {
+                for (int i = position; i < text.length(); i++) {
+                    if (((Character) text.charAt(i)).toString().equals(">")) {
+                        return i + 1;
+                    }
+                }
+                return null;
+            }
+
+            private boolean isTag(int position, String text) {
+                for (int i = position; i < text.length(); i++) {
+                    if (((Character) text.charAt(i)).toString().equals(">")) {
+                        return true;
+                    } else if (((Character) text.charAt(i)).toString().equals(
+                            "<")) {
+                        return false;
+                    }
+                }
+                for (int i = position; i >= 0; i--) {
+                    if (((Character) text.charAt(i)).toString().equals(">")) {
+                        return false;
+                    } else if (((Character) text.charAt(i)).toString().equals(
+                            "<")) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
+
+            public void mousePressed(MouseEvent e) {
+            }
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
         });
     }
 
