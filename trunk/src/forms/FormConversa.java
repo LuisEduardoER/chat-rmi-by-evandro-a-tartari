@@ -70,6 +70,7 @@ public class FormConversa extends JFrame {
     private Boolean isBold = false;
     private Boolean isItalic = false;
     private Boolean isSublinhado = false;
+    private static Boolean isSublinhadoStatic = false;
     private String nomeConversa;
     private Color color;
     private Integer fontSize;
@@ -446,6 +447,7 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
         txtDescritorMensagem.setText(text);
         this.isSublinhado = isSublinhado;
+        FormConversa.isSublinhadoStatic = isSublinhado;
     }
 
     public void addBorderBtnPaletaCores(JButton button) {
@@ -677,5 +679,9 @@ public class FormConversa extends JFrame {
 
     public JToggleButton getBtnSublinhado() {
         return btnSublinhado;
+    }
+    
+    public static boolean getIsSublinhadoStatic(){
+    	return FormConversa.isSublinhadoStatic;
     }
 }
