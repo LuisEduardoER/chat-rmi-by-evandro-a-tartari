@@ -17,7 +17,7 @@ public class FormEmotionsListener implements ActionListener, MouseListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        conversa.addImagen(e.getActionCommand());
+        conversa.addImagem(e.getActionCommand());
     }
 
     public void mouseClicked(MouseEvent e) {
