@@ -163,8 +163,7 @@ public class JTextPaneI extends JTextPane {
     private String getTextFormat(String mensagem) {
         String text = mensagem.replace("&lt;", "<");
         text = text.replace("&gt;", ">");
-        text = text.replace("\r", "");
-        text = text.replace("\n", "");
+        text = text.replace("\r\n", "");
         return text;
     }
 

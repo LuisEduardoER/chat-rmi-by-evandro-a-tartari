@@ -55,7 +55,19 @@ public class Mensagem implements Serializable {
     }
 
     public void setMensagem(String mensagem) {
-        this.mensagem = findTags(mensagem).replace("\r\n", "");
+        String msg = findTags(mensagem).trim();
+        if (msg.trim().endsWith("\r\n")) {
+            int posicao = msg.lastIndexOf("\r\n");
+            if(posicao==-1)
+                posicao = msg.lastIndexOf("\n\n");
+            msg = msg.substring(0, posicao - 1);
+        } else if (msg.trim().endsWith("\n") || msg.trim().endsWith("\r")) {
+            int posicao = msg.lastIndexOf("\n");
+            if (posicao == -1)
+                posicao = msg.lastIndexOf("\r");
+            msg = msg.substring(0, posicao - 1);
+        }
+        this.mensagem = msg;
     }
 
     public Boolean getIsBold() {
