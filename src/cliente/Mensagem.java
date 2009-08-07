@@ -55,7 +55,7 @@ public class Mensagem implements Serializable {
     }
 
     public void setMensagem(String mensagem) {
-        this.mensagem = findTags(mensagem);
+        this.mensagem = findTags(mensagem).replace("\r\n", "");
     }
 
     public Boolean getIsBold() {
@@ -134,7 +134,7 @@ public class Mensagem implements Serializable {
         String[] msg = mensagem.split(" ");
         String msgFormatada = "";
         for (int i = 0; i < msg.length; i++) {
-            msgFormatada += getMsg(msg[i])+" ";
+            msgFormatada += getMsg(msg[i]) + " ";
         }
         return msgFormatada;
     }
