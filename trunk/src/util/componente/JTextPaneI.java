@@ -78,7 +78,9 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setItalic(attr, mensagem.getIsItalic());
             StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), mensagem.getMensagem(), attr);
+                    .getLength(), getTextFormat(mensagem.getMensagem()),
+                    attr);
+            insertTabulacao();
             newSimpleAttributeSet();
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,7 +103,7 @@ public class JTextPaneI extends JTextPane {
                 adicionaText(mensagem, color, msg[i]);
             }
         }
-
+        insertTabulacao();
     }
 
     private void montaHeader(Mensagem mensagem, Color color) {
@@ -127,7 +129,7 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setItalic(attr, mensagem.getIsItalic());
             StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), text, attr);
+                    .getLength(), getTextFormat(text), attr);
             newSimpleAttributeSet();
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,6 +158,25 @@ public class JTextPaneI extends JTextPane {
 
     private void newSimpleAttributeSet() {
         attr = new SimpleAttributeSet();
+    }
+
+    private String getTextFormat(String mensagem) {
+        String text = mensagem.replace("&lt;", "<");
+        text = text.replace("&gt;", ">");
+        text = text.replace("\r", "");
+        text = text.replace("\n", "");
+        return text;
+    }
+
+    private void insertTabulacao() {
+        try {
+            newSimpleAttributeSet();
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), "\r\n", attr);
+            newSimpleAttributeSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

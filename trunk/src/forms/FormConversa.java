@@ -538,7 +538,7 @@ public class FormConversa extends JFrame {
         return emotions;
     }
     
-    public void addImagen(String text) {
+    public void addImagem(String text) {
         int insert = txtDescritorMensagem.getCaretPosition();
         String texto = txtDescritorMensagem.getText();
         String strTela = texto.substring(0, insert);
@@ -548,6 +548,7 @@ public class FormConversa extends JFrame {
         getEmotions().dispose();
         emotions = null;
         btnEmotions.setEnabled(true);
+        txtDescritorMensagem.requestFocus();
     }
 
 
