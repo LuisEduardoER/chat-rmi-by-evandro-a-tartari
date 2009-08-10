@@ -441,7 +441,7 @@ public class FormListFriends extends JFrame {
         if (trayManager == null) {
             trayManager = new TrayManagerFormListFriend(this);
             trayManager.createTrayIcon("MsMundica is active - "
-                    + getNomeCliente(), getIcon());
+                    + Criptografia.decripto(getNomeCliente()), getIcon());
             trayManager.criaMenu("Exit", true);
             trayManager.criaMenu("Abrir", true);
             trayManager.adicionaEvento();
