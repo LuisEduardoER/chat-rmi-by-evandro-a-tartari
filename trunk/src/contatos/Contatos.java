@@ -5,6 +5,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+import util.Criptografia;
 import util.Util;
 
 /**
@@ -24,7 +25,6 @@ public class Contatos implements Serializable {
     private Integer portaServico;
     private Integer portaCliente;
     private String login;
-    private String senha;
     private ImageIcon icon;
     private ImageIcon iconUsuario;
     private ImageIcon iconContato;
@@ -51,7 +51,7 @@ public class Contatos implements Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = Criptografia.cripto(nome);
     }
 
     public String getIpServidor() {
@@ -83,15 +83,7 @@ public class Contatos implements Serializable {
     }
 
     public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+        this.login = Criptografia.cripto(login);
     }
 
     public void setIcon(ImageIcon icon) {
