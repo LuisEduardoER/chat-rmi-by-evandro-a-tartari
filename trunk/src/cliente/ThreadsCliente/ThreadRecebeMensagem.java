@@ -4,6 +4,7 @@ import gerenteDeTelas.Gerente;
 
 import javax.swing.JFrame;
 
+import util.Criptografia;
 import cliente.Mensagem;
 import contatos.Contatos;
 
@@ -17,14 +18,15 @@ public class ThreadRecebeMensagem extends Thread {
     }
 
     public void run() {
-        String name = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        String name = Criptografia.decripto(mensagem.getContatoRecebe()) + 
+        Criptografia.decripto(mensagem.getUsuarioEnvia());
         if (gerente.getListaConversa().get(name) != null) {
             gerente.getListaConversa().get(name).recebeMensagem(mensagem);
             if(gerente.getListaConversa().get(name).getExtendedState()==JFrame.ICONIFIED)
             new ThreadPiscaJanela(gerente.getListaConversa().get(name)).start();
         } else {
             Contatos contato = new Contatos();
-            contato.setLogin(mensagem.getUsuarioEnvia());
+            contato.setLogin(Criptografia.decripto(mensagem.getUsuarioEnvia()));
             int posicao = gerente.getFormListFriends().getContatos().indexOf(
                     contato);
             if (posicao != -1) {
