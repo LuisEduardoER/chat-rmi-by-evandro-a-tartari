@@ -34,6 +34,7 @@ import acao.FormConversaListener;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import cliente.ThreadsCliente.ThreadAlerta;
+import cliente.ThreadsCliente.ThreadChamarAtencao;
 import cliente.ThreadsCliente.ThreadRecebeArquivo;
 import contatos.Contatos;
 
@@ -616,7 +617,7 @@ public class FormConversa extends JFrame {
     }
 
     public void chamarAtencao(Mensagem mensagem) {
-        gerente.chamarAtencao(mensagem, getContato());
+        new ThreadChamarAtencao(this, gerente, mensagem).start();
 
     }
 
