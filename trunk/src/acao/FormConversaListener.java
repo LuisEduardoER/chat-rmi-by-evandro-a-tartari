@@ -132,7 +132,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
             if (e.getModifiers() == 0) {
                 e.consume();
                 if(conversa.getPaleta()!=null)
-                conversa.getPaleta().dispose();
+                conversa.fechaPaletaCores();
             }
         }
     }
