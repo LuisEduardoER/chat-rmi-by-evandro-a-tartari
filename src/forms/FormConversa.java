@@ -601,8 +601,8 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.appendMsgIcon(text, getConfig());
         this.color = color;
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
     public void recebeAviso(EnviaArquivo arquivo) {
