@@ -67,12 +67,12 @@ public class FormConversa extends JFrame {
     private Contatos contato;
     private Gerente gerente;
     private SimpleAttributeSet simpleAttributeSet;
-    private static String fontFamily;
-    private static Boolean isBold = false;
-    private static Boolean isItalic = false;
-    private static Boolean isSublinhado = false;
-    private static Color color;
-    private static Integer fontSize;
+    private String fontFamily;
+    private Boolean isBold = false;
+    private Boolean isItalic = false;
+    private Boolean isSublinhado = false;
+    private Color color;
+    private Integer fontSize;
     private String nomeConversa;
     private JFrame paletaCores;
     private JColorChooser jColorChooser;
@@ -106,8 +106,7 @@ public class FormConversa extends JFrame {
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPanelI();
             txtDescritorMensagem.addListenersTag();
-            FormConversa.fontSize = txtDescritorMensagem.getFont().getSize();
-            FormConversa.fontFamily = txtDescritorMensagem.getFont().getFamily();
+            
             simpleAttributeSet = new SimpleAttributeSet();
             txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet,
                     true);
@@ -357,7 +356,10 @@ public class FormConversa extends JFrame {
         return txtDescritorMensagem;
     }
 
-    public static Integer getFontSize() {
+    public Integer getFontSize() {
+        if(fontSize==null){
+            this.fontSize = txtDescritorMensagem.getFont().getSize();
+        }
         return fontSize;
     }
 
@@ -382,19 +384,22 @@ public class FormConversa extends JFrame {
         return contato;
     }
 
-    public static Boolean getIsBold() {
+    public Boolean getIsBold() {
         return isBold;
     }
 
-    public static Boolean getIsItalic() {
+    public Boolean getIsItalic() {
         return isItalic;
     }
 
-    public static Boolean getIsSublinhado() {
+    public Boolean getIsSublinhado() {
         return isSublinhado;
     }
 
-    public static String getFontFamily() {
+    public String getFontFamily() {
+        if(fontFamily==null){
+            this.fontFamily = txtDescritorMensagem.getFont().getFamily();
+        }
         return fontFamily;
     }
 
@@ -404,7 +409,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.fontFamily = (String) comboTipoFonte.getSelectedItem();
+        this.fontFamily = (String) comboTipoFonte.getSelectedItem();
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
@@ -415,7 +420,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.fontSize = size;
+        this.fontSize = size;
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
@@ -424,7 +429,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.isBold = isBold;
+        this.isBold = isBold;
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
@@ -433,7 +438,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.isItalic = isItalic;
+        this.isItalic = isItalic;
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
@@ -442,7 +447,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.isSublinhado = isSublinhado;
+        this.isSublinhado = isSublinhado;
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
@@ -578,14 +583,14 @@ public class FormConversa extends JFrame {
         this.nomeConversa = nomeConversa;
     }
 
-    public static Color getColor() {
+    public Color getColor() {
         if (color == null) {
             color = Color.BLACK;
         }
         return color;
     }
 
-    public static Object[] getConfig() {
+    public Object[] getConfig() {
         return new Object[] { getFontFamily(), getColor(), getFontSize(),
                 getIsBold(), getIsItalic(), getIsSublinhado() };
     }
@@ -595,7 +600,7 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        FormConversa.color = color;
+        this.color = color;
         txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
