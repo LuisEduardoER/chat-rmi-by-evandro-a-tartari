@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import util.Util;
-
 import forms.FormConversa;
 
 public class FormEmotionsListener implements ActionListener, MouseListener {
