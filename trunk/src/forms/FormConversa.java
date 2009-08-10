@@ -136,11 +136,11 @@ public class FormConversa extends JFrame {
                     "imagens/btnEnviarpressionado.png");
             String contatoNome = Criptografia.decripto(contato.getNome());
             String usuarioNome = Criptografia.decripto(usuario.getNome());
-            if (contato.getNome().length() > 15) {
-                contatoNome = contato.getNome().substring(0, 14);
+            if (Criptografia.decripto(contato.getNome()).length() > 15) {
+                contatoNome = Criptografia.decripto(contato.getNome()).substring(0, 14);
             }
-            if (usuario.getNome().length() > 15) {
-                usuarioNome = usuario.getNome().substring(0, 14);
+            if (Criptografia.decripto(usuario.getNome()).length() > 15) {
+                usuarioNome = Criptografia.decripto(usuario.getNome()).substring(0, 14);
             }
             lblNomeContato = newJLabel(contatoNome, true);
             lblNomeUsuario = newJLabel(usuarioNome, false);
