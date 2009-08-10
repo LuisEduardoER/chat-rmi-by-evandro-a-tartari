@@ -18,6 +18,7 @@ import servidor.ThreadsServidor.ThreadArquivo;
 import servidor.ThreadsServidor.ThreadChamarAtencao;
 import servidor.ThreadsServidor.ThreadMensagemEnviada;
 import servidor.ThreadsServidor.ThreadMensagemEnviou;
+import util.Criptografia;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import contatos.Contatos;
@@ -46,21 +47,20 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
         StringBuilder sb = new StringBuilder();
-        sb.append(mensageiro.getContatos().getLogin());
-        if (getPermissoes().contains(mensageiro.getContatos().getLogin())) {
-            if (getClientes().get(mensageiro.getContatos().getLogin()) == null) {
-                getClientes().put(mensageiro.getContatos().getLogin(),
+        String login = Criptografia.decripto(mensageiro.getContatos().getLogin());
+        sb.append(login);
+        if (getPermissoes().contains(login)) {
+            if (getClientes().get(login) == null) {
+                getClientes().put(login,
                         mensageiro);
                 sb.append(" Connectado");
                 getContatos().add(mensageiro.getContatos());
                 System.out.println(sb.toString());
                 return "OK";
             } else {
-                System.out.println(sb.toString());
                 return "Usuario Já conectado";
             }
         } else {
-            System.out.println(sb.toString());
             return "Usuario não Cadastrado";
         }
     }
@@ -89,7 +89,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             throws RemoteException {
         if (getContatos().size() > 0) {
             for (Contatos contato : getContatos()) {
-                getClientes().get(contato.getLogin()).carregaContatos(
+                getClientes().get(Criptografia.decripto(contato.getLogin())).carregaContatos(
                         getContatos());
             }
         }
@@ -145,15 +145,16 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
         try {
-            if (getClientes().get(mensageiro.getContatos().getLogin()) != null) {
-                getClientes().remove(mensageiro.getContatos().getLogin());
+            String login = Criptografia.decripto(mensageiro.getContatos().getLogin());
+            if (getClientes().get(login) != null) {
+                getClientes().remove(login);
                 getContatos().remove(mensageiro.getContatos());
                 for (Contatos contato : getContatos()) {
-                    getClientes().get(contato.getLogin()).removeContato(
+                    getClientes().get(Criptografia.decripto(contato.getLogin())).removeContato(
                             mensageiro.getContatos());
                 }
             }
-            System.out.println("Saida: " + mensageiro.getContatos().getLogin());
+            System.out.println("Saida: " + login);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -168,7 +169,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public void enviarMensagem(Mensagem mensagem) throws RemoteException {
-        if (getClientes().get(mensagem.getContatoRecebe()) != null) {
+        if (getClientes().get(Criptografia.decripto(mensagem.getContatoRecebe())) != null) {
             new ThreadMensagemEnviada(this, mensagem).start();
             new ThreadMensagemEnviou(this, mensagem).start();
         }
@@ -190,7 +191,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException {
-        getClientes().get(arquivo.getContatoEnvia().getLogin())
+        getClientes().get(Criptografia.decripto(arquivo.getContatoEnvia().getLogin()))
                 .recebeAvisoEnvioCompleto(arquivo);
 
     }
@@ -199,7 +200,7 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         try {
             if (getClientes().size() > 0) {
                 for (Contatos contato : getContatos()) {
-                    getClientes().get(contato.getLogin()).servidorFechando();
+                    getClientes().get(Criptografia.decripto(contato.getLogin())).servidorFechando();
                 }
                 getClientes().clear();
                 getContatos().clear();    
