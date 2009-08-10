@@ -409,7 +409,8 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.setText(text);
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
+        this.fontFamily = (String) comboTipoFonte.getSelectedItem();
     }
 
     public void setFontSize() {
@@ -419,8 +420,8 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.setText(text);
         this.fontSize = size;
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
     public void setIsBold(Boolean isBold) {
@@ -428,8 +429,8 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.appendMsgIcon(text, getConfig());
         this.isBold = isBold;
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
     public void setIsItalic(Boolean isItalic) {
@@ -437,8 +438,8 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.appendMsgIcon(text, getConfig());
         this.isItalic = isItalic;
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
     }
 
     public void setIsSublinhado(Boolean isSublinhado) {
@@ -446,10 +447,10 @@ public class FormConversa extends JFrame {
         String text = txtDescritorMensagem.getText();
         txtDescritorMensagem.setText("");
         txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet, true);
-        txtDescritorMensagem.appendMsgIcon(text, getConfig());
         this.isSublinhado = isSublinhado;
         FormConversa.isSublinhadoStatic = isSublinhado;
-    }
+        txtDescritorMensagem.appendMsgIcon(text, getConfig());
+     }
 
     public void addBorderBtnPaletaCores(JButton button) {
         button.setBorderPainted(true);
