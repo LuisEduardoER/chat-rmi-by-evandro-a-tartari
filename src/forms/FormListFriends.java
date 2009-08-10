@@ -92,7 +92,7 @@ public class FormListFriends extends JFrame {
      */
     public void config() {
         try {
-            setTitle(cliente.getContatos().getNome());
+            setTitle(Criptografia.decripto(cliente.getContatos().getNome()));
             setIconImage(getIcon());
             setContentPane(new Container());
             setSize(250, (int) dimensao.getHeight() - 40);
