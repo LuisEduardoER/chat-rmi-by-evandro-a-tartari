@@ -40,7 +40,7 @@ public class JTextPaneI extends JTextPane {
     /** append text */
     public void append(Mensagem mensagem, Boolean isContato) {
         try {
-            if (verificador(mensagem.getMensagem())) {
+            if (verificador(Criptografia.decripto(mensagem.getMensagem()))) {
                 if (isContato) {
                     adicionaMensagemComIcone(mensagem, Color.RED);
                 } else {
@@ -84,7 +84,7 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setItalic(attr, mensagem.getIsItalic());
             StyleConstants.setUnderline(attr, mensagem.getIsSublinhado());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
-                    .getLength(), getTextFormat(mensagem.getMensagem()), attr);
+                    .getLength(), getTextFormat(Criptografia.decripto(mensagem.getMensagem())), attr);
             insertTabulacao();
             newSimpleAttributeSet();
         } catch (Exception e) {
@@ -93,7 +93,7 @@ public class JTextPaneI extends JTextPane {
     }
 
     private void adicionaMensagemComIcone(Mensagem mensagem, Color color) {
-        String[] msg = mensagem.getMensagem().split("<");
+        String[] msg = Criptografia.decripto(mensagem.getMensagem()).split("<");
         montaHeader(mensagem, color);
         for (int i = 0; i < msg.length; i++) {
             if (msg[i].contains(">")) {
@@ -117,7 +117,7 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setFontSize(attr, mensagem.getFontSize());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
                     .getLength(), mensagem.getDataHora() + " "
-                    + mensagem.getNomeEnvia() + ": ", attr);
+                    + Criptografia.decripto(mensagem.getNomeEnvia()) + ": ", attr);
             newSimpleAttributeSet();
         } catch (Exception e) {
             e.printStackTrace();
@@ -286,7 +286,7 @@ public class JTextPaneI extends JTextPane {
     }
 
     private String getTextFormat(String mensagem) {
-        String text = Criptografia.decripto(mensagem).replace("&lt;", "<");
+        String text = mensagem.replace("&lt;", "<");
         text = text.replace("&gt;", ">");
         text = text.replace("\r\n", "");
         return text;
