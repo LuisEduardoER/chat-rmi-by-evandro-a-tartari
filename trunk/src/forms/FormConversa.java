@@ -28,6 +28,7 @@ import javax.swing.border.Border;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import util.Criptografia;
 import util.Util;
 import util.componente.JTextPaneI;
 import acao.FormConversaListener;
@@ -98,9 +99,9 @@ public class FormConversa extends JFrame {
     public void inicializar(Contatos contato, Contatos usuario) {
         try {
             sb.append("Conversa: ");
-            sb.append(usuario.getNome());
+            sb.append(Criptografia.decripto(usuario.getNome()));
             sb.append(" - ");
-            sb.append(contato.getNome());
+            sb.append(Criptografia.decripto(contato.getNome()));
             setTitle(sb.toString());
             txtReceptorMensagem = newJTextPanelI();
             txtReceptorMensagem.setEditable(false);
@@ -133,8 +134,8 @@ public class FormConversa extends JFrame {
             scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
-            String contatoNome = contato.getNome();
-            String usuarioNome = usuario.getNome();
+            String contatoNome = Criptografia.decripto(contato.getNome());
+            String usuarioNome = Criptografia.decripto(usuario.getNome());
             if (contato.getNome().length() > 15) {
                 contatoNome = contato.getNome().substring(0, 14);
             }
@@ -344,7 +345,7 @@ public class FormConversa extends JFrame {
 
     private String[] getValoresComboFont() {
         return new String[] { "8", "9", "10", "11", "12", "13", "14", "15",
-                "16", "17", "18", "19", "20", "21", "22", "23", "24" };
+                "16", "17", "18", "19", "20"};
     }
 
     private String[] getTipoFonte() {
