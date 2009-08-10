@@ -15,13 +15,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
-import cliente.ThreadsCliente.ThreadMensagemEnviada;
-import cliente.ThreadsCliente.ThreadPiscaJanela;
-import cliente.ThreadsCliente.ThreadRecebeMensagem;
+import cliente.ThreadsCliente.*;
 import contatos.Contatos;
 
 /**
@@ -245,8 +242,8 @@ public class Gerente {
             String name = cliente.getContatos().getLogin() + contato.getLogin();
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
-                if(conversa.getExtendedState()==JFrame.ICONIFIED)
-                new ThreadPiscaJanela(conversa).start();
+                if (conversa.getExtendedState() == JFrame.ICONIFIED)
+                    new ThreadPiscaJanela(conversa).start();
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
                 conversa.setNomeConversa(name);
@@ -296,6 +293,7 @@ public class Gerente {
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
+                new ThreadPiscaJanela(conversa).start();
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
                 conversa.setNomeConversa(name);
@@ -304,7 +302,7 @@ public class Gerente {
                         .getContatos());
                 conversa.setContato(arquivo.getContatoEnvia());
                 conversa.recebeAviso(arquivo);
-                conversa.renderiza();
+                new ThreadPiscaJanela(conversa).start();
                 listaConversa.put(name, conversa);
             }
         } catch (RemoteException e) {
@@ -326,7 +324,6 @@ public class Gerente {
 
     public void fechouConversa(FormConversa conversa) {
         getListaConversa().remove(conversa.getNomeConversa());
-
     }
 
     public void verificaInstanciaConversa(Contatos contato) {
@@ -356,14 +353,10 @@ public class Gerente {
     }
 
     public void receberChamadaAtencao(Mensagem mensagem) {
-        String name = mensagem.getUsuarioEnvia() + mensagem.getContatoRecebe();
-        String name2 = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
-        if (getListaConversa().get(name) != null) {
-            getListaConversa().get(name).recebeMensagem(mensagem);
-            getListaConversa().get(name).disparaThread();
-        } else if (getListaConversa().get(name2) != null) {
-            getListaConversa().get(name2).recebeMensagem(mensagem);
-            getListaConversa().get(name2).disparaThread();
+        String nome = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        if (getListaConversa().get(nome) != null) {
+            getListaConversa().get(nome).recebeMensagem(mensagem);
+            getListaConversa().get(nome).disparaThread();
         } else {
             Contatos contato = new Contatos();
             contato.setLogin(mensagem.getUsuarioEnvia());
@@ -373,9 +366,9 @@ public class Gerente {
                         posicao);
                 try {
                     this.iniciaConversa(contato, mensagem);
-                    name = cliente.getContatos().getLogin()
+                    nome = cliente.getContatos().getLogin()
                             + contato.getLogin();
-                    getListaConversa().get(name).disparaThread();
+                    getListaConversa().get(nome).disparaThread();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -397,14 +390,10 @@ public class Gerente {
 
     public void recebeArquivo(EnviaArquivo arquivo) {
         try {
-            String name = arquivo.getContatoEnvia().getLogin()
-                    + arquivo.getContatoRecebe().getLogin();
-            String name2 = arquivo.getContatoRecebe().getLogin()
+            String nome = arquivo.getContatoRecebe().getLogin()
                     + arquivo.getContatoEnvia().getLogin();
-            if (getListaConversa().get(name) != null) {
-                getListaConversa().get(name).recebeArquivo(arquivo);
-            } else if (getListaConversa().get(name2) != null) {
-                getListaConversa().get(name2).recebeArquivo(arquivo);
+            if (getListaConversa().get(nome) != null) {
+                getListaConversa().get(nome).recebeArquivo(arquivo);
             } else {
                 int posicao = getFormListFriends().getContatos().indexOf(
                         arquivo.getContatoEnvia());
@@ -412,7 +401,7 @@ public class Gerente {
                     Contatos contato = (Contatos) getFormListFriends()
                             .getContatos().get(posicao);
                     this.iniciaConversa(arquivo);
-                    name = cliente.getContatos().getLogin()
+                    nome = cliente.getContatos().getLogin()
                             + contato.getLogin();
                 }
             }
@@ -425,12 +414,8 @@ public class Gerente {
         try {
             String name = arquivo.getContatoEnvia().getLogin()
                     + arquivo.getContatoRecebe().getLogin();
-            String name2 = arquivo.getContatoRecebe().getLogin()
-                    + arquivo.getContatoEnvia().getLogin();
             if (getListaConversa().get(name) != null) {
                 getListaConversa().get(name).recebeAviso(arquivo);
-            } else if (getListaConversa().get(name2) != null) {
-                getListaConversa().get(name2).recebeAviso(arquivo);
             } else {
                 int posicao = getFormListFriends().getContatos().indexOf(
                         arquivo.getContatoEnvia());
@@ -449,10 +434,12 @@ public class Gerente {
     }
 
     public void servidorFechando() {
-       getFormListFriends().setExtendedState(JFrame.NORMAL);
-       JOptionPane.showMessageDialog(null, "Servidor Fechou! Esta Janela será encerrada", "Aviso de Fechamento!!!", JOptionPane.QUESTION_MESSAGE);
-       getFormListFriends().dispose();
-       System.exit(0);
+        getFormListFriends().setExtendedState(JFrame.NORMAL);
+        JOptionPane.showMessageDialog(null,
+                "Servidor Fechou! Esta Janela será encerrada",
+                "Aviso de Fechamento!!!", JOptionPane.QUESTION_MESSAGE);
+        getFormListFriends().dispose();
+        System.exit(0);
     }
 
 }

@@ -1,5 +1,7 @@
 package cliente.ThreadsCliente;
 
+import javax.swing.JFrame;
+
 import forms.FormConversa;
 
 public class ThreadAlerta extends Thread {
@@ -12,6 +14,7 @@ public class ThreadAlerta extends Thread {
     }
 
     public void setXY() {
+        conversa.setExtendedState(JFrame.NORMAL);
         if (x == null && y == null) {
             x = this.conversa.getLocation().x;
             y = this.conversa.getLocation().y;
@@ -39,19 +42,7 @@ public class ThreadAlerta extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setEnableButton();
-    }
-
-    @SuppressWarnings("static-access")
-    private void setEnableButton() {
-        if (!conversa.getBtnAlerta().isEnabled()) {
-            try {
-                this.sleep(10000);
-                conversa.getBtnAlerta().setEnabled(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
 
     }
+
 }
