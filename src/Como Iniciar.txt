@@ -1,0 +1,10 @@
+- Iniciar o servidor forms a classe FormServidor. Na mesma colocar 
+a porta do serviço, o ip será capturado diretamente do computador
+que subirá o serviço.
+- Iniciar o gerenteTelas.Gerente para rodar o aplicativo client.
+No mesmo pedirá ip, porta serviço, porta resposta client, login, 
+Nome. no login há logins pre-definidos no server. qualquer coisa
+adicionar mais lá.
+- Uma vez instanciado pelo menos duas janela pode se iniciar a con
+versa entre dois clientes. os botões sao bem explicativos o que
+cada um faz.
