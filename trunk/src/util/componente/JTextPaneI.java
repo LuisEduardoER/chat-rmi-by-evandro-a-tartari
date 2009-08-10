@@ -15,6 +15,7 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import util.Criptografia;
 import util.Util;
 import cliente.Mensagem;
 
@@ -74,7 +75,7 @@ public class JTextPaneI extends JTextPane {
             StyleConstants.setFontSize(attr, mensagem.getFontSize());
             m_defaultStyledDocument.insertString(m_defaultStyledDocument
                     .getLength(), mensagem.getDataHora() + " "
-                    + mensagem.getNomeEnvia() + ": ", attr);
+                    + Criptografia.decripto(mensagem.getNomeEnvia()) + ": ", attr);
             newSimpleAttributeSet();
             StyleConstants.setFontFamily(attr, mensagem.getFontFamily());
             StyleConstants.setForeground(attr, mensagem.getColor());
@@ -285,7 +286,7 @@ public class JTextPaneI extends JTextPane {
     }
 
     private String getTextFormat(String mensagem) {
-        String text = mensagem.replace("&lt;", "<");
+        String text = Criptografia.decripto(mensagem).replace("&lt;", "<");
         text = text.replace("&gt;", ">");
         text = text.replace("\r\n", "");
         return text;

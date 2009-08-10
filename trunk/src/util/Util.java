@@ -42,34 +42,37 @@ public class Util {
 
     public static Mensagem newMensagem(FormConversa conversa, String text)
             throws Exception {
-        return new Mensagem(conversa.getCliente().getContatos().getLogin(),
-                conversa.getCliente().getContatos().getNome(), text, Util
-                        .getDataHora(), conversa.getFontSize(), conversa
-                        .getFontFamily(), conversa.getColor(), conversa
-                        .getIsBold(), conversa.getIsItalic(), conversa
-                        .getIsSublinhado(), conversa.getContato().getLogin());
+        return new Mensagem(Criptografia.decripto(conversa.getCliente()
+                .getContatos().getLogin()), Criptografia.decripto(conversa
+                .getCliente().getContatos().getNome()), text, Util
+                .getDataHora(), conversa.getFontSize(), conversa
+                .getFontFamily(), conversa.getColor(), conversa.getIsBold(),
+                conversa.getIsItalic(), conversa.getIsSublinhado(),
+                Criptografia.decripto(conversa.getContato().getLogin()));
     }
 
     public static Mensagem newMensagemArquivoRecebido(EnviaArquivo arquivo,
             FormConversa conversa) {
-        return new Mensagem(arquivo.getContatoRecebe().getLogin(), arquivo
-                .getContatoRecebe().getNome(),
+        return new Mensagem(Criptografia.decripto(arquivo.getContatoRecebe()
+                .getLogin()), Criptografia.decripto(arquivo.getContatoRecebe()
+                .getNome()),
                 "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
                         + arquivo.getNomeArquivo() + "\n", Util.getDataHora(),
-                        conversa.getFontSize(), conversa.getFontFamily(), conversa
+                conversa.getFontSize(), conversa.getFontFamily(), conversa
                         .getColor(), conversa.getIsBold(), conversa
-                        .getIsItalic(), conversa.getIsSublinhado(), arquivo
-                        .getContatoRecebe().getNome());
+                        .getIsItalic(), conversa.getIsSublinhado(),
+                Criptografia.decripto(arquivo.getContatoRecebe().getNome()));
     }
 
     public static Mensagem newMensagemRecebeAviso(EnviaArquivo arquivo,
             FormConversa conversa) {
-        return new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
-                .getContatoEnvia().getNome(), arquivo.getRetorno(), Util
-                .getDataHora(), conversa.getFontSize(), conversa
-                .getFontFamily(), conversa.getColor(), conversa.getIsBold(),
-                conversa.getIsItalic(), conversa.getIsSublinhado(), arquivo
-                        .getContatoRecebe().getNome());
+        return new Mensagem(Criptografia.decripto(arquivo.getContatoEnvia()
+                .getLogin()), Criptografia.decripto(arquivo.getContatoEnvia()
+                .getNome()), arquivo.getRetorno(), Util.getDataHora(), conversa
+                .getFontSize(), conversa.getFontFamily(), conversa.getColor(),
+                conversa.getIsBold(), conversa.getIsItalic(), conversa
+                        .getIsSublinhado(), Criptografia.decripto(arquivo
+                        .getContatoRecebe().getNome()));
     }
 
     public static class RedimencionaImagemIcon {
@@ -146,7 +149,7 @@ public class Util {
     public static class Emotions {
         private static List<String> listaEmotions;
         private static Map<String, String> mapaEmotions;
-        
+
         public static List<String> getListEmotions() {
             if (listaEmotions == null) {
                 listaEmotions = new ArrayList<String>();
@@ -178,18 +181,19 @@ public class Util {
             if (mapaEmotions == null) {
                 mapaEmotions = new HashMap<String, String>();
                 for (String caminho : Emotions.getListEmotions()) {
-                    String action = "<"+caminho.substring(caminho.lastIndexOf("/") + 1,
-                            caminho.lastIndexOf("."))+">";
+                    String action = "<"
+                            + caminho.substring(caminho.lastIndexOf("/") + 1,
+                                    caminho.lastIndexOf(".")) + ">";
                     mapaEmotions.put(action, caminho);
                 }
             }
             return mapaEmotions;
 
         }
-        
 
     }
-    public static class FormatedText{
+
+    public static class FormatedText {
         public static String findTags(String mensagem) {
             String[] msg = mensagem.split(" ");
             String msgFormatada = "";
