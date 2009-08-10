@@ -1,6 +1,4 @@
-- limpar o codigo. Buscar Alta Performance. Pegar metodos 
-duplicatos em varias classes e montar uma class util.
-- ajeitar layout do FormListFriends/
+- ajeitar layout do FormListFriends;
 
 Release 2.0 - Incluir
 - migrar tudo para Java.net;
