@@ -26,7 +26,7 @@ public class ThreadRecebeArquivo extends Thread {
     public void run() {
         ClassLoader clazz = this.getClass().getClassLoader();
         String mensagemTela = Criptografia.decripto(arquivo.getContatoEnvia().getNome()) + " enviou um arquivo: "
-                + Criptografia.decripto(arquivo.getNomeArquivo());
+                + arquivo.getNomeArquivo();
         int retorno = JOptionPane.showOptionDialog(conversa, mensagemTela,
                         "Notificação de recebimentp de arquivo",
                         JOptionPane.YES_NO_OPTION,
