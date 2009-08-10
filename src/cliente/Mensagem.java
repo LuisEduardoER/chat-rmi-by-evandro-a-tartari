@@ -3,6 +3,7 @@ package cliente;
 import java.awt.Color;
 import java.io.Serializable;
 
+import util.Criptografia;
 import util.Util;
 
 public class Mensagem implements Serializable {
@@ -46,7 +47,7 @@ public class Mensagem implements Serializable {
     }
 
     public void setUsuarioEnvia(String usuarioEnvia) {
-        this.usuarioEnvia = usuarioEnvia;
+        this.usuarioEnvia = Criptografia.cripto(usuarioEnvia);
     }
 
     public String getMensagem() {
@@ -66,7 +67,7 @@ public class Mensagem implements Serializable {
                 posicao = msg.lastIndexOf("\r");
             msg = msg.substring(0, posicao - 1);
         }
-        this.mensagem = msg;
+        this.mensagem = Criptografia.cripto(msg);
     }
 
     public Boolean getIsBold() {
@@ -90,11 +91,11 @@ public class Mensagem implements Serializable {
     }
 
     public void setContatoRecebe(String contatoRecebe) {
-        this.contatoRecebe = contatoRecebe;
+        this.contatoRecebe = Criptografia.cripto(contatoRecebe);
     }
 
     public void setNomeEnvia(String nomeEnvia) {
-        this.nomeEnvia = nomeEnvia;
+        this.nomeEnvia = Criptografia.cripto(nomeEnvia);
     }
 
     public String getNomeEnvia() {
