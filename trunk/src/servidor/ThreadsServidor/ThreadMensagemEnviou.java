@@ -2,6 +2,7 @@ package servidor.ThreadsServidor;
 
 import cliente.Mensagem;
 import servidor.MensageiroServerImpl;
+import util.Criptografia;
 
 public class ThreadMensagemEnviou extends Thread {
     private MensageiroServerImpl servidor;
@@ -14,7 +15,7 @@ public class ThreadMensagemEnviou extends Thread {
 
     public void run() {
         try {
-            servidor.getClientes().get(mensagem.getUsuarioEnvia())
+            servidor.getClientes().get(Criptografia.decripto(mensagem.getUsuarioEnvia()))
                     .mensagemEnviada(mensagem);
         } catch (Exception e) {
             e.printStackTrace();

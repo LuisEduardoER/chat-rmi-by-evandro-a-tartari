@@ -1,6 +1,7 @@
 package servidor.ThreadsServidor;
 
 import servidor.MensageiroServerImpl;
+import util.Criptografia;
 import cliente.EnviaArquivo;
 
 public class ThreadArquivo extends Thread {
@@ -13,7 +14,7 @@ public class ThreadArquivo extends Thread {
     }
     public void run() {
         try{
-        servidor.getClientes().get(arquivo.getContatoRecebe().getLogin()).recebeArquivo(
+        servidor.getClientes().get(Criptografia.decripto(arquivo.getContatoRecebe().getLogin())).recebeArquivo(
                 arquivo);
         }catch (Exception e) {
             e.printStackTrace();
