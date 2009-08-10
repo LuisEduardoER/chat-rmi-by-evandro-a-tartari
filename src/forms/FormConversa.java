@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -75,7 +76,7 @@ public class FormConversa extends JFrame {
     private Color color;
     private Integer fontSize;
     private String nomeConversa;
-    private JFrame paletaCores;
+    private JDialog paletaCores;
     private JColorChooser jColorChooser;
     private JButton btnPaleta;
     private JButton btnSendFile;
@@ -107,7 +108,7 @@ public class FormConversa extends JFrame {
             txtReceptorMensagem.setEditable(false);
             txtDescritorMensagem = newJTextPanelI();
             txtDescritorMensagem.addListenersTag();
-            
+
             simpleAttributeSet = new SimpleAttributeSet();
             txtDescritorMensagem.setCharacterAttributes(simpleAttributeSet,
                     true);
@@ -137,10 +138,12 @@ public class FormConversa extends JFrame {
             String contatoNome = Criptografia.decripto(contato.getNome());
             String usuarioNome = Criptografia.decripto(usuario.getNome());
             if (Criptografia.decripto(contato.getNome()).length() > 15) {
-                contatoNome = Criptografia.decripto(contato.getNome()).substring(0, 14);
+                contatoNome = Criptografia.decripto(contato.getNome())
+                        .substring(0, 14);
             }
             if (Criptografia.decripto(usuario.getNome()).length() > 15) {
-                usuarioNome = Criptografia.decripto(usuario.getNome()).substring(0, 14);
+                usuarioNome = Criptografia.decripto(usuario.getNome())
+                        .substring(0, 14);
             }
             lblNomeContato = newJLabel(contatoNome, true);
             lblNomeUsuario = newJLabel(usuarioNome, false);
@@ -345,7 +348,7 @@ public class FormConversa extends JFrame {
 
     private String[] getValoresComboFont() {
         return new String[] { "8", "9", "10", "11", "12", "13", "14", "15",
-                "16", "17", "18", "19", "20"};
+                "16", "17", "18", "19", "20" };
     }
 
     private String[] getTipoFonte() {
@@ -358,7 +361,7 @@ public class FormConversa extends JFrame {
     }
 
     public Integer getFontSize() {
-        if(fontSize==null){
+        if (fontSize == null) {
             this.fontSize = txtDescritorMensagem.getFont().getSize();
         }
         return fontSize;
@@ -398,7 +401,7 @@ public class FormConversa extends JFrame {
     }
 
     public String getFontFamily() {
-        if(fontFamily==null){
+        if (fontFamily == null) {
             this.fontFamily = txtDescritorMensagem.getFont().getFamily();
         }
         return fontFamily;
@@ -495,14 +498,13 @@ public class FormConversa extends JFrame {
         return fileChooser;
     }
 
-    public JFrame getPaleta() {
+    public JDialog getPaleta() {
         return paletaCores;
     }
 
-    public JFrame getPaletaCores() {
-        paletaCores = new JFrame();
+    public JDialog getPaletaCores() {
+        paletaCores = new JDialog();
         paletaCores.setDefaultCloseOperation(ICONIFIED);
-        paletaCores.setExtendedState(NORMAL);
         paletaCores.setSize(310, 335);
         paletaCores.setContentPane(new Container());
         paletaCores.setLocationRelativeTo(btnPaletaCores);
@@ -535,7 +537,7 @@ public class FormConversa extends JFrame {
         return enviaArquivo;
     }
 
-    public JFrame getEmotions() {
+    public JDialog getEmotions() {
         if (emotions == null) {
             emotions = new FormEmotions(btnEmotions, this);
             emotions.inicializar();
@@ -572,8 +574,8 @@ public class FormConversa extends JFrame {
 
     public void recebeMensagem(Mensagem mensagem) {
         try {
-            txtReceptorMensagem.append(mensagem, isContato(Criptografia.decripto(mensagem
-                    .getUsuarioEnvia())));
+            txtReceptorMensagem.append(mensagem, isContato(Criptografia
+                    .decripto(mensagem.getUsuarioEnvia())));
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
@@ -669,7 +671,8 @@ public class FormConversa extends JFrame {
 
     public Boolean isContato(String login) {
         try {
-            return !Criptografia.decripto(cliente.getContatos().getLogin()).equals(login);
+            return !Criptografia.decripto(cliente.getContatos().getLogin())
+                    .equals(login);
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;
