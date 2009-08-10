@@ -17,7 +17,6 @@ import javax.swing.text.StyleConstants;
 
 import util.Util;
 import cliente.Mensagem;
-import forms.FormConversa;
 
 /**
  * 
@@ -156,6 +155,16 @@ public class JTextPaneI extends JTextPane {
             e.printStackTrace();
         }
     }
+    private void adicionaText(String mensagem, SimpleAttributeSet simpleAttributeSet) {
+        try {
+            SimpleAttributeSet simple = new SimpleAttributeSet();
+            simple = simpleAttributeSet;
+            m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                    .getLength(), getTextFormat(mensagem), simple);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void appendMsgIcon(String mensagem, Object[] config) {
         String[] msg = mensagem.split("<");
@@ -173,6 +182,46 @@ public class JTextPaneI extends JTextPane {
             }
         }
     }
+    public void appendMsgIcon(String mensagem) {
+        String[] msg = mensagem.split("<");
+        SimpleAttributeSet attributeSet = (SimpleAttributeSet) getInputAttributes();
+        for (int i = 0; i < msg.length; i++) {
+            if (msg[i].contains(">")) {
+                String[] msg2 = msg[i].split(">");
+                for (int j = 0; j < msg2.length; j++) {
+                    if (j == 0)
+                        adicionaIcon(mensagem, attributeSet ,msg2[j]);
+                    else
+                        adicionaText(msg2[j], attributeSet);
+                }
+            } else {
+                adicionaText(msg[i], attributeSet);
+            }
+        }
+    }
+
+    private void adicionaIcon(String mensagem, SimpleAttributeSet attributeSet, String urlMapIcon) {
+        newSimpleAttributeSet();
+        ClassLoader clazz = this.getClass().getClassLoader();
+        URL res = clazz.getResource(Util.Emotions.getEmotions().get(
+                "<" + urlMapIcon + ">"));
+        ImageIcon icon = new ImageIcon(res);
+        if (icon != null) {
+            try {
+                SimpleAttributeSet simple = new SimpleAttributeSet();
+                simple = attributeSet;
+                StyleConstants.setIcon(simple, icon);
+                m_defaultStyledDocument.insertString(m_defaultStyledDocument
+                        .getLength(), "<" + urlMapIcon + ">", simple);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            adicionaText(urlMapIcon, attributeSet);
+        }
+    }
+
+
 
     private void adicionaIcon(String mensagem, Object[] config,
             String urlMapIcon) {
@@ -256,7 +305,7 @@ public class JTextPaneI extends JTextPane {
     protected void renderComponente() {
         String text = Util.FormatedText.findTags(getText()).trim();
         setText("");
-        appendMsgIcon(text, FormConversa.getConfig());
+        appendMsgIcon(text);
     }
     public void addListenersTag() {
         addKeyListener(new KeyListener() {

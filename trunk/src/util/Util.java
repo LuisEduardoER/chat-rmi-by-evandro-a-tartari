@@ -44,9 +44,9 @@ public class Util {
             throws Exception {
         return new Mensagem(conversa.getCliente().getContatos().getLogin(),
                 conversa.getCliente().getContatos().getNome(), text, Util
-                        .getDataHora(), FormConversa.getFontSize(), FormConversa
-                        .getFontFamily(), FormConversa.getColor(), FormConversa
-                        .getIsBold(), FormConversa.getIsItalic(), FormConversa
+                        .getDataHora(), conversa.getFontSize(), conversa
+                        .getFontFamily(), conversa.getColor(), conversa
+                        .getIsBold(), conversa.getIsItalic(), conversa
                         .getIsSublinhado(), conversa.getContato().getLogin());
     }
 
@@ -56,9 +56,9 @@ public class Util {
                 .getContatoRecebe().getNome(),
                 "Arquivo recebido com sucesso no caminho : C:\\MsMundica\\"
                         + arquivo.getNomeArquivo() + "\n", Util.getDataHora(),
-                        FormConversa.getFontSize(), FormConversa.getFontFamily(), FormConversa
-                        .getColor(), FormConversa.getIsBold(), FormConversa
-                        .getIsItalic(), FormConversa.getIsSublinhado(), arquivo
+                        conversa.getFontSize(), conversa.getFontFamily(), conversa
+                        .getColor(), conversa.getIsBold(), conversa
+                        .getIsItalic(), conversa.getIsSublinhado(), arquivo
                         .getContatoRecebe().getNome());
     }
 
@@ -66,9 +66,9 @@ public class Util {
             FormConversa conversa) {
         return new Mensagem(arquivo.getContatoEnvia().getLogin(), arquivo
                 .getContatoEnvia().getNome(), arquivo.getRetorno(), Util
-                .getDataHora(), FormConversa.getFontSize(), FormConversa
-                .getFontFamily(), FormConversa.getColor(), FormConversa.getIsBold(),
-                FormConversa.getIsItalic(), FormConversa.getIsSublinhado(), arquivo
+                .getDataHora(), conversa.getFontSize(), conversa
+                .getFontFamily(), conversa.getColor(), conversa.getIsBold(),
+                conversa.getIsItalic(), conversa.getIsSublinhado(), arquivo
                         .getContatoRecebe().getNome());
     }
 
