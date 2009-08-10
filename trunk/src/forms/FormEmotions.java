@@ -64,9 +64,4 @@ public class FormEmotions extends JFrame {
     public List<String> newArrayList() {
         return Util.Emotions.getListEmotions();
     }
-
-    public static void main(String[] args) {
-        FormEmotions emotions = new FormEmotions(null, null);
-        emotions.inicializar();
-    }
 }
