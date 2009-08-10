@@ -15,6 +15,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import util.Criptografia;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
@@ -71,8 +73,8 @@ public class Gerente {
                     formListFriends.config();
                     formListFriends.inicializa();
                     formListFriends.createMenuBar();
-                    formListFriends.criarBordaPainel(cliente.getContatos()
-                            .getNome());
+                    formListFriends.criarBordaPainel(Criptografia
+                            .decripto(cliente.getContatos().getNome()));
                     formListFriends.adicionaListener();
                     formListFriends.buscaContatos();
                     formListFriends.renderiza();
@@ -189,14 +191,14 @@ public class Gerente {
     }
 
     public void controladorConversa(Contatos contato) throws Exception {
-        String name = cliente.getContatos().getLogin() + contato.getLogin();
+        String name = Criptografia.decripto(cliente.getContatos().getLogin())
+                + Criptografia.decripto(contato.getLogin());
         if (listaConversa.get(name) != null) {
             FormConversa conversa = listaConversa.get(name);
             conversa.setExtendedState(JFrame.NORMAL);
         } else {
             FormConversa conversa = new FormConversa(this, cliente);
-            conversa.setNomeConversa(cliente.getContatos().getLogin()
-                    + contato.getLogin());
+            conversa.setNomeConversa(name);
             conversa.config();
             conversa.inicializar(contato, cliente.getContatos());
             conversa.setContato(contato);
@@ -239,7 +241,8 @@ public class Gerente {
 
     public void iniciaConversa(Contatos contato, Mensagem mensagem) {
         try {
-            String name = cliente.getContatos().getLogin() + contato.getLogin();
+            String name = Criptografia.decripto(cliente.getContatos().getLogin())
+            + Criptografia.decripto(contato.getLogin());
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 if (conversa.getExtendedState() == JFrame.ICONIFIED)
@@ -264,8 +267,8 @@ public class Gerente {
 
     private void iniciaConversa(EnviaArquivo arquivo) {
         try {
-            String name = cliente.getContatos().getLogin()
-                    + arquivo.getContatoEnvia().getLogin();
+            String name = Criptografia.decripto(cliente.getContatos().getLogin())
+                    + Criptografia.decripto(arquivo.getContatoEnvia().getLogin());
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
@@ -288,8 +291,8 @@ public class Gerente {
 
     private void iniciaReciboAviso(EnviaArquivo arquivo) {
         try {
-            String name = cliente.getContatos().getLogin()
-                    + arquivo.getContatoEnvia().getLogin();
+            String name = Criptografia.decripto(cliente.getContatos().getLogin())
+                    + Criptografia.decripto(arquivo.getContatoEnvia().getLogin());
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
                 conversa.setExtendedState(JFrame.ICONIFIED);
@@ -328,9 +331,10 @@ public class Gerente {
 
     public void verificaInstanciaConversa(Contatos contato) {
         try {
-            String name = cliente.getContatos().getLogin() + contato.getLogin();
-            String name2 = contato.getLogin()
-                    + cliente.getContatos().getLogin();
+            String name = Criptografia.decripto(cliente.getContatos().getLogin()) + 
+            Criptografia.decripto(contato.getLogin());
+            String name2 = Criptografia.decripto(contato.getLogin())
+                    + Criptografia.decripto(cliente.getContatos().getLogin());
             if (getListaConversa().get(name) != null) {
                 getListaConversa().get(name).disableChat();
                 getListaConversa().remove(getListaConversa().get(name));
@@ -353,21 +357,22 @@ public class Gerente {
     }
 
     public void receberChamadaAtencao(Mensagem mensagem) {
-        String nome = mensagem.getContatoRecebe() + mensagem.getUsuarioEnvia();
+        String nome = Criptografia.decripto(mensagem.getContatoRecebe()) + 
+        Criptografia.decripto(mensagem.getUsuarioEnvia());
         if (getListaConversa().get(nome) != null) {
             getListaConversa().get(nome).recebeMensagem(mensagem);
             getListaConversa().get(nome).disparaThread();
         } else {
             Contatos contato = new Contatos();
-            contato.setLogin(mensagem.getUsuarioEnvia());
+            contato.setLogin(Criptografia.decripto(mensagem.getUsuarioEnvia()));
             int posicao = getFormListFriends().getContatos().indexOf(contato);
             if (posicao != -1) {
                 contato = (Contatos) getFormListFriends().getContatos().get(
                         posicao);
                 try {
                     this.iniciaConversa(contato, mensagem);
-                    nome = cliente.getContatos().getLogin()
-                            + contato.getLogin();
+                    nome = Criptografia.decripto(cliente.getContatos().getLogin())
+                            + Criptografia.decripto(contato.getLogin());
                     getListaConversa().get(nome).disparaThread();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -390,8 +395,8 @@ public class Gerente {
 
     public void recebeArquivo(EnviaArquivo arquivo) {
         try {
-            String nome = arquivo.getContatoRecebe().getLogin()
-                    + arquivo.getContatoEnvia().getLogin();
+            String nome = Criptografia.decripto(arquivo.getContatoRecebe().getLogin())
+                    + Criptografia.decripto(arquivo.getContatoEnvia().getLogin());
             if (getListaConversa().get(nome) != null) {
                 getListaConversa().get(nome).recebeArquivo(arquivo);
             } else {
@@ -412,8 +417,8 @@ public class Gerente {
 
     public void recebeAvisoEnvioCompleto(EnviaArquivo arquivo) {
         try {
-            String name = arquivo.getContatoEnvia().getLogin()
-                    + arquivo.getContatoRecebe().getLogin();
+            String name = Criptografia.decripto(arquivo.getContatoEnvia().getLogin())
+                    + Criptografia.decripto(arquivo.getContatoRecebe().getLogin());
             if (getListaConversa().get(name) != null) {
                 getListaConversa().get(name).recebeAviso(arquivo);
             } else {
@@ -423,8 +428,8 @@ public class Gerente {
                     Contatos contato = (Contatos) getFormListFriends()
                             .getContatos().get(posicao);
                     this.iniciaReciboAviso(arquivo);
-                    name = cliente.getContatos().getLogin()
-                            + contato.getLogin();
+                    name = Criptografia.decripto(cliente.getContatos().getLogin())
+                            + Criptografia.decripto(contato.getLogin());
                 }
             }
         } catch (Exception e) {
