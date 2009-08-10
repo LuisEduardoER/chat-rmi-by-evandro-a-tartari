@@ -555,7 +555,6 @@ public class FormConversa extends JFrame {
         btnEmotions.setEnabled(true);
         txtDescritorMensagem.appendMsgIcon(Util.FormatedText.findTags(strTela)
                 .trim(), getConfig());
-        this.setAttribute();
         txtDescritorMensagem.requestFocus();
     }
 
@@ -581,15 +580,6 @@ public class FormConversa extends JFrame {
         }
     }
     
-    private void setAttribute() {
-        StyleConstants.setFontFamily(simpleAttributeSet, (String) getConfig()[0]);
-        StyleConstants.setForeground(simpleAttributeSet, (Color) getConfig()[1]);
-        StyleConstants.setFontSize(simpleAttributeSet, (Integer) getConfig()[2]);
-        StyleConstants.setBold(simpleAttributeSet, (Boolean) getConfig()[3]);
-        StyleConstants.setItalic(simpleAttributeSet, (Boolean) getConfig()[4]);
-        StyleConstants.setUnderline(simpleAttributeSet, (Boolean) getConfig()[5]);
-    }
-
     public void setNomeConversa(String nomeConversa) {
         this.nomeConversa = nomeConversa;
     }
