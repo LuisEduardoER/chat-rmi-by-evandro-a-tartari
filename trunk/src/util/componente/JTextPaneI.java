@@ -183,6 +183,12 @@ public class JTextPaneI extends JTextPane {
         ImageIcon icon = new ImageIcon(res);
         if (icon != null) {
             try {
+                StyleConstants.setFontFamily(attr, (String) config[0]);
+                StyleConstants.setForeground(attr, (Color) config[1]);
+                StyleConstants.setFontSize(attr, (Integer) config[2]);
+                StyleConstants.setBold(attr, (Boolean) config[3]);
+                StyleConstants.setItalic(attr, (Boolean) config[4]);
+                StyleConstants.setUnderline(attr, (Boolean) config[5]);
                 StyleConstants.setIcon(attr, icon);
                 m_defaultStyledDocument.insertString(m_defaultStyledDocument
                         .getLength(), "<" + urlMapIcon + ">", attr);
@@ -250,11 +256,8 @@ public class JTextPaneI extends JTextPane {
     protected void renderComponente() {
         String text = Util.FormatedText.findTags(getText()).trim();
         setText("");
-        appendMsgIcon(text, new Object[] { getFont().getFamily(),
-                getForeground(), getFont().getSize(), getFont().isBold(),
-                getFont().isItalic(), FormConversa.getIsSublinhadoStatic() });
+        appendMsgIcon(text, FormConversa.getConfig());
     }
-
     public void addListenersTag() {
         addKeyListener(new KeyListener() {
 
