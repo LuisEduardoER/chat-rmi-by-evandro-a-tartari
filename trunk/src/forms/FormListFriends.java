@@ -38,11 +38,13 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import util.Criptografia;
 import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
+
 import contatos.Contatos;
 import contatos.ContatosComparator;
 import contatos.render.ContatosRender;
@@ -323,7 +325,7 @@ public class FormListFriends extends JFrame {
         lblUsuario.setHorizontalAlignment(JLabel.CENTER);
         lblUsuario.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(
                 contatos.getIconUsuario(), 60, 60, 1000));
-        lblUsuario.setText(contatos.getNome());
+        lblUsuario.setText(Criptografia.decripto(contatos.getNome()));
         lblUsuario.setBounds(30, 85, 100, 30);
         lblUsuario.setForeground(Color.BLUE);
         lblUsuario.setFont(new Font("verdana", Font.BOLD, 14));
