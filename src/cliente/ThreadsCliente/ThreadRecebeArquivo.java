@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import util.Criptografia;
 import util.Util;
 import cliente.EnviaArquivo;
 import forms.FormConversa;
@@ -24,8 +25,8 @@ public class ThreadRecebeArquivo extends Thread {
     
     public void run() {
         ClassLoader clazz = this.getClass().getClassLoader();
-        String mensagemTela = arquivo.getContatoEnvia().getNome() + " enviou um arquivo: "
-                + arquivo.getNomeArquivo();
+        String mensagemTela = Criptografia.decripto(arquivo.getContatoEnvia().getNome()) + " enviou um arquivo: "
+                + Criptografia.decripto(arquivo.getNomeArquivo());
         int retorno = JOptionPane.showOptionDialog(conversa, mensagemTela,
                         "Notificação de recebimentp de arquivo",
                         JOptionPane.YES_NO_OPTION,
@@ -46,7 +47,7 @@ public class ThreadRecebeArquivo extends Thread {
                 fos.flush();
                 fos.close();
                 arquivo.setRetorno("Arquivo recebido com sucesso por "
-                        + arquivo.getContatoRecebe().getNome()+"\n");
+                        + Criptografia.decripto(arquivo.getContatoRecebe().getNome())+"\n");
                 conversa.avisaArquivoRecebido(arquivo);
                 cliente.enviaAvisoEnvioCompleto(arquivo);
             } catch (Exception e) {
@@ -55,7 +56,7 @@ public class ThreadRecebeArquivo extends Thread {
         } else if (retorno == 1) {
             try {
                 arquivo.setRetorno("Arquivo não enviado para "
-                        + arquivo.getContatoRecebe().getNome());
+                        + Criptografia.decripto(arquivo.getContatoRecebe().getNome()));
                 cliente.enviaAvisoEnvioCompleto(arquivo);
             } catch (Exception e) {
                 e.printStackTrace();

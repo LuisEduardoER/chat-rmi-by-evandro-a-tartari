@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+import util.Criptografia;
+
 import contatos.Contatos;
 
 /**
@@ -26,7 +28,7 @@ public class ContatosRender extends JLabel implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
         Contatos contatos = (Contatos) value;
-        setText(contatos.getNome());
+        setText(Criptografia.decripto(contatos.getNome()));
         setFont(new Font("verdana", Font.BOLD, 12));
         setIcon(contatos.getImage());
         return this;
