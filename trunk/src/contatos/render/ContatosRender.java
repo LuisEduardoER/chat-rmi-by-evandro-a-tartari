@@ -8,7 +8,6 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import util.Criptografia;
-
 import contatos.Contatos;
 
 /**

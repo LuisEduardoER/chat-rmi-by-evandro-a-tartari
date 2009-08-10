@@ -20,7 +20,9 @@ import util.Criptografia;
 import cliente.EnviaArquivo;
 import cliente.MensageiroClienteImpl;
 import cliente.Mensagem;
-import cliente.ThreadsCliente.*;
+import cliente.ThreadsCliente.ThreadMensagemEnviada;
+import cliente.ThreadsCliente.ThreadPiscaJanela;
+import cliente.ThreadsCliente.ThreadRecebeMensagem;
 import contatos.Contatos;
 
 /**

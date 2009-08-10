@@ -1,9 +1,9 @@
 package cliente.ThreadsCliente;
 
-import util.Criptografia;
-import contatos.Contatos;
 import gerenteDeTelas.Gerente;
+import util.Criptografia;
 import cliente.Mensagem;
+import contatos.Contatos;
 
 public class ThreadMensagemEnviada extends Thread {
     private Gerente gerente;

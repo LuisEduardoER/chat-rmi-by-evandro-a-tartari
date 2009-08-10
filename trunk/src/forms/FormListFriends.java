@@ -44,7 +44,6 @@ import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
-
 import contatos.Contatos;
 import contatos.ContatosComparator;
 import contatos.render.ContatosRender;

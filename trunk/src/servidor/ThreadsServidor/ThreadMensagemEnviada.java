@@ -1,8 +1,8 @@
 package servidor.ThreadsServidor;
 
-import cliente.Mensagem;
 import servidor.MensageiroServerImpl;
 import util.Criptografia;
+import cliente.Mensagem;
 
 public class ThreadMensagemEnviada extends Thread{
     private MensageiroServerImpl servidor;
