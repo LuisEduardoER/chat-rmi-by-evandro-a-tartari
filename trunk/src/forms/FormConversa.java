@@ -481,6 +481,7 @@ public class FormConversa extends JFrame {
         paletaCores.dispose();
         jColorChooser = null;
         btnPaleta = null;
+        btnPaletaCores.setEnabled(true);
     }
 
     public void fechaEnviaArquivo() {
