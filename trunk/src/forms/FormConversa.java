@@ -572,8 +572,8 @@ public class FormConversa extends JFrame {
 
     public void recebeMensagem(Mensagem mensagem) {
         try {
-            txtReceptorMensagem.append(mensagem, isContato(mensagem
-                    .getUsuarioEnvia()));
+            txtReceptorMensagem.append(mensagem, isContato(Criptografia.decripto(mensagem
+                    .getUsuarioEnvia())));
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
@@ -669,7 +669,7 @@ public class FormConversa extends JFrame {
 
     public Boolean isContato(String login) {
         try {
-            return !cliente.getContatos().getLogin().equals(login);
+            return !Criptografia.decripto(cliente.getContatos().getLogin()).equals(login);
         } catch (RemoteException e) {
             e.printStackTrace();
             return null;
