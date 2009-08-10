@@ -1,6 +1,7 @@
 package servidor.ThreadsServidor;
 
 import servidor.MensageiroServerImpl;
+import util.Criptografia;
 import cliente.Mensagem;
 import contatos.Contatos;
 
@@ -19,11 +20,11 @@ public class ThreadChamarAtencao extends Thread {
 
     public void run() {
         try {
-            servidor.getClientes().get(contato.getLogin())
+            servidor.getClientes().get(Criptografia.decripto(contato.getLogin()))
                     .receberChamadaAtencao(mensagem);
-            mensagem.setMensagem("Você pediu a atenção de " + contato.getNome()
+            mensagem.setMensagem("Você pediu a atenção de " + Criptografia.decripto(contato.getNome())
                     + "\n");
-            servidor.getClientes().get(mensagem.getUsuarioEnvia())
+            servidor.getClientes().get(Criptografia.decripto(mensagem.getUsuarioEnvia()))
                     .mensagemEnviada(mensagem);
         } catch (Exception e) {
             e.printStackTrace();
