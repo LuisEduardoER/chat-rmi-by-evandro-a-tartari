@@ -67,7 +67,15 @@ public class Mensagem implements Serializable {
                 posicao = msg.lastIndexOf("\r");
             msg = msg.substring(0, posicao - 1);
         }
-        this.mensagem = Criptografia.cripto(msg);
+        String[] msgArray = msg.split(" ");
+        for (int i = 0; i < msgArray.length; i++) {
+            if(i== (msgArray.length -1)){
+                msg = Criptografia.cripto(msgArray[i]);
+            }else{
+                msg = Criptografia.cripto(msgArray[i])+" ";
+            }
+        }
+        this.mensagem = msg;
     }
 
     public Boolean getIsBold() {
