@@ -1,4 +1,5 @@
 package toaster;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +23,38 @@ public class ControladorToaster extends JDialog {
     }
 
     public void addToaster(String text, String name, ImageIcon icon) {
-        toaster = new Toaster(text, name, icon, posicaoX, posicaoY, this);
-        toaster.init();
-        toaster.addListener();
-        toaster.render();
-        toaster.setNomePopUp("1" + posicaoY);
-        toaster.start(posicaoX, posicaoY);
-        listaPopups.add(toaster);
-        posicaoY -= 120;
+        if (listaPopups.size() > 0) {
+            Toaster find = new Toaster();
+            find.setNomePopUp(name);
+            int posicao = listaPopups.indexOf(find);
+            if (posicao != -1) {
+                listaPopups.get(posicao).stopedThread();
+                listaPopups.get(posicao).setNome(name);
+                listaPopups.get(posicao).setText(text);
+                listaPopups.get(posicao).render();
+                listaPopups.get(posicao).start(posicaoX,
+                        listaPopups.get(posicao).getLocation().y + 305);
+            } else {
+                toaster = new Toaster(text, name, icon, posicaoX, posicaoY,
+                        this);
+                toaster.init();
+                toaster.addListener();
+                toaster.render();
+                toaster.setNomePopUp(name);
+                toaster.start(posicaoX, posicaoY);
+                listaPopups.add(toaster);
+                posicaoY -= 120;
+            }
+        } else {
+            toaster = new Toaster(text, name, icon, posicaoX, posicaoY, this);
+            toaster.init();
+            toaster.addListener();
+            toaster.render();
+            toaster.setNomePopUp(name);
+            toaster.start(posicaoX, posicaoY);
+            listaPopups.add(toaster);
+            posicaoY -= 120;
+        }
     }
 
     public void reordena(Toaster toaster) {
