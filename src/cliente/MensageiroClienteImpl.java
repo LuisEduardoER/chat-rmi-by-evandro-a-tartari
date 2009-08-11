@@ -142,6 +142,11 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
         
     }
 
+    public void contatoConectou(Contatos contatos) throws RemoteException {
+        gerente.contatoConectou(contatos);
+        
+    }
+
 
 
 
