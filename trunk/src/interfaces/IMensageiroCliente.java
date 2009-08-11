@@ -53,4 +53,6 @@ public interface IMensageiroCliente extends Remote {
 
     public void servidorFechando() throws RemoteException;
 
+    public void contatoConectou(Contatos contatos)throws RemoteException;
+
 }
