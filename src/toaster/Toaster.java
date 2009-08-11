@@ -119,6 +119,9 @@ public class Toaster extends JDialog {
 
     public JLabel getImageContato() {
         JLabel lbl = new JLabel();
+        if(getIcone()==null){
+            return new JLabel();
+        }
         lbl.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(getIcone(),
                 50, 50, 500));
         lbl.setBounds(7, 56, 50, 50);
