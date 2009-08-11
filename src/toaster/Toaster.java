@@ -465,28 +465,6 @@ public class Toaster {
         return sharedFrame;
     }
 
-    /**
-     * Test.
-     * 
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-        javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager
-                .getSystemLookAndFeelClassName());
-        Toaster.BACKGROUND_COLOR = Color.white;
-        Toaster.FOREGROUND_COLOR = Color.black;
-        Toaster.BORDER_COLOR = Color.black;
-        final Toaster t = new Toaster(BOTTOM_RIGHT, new Dimension(260, 60));
-        t.setTextAlign(Canvas.LEFT_ALIGNMENT);
-        t.popup(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                System.out.print("OK");
-            }
-        }, "This is a test message blah blah blah blah", "Brett says", UIUtil
-                .loadImage(Toaster.class, "/teste/teste.png"));
-    }
-
     class MagicThread extends Thread {
 
         boolean run = true;
