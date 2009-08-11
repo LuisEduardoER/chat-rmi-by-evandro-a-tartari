@@ -21,6 +21,9 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
+
 /**
  * 
  * UI component that display <i>toaster</i> style messages. When a request to
@@ -62,7 +65,6 @@ public class Toaster {
      * from top to bottom
      */
     public final static int TOP_RIGHT = 3;
-
 
     /**
      * Default background color for new toasters
@@ -142,16 +144,21 @@ public class Toaster {
      *            popup size
      * @see #setPosition(int)
      */
-    public Toaster(int position, Dimension popupSize) {
-        messages = new Vector();
-        backgroundColor = BACKGROUND_COLOR;
-        foregroundColor = FOREGROUND_COLOR;
-        borderColor = BORDER_COLOR;
-        textFont = TEXT_FONT;
-        titleFont = TITLE_FONT;
-        this.popupSize = popupSize;
-        this.position = position;
-        textAlign = Canvas.CENTER_ALIGNMENT;
+    public Toaster(int position, Dimension popupSize, LookAndFeel look) {
+        try {
+            messages = new Vector();
+            backgroundColor = BACKGROUND_COLOR;
+            foregroundColor = FOREGROUND_COLOR;
+            borderColor = BORDER_COLOR;
+            textFont = TEXT_FONT;
+            titleFont = TITLE_FONT;
+            this.popupSize = popupSize;
+            this.position = position;
+            textAlign = Canvas.CENTER_ALIGNMENT;
+            UIManager.setLookAndFeel(look);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -471,7 +478,7 @@ public class Toaster {
         int moved;
 
         MagicThread() {
-            super("MagicThread"); 
+            super("MagicThread");
             start();
         }
 
@@ -552,8 +559,8 @@ public class Toaster {
             this.preferredSize = preferredSize;
             this.callback = callback;
             try {
-                Method m = getClass().getMethod(
-                        "setAlwaysOnTop", new Class[] { boolean.class });
+                Method m = getClass().getMethod("setAlwaysOnTop",
+                        new Class[] { boolean.class });
                 m.invoke(this, new Object[] { Boolean.TRUE });
             } catch (Exception e) {
             }
@@ -641,7 +648,7 @@ public class Toaster {
         public void mouseClicked(MouseEvent e) {
             if (callback != null) {
                 callback.actionPerformed(new ActionEvent(this,
-                        ActionEvent.ACTION_PERFORMED, "clicked")); 
+                        ActionEvent.ACTION_PERFORMED, "clicked"));
             }
             hideAndRemove(this);
         }
