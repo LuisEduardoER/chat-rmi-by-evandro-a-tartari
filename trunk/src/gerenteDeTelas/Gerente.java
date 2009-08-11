@@ -233,6 +233,7 @@ public class Gerente {
     }
 
     public void recebeMensagem(Mensagem mensagem) {
+        getFormListFriends().activeToaster(mensagem);
         new ThreadRecebeMensagem(this, mensagem).start();
     }
 
