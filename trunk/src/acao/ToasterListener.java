@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class ToasterListener implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
-        
+        System.out.print("Tra");
         
     }
 
