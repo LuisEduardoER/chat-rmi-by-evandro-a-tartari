@@ -4,8 +4,6 @@ Release 2.0 - Incluir
 - migrar tudo para Java.net;
 - Implemenção dos botões da tela de FormListFriends;
   (btnAdicionaContato, btnRemoveContato , btnChat);
-- Verificar possibilidade de colocar imagem na tela junto com 
-texto JTextPanelI;  
 - Mudar o botao de enviar FormConversa;
 - Colocar popup torradeira no chat vide sample ToasterSample;
 - Fazer Um form para conferencia com varias pessoas(btnChat);
