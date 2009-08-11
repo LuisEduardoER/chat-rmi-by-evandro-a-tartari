@@ -47,12 +47,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public String registra(IMensageiroCliente mensageiro)
             throws RemoteException {
         StringBuilder sb = new StringBuilder();
-        String login = Criptografia.decripto(mensageiro.getContatos().getLogin());
+        String login = Criptografia.decripto(mensageiro.getContatos()
+                .getLogin());
         sb.append(login);
         if (getPermissoes().contains(login)) {
             if (getClientes().get(login) == null) {
-                getClientes().put(login,
-                        mensageiro);
+                getClientes().put(login, mensageiro);
                 sb.append(" Connectado");
                 getContatos().add(mensageiro.getContatos());
                 System.out.println(sb.toString());
@@ -90,14 +90,16 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         cliente.carregaContatos(getContatos());
         if (getContatos().size() > 0) {
             for (Contatos contato : getContatos()) {
-                if(!contato.getLogin().equals(cliente.getContatos().getLogin()))
-                    getClientes().get(Criptografia.decripto(contato.getLogin())).contatoConectou(cliente.getContatos());
+                if (!contato.getLogin()
+                        .equals(cliente.getContatos().getLogin()))
+                    getClientes()
+                            .get(Criptografia.decripto(contato.getLogin()))
+                            .contatoConectou(cliente.getContatos());
             }
-            
+
         }
     }
 
-    
     /**
      * Getters and Setters
      * 
@@ -148,13 +150,15 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     public void removeCliente(IMensageiroCliente mensageiro)
             throws RemoteException {
         try {
-            String login = Criptografia.decripto(mensageiro.getContatos().getLogin());
+            String login = Criptografia.decripto(mensageiro.getContatos()
+                    .getLogin());
             if (getClientes().get(login) != null) {
                 getClientes().remove(login);
                 getContatos().remove(mensageiro.getContatos());
                 for (Contatos contato : getContatos()) {
-                    getClientes().get(Criptografia.decripto(contato.getLogin())).removeContato(
-                            mensageiro.getContatos());
+                    getClientes()
+                            .get(Criptografia.decripto(contato.getLogin()))
+                            .removeContato(mensageiro.getContatos());
                 }
             }
             System.out.println("Saida: " + login);
@@ -172,7 +176,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
     }
 
     public void enviarMensagem(Mensagem mensagem) throws RemoteException {
-        if (getClientes().get(Criptografia.decripto(mensagem.getContatoRecebe())) != null) {
+        if (getClientes().get(
+                Criptografia.decripto(mensagem.getContatoRecebe())) != null) {
             new ThreadMensagemEnviada(this, mensagem).start();
             new ThreadMensagemEnviou(this, mensagem).start();
         }
@@ -194,7 +199,8 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
 
     public void enviaAvisoEnvioCompleto(EnviaArquivo arquivo)
             throws RemoteException {
-        getClientes().get(Criptografia.decripto(arquivo.getContatoEnvia().getLogin()))
+        getClientes().get(
+                Criptografia.decripto(arquivo.getContatoEnvia().getLogin()))
                 .recebeAvisoEnvioCompleto(arquivo);
 
     }
@@ -203,10 +209,12 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
         try {
             if (getClientes().size() > 0) {
                 for (Contatos contato : getContatos()) {
-                    getClientes().get(Criptografia.decripto(contato.getLogin())).servidorFechando();
+                    getClientes()
+                            .get(Criptografia.decripto(contato.getLogin()))
+                            .servidorFechando();
                 }
                 getClientes().clear();
-                getContatos().clear();    
+                getContatos().clear();
             }
         } catch (Exception e) {
             getClientes().clear();

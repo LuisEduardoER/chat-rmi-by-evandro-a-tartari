@@ -44,6 +44,7 @@ import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
 import acao.ToasterListener;
+import cliente.Mensagem;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
 import contatos.Contatos;
@@ -597,6 +598,13 @@ public class FormListFriends extends JFrame {
             modelAux.add(contatos);
             Collections.sort(modelAux, new ContatosComparator());
         }
+    }
+
+    public void activeToaster(Mensagem mensagem) {
+        toaster.popup(listenerToaster, Criptografia.decripto(mensagem
+                .getMensagem()), Criptografia.decripto(mensagem
+                .getContatoRecebe()));
+
     }
 
 }
