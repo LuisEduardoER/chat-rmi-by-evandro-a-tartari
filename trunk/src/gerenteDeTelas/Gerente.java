@@ -449,4 +449,9 @@ public class Gerente {
         System.exit(0);
     }
 
+    public void contatoConectou(Contatos contatos) {
+        getFormListFriends().contatoConectou(contatos);
+        
+    }
+
 }
