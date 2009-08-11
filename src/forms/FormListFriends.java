@@ -35,6 +35,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneLayout;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -90,7 +91,8 @@ public class FormListFriends extends JFrame {
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
         Toaster.FOREGROUND_COLOR = this.getForeground();
-        toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60));
+        toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60),
+                UIManager.getLookAndFeel());
     }
 
     /**
