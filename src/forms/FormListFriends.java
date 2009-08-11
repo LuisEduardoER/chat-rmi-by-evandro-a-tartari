@@ -89,7 +89,6 @@ public class FormListFriends extends JFrame {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
-        Toaster.FOREGROUND_COLOR = this.getForeground();
         listenerToaster = new ToasterListener(gerente, this);
         toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60));
     }
