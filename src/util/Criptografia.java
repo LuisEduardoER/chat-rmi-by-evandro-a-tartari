@@ -1,8 +1,8 @@
 package util;
+
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 
 public class Criptografia {
-
 
     private static final Integer SOMA = 2;
     private static final Integer SUBTRAI = 6;
@@ -70,8 +70,8 @@ public class Criptografia {
             } else {
                 j = 0;
                 for (int i = 0; i < hexBytes.length; i++) {
-                    if(j > hexBytes.length - 1){
-                        j = 1; 
+                    if (j > hexBytes.length - 1) {
+                        j = 1;
                     }
                     hexResult[j] = (byte) (((((hexBytes[i] + new Long(SUBTRAI)
                             .byteValue()) * new Long(DIVIDE).byteValue()) + new Long(
@@ -84,9 +84,9 @@ public class Criptografia {
             result = new String(HexBin.decode(new String(hexResult)));
             cripto++;
         }
+        cripto = 0;
         return result;
     }
-
 
     private static class Fibonnaci {
 
