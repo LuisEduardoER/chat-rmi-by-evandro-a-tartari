@@ -38,12 +38,11 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import toaster.Toaster;
+import toaster.ControladorToaster;
 import util.Criptografia;
 import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
-import acao.ToasterListener;
 import cliente.Mensagem;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
@@ -82,15 +81,13 @@ public class FormListFriends extends JFrame {
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
     private JLabel lblUsuario;
-    private Toaster toaster;
-    private ToasterListener listenerToaster;
+    private ControladorToaster toaster;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
-        listenerToaster = new ToasterListener(gerente, this);
-        toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60));
+        toaster = new ControladorToaster();
     }
 
     /**
@@ -583,10 +580,9 @@ public class FormListFriends extends JFrame {
     }
 
     public void contatoConectou(Contatos contatos) {
-        toaster.popup(listenerToaster, "is On Line", Criptografia
-                .decripto(contatos.getNome()), Util.RedimencionaImagemIcon
-                .redimencionaImagem(contatos.getIconContato(), 50, 50, 500)
-                .getImage(), Criptografia.decripto(contatos.getLogin()));
+        toaster.addToaster("is On Line", Criptografia.decripto(contatos
+                .getNome()), Util.RedimencionaImagemIcon.redimencionaImagem(
+                contatos.getIconContato(), 50, 50, 500));
         if (isListaAberta) {
             listaApresentacao.add(contatos);
             Collections.sort(listaApresentacao, new ContatosComparator());
@@ -608,17 +604,14 @@ public class FormListFriends extends JFrame {
         int posicao = getContatos().indexOf(contato);
         if (posicao != -1) {
             contato = (Contatos) getContatos().getElementAt(posicao);
-            Image image = Util.RedimencionaImagemIcon.redimencionaImagem(
-                    contato.getIconContato(), 50, 50, 500).getImage();
-            toaster.popup(listenerToaster, Criptografia.decripto(mensagem
-                    .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()), image, Criptografia.decripto(mensagem
-                    .getUsuarioEnvia()));
+            ImageIcon image = Util.RedimencionaImagemIcon.redimencionaImagem(
+                    contato.getIconContato(), 50, 50, 500);
+            toaster.addToaster(Criptografia.decripto(mensagem.getMensagem()),
+                    Criptografia.decripto(mensagem.getNomeEnvia()), image);
+
         } else {
-            toaster.popup(listenerToaster, Criptografia.decripto(mensagem
-                    .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()), Criptografia.decripto(mensagem
-                    .getUsuarioEnvia()));
+            toaster.addToaster(Criptografia.decripto(mensagem.getMensagem()),
+                    Criptografia.decripto(mensagem.getNomeEnvia()), null);
         }
 
     }
