@@ -91,7 +91,7 @@ public class FormListFriends extends JFrame {
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
         Toaster.FOREGROUND_COLOR = this.getForeground();
-        listenerToaster = new ToasterListener();
+        listenerToaster = new ToasterListener(gerente, this);
         toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60),
                 UIManager.getLookAndFeel());
     }
@@ -589,7 +589,7 @@ public class FormListFriends extends JFrame {
         toaster.popup(listenerToaster, "is On Line", Criptografia
                 .decripto(contatos.getNome()), Util.RedimencionaImagemIcon
                 .redimencionaImagem(contatos.getIconContato(), 50, 50, 500)
-                .getImage());
+                .getImage(), Criptografia.decripto(contatos.getLogin()));
         if (isListaAberta) {
             listaApresentacao.add(contatos);
             Collections.sort(listaApresentacao, new ContatosComparator());
@@ -615,13 +615,14 @@ public class FormListFriends extends JFrame {
                     contato.getIconContato(), 50, 50, 500).getImage();
             toaster.popup(listenerToaster, Criptografia.decripto(mensagem
                     .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()), image);
+                    .getNomeEnvia()), image, Criptografia.decripto(mensagem
+                    .getUsuarioEnvia()));
         } else {
             toaster.popup(listenerToaster, Criptografia.decripto(mensagem
                     .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()));
+                    .getNomeEnvia()), Criptografia.decripto(mensagem
+                    .getUsuarioEnvia()));
         }
 
     }
-
 }
