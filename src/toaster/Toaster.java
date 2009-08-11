@@ -37,7 +37,10 @@ public class Toaster extends JDialog {
             "imagens/imgBaixo.png", 0, 115, 170, 5);
     private JLabel tituloToaster = new JLabel("", JLabel.CENTER);
     private JTextPaneI txtReceptor = newJTextPaneI();
+    private ThreadApresentaToaster thread;
 
+    public Toaster() {
+    }
     public Toaster(String text, String name , ImageIcon icone, Integer posicaoX,
             Integer posicaoY, ControladorToaster controladorToaster) {
         this.dimensao = new Dimension(posicaoX, posicaoY);
@@ -148,6 +151,13 @@ public class Toaster extends JDialog {
     public String getNomePopUp() {
         return nomePopUp;
     }
+    
+    public void setText(String text){
+        txtReceptor.setText(text);
+    }
+    public void setNome(String nome){
+        tituloToaster.setText(nome);
+    }
 
     public int hashCode() {
         final int prime = 31;
@@ -174,12 +184,16 @@ public class Toaster extends JDialog {
     }
 
     public void start(int posicaoX, int posicaoY) {
-        new ThreadApresentaToaster(this, posicaoX, posicaoY).start();
+        this.thread = new ThreadApresentaToaster(this, posicaoX, posicaoY);
+        thread.start();
     }
 
     public void reordena(int posicaoX, int posicaoY) {
         new ThreadReordena(this, posicaoX, posicaoY).start();
 
+    }
+    public void stopedThread() {
+        thread.interrupt();
     }
 
 }
