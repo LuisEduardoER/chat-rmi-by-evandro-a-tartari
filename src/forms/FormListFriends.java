@@ -87,7 +87,7 @@ public class FormListFriends extends JFrame {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
-        toaster = new ControladorToaster();
+        toaster = new ControladorToaster(gerente, this);
     }
 
     /**

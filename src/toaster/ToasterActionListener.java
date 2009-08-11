@@ -5,10 +5,12 @@ import gerenteDeTelas.Gerente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import contatos.Contatos;
 
-public class ToasterActionListener implements ActionListener {
+public class ToasterActionListener implements ActionListener, MouseListener{
     private Gerente gerente;
     private FormListFriends formList;
 
@@ -25,6 +27,38 @@ public class ToasterActionListener implements ActionListener {
             contato = (Contatos) formList.getContatos().getElementAt(posicao);
             gerente.abreConversa(contato);
         }
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        Contatos contato = new Contatos();
+        /**
+         * Arruma Logica pra isso!!
+         */
+        int posicao = formList.getContatos().indexOf(contato);
+        if (posicao != -1) {
+            contato = (Contatos) formList.getContatos().getElementAt(posicao);
+            gerente.abreConversa(contato);
+        }
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
