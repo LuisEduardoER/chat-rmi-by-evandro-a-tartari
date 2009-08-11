@@ -267,6 +267,31 @@ public class Gerente {
         }
 
     }
+    
+    public void abreConversa(Contatos contato) {
+        try {
+            String name = Criptografia.decripto(cliente.getContatos().getLogin())
+            + Criptografia.decripto(contato.getLogin());
+            if (listaConversa.get(name) != null) {
+                FormConversa conversa = listaConversa.get(name);
+                if (conversa.getExtendedState() == JFrame.ICONIFIED)
+                    new ThreadPiscaJanela(conversa).start();
+            } else {
+                FormConversa conversa = new FormConversa(this, cliente);
+                conversa.setNomeConversa(name);
+                conversa.config();
+                conversa.inicializar(contato, cliente.getContatos());
+                conversa.setContato(contato);
+                conversa.setExtendedState(JFrame.NORMAL);
+                conversa.renderiza();
+                listaConversa.put(name, conversa);
+                new ThreadPiscaJanela(conversa).start();
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void iniciaConversa(EnviaArquivo arquivo) {
         try {
