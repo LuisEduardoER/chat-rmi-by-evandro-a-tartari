@@ -584,7 +584,8 @@ public class FormListFriends extends JFrame {
 
     public void contatoConectou(Contatos contatos) {
         toaster.popup(listenerToaster, "is On Line", Criptografia
-                .decripto(contatos.getNome()), contatos.getIconContato()
+                .decripto(contatos.getNome()), Util.RedimencionaImagemIcon
+                .redimencionaImagem(contatos.getIconContato(), 50, 50, 500)
                 .getImage());
         if (isListaAberta) {
             listaApresentacao.add(contatos);
@@ -602,9 +603,21 @@ public class FormListFriends extends JFrame {
     }
 
     public void activeToaster(Mensagem mensagem) {
-        toaster.popup(listenerToaster, Criptografia.decripto(mensagem
-                .getMensagem()), Criptografia.decripto(mensagem
-                .getContatoRecebe()));
+        Contatos contato = new Contatos();
+        contato.setLogin(mensagem.getUsuarioEnvia());
+        int posicao = getContatos().indexOf(contato);
+        if (posicao != -1) {
+            contato = (Contatos) getContatos().getElementAt(posicao);
+            Image image = Util.RedimencionaImagemIcon.redimencionaImagem(
+                    contato.getIconContato(), 50, 50, 500).getImage();
+            toaster.popup(listenerToaster, Criptografia.decripto(mensagem
+                    .getMensagem()), Criptografia.decripto(mensagem
+                    .getContatoRecebe()), image);
+        } else {
+            toaster.popup(listenerToaster, Criptografia.decripto(mensagem
+                    .getMensagem()), Criptografia.decripto(mensagem
+                    .getContatoRecebe()));
+        }
 
     }
 
