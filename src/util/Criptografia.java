@@ -2,39 +2,91 @@ package util;
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
 
 public class Criptografia {
+
+
     private static final Integer SOMA = 2;
     private static final Integer SUBTRAI = 6;
     private static final Integer MULTIPLICA = 2;
     private static final Integer DIVIDE = 2;
+    private static Integer cripto = 0;
 
     public static String cripto(String text) {
-        byte[] hexBytes = HexBin.encode(text.getBytes()).getBytes();
-        int j = hexBytes.length - 1;
+        String result = "";
+        byte[] hexBytes = HexBin.encode(text.getBytes()).trim().getBytes();
         byte[] hexResult = new byte[hexBytes.length];
-        for (int i = 0; i < hexBytes.length; i++) {
-            hexResult[i] = (byte) (((((hexBytes[j] + new Long(SOMA).byteValue()) * new Long(
-                    MULTIPLICA).byteValue()) - new Long(SUBTRAI).byteValue()) / new Long(
-                    DIVIDE).byteValue()) - new Long(SUBTRAI).byteValue());
+        while (cripto < 2) {
+            if (!result.equals("")) {
+                hexBytes = HexBin.encode(result.getBytes()).getBytes();
+                hexResult = new byte[hexBytes.length];
+                int j = 0;
+                for (int i = 0; i < hexBytes.length; i++) {
+                    if (j > hexBytes.length - 1) {
+                        j = 1;
+                    }
+                    hexResult[i] = (byte) (((((hexBytes[j] + new Long(SOMA)
+                            .byteValue()) * new Long(MULTIPLICA).byteValue()) - new Long(
+                            SUBTRAI).byteValue()) / new Long(DIVIDE)
+                            .byteValue()) - new Long(SUBTRAI).byteValue());
+                    j += 2;
+                }
+            } else {
+                int j = hexBytes.length - 1;
+                for (int i = 0; i < hexBytes.length; i++) {
+                    hexResult[i] = (byte) (((((hexBytes[j] + new Long(SOMA)
+                            .byteValue()) * new Long(MULTIPLICA).byteValue()) - new Long(
+                            SUBTRAI).byteValue()) / new Long(DIVIDE)
+                            .byteValue()) - new Long(SUBTRAI).byteValue());
 
-            j--;
+                    j--;
+                }
+            }
+            result = Fibonnaci.getInstancia().codificaString(
+                    new String(hexResult));
+            cripto += 1;
         }
-        return Fibonnaci.getInstancia().codificaString(new String(hexResult));
+        cripto = 0;
+        return new String(result);
     }
 
     public static String decripto(String text) {
+        String result = "";
         byte[] hexBytes = Fibonnaci.getInstancia().decodificaString(
                 new String(text)).getBytes();
         int j = hexBytes.length - 1;
         byte[] hexResult = new byte[hexBytes.length];
-        for (int i = 0; i < hexBytes.length; i++) {
-            hexResult[i] = (byte) (((((hexBytes[j] + new Long(SUBTRAI)
-                    .byteValue()) * new Long(DIVIDE).byteValue()) + new Long(
-                    SUBTRAI).byteValue()) / new Long(MULTIPLICA).byteValue()) - new Long(
-                    SOMA).byteValue());
-            j--;
+        while (cripto < 2) {
+            if (!result.equals("")) {
+                hexBytes = Fibonnaci.getInstancia().decodificaString(
+                        new String(result)).getBytes();
+                hexResult = new byte[hexBytes.length];
+                j = hexBytes.length - 1;
+                for (int i = 0; i < hexBytes.length; i++) {
+                    hexResult[i] = (byte) (((((hexBytes[j] + new Long(SUBTRAI)
+                            .byteValue()) * new Long(DIVIDE).byteValue()) + new Long(
+                            SUBTRAI).byteValue()) / new Long(MULTIPLICA)
+                            .byteValue()) - new Long(SOMA).byteValue());
+                    j--;
+                }
+            } else {
+                j = 0;
+                for (int i = 0; i < hexBytes.length; i++) {
+                    if(j > hexBytes.length - 1){
+                        j = 1; 
+                    }
+                    hexResult[j] = (byte) (((((hexBytes[i] + new Long(SUBTRAI)
+                            .byteValue()) * new Long(DIVIDE).byteValue()) + new Long(
+                            SUBTRAI).byteValue()) / new Long(MULTIPLICA)
+                            .byteValue()) - new Long(SOMA).byteValue());
+                    j += 2;
+                }
+
+            }
+            result = new String(HexBin.decode(new String(hexResult)));
+            cripto++;
         }
-        return new String(HexBin.decode(new String(hexResult)));
+        return result;
     }
+
 
     private static class Fibonnaci {
 
