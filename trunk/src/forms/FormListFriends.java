@@ -38,10 +38,12 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import toaster.Toaster;
 import util.Criptografia;
 import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
+import acao.ToasterListener;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
 import contatos.Contatos;
@@ -79,11 +81,14 @@ public class FormListFriends extends JFrame {
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
     private JLabel lblUsuario;
+    private Toaster toaster;
+    private ToasterListener listenerToaster;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
+        toaster = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60));
     }
 
     /**
@@ -573,6 +578,25 @@ public class FormListFriends extends JFrame {
 
     public JLabel getLblUsuario() {
         return lblUsuario;
+    }
+
+    public void contatoConectou(Contatos contatos) {
+        toaster.popup(listenerToaster, "is On Line", Criptografia
+                .decripto(contatos.getNome()), contatos.getIconContato()
+                .getImage());
+        if (isListaAberta) {
+            listaApresentacao.add(contatos);
+            Collections.sort(listaApresentacao, new ContatosComparator());
+            modelContatos.clear();
+            Contatos primeiro = new Contatos(" Friends");
+            modelContatos.addElement(primeiro);
+            for (Contatos contato : listaApresentacao) {
+                modelContatos.addElement(contato);
+            }
+        } else {
+            modelAux.add(contatos);
+            Collections.sort(modelAux, new ContatosComparator());
+        }
     }
 
 }
