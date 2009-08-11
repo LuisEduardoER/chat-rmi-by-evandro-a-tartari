@@ -606,7 +606,7 @@ public class FormListFriends extends JFrame {
 
     public void activeToaster(Mensagem mensagem) {
         Contatos contato = new Contatos();
-        contato.setLogin(mensagem.getUsuarioEnvia());
+        contato.setLogin(Criptografia.decripto(mensagem.getUsuarioEnvia()));
         int posicao = getContatos().indexOf(contato);
         if (posicao != -1) {
             contato = (Contatos) getContatos().getElementAt(posicao);
@@ -618,7 +618,7 @@ public class FormListFriends extends JFrame {
         } else {
             toaster.popup(listenerToaster, Criptografia.decripto(mensagem
                     .getMensagem()), Criptografia.decripto(mensagem
-                    .getContatoRecebe()));
+                    .getNomeEnvia()));
         }
 
     }
