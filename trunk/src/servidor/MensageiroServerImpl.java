@@ -89,8 +89,11 @@ public class MensageiroServerImpl extends UnicastRemoteObject implements
             throws RemoteException {
         if (getContatos().size() > 0) {
             for (Contatos contato : getContatos()) {
+                if(cliente.getContatos().equals(contato))
                 getClientes().get(Criptografia.decripto(contato.getLogin())).carregaContatos(
                         getContatos());
+                else
+                    getClientes().get(Criptografia.decripto(contato.getLogin())).contatoConectou(cliente.getContatos());
             }
         }
     }
