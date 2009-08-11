@@ -274,8 +274,7 @@ public class Gerente {
             + Criptografia.decripto(contato.getLogin());
             if (listaConversa.get(name) != null) {
                 FormConversa conversa = listaConversa.get(name);
-                if (conversa.getExtendedState() == JFrame.ICONIFIED)
-                    new ThreadPiscaJanela(conversa).start();
+                conversa.setExtendedState(JFrame.NORMAL);
             } else {
                 FormConversa conversa = new FormConversa(this, cliente);
                 conversa.setNomeConversa(name);
@@ -285,7 +284,6 @@ public class Gerente {
                 conversa.setExtendedState(JFrame.NORMAL);
                 conversa.renderiza();
                 listaConversa.put(name, conversa);
-                new ThreadPiscaJanela(conversa).start();
             }
         } catch (RemoteException e) {
             e.printStackTrace();
