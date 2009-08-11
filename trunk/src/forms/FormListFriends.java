@@ -612,7 +612,7 @@ public class FormListFriends extends JFrame {
                     contato.getIconContato(), 50, 50, 500).getImage();
             toaster.popup(listenerToaster, Criptografia.decripto(mensagem
                     .getMensagem()), Criptografia.decripto(mensagem
-                    .getContatoRecebe()), image);
+                    .getNomeEnvia()), image);
         } else {
             toaster.popup(listenerToaster, Criptografia.decripto(mensagem
                     .getMensagem()), Criptografia.decripto(mensagem
