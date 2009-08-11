@@ -21,17 +21,11 @@ package toaster;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-/**
- * 
- * Accesor class for message resources.
- * 
- * @author Brett Smith <a href="mailto: brett@3sp.com">&lt;brett@3sp.com&gt;</a>
- */
 public class Messages {
 
     // Private statics
     private static ResourceBundle resourceBundle = ResourceBundle
-            .getBundle("Toaster.ApplicationResources"); //$NON-NLS-1$
+            .getBundle("properties.ApplicationResources"); 
 
     private Messages() {
     }
