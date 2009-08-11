@@ -1,4 +1,8 @@
 package toaster;
+
+import forms.FormListFriends;
+import gerenteDeTelas.Gerente;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -38,10 +42,12 @@ public class Toaster extends JDialog {
     private JLabel tituloToaster = new JLabel("", JLabel.CENTER);
     private JTextPaneI txtReceptor = newJTextPaneI();
     private ThreadApresentaToaster thread;
+    private ToasterActionListener listener;
 
     public Toaster() {
     }
-    public Toaster(String text, String name , ImageIcon icone, Integer posicaoX,
+
+    public Toaster(String text, String name, ImageIcon icone, Integer posicaoX,
             Integer posicaoY, ControladorToaster controladorToaster) {
         this.dimensao = new Dimension(posicaoX, posicaoY);
         this.controladorToaster = controladorToaster;
@@ -53,7 +59,8 @@ public class Toaster extends JDialog {
         tituloToaster.setBounds(14, 30, 140, 20);
     }
 
-    public void init() {
+    public void init(Gerente gerente, FormListFriends formList) {
+        listener = new ToasterActionListener(gerente, formList);
         setContentPane(new Container());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBackground(Color.white);
@@ -79,6 +86,14 @@ public class Toaster extends JDialog {
     }
 
     public void addListener() {
+        icon.addMouseListener(listener);
+        imgCima.addMouseListener(listener);
+        imgLadoR.addMouseListener(listener);
+        imgLadoL.addMouseListener(listener);
+        imgBaixo.addMouseListener(listener);
+        tituloToaster.addMouseListener(listener);
+        txtReceptor.addMouseListener(listener);
+        addMouseListener(listener);
         close.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 dispose();
@@ -122,7 +137,7 @@ public class Toaster extends JDialog {
 
     public JLabel getImageContato() {
         JLabel lbl = new JLabel();
-        if(getIcone()==null){
+        if (getIcone() == null) {
             return new JLabel();
         }
         lbl.setIcon(Util.RedimencionaImagemIcon.redimencionaImagem(getIcone(),
@@ -151,11 +166,12 @@ public class Toaster extends JDialog {
     public String getNomePopUp() {
         return nomePopUp;
     }
-    
-    public void setText(String text){
+
+    public void setText(String text) {
         txtReceptor.setText(text);
     }
-    public void setNome(String nome){
+
+    public void setNome(String nome) {
         tituloToaster.setText(nome);
     }
 
@@ -192,6 +208,7 @@ public class Toaster extends JDialog {
         new ThreadReordena(this, posicaoX, posicaoY).start();
 
     }
+
     public void stopedThread() {
         thread.interrupt();
     }

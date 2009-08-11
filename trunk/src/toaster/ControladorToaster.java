@@ -1,5 +1,8 @@
 package toaster;
 
+import forms.FormListFriends;
+import gerenteDeTelas.Gerente;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +18,12 @@ public class ControladorToaster extends JDialog {
     private List<Toaster> listaPopups;
     private final Integer posicaoX;
     private Integer posicaoY;
+    private Gerente gerente; 
+    private FormListFriends formList;
 
-    public ControladorToaster() {
+    public ControladorToaster(Gerente gerente, FormListFriends formList) {
+        this.gerente = gerente;
+        this.formList = formList;
         posicaoX = getToolkit().getScreenSize().width - 170;
         posicaoY = getToolkit().getScreenSize().height + 155;
         listaPopups = new ArrayList<Toaster>();
@@ -37,7 +44,7 @@ public class ControladorToaster extends JDialog {
             } else {
                 toaster = new Toaster(text, name, icon, posicaoX, posicaoY,
                         this);
-                toaster.init();
+                toaster.init(gerente, formList);
                 toaster.addListener();
                 toaster.render();
                 toaster.setNomePopUp(name);
@@ -47,7 +54,7 @@ public class ControladorToaster extends JDialog {
             }
         } else {
             toaster = new Toaster(text, name, icon, posicaoX, posicaoY, this);
-            toaster.init();
+            toaster.init(gerente, formList);
             toaster.addListener();
             toaster.render();
             toaster.setNomePopUp(name);
@@ -70,7 +77,4 @@ public class ControladorToaster extends JDialog {
         }
     }
 
-    public static void main(String[] args) {
-        new ControladorToaster();
-    }
 }
