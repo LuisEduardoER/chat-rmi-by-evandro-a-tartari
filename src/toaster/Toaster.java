@@ -21,8 +21,9 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+
+import org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel;
 
 /**
  * 
@@ -90,7 +91,7 @@ public class Toaster {
      * Default title font for new toasters
      */
     public static Font TITLE_FONT = null;
-    
+
     private String contato;
 
     static {
@@ -146,7 +147,7 @@ public class Toaster {
      *            popup size
      * @see #setPosition(int)
      */
-    public Toaster(int position, Dimension popupSize, LookAndFeel look) {
+    public Toaster(int position, Dimension popupSize) {
         try {
             messages = new Vector();
             backgroundColor = BACKGROUND_COLOR;
@@ -157,7 +158,8 @@ public class Toaster {
             this.popupSize = popupSize;
             this.position = position;
             textAlign = Canvas.CENTER_ALIGNMENT;
-            UIManager.setLookAndFeel(look);
+            UIManager
+                    .setLookAndFeel(new SubstanceOfficeSilver2007LookAndFeel());
         } catch (Exception e) {
             e.printStackTrace();
         }
