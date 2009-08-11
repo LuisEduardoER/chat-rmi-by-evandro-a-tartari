@@ -90,6 +90,8 @@ public class Toaster {
      * Default title font for new toasters
      */
     public static Font TITLE_FONT = null;
+    
+    private String contato;
 
     static {
         try {
@@ -319,8 +321,8 @@ public class Toaster {
      *            title of message
      */
     public synchronized void popup(ActionListener callback, String message,
-            String title) {
-        popup(callback, message, title, null);
+            String title, String contato) {
+        popup(callback, message, title, null, contato);
     }
 
     /**
@@ -336,8 +338,9 @@ public class Toaster {
      *            image or <code>null</code>
      */
     public synchronized void popup(ActionListener callback, String message,
-            String title, Image image) {
-        popup(callback, message, title, image, -1);
+            String title, Image image, String contato) {
+        setContato(contato);
+        popup(callback, message, title, image, -1, contato);
     }
 
     /**
@@ -355,7 +358,8 @@ public class Toaster {
      *            image or <code>null</code>
      */
     public void popup(ActionListener callback, String message, String title,
-            Image image, int timeout) {
+            Image image, int timeout, String contato) {
+        setContato(contato);
         if (timeout == -1) {
             timeout = DEFAULT_TIMEOUT;
         }
@@ -470,6 +474,14 @@ public class Toaster {
             sharedFrame = new Frame();
         }
         return sharedFrame;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
+
+    public String getContato() {
+        return contato;
     }
 
     class MagicThread extends Thread {
@@ -648,7 +660,7 @@ public class Toaster {
         public void mouseClicked(MouseEvent e) {
             if (callback != null) {
                 callback.actionPerformed(new ActionEvent(this,
-                        ActionEvent.ACTION_PERFORMED, "clicked"));
+                        ActionEvent.ACTION_PERFORMED, getContato()));
             }
             hideAndRemove(this);
         }
