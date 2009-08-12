@@ -65,6 +65,7 @@ public class Toaster extends JDialog {
         listener = new ToasterActionListener(gerente, formList);
         setContentPane(new Container());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setBackground(Color.white);
         setSize(170, 120);
         icon.setVerticalAlignment(JLabel.CENTER);
