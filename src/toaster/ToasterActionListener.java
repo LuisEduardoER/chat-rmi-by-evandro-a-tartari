@@ -31,9 +31,7 @@ public class ToasterActionListener implements ActionListener, MouseListener{
 
     public void mouseClicked(MouseEvent e) {
         Contatos contato = new Contatos();
-        /**
-         * Arruma Logica pra isso!!
-         */
+        contato.setLogin(e.getComponent().getName());
         int posicao = formList.getContatos().indexOf(contato);
         if (posicao != -1) {
             contato = (Contatos) formList.getContatos().getElementAt(posicao);
