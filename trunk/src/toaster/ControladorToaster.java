@@ -18,7 +18,7 @@ public class ControladorToaster extends JDialog {
     private List<Toaster> listaPopups;
     private final Integer posicaoX;
     private Integer posicaoY;
-    private Gerente gerente; 
+    private Gerente gerente;
     private FormListFriends formList;
 
     public ControladorToaster(Gerente gerente, FormListFriends formList) {
@@ -71,9 +71,10 @@ public class ControladorToaster extends JDialog {
             for (Toaster popup : listaPopups) {
                 popup.reordena(posicaoX, newPosicaoY);
                 newPosicaoY -= 120;
-                
+
             }
-            posicaoY = getToolkit().getScreenSize().height - 150;
+            if (listaPopups.size() == 0)
+                posicaoY = getToolkit().getScreenSize().height - 150;
         } else {
             posicaoY += 120;
         }
