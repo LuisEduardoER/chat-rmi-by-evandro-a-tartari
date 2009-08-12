@@ -26,7 +26,7 @@ public class ThreadApresentaToaster extends Thread {
             }
         }
         try {
-            this.sleep(10000);
+            this.sleep(15000);
             toaster.dispose();
         } catch (Exception e) {
 
