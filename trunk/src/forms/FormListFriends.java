@@ -184,7 +184,7 @@ public class FormListFriends extends JFrame {
     private Toaster newToaster() {
         Toaster.BACKGROUND_COLOR = this.getBackground();
         Toaster.FOREGROUND_COLOR = this.getForeground();
-        Toaster.BORDER_COLOR = Color.black;
+        Toaster.BORDER_COLOR = Color.blue;
         Toaster t = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(170, 60));
         t.setTextAlign(Canvas.LEFT_ALIGNMENT);
         return t;
