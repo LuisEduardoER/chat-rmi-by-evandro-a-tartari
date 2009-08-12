@@ -17,7 +17,7 @@ public class ControladorToaster extends JDialog {
     private Toaster toaster;
     private List<Toaster> listaPopups;
     private final Integer posicaoX;
-    private Integer posicaoY;
+    private static Integer posicaoY;
     private Gerente gerente;
     private FormListFriends formList;
 
