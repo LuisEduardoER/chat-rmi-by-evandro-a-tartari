@@ -4,6 +4,7 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -38,11 +39,12 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import toaster.ControladorToaster;
 import util.Criptografia;
 import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
+import acao.ToasterListener;
+import br.com.chat.toaster.Toaster;
 import cliente.Mensagem;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
@@ -81,13 +83,15 @@ public class FormListFriends extends JFrame {
     private Dimension dimensao = Toolkit.getDefaultToolkit().getScreenSize();
     private Boolean isListaAberta = true;
     private JLabel lblUsuario;
-    private ControladorToaster toaster;
+    private Toaster toaster;
+    private ToasterListener toasterListener;
 
     public FormListFriends(Gerente gerente) {
         this.gerente = gerente;
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
-        toaster = new ControladorToaster(gerente, this);
+        toaster = newToaster();
+        toasterListener = new ToasterListener();
     }
 
     /**
@@ -175,6 +179,15 @@ public class FormListFriends extends JFrame {
                 JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         return painel;
+    }
+
+    private Toaster newToaster() {
+        Toaster.BACKGROUND_COLOR = this.getBackground();
+        Toaster.FOREGROUND_COLOR = this.getForeground();
+        Toaster.BORDER_COLOR = Color.black;
+        Toaster t = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(260, 60));
+        t.setTextAlign(Canvas.LEFT_ALIGNMENT);
+        return t;
     }
 
     private JPanel newJPanel() {
@@ -580,9 +593,10 @@ public class FormListFriends extends JFrame {
     }
 
     public void contatoConectou(Contatos contatos) {
-        toaster.addToaster("is On Line", Criptografia.decripto(contatos
-                .getLogin()), Util.RedimencionaImagemIcon.redimencionaImagem(
-                contatos.getIconContato(), 50, 50, 500));
+        toaster.popup(toasterListener, "is On Line", Criptografia.decripto(contatos
+                .getNome()), Util.RedimencionaImagemIcon.redimencionaImagem(
+                contatos.getIconContato(), 50, 50, 500).getImage(),
+                Criptografia.decripto(contatos.getLogin()));
         if (isListaAberta) {
             listaApresentacao.add(contatos);
             Collections.sort(listaApresentacao, new ContatosComparator());
@@ -606,12 +620,15 @@ public class FormListFriends extends JFrame {
             contato = (Contatos) getContatos().getElementAt(posicao);
             ImageIcon image = Util.RedimencionaImagemIcon.redimencionaImagem(
                     contato.getIconContato(), 50, 50, 500);
-            toaster.addToaster(Criptografia.decripto(mensagem.getMensagem()),
-                    Criptografia.decripto(mensagem.getNomeEnvia()), image);
+            toaster.popup(toasterListener, Criptografia.decripto(mensagem
+                    .getMensagem()), Criptografia.decripto(mensagem
+                    .getNomeEnvia()), image.getImage(), Criptografia.decripto(mensagem
+                    .getUsuarioEnvia()));
 
         } else {
-            toaster.addToaster(Criptografia.decripto(mensagem.getMensagem()),
-                    Criptografia.decripto(mensagem.getNomeEnvia()), null);
+            toaster.popup(toasterListener, Criptografia.decripto(mensagem
+                    .getMensagem()), Criptografia.decripto(mensagem
+                    .getNomeEnvia()), null);
         }
 
     }
