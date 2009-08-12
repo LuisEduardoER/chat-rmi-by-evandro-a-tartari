@@ -581,7 +581,7 @@ public class FormListFriends extends JFrame {
 
     public void contatoConectou(Contatos contatos) {
         toaster.addToaster("is On Line", Criptografia.decripto(contatos
-                .getNome()), Util.RedimencionaImagemIcon.redimencionaImagem(
+                .getLogin()), Util.RedimencionaImagemIcon.redimencionaImagem(
                 contatos.getIconContato(), 50, 50, 500));
         if (isListaAberta) {
             listaApresentacao.add(contatos);
