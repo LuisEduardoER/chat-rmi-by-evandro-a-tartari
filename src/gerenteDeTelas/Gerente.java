@@ -178,6 +178,11 @@ public class Gerente {
     public void lancaExcessao(String texto) {
         connect.getExcessao().lancaExcessaoSimple(texto);
     }
+    
+    public void habilitaBotaoConnect() {
+        connect.habilitaBotaoConnect();
+        
+    }
 
     /**
      * Cria e retorna caso necessario uma instancia do FormListFriends
@@ -477,5 +482,7 @@ public class Gerente {
         getFormListFriends().contatoConectou(contatos);
         
     }
+
+ 
 
 }

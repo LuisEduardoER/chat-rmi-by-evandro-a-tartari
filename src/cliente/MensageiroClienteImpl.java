@@ -61,6 +61,7 @@ public class MensageiroClienteImpl extends UnicastRemoteObject implements
 			}
 		} catch (Exception e) {
 			gerente.lancaExcessao("Erro buscando servidor");
+			gerente.habilitaBotaoConnect();
 			return false;
 		}
 	}

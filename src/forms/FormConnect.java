@@ -438,6 +438,9 @@ public class FormConnect extends JFrame {
         }
         return iconUsuario;
     }
+    public void habilitaBotaoConnect() {
+        btnConnectar.setEnabled(true);
+    }
 
     public void disableButtonConnect() {
         btnConnectar.setEnabled(false);
@@ -448,5 +451,7 @@ public class FormConnect extends JFrame {
         btnConnectar.setEnabled(true);
         
     }
+
+
 
 }
