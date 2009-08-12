@@ -492,6 +492,7 @@ public class FormConversa extends JFrame {
         txtDescritorMensagem.requestFocus();
         enviaArquivo.dispose();
         fileChooser = null;
+        btnSendFile.setEnabled(true);
     }
 
     public JFileChooser getFileChooser() {
