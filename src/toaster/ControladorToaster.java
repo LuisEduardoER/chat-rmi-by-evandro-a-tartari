@@ -46,8 +46,8 @@ public class ControladorToaster extends JDialog {
                         this);
                 toaster.init(gerente, formList);
                 toaster.addListener();
-                toaster.render();
                 toaster.setNomePopUp(name);
+                toaster.render();
                 toaster.start(posicaoX, posicaoY);
                 listaPopups.add(toaster);
                 posicaoY -= 120;
