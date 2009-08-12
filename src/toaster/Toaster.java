@@ -219,8 +219,9 @@ public class Toaster extends JDialog {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void stopedThread() {
-        thread.interrupt();
+        thread.suspend();
     }
 
 }
