@@ -16,7 +16,7 @@ public class ThreadApresentaToaster extends Thread {
 
     @SuppressWarnings("static-access")
     public void run() {
-        while (posicaoyInicial > posicaoyFinal) {
+        while (posicaoyInicial >= posicaoyFinal) {
             try {
                 toaster.setLocation(posicaox, posicaoyInicial);
                 posicaoyInicial--;
