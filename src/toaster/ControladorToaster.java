@@ -65,9 +65,9 @@ public class ControladorToaster extends JDialog {
     }
 
     public void reordena(Toaster toaster) {
-        listaPopups.remove(toaster);
         int newPosicaoY = getToolkit().getScreenSize().height - 150;
         if (listaPopups.size() > 0) {
+            listaPopups.remove(toaster);
             for (Toaster popup : listaPopups) {
                 popup.reordena(posicaoX, newPosicaoY);
                 newPosicaoY -= 120;
@@ -76,7 +76,7 @@ public class ControladorToaster extends JDialog {
             if (listaPopups.size() == 0)
                 posicaoY = getToolkit().getScreenSize().height - 150;
         } else {
-            posicaoY += 120;
+            posicaoY  = getToolkit().getScreenSize().height - 150;
         }
     }
 
