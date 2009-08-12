@@ -28,6 +28,7 @@ public class Toaster extends JDialog {
     private Dimension dimensao;
     private ControladorToaster controladorToaster;
     private String nomePopUp;
+    private String name;
     private JLabel icon = new JLabel("", JLabel.CENTER);
     private JLabel close = newJLabelIcon("", JLabel.RIGHT,
             "imagens/closeModificado.png", 155, 0, 15, 15);
@@ -53,6 +54,7 @@ public class Toaster extends JDialog {
         this.controladorToaster = controladorToaster;
         txtReceptor.setText(text);
         setIcone(icone);
+        this.name = name;
         tituloToaster.setFont(new Font("", Font.BOLD, 12));
         tituloToaster.setText(name);
         tituloToaster.setForeground(Color.BLUE);
@@ -86,6 +88,13 @@ public class Toaster extends JDialog {
     }
 
     public void addListener() {
+        icon.setName(name);
+        imgCima.setName(name);
+        imgLadoL.setName(name);
+        imgLadoR.setName(name);
+        tituloToaster.setName(name);
+        txtReceptor.setName(name);
+        setName(name);
         icon.addMouseListener(listener);
         imgCima.addMouseListener(listener);
         imgLadoR.addMouseListener(listener);
