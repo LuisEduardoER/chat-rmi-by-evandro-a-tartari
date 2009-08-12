@@ -74,9 +74,9 @@ public class ControladorToaster extends JDialog {
 
             }
             if (listaPopups.size() == 0)
-                posicaoY = getToolkit().getScreenSize().height - 150;
+                posicaoY = getToolkit().getScreenSize().height + 155;
         } else {
-            posicaoY  = getToolkit().getScreenSize().height - 150;
+            posicaoY  = getToolkit().getScreenSize().height + 155;
         }
     }
 
