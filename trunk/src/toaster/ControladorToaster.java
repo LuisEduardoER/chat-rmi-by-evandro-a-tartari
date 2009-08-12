@@ -71,7 +71,9 @@ public class ControladorToaster extends JDialog {
             for (Toaster popup : listaPopups) {
                 popup.reordena(posicaoX, newPosicaoY);
                 newPosicaoY -= 120;
+                
             }
+            posicaoY = getToolkit().getScreenSize().height - 150;
         } else {
             posicaoY += 120;
         }
