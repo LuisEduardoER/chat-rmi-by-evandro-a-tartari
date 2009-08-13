@@ -94,7 +94,7 @@ public class FormConversaListener implements ActionListener, KeyListener,
             new ThreadEnviaArquivo(conversa, gerente).start();
         } else if (e.getActionCommand().equals("CancelSelection")) {
             conversa.fechaEnviaArquivo();
-        }else if(e.getActionCommand().equals("emotions")){
+        } else if (e.getActionCommand().equals("emotions")) {
             conversa.instanciaEmotions();
         }
 
@@ -124,15 +124,16 @@ public class FormConversaListener implements ActionListener, KeyListener,
             if (e.getModifiers() == 0) {
                 e.consume();
                 enviarMensagem(getText());
-            }else if (e.getModifiers() == 1) {
+            } else if (e.getModifiers() == 1) {
                 e.consume();
-                conversa.getTxtDescritorMensagens().setText(conversa.getTxtDescritorMensagens().getText()+"\n");
+                conversa.getTxtDescritorMensagens().setText(
+                        conversa.getTxtDescritorMensagens().getText() + "\n");
             }
         } else if (e.getKeyCode() == Event.ESCAPE) {
             if (e.getModifiers() == 0) {
                 e.consume();
-                if(conversa.getPaleta()!=null)
-                conversa.fechaPaletaCores();
+                if (conversa.getPaleta() != null)
+                    conversa.fechaPaletaCores();
             }
         }
     }
@@ -142,8 +143,10 @@ public class FormConversaListener implements ActionListener, KeyListener,
 
     public void enviarMensagem(String text) {
         try {
-            gerente.enviarMensagem(getMensagem(text));
-            zeraDescritor();
+            if (!text.trim().equals("")) {
+                gerente.enviarMensagem(getMensagem(text));
+                zeraDescritor();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
