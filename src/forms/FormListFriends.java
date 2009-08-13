@@ -4,7 +4,6 @@ import gerenteDeTelas.Gerente;
 import interfaces.IMensageiroCliente;
 
 import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -44,7 +43,7 @@ import util.Util;
 import util.render.ComboCellRender;
 import acao.FormListFriendsListener;
 import acao.ToasterListener;
-import br.com.chat.toaster.Toaster;
+import br.com.chat.poptorradeira.Toaster;
 import cliente.Mensagem;
 import cliente.SysTrayClient.TrayManagerFormListFriend;
 import cliente.ThreadsCliente.ThreadCarregaContatos;
@@ -182,11 +181,7 @@ public class FormListFriends extends JFrame {
     }
 
     private Toaster newToaster() {
-        Toaster.BACKGROUND_COLOR = this.getBackground();
-        Toaster.FOREGROUND_COLOR = this.getForeground();
-        Toaster.BORDER_COLOR = Color.blue;
-        Toaster t = new Toaster(Toaster.BOTTOM_RIGHT, new Dimension(170, 60));
-        t.setTextAlign(Canvas.LEFT_ALIGNMENT);
+        Toaster t = new Toaster(new Dimension(170, 60));
         return t;
     }
 
@@ -593,10 +588,11 @@ public class FormListFriends extends JFrame {
     }
 
     public void contatoConectou(Contatos contatos) {
-        toaster.popup(toasterListener, "is On Line", Criptografia
-                .decripto(contatos.getNome()), Util.RedimencionaImagemIcon
-                .redimencionaImagem(contatos.getIconContato(), 50, 50, 500)
-                .getImage(), Criptografia.decripto(contatos.getLogin()));
+        toaster.adicionaToaster(toasterListener, Criptografia.decripto(contatos
+                .getNome()), this.getBackground(), this.getBackground(),
+                "is On Line", Util.RedimencionaImagemIcon.redimencionaImagem(
+                        contatos.getIconContato(), 50, 50, 500), Criptografia
+                        .decripto(contatos.getLogin()));
         if (isListaAberta) {
             listaApresentacao.add(contatos);
             Collections.sort(listaApresentacao, new ContatosComparator());
@@ -620,16 +616,13 @@ public class FormListFriends extends JFrame {
             contato = (Contatos) getContatos().getElementAt(posicao);
             ImageIcon image = Util.RedimencionaImagemIcon.redimencionaImagem(
                     contato.getIconContato(), 50, 50, 500);
-            toaster.popup(toasterListener, Criptografia.decripto(mensagem
-                    .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()), image.getImage(), Criptografia
-                    .decripto(mensagem.getUsuarioEnvia()));
-
+            toaster.adicionaToaster(toasterListener, Criptografia
+                    .decripto(mensagem.getNomeEnvia()), this.getBackground(),
+                    this.getBackground(), Criptografia.decripto(mensagem
+                            .getMensagem()), image, Criptografia
+                            .decripto(mensagem.getUsuarioEnvia()));
         } else {
-            toaster.popup(toasterListener, Criptografia.decripto(mensagem
-                    .getMensagem()), Criptografia.decripto(mensagem
-                    .getNomeEnvia()), Criptografia.decripto(mensagem
-                    .getUsuarioEnvia()));
+            //TODO
         }
 
     }
