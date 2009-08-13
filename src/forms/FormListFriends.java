@@ -181,7 +181,7 @@ public class FormListFriends extends JFrame {
     }
 
     private Toaster newToaster() {
-        Toaster t = new Toaster(new Dimension(170, 60));
+        Toaster t = new Toaster(new Dimension(260, 100));
         return t;
     }
 
