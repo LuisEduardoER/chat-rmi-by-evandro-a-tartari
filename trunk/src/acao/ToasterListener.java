@@ -11,6 +11,11 @@ import contatos.Contatos;
 public class ToasterListener implements ActionListener {
     private Gerente gerente;
     private FormListFriends formList;
+    
+    public ToasterListener(Gerente gerente, FormListFriends formList) {
+        this.gerente = gerente;
+        this.formList = formList;
+    }
 
     public void actionPerformed(ActionEvent e) {
         Contatos contato = new Contatos();
