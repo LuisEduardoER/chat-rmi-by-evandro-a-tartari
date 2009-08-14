@@ -295,19 +295,6 @@ public class Gerente {
         }
 
     }
-    public void abreConversa(Contatos contato, String text) {
-        try {
-            String name = Criptografia.decripto(cliente.getContatos().getLogin())
-            + Criptografia.decripto(contato.getLogin());
-            if (listaConversa.get(name) != null) {
-                FormConversa conversa = listaConversa.get(name);
-                conversa.setExtendedState(JFrame.NORMAL);
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void iniciaConversa(EnviaArquivo arquivo) {
         try {
