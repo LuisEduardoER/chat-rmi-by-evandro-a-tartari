@@ -4,7 +4,11 @@ import gerenteDeTelas.Gerente;
 import util.Criptografia;
 import cliente.Mensagem;
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadMensagemEnviada extends Thread {
     private Gerente gerente;
     private Mensagem mensagem;

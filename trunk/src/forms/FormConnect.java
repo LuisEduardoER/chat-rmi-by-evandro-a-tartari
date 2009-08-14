@@ -28,6 +28,7 @@ import gerenteDeTelas.Gerente;
  * @author evandro.tartari
  * 
  */
+
 public class FormConnect extends JFrame {
     // serialização
     private static final long serialVersionUID = 7662142711284402861L;
@@ -112,7 +113,7 @@ public class FormConnect extends JFrame {
      * configuração do JFrame
      */
     public void configJFrame() {
-        setTitle("MsRamister");
+        setTitle("Chat RMI");
         setResizable(false);
         setSize(250, 400);
         setIconImage(getImage());

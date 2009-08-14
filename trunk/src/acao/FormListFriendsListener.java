@@ -24,6 +24,7 @@ import gerenteDeTelas.Gerente;
  * @author evandro.tartari
  * 
  */
+
 public class FormListFriendsListener implements ActionListener, KeyListener,
         MouseListener, WindowListener {
     private FormListFriends formContatos;

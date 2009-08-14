@@ -6,7 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ComboCellRender extends JLabel implements ListCellRenderer {
 
     /**

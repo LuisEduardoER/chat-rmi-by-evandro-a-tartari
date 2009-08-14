@@ -17,6 +17,7 @@ import servidor.forms.FormServidor;
  * @author evandro.tartari
  * 
  */
+
 public class SysTrayImpls implements MouseListener, ActionListener {
     private static TrayIcon trayIcon;
     private FormServidor servidor;

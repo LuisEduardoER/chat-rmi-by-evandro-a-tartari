@@ -10,7 +10,11 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import forms.FormListFriends;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class TrayManagerFormListFriendsListener implements MouseListener, ActionListener {
     private TrayIcon trayIcon;
     private FormListFriends listaContatos;

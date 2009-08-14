@@ -13,6 +13,7 @@ import contatos.Contatos;
  * @author evandro.tartari
  * 
  */
+
 public interface IMensageiroCliente extends Remote {
 
     public Boolean findServidor() throws RemoteException;

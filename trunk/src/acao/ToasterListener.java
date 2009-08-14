@@ -7,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ToasterListener implements ActionListener {
     private Gerente gerente;
     private FormListFriends formList;

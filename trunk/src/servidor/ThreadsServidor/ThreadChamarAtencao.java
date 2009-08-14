@@ -4,7 +4,11 @@ import servidor.MensageiroServerImpl;
 import util.Criptografia;
 import cliente.Mensagem;
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadChamarAtencao extends Thread {
 
     private MensageiroServerImpl servidor;

@@ -27,6 +27,7 @@ import gerenteDeTelas.Gerente;
  * @author evandro.tartari
  * 
  */
+
 public class FormConversaListener implements ActionListener, KeyListener,
         WindowListener, MouseListener {
     private FormConversa conversa;

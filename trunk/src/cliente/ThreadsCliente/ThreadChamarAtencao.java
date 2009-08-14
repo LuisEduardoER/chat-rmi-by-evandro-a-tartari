@@ -3,7 +3,11 @@ package cliente.ThreadsCliente;
 import cliente.Mensagem;
 import forms.FormConversa;
 import gerenteDeTelas.Gerente;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadChamarAtencao extends Thread {
     private FormConversa conversa;
     private Gerente gerente;

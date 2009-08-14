@@ -9,6 +9,7 @@ import javax.swing.filechooser.FileFilter;
  * @author evandro.tartari
  *
  */
+
 public class FileFilterImpl extends FileFilter {
     private String description = "";
     private ArrayList<String> extensions = new ArrayList<String>();

@@ -11,7 +11,11 @@ import javax.swing.JButton;
 
 import util.Util;
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormEmotionsListener implements ActionListener, MouseListener {
     private FormConversa conversa;
 

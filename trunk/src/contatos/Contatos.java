@@ -13,6 +13,7 @@ import util.Util;
  * @author evandro.tartari
  * 
  */
+
 public class Contatos implements Serializable {
 
     /**

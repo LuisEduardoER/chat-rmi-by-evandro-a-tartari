@@ -56,6 +56,7 @@ import contatos.render.ContatosRender;
  * @author evandro.tartari
  * 
  */
+
 public class FormListFriends extends JFrame {
 
     /**
@@ -589,7 +590,7 @@ public class FormListFriends extends JFrame {
 
     public void contatoConectou(Contatos contatos) {
         toaster.adicionaToaster(toasterListener, Criptografia.decripto(contatos
-                .getNome()), this.getBackground(), this.getBackground(),
+                .getNome()), this.getForeground(), this.getBackground(),
                 "is On Line", Util.RedimencionaImagemIcon.redimencionaImagem(
                         contatos.getIconContato(), 50, 50, 500), Criptografia
                         .decripto(contatos.getLogin()));
@@ -617,7 +618,7 @@ public class FormListFriends extends JFrame {
             ImageIcon image = Util.RedimencionaImagemIcon.redimencionaImagem(
                     contato.getIconContato(), 50, 50, 500);
             toaster.adicionaToaster(toasterListener, Criptografia
-                    .decripto(mensagem.getNomeEnvia()), this.getBackground(),
+                    .decripto(mensagem.getNomeEnvia()), this.getForeground(),
                     this.getBackground(), Criptografia.decripto(mensagem
                             .getMensagem()), image, Criptografia
                             .decripto(mensagem.getUsuarioEnvia()));

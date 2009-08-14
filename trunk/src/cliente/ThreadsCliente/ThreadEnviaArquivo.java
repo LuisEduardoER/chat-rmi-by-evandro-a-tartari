@@ -4,7 +4,11 @@ import forms.FormConversa;
 import gerenteDeTelas.Gerente;
 
 import javax.swing.JFrame;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadEnviaArquivo extends Thread{
     private Gerente gerente;
     private FormConversa conversa;
