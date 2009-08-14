@@ -582,6 +582,7 @@ public class FormConversa extends JFrame {
             e.printStackTrace();
         }
     }
+    
 
     public void setNomeConversa(String nomeConversa) {
         this.nomeConversa = nomeConversa;
