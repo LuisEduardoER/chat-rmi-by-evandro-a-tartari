@@ -28,6 +28,7 @@ import contatos.Contatos;
  * @author evandro.tartari
  * 
  */
+
 public class MensageiroServerImpl extends UnicastRemoteObject implements
         IMensageiroServer {
 

@@ -10,7 +10,11 @@ import java.awt.TrayIcon;
 import javax.swing.JFrame;
 
 import forms.FormListFriends;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class TrayManagerFormListFriend {
     private TrayIcon trayIcon;
     private SystemTray tray;

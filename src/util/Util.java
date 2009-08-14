@@ -20,7 +20,11 @@ import javax.swing.text.PlainDocument;
 import cliente.EnviaArquivo;
 import cliente.Mensagem;
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class Util {
 
     public static String getDataHora() {

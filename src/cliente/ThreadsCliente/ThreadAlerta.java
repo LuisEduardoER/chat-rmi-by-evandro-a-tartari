@@ -3,7 +3,11 @@ package cliente.ThreadsCliente;
 import javax.swing.JFrame;
 
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadAlerta extends Thread {
     private FormConversa conversa;
     private Integer x;

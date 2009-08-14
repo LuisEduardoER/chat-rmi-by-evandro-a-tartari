@@ -1,7 +1,11 @@
 package util;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.HexBin;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class Criptografia {
 
     private static final Integer SOMA = 2;

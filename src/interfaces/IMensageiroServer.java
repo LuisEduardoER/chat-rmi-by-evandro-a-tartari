@@ -12,6 +12,7 @@ import contatos.Contatos;
  * @author evandro.tartari
  * 
  */
+
 public interface IMensageiroServer extends Remote {
 
     public String registra(IMensageiroCliente mensageiro)

@@ -1,7 +1,11 @@
 package cliente.ThreadsCliente;
 
 import acao.FormConversaListener;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadEnviarMensagem extends Thread {
     private FormConversaListener listener;
 

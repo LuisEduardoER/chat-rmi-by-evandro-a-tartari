@@ -3,7 +3,11 @@ package cliente.ThreadsCliente;
 import javax.swing.JFrame;
 
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadPiscaJanela extends Thread {
     private FormConversa conversa;
 

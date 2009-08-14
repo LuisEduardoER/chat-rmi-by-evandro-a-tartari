@@ -15,6 +15,7 @@ import javax.swing.JLabel;
  * @author evandro.tartari
  *
  */
+
 public class ImagePreviewer extends JLabel {
 
     /**

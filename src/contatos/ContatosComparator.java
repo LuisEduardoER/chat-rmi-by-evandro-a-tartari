@@ -3,7 +3,11 @@ package contatos;
 import java.util.Comparator;
 
 import util.Criptografia;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ContatosComparator implements Comparator<Contatos>{
 
     public int compare(Contatos o1, Contatos o2) {

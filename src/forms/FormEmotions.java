@@ -10,7 +10,11 @@ import javax.swing.JDialog;
 
 import util.Util;
 import acao.FormEmotionsListener;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class FormEmotions extends JDialog {
 
     /**

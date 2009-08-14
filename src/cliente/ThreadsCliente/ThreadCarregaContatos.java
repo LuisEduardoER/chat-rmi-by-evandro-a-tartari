@@ -8,7 +8,11 @@ import javax.swing.DefaultListModel;
 import contatos.Contatos;
 import contatos.ContatosComparator;
 import forms.FormListFriends;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadCarregaContatos extends Thread {
     private List<Contatos> contatos;
     private DefaultListModel modelContatos;

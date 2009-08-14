@@ -12,7 +12,11 @@ import util.Criptografia;
 import util.Util;
 import cliente.EnviaArquivo;
 import forms.FormConversa;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadRecebeArquivo extends Thread {
     private EnviaArquivo arquivo;
     private FormConversa conversa;

@@ -24,6 +24,7 @@ import cliente.Mensagem;
  * @author evandro.tartari
  * 
  */
+
 public class JTextPaneI extends JTextPane {
     /**
      * 

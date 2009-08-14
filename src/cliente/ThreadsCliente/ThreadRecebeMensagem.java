@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import util.Criptografia;
 import cliente.Mensagem;
 import contatos.Contatos;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadRecebeMensagem extends Thread {
     private Gerente gerente;
     private Mensagem mensagem;

@@ -5,7 +5,11 @@ import java.io.Serializable;
 
 import util.Criptografia;
 import util.Util;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class Mensagem implements Serializable {
 
     /**

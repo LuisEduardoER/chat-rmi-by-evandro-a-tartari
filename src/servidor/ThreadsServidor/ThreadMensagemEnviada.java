@@ -3,7 +3,11 @@ package servidor.ThreadsServidor;
 import servidor.MensageiroServerImpl;
 import util.Criptografia;
 import cliente.Mensagem;
-
+/**
+ * 
+ * @author evandro.tartari
+ *
+ */
 public class ThreadMensagemEnviada extends Thread{
     private MensageiroServerImpl servidor;
     private Mensagem mensagem;
