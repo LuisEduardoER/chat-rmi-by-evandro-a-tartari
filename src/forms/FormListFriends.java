@@ -622,9 +622,7 @@ public class FormListFriends extends JFrame {
                     this.getBackground(), Criptografia.decripto(mensagem
                             .getMensagem()), image, Criptografia
                             .decripto(mensagem.getUsuarioEnvia()));
-        } else {
-            //TODO
-        }
+        } 
 
     }
 }
