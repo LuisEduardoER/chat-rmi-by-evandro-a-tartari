@@ -90,7 +90,7 @@ public class FormListFriends extends JFrame {
         modelAux = new ArrayList<Contatos>();
         listaApresentacao = new ArrayList<Contatos>();
         toaster = newToaster();
-        toasterListener = new ToasterListener();
+        toasterListener = new ToasterListener(gerente, this);
     }
 
     /**
