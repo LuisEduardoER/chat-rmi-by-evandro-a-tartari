@@ -16,7 +16,7 @@ public class TesteL {
         reader = new BufferedReader(fReader);
         listaB = new ArrayList<TesteB>();
         String line = "";
-        int i = 0;
+        int i = 1;
         while (reader.ready()) {
             line = reader.readLine();
             String[] lines = line.split(" ");
