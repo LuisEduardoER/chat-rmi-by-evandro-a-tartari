@@ -11,7 +11,7 @@ public class TesteL {
     private static BufferedReader reader;
     private static final String CAMINHO_ARQUIVO_IN = "C://workspace/MsMundica/src/Teste/arquivo.txt";
     private static List<TesteB> listaB;
-    public static void execute() throws Exception {
+    public static List<TesteB> execute() throws Exception {
         fReader = new FileReader(CAMINHO_ARQUIVO_IN);
         reader = new BufferedReader(fReader);
         listaB = new ArrayList<TesteB>();
@@ -24,6 +24,7 @@ public class TesteL {
             i++;
         }
         close();
+        return listaB;
     }
 
     private static void close() throws IOException {
