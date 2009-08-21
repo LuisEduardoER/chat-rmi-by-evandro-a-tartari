@@ -14,7 +14,8 @@ public class Teste {
         for (String res : resultado) {
             System.out.print(res);
         }
-        System.out.print("Est Media " + EstSoma.getMediaSoma());
+        System.out.println("Est Media " + EstSoma.getMediaSoma());
+        System.out.print("Est Media " + EstSoma.getVarMedia(lista));
         
     }
 }
