@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TesteListaOrdenada {
+public class ListaOrdenada {
     private static FileReader fReader;
     private static BufferedReader reader;
-    private static final String CAMINHO_ARQUIVO_IN = "C://workspace/MsMundica/src/Teste/arquivo.txt";
+    private static final String CAMINHO_ARQUIVO_IN = "C://workspace/chatRmi/src/Teste/arquivo.txt";
     private static List<Integer> listaB;
     private static List<List<Integer>> fList;
 
-    public static List<TesteB> execute() throws Exception {
+    public static List<Bolas> execute() throws Exception {
         fReader = new FileReader(CAMINHO_ARQUIVO_IN);
         reader = new BufferedReader(fReader);
         listaB = new ArrayList<Integer>();
@@ -34,8 +34,8 @@ public class TesteListaOrdenada {
         return toResolveList();
     }
 
-    private static List<TesteB> toResolveList() {
-        List<TesteB> listaB = new ArrayList<TesteB>();
+    private static List<Bolas> toResolveList() {
+        List<Bolas> listaB = new ArrayList<Bolas>();
         int i = 1;
         for (List<Integer> listaInteger : fList) {
             String[] numeros = new String[15];
@@ -44,7 +44,7 @@ public class TesteListaOrdenada {
                 numeros[j] = numB.toString();
                 j++;
             }
-            listaB.add(new TesteB(i, numeros));
+            listaB.add(new Bolas(i, numeros));
             i++;
         }
         return listaB;

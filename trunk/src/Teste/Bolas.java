@@ -1,6 +1,6 @@
 package Teste;
 
-public class TesteB {
+public class Bolas {
     private Double id;
     private Double b01;
     private Double b02;
@@ -18,7 +18,7 @@ public class TesteB {
     private Double b14;
     private Double b15;
 
-    public TesteB(Integer id, String[] lines) {
+    public Bolas(Integer id, String[] lines) {
         setId(id.doubleValue());
         setB01(Double.parseDouble(lines[0]));
         setB02(Double.parseDouble(lines[1]));
@@ -166,8 +166,8 @@ public class TesteB {
     }
 
     public boolean equals(Object obj) {
-        if (obj instanceof TesteB) {
-            TesteB other = (TesteB) obj;
+        if (obj instanceof Bolas) {
+            Bolas other = (Bolas) obj;
             if (other.b01.equals(this.b01) && other.b02.equals(this.b02)
                     && other.b03.equals(this.b03) && other.b04.equals(this.b04)
                     && other.b05.equals(this.b05) && other.b06.equals(this.b06)
