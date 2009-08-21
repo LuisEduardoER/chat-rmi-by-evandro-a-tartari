@@ -35,7 +35,7 @@ public class TesteB {
         setB12(Double.parseDouble(lines[11]));
         setB13(Double.parseDouble(lines[12]));
         setB14(Double.parseDouble(lines[13]));
-        setB15(Double.parseDouble(lines[0]));
+        setB15(Double.parseDouble(lines[14]));
     }
 
     public Double getB01() {
