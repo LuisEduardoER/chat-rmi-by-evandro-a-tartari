@@ -184,4 +184,10 @@ public class TesteB {
         }
 
     }
+
+    public Integer getSoma() {
+        return (int) (this.b01 + this.b02 + this.b03 + this.b04 + this.b05
+                + this.b06 + this.b07 + this.b08 + this.b09 + this.b10
+                + this.b11 + this.b12 + this.b13 + this.b14 + this.b15);
+    }
 }
