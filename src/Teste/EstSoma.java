@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstSoma {
-    public static Double mediaSoma = 0.0;
-    public static Double varMedia = 0.0;
+    private static Double mediaSoma = 0.0;
+    private static Double varMedia = 0.0;
+    private static String sequenciaVariacao = "";
 
     public static List<String> mediaSomaNumeros(List<TesteB> est) {
         StringBuilder sb;
@@ -37,7 +38,9 @@ public class EstSoma {
             Integer variacao = a.getSoma() - b.getSoma();
             if (variacao < 0) {
                 variacao = variacao * -1;
-            }
+                sequenciaVariacao += "- ";
+            } else
+                sequenciaVariacao += "+ ";
             if (varMedia == 0) {
                 varMedia = variacao.doubleValue();
             } else {
@@ -45,5 +48,9 @@ public class EstSoma {
             }
         }
         return EstSoma.varMedia;
+    }
+    
+    public static String getSequenciaVariacao(){
+        return EstSoma.sequenciaVariacao;
     }
 }
