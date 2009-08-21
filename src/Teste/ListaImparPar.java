@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TesteListaImparPar {
+public class ListaImparPar {
     private static FileReader fReader;
     private static BufferedReader reader;
-    private static final String CAMINHO_ARQUIVO_IN = "C://workspace/MsMundica/src/Teste/arquivo.txt";
+    private static final String CAMINHO_ARQUIVO_IN = "C://workspace/chatRmi/src/Teste/arquivo.txt";
     private static List<Integer> listaPar;
     private static List<Integer> listaImpar;
     private static List<List<Integer>> listaResultados;

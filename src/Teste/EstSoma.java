@@ -8,10 +8,10 @@ public class EstSoma {
     private static Double varMedia = 0.0;
     private static String sequenciaVariacao = "";
 
-    public static List<String> mediaSomaNumeros(List<TesteB> est) {
+    public static List<String> mediaSomaNumeros(List<Bolas> est) {
         StringBuilder sb;
         List<String> lista = new ArrayList<String>();
-        for (TesteB testeB : est) {
+        for (Bolas testeB : est) {
             sb = new StringBuilder();
             if (mediaSoma == 0) {
                 mediaSoma = testeB.getSoma().doubleValue();
@@ -31,10 +31,10 @@ public class EstSoma {
         return EstSoma.mediaSoma;
     }
 
-    public static Double getVarMedia(List<TesteB> est) {
+    public static Double getVarMedia(List<Bolas> est) {
         for (int i = 0; i < est.size() - 1; i++) {
-            TesteB a = est.get(i);
-            TesteB b = est.get(i + 1);
+            Bolas a = est.get(i);
+            Bolas b = est.get(i + 1);
             Integer variacao = a.getSoma() - b.getSoma();
             if (variacao < 0) {
                 variacao = variacao * -1;

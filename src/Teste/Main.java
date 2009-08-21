@@ -3,12 +3,12 @@ package Teste;
 import java.util.List;
 
 
-public class Teste {
+public class Main {
 
     public static void main(String[] args) throws Exception {
-        TesteL.execute();
-        List<TesteB> lista= TesteListaOrdenada.execute();
-        EstImparPar.execute(TesteListaImparPar
+        Leitor.execute();
+        List<Bolas> lista= ListaOrdenada.execute();
+        EstImparPar.execute(ListaImparPar
                 .execute());
         List<String> resultado = EstSoma.mediaSomaNumeros(lista);
         for (String res : resultado) {
