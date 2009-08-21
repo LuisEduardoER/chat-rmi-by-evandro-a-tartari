@@ -1,6 +1,7 @@
 package Teste;
 
 public class TesteB {
+    private Double id;
     private Double b01;
     private Double b02;
     private Double b03;
@@ -16,6 +17,26 @@ public class TesteB {
     private Double b13;
     private Double b14;
     private Double b15;
+    
+
+    public TesteB(Integer id, String[] lines) {
+        setId(id.doubleValue());
+        setB01(Double.parseDouble(lines[0]));
+        setB02(Double.parseDouble(lines[1]));
+        setB03(Double.parseDouble(lines[2]));
+        setB04(Double.parseDouble(lines[3]));
+        setB05(Double.parseDouble(lines[4]));
+        setB06(Double.parseDouble(lines[5]));
+        setB07(Double.parseDouble(lines[6]));
+        setB08(Double.parseDouble(lines[7]));
+        setB09(Double.parseDouble(lines[8]));
+        setB10(Double.parseDouble(lines[9]));
+        setB11(Double.parseDouble(lines[10]));
+        setB12(Double.parseDouble(lines[11]));
+        setB13(Double.parseDouble(lines[12]));
+        setB14(Double.parseDouble(lines[13]));
+        setB15(Double.parseDouble(lines[0]));
+    }
 
     public Double getB01() {
         return b01;
@@ -137,4 +158,11 @@ public class TesteB {
         this.b15 = b15;
     }
 
+    public void setId(Double id) {
+        this.id = id;
+    }
+
+    public Double getId() {
+        return id;
+    }
 }
