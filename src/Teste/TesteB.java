@@ -17,7 +17,6 @@ public class TesteB {
     private Double b13;
     private Double b14;
     private Double b15;
-    
 
     public TesteB(Integer id, String[] lines) {
         setId(id.doubleValue());
@@ -164,5 +163,25 @@ public class TesteB {
 
     public Double getId() {
         return id;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof TesteB) {
+            TesteB other = (TesteB) obj;
+            if (other.b01.equals(this.b01) && other.b02.equals(this.b02)
+                    && other.b03.equals(this.b03) && other.b04.equals(this.b04)
+                    && other.b05.equals(this.b05) && other.b06.equals(this.b06)
+                    && other.b07.equals(this.b07) && other.b08.equals(this.b08)
+                    && other.b09.equals(this.b09) && other.b10.equals(this.b10)
+                    && other.b11.equals(this.b11) && other.b12.equals(this.b12)
+                    && other.b13.equals(this.b13) && other.b14.equals(this.b14)
+                    && other.b15.equals(this.b15))
+                return true;
+            else
+                return false;
+        } else {
+            return super.equals(obj);
+        }
+
     }
 }
