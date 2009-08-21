@@ -9,17 +9,18 @@ public class EstImparPar {
     private static List<String> resultado;
 
     public static List<String> execute(List<List<Integer>> est) {
+        resultado = new ArrayList<String>();
         StringBuilder sb;
         for (int i = 0; i < est.size();) {
             sb = new StringBuilder();
             sb.append("Concurso: ");
-            sb.append(est.get(i).get(0));
-            sb.append("Pares: ");
+            sb.append(est.get(i).get(0)+" ");
             sb.append("Impares: ");
             Integer imp = est.get(i + 1).size();
-            sb.append(impar);
+            sb.append(imp+" ");
+            sb.append("Pares: ");
             Integer pAr = est.get(i + 2).size();
-            sb.append(par);
+            sb.append(pAr+" ");
             i += 3;
             if (impar == 0 && par == 0) {
                 impar = imp.doubleValue();
@@ -30,7 +31,7 @@ public class EstImparPar {
             }
             resultado.add(sb.toString() + "\r\n");
         }
-        
+
         return resultado;
     }
 
