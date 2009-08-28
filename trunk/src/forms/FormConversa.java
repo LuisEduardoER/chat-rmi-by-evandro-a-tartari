@@ -614,6 +614,7 @@ public class FormConversa extends JFrame {
     public void recebeAviso(EnviaArquivo arquivo) {
         Mensagem m = Util.newMensagemRecebeAviso(arquivo, this);
         txtReceptorMensagem.append(m, true);
+        scrollPanelReceptor.getVerticalScrollBar().setValue(txtReceptorMensagem.getText().length());
         btnSendFile.setEnabled(true);
 
     }
@@ -621,7 +622,7 @@ public class FormConversa extends JFrame {
     public void avisaArquivoRecebido(EnviaArquivo arquivo) {
         Mensagem m = Util.newMensagemArquivoRecebido(arquivo, this);
         txtReceptorMensagem.append(m, false);
-
+        scrollPanelReceptor.getVerticalScrollBar().setValue(txtReceptorMensagem.getText().length());
     }
 
     public void recebeArquivo(EnviaArquivo arquivo) {
