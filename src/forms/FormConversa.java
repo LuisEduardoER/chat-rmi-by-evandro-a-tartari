@@ -578,6 +578,7 @@ public class FormConversa extends JFrame {
         try {
             txtReceptorMensagem.append(mensagem, isContato(Criptografia
                     .decripto(mensagem.getUsuarioEnvia())));
+            txtReceptorMensagem.setCaretPosition(txtReceptorMensagem.getText().length());
             txtDescritorMensagem.requestFocus();
         } catch (Exception e) {
             e.printStackTrace();
