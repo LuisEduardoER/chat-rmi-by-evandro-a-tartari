@@ -57,7 +57,7 @@ public class FormConversa extends JFrame {
     private JLabel lblNomeUsuario;
     private JTextPaneI txtDescritorMensagem;
     private JScrollPane scrollPaneDescritor;
-    private JScrollPane scroolPanelReceptor;
+    private JScrollPane scrollPanelReceptor;
     private JButton btnEnviarMensagem;
     private JButton btnPaletaCores;
     private JToggleButton btnNegrito;
@@ -133,7 +133,7 @@ public class FormConversa extends JFrame {
             comboTipoFonte.setActionCommand("TipoFonte");
             txtDescritorMensagem.addKeyListener(listener);
             scrollPaneDescritor = newJScrollPane(txtDescritorMensagem);
-            scroolPanelReceptor = newJScrollPane(txtReceptorMensagem);
+            scrollPanelReceptor = newJScrollPane(txtReceptorMensagem);
             btnEnviarMensagem = newJButton("imagens/btnEnviar.png",
                     "imagens/btnEnviarpressionado.png");
             String contatoNome = Criptografia.decripto(contato.getNome());
@@ -148,7 +148,7 @@ public class FormConversa extends JFrame {
             }
             lblNomeContato = newJLabel(contatoNome, true);
             lblNomeUsuario = newJLabel(usuarioNome, false);
-            adicionaTela(scroolPanelReceptor, 5, 5, 390, 250);
+            adicionaTela(scrollPanelReceptor, 5, 5, 390, 250);
             adicionaTela(btnNegrito, 6, 257, 20, 20);
             adicionaTela(btnItalico, 33, 257, 20, 20);
             adicionaTela(btnSublinhado, 60, 257, 20, 20);
