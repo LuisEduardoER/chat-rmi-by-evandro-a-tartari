@@ -1,0 +1,1 @@
+Chat desenveloped in Remote Method Invocation (RMI). - Para conhecimento de distribuição de serviços em aplicações java e para conhecer melhor os objetos swing.
